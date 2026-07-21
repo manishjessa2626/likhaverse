@@ -92,6 +92,8 @@ export async function GET(request: Request) {
       },
     })
   } catch (error) {
+    console.error("[/api/stories GET]", error instanceof Error ? error.message : error)
+    if (error instanceof Error && error.stack) console.error(error.stack)
     return apiError(error)
   }
 }

@@ -7,7 +7,7 @@ const log = createLogger("health")
 
 export async function GET(request: Request) {
   const start = Date.now()
-  const checks: Record<string, { status: "ok" | "error"; latency?: number; error?: string }> = {} as any
+  const checks: Record<string, { status: "ok" | "error"; latency?: number; error?: string }> = {}
 
   const dbStart = Date.now()
   try {
@@ -21,8 +21,8 @@ export async function GET(request: Request) {
   try {
     const count = await prisma.story.count()
     checks.stories = { status: "ok", latency: Date.now() - storyCheckStart, error: `count=${count}` }
-  } catch {
-    delete checks.stories
+  } catch (err) {
+    checks.stories = { status: "error", latency: Date.now() - storyCheckStart, error: err instanceof Error ? err.message : "Unknown" }
   }
 
   const redisStart = Date.now()
