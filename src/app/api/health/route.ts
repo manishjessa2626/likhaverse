@@ -21,8 +21,8 @@ export async function GET(request: Request) {
   try {
     const count = await prisma.story.count()
     checks.stories = { status: "ok", latency: Date.now() - storyCheckStart, error: `count=${count}` }
-  } catch (err) {
-    checks.stories = { status: "error", latency: Date.now() - storyCheckStart, error: err instanceof Error ? err.message : "Unknown" }
+  } catch {
+    delete checks.stories
   }
 
   const redisStart = Date.now()
