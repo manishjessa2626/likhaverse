@@ -15,76 +15,88 @@ const storyInclude = {
 const genres = ["romance", "fantasy", "drama", "horror", "comedy"] as const
 
 export const getHomepageData = cache(async function getHomepageData() {
-  const session = await getServerSession(authOptions)
-  const userId = session?.user?.id
+  try {
+    const session = await getServerSession(authOptions)
+    const userId = session?.user?.id
 
-  const cacheKey = userId || "guest"
+    const cacheKey = (userId || "guest") + "_homepage"
 
-  return getCachedOrFetch(cacheKey, async () => {
-    const [
-      trending,
-      editorsPicks,
-      originals,
-      latestChapters,
-      personal,
-      ...genreResults
-    ] = await Promise.all([
-      prisma.story.findMany({
-        where: { status: { in: ["PUBLISHED", "COMPLETED"] } },
-        orderBy: { viewCount: "desc" },
-        take: 4,
-        include: storyInclude,
-      }),
-      prisma.story.findMany({
-        where: { studioBadge: true, status: { in: ["PUBLISHED", "COMPLETED"] } },
-        orderBy: { updatedAt: "desc" },
-        take: 4,
-        include: storyInclude,
-      }),
-      prisma.story.findMany({
-        where: { original: true, status: { in: ["PUBLISHED", "COMPLETED"] } },
-        orderBy: { viewCount: "desc" },
-        take: 4,
-        include: {
-          ...storyInclude,
-          author: { select: { id: true, name: true, role: true } },
-        },
-      }),
-      prisma.story.findMany({
-        where: { status: { in: ["PUBLISHED", "COMPLETED"] } },
-        orderBy: { updatedAt: "desc" },
-        take: 4,
-        include: storyInclude,
-      }),
-      userId
-        ? getPersonalContent(userId)
-        : Promise.resolve(null),
-      ...genres.map((tag) =>
+    return getCachedOrFetch(cacheKey, async () => {
+      const [
+        trending,
+        editorsPicks,
+        originals,
+        latestChapters,
+        personal,
+        ...genreResults
+      ] = await Promise.all([
         prisma.story.findMany({
-          where: {
-            status: { in: ["PUBLISHED", "COMPLETED"] },
-            tags: { contains: tag },
-          },
+          where: { status: { in: ["PUBLISHED", "COMPLETED"] } },
           orderBy: { viewCount: "desc" },
           take: 4,
           include: storyInclude,
         }).catch(() => [] as any[]),
-      ),
-    ])
+        prisma.story.findMany({
+          where: { studioBadge: true, status: { in: ["PUBLISHED", "COMPLETED"] } },
+          orderBy: { updatedAt: "desc" },
+          take: 4,
+          include: storyInclude,
+        }).catch(() => [] as any[]),
+        prisma.story.findMany({
+          where: { original: true, status: { in: ["PUBLISHED", "COMPLETED"] } },
+          orderBy: { viewCount: "desc" },
+          take: 4,
+          include: {
+            ...storyInclude,
+            author: { select: { id: true, name: true, role: true } },
+          },
+        }).catch(() => [] as any[]),
+        prisma.story.findMany({
+          where: { status: { in: ["PUBLISHED", "COMPLETED"] } },
+          orderBy: { updatedAt: "desc" },
+          take: 4,
+          include: storyInclude,
+        }).catch(() => [] as any[]),
+        userId
+          ? getPersonalContent(userId)
+          : Promise.resolve(null),
+        ...genres.map((tag) =>
+          prisma.story.findMany({
+            where: {
+              status: { in: ["PUBLISHED", "COMPLETED"] },
+              tags: { contains: tag },
+            },
+            orderBy: { viewCount: "desc" },
+            take: 4,
+            include: storyInclude,
+          }).catch(() => [] as any[]),
+        ),
+      ])
 
-    const genreData = Object.fromEntries(
-      genres.map((tag, i) => [tag, genreResults[i] as any[]])
-    )
+      const genreData = Object.fromEntries(
+        genres.map((tag, i) => [tag, genreResults[i] as any[]])
+      )
 
+      return {
+        trending: trending ?? [],
+        editorsPicks: editorsPicks ?? [],
+        originals: originals ?? [],
+        latestChapters: latestChapters ?? [],
+        personal,
+        genreData: genreData ?? {},
+      }
+    })
+  } catch (e) {
+    console.error("getHomepageData error:", getErrorMessage(e))
     return {
-      trending,
-      editorsPicks,
-      originals,
-      latestChapters,
-      personal,
-      genreData,
+      trending: [],
+      editorsPicks: [],
+      originals: [],
+      latestChapters: [],
+      personal: null,
+      genreData: {},
     }
-  })
+  }
 })
 
 async function getPersonalContent(userId: string) {
