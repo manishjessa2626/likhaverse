@@ -639,6 +639,7 @@ export type CommentCreateOrConnectWithoutUserInput = {
 
 export type CommentCreateManyUserInputEnvelope = {
   data: Prisma.CommentCreateManyUserInput | Prisma.CommentCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type CommentUpsertWithWhereUniqueWithoutUserInput = {
@@ -702,6 +703,7 @@ export type CommentCreateOrConnectWithoutStoryInput = {
 
 export type CommentCreateManyStoryInputEnvelope = {
   data: Prisma.CommentCreateManyStoryInput | Prisma.CommentCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type CommentUpsertWithWhereUniqueWithoutStoryInput = {
@@ -751,6 +753,7 @@ export type CommentCreateOrConnectWithoutChapterInput = {
 
 export type CommentCreateManyChapterInputEnvelope = {
   data: Prisma.CommentCreateManyChapterInput | Prisma.CommentCreateManyChapterInput[]
+  skipDuplicates?: boolean
 }
 
 export type CommentUpsertWithWhereUniqueWithoutChapterInput = {
@@ -829,6 +832,7 @@ export type CommentCreateOrConnectWithoutParentInput = {
 
 export type CommentCreateManyParentInputEnvelope = {
   data: Prisma.CommentCreateManyParentInput | Prisma.CommentCreateManyParentInput[]
+  skipDuplicates?: boolean
 }
 
 export type CommentUpsertWithoutRepliesInput = {
@@ -1934,6 +1938,7 @@ export type CommentCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Comments.
    */
   data: Prisma.CommentCreateManyInput | Prisma.CommentCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1952,6 +1957,7 @@ export type CommentCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many Comments.
    */
   data: Prisma.CommentCreateManyInput | Prisma.CommentCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

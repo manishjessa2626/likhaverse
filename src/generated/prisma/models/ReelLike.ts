@@ -406,6 +406,7 @@ export type ReelLikeCreateOrConnectWithoutUserInput = {
 
 export type ReelLikeCreateManyUserInputEnvelope = {
   data: Prisma.ReelLikeCreateManyUserInput | Prisma.ReelLikeCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReelLikeUpsertWithWhereUniqueWithoutUserInput = {
@@ -453,6 +454,7 @@ export type ReelLikeCreateOrConnectWithoutReelInput = {
 
 export type ReelLikeCreateManyReelInputEnvelope = {
   data: Prisma.ReelLikeCreateManyReelInput | Prisma.ReelLikeCreateManyReelInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReelLikeUpsertWithWhereUniqueWithoutReelInput = {
@@ -1243,6 +1245,7 @@ export type ReelLikeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many ReelLikes.
    */
   data: Prisma.ReelLikeCreateManyInput | Prisma.ReelLikeCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1261,6 +1264,7 @@ export type ReelLikeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many ReelLikes.
    */
   data: Prisma.ReelLikeCreateManyInput | Prisma.ReelLikeCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

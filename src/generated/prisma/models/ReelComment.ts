@@ -424,6 +424,7 @@ export type ReelCommentCreateOrConnectWithoutUserInput = {
 
 export type ReelCommentCreateManyUserInputEnvelope = {
   data: Prisma.ReelCommentCreateManyUserInput | Prisma.ReelCommentCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReelCommentUpsertWithWhereUniqueWithoutUserInput = {
@@ -474,6 +475,7 @@ export type ReelCommentCreateOrConnectWithoutReelInput = {
 
 export type ReelCommentCreateManyReelInputEnvelope = {
   data: Prisma.ReelCommentCreateManyReelInput | Prisma.ReelCommentCreateManyReelInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReelCommentUpsertWithWhereUniqueWithoutReelInput = {
@@ -1278,6 +1280,7 @@ export type ReelCommentCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many ReelComments.
    */
   data: Prisma.ReelCommentCreateManyInput | Prisma.ReelCommentCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1296,6 +1299,7 @@ export type ReelCommentCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many ReelComments.
    */
   data: Prisma.ReelCommentCreateManyInput | Prisma.ReelCommentCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

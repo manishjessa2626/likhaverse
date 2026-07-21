@@ -498,6 +498,7 @@ export type ChallengeParticipantCreateOrConnectWithoutUserInput = {
 
 export type ChallengeParticipantCreateManyUserInputEnvelope = {
   data: Prisma.ChallengeParticipantCreateManyUserInput | Prisma.ChallengeParticipantCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChallengeParticipantUpsertWithWhereUniqueWithoutUserInput = {
@@ -551,6 +552,7 @@ export type ChallengeParticipantCreateOrConnectWithoutChallengeInput = {
 
 export type ChallengeParticipantCreateManyChallengeInputEnvelope = {
   data: Prisma.ChallengeParticipantCreateManyChallengeInput | Prisma.ChallengeParticipantCreateManyChallengeInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChallengeParticipantUpsertWithWhereUniqueWithoutChallengeInput = {
@@ -1369,6 +1371,7 @@ export type ChallengeParticipantCreateManyArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many ChallengeParticipants.
    */
   data: Prisma.ChallengeParticipantCreateManyInput | Prisma.ChallengeParticipantCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1387,6 +1390,7 @@ export type ChallengeParticipantCreateManyAndReturnArgs<ExtArgs extends runtime.
    * The data used to create many ChallengeParticipants.
    */
   data: Prisma.ChallengeParticipantCreateManyInput | Prisma.ChallengeParticipantCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

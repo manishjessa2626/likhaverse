@@ -472,6 +472,7 @@ export type StoryAnalysisCreateOrConnectWithoutAuthorInput = {
 
 export type StoryAnalysisCreateManyAuthorInputEnvelope = {
   data: Prisma.StoryAnalysisCreateManyAuthorInput | Prisma.StoryAnalysisCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryAnalysisUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -528,6 +529,7 @@ export type StoryAnalysisCreateOrConnectWithoutStoryInput = {
 
 export type StoryAnalysisCreateManyStoryInputEnvelope = {
   data: Prisma.StoryAnalysisCreateManyStoryInput | Prisma.StoryAnalysisCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryAnalysisUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1360,6 +1362,7 @@ export type StoryAnalysisCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many StoryAnalyses.
    */
   data: Prisma.StoryAnalysisCreateManyInput | Prisma.StoryAnalysisCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1378,6 +1381,7 @@ export type StoryAnalysisCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many StoryAnalyses.
    */
   data: Prisma.StoryAnalysisCreateManyInput | Prisma.StoryAnalysisCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

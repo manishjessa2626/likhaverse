@@ -400,6 +400,7 @@ export type AdUnlockCreateOrConnectWithoutUserInput = {
 
 export type AdUnlockCreateManyUserInputEnvelope = {
   data: Prisma.AdUnlockCreateManyUserInput | Prisma.AdUnlockCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type AdUnlockUpsertWithWhereUniqueWithoutUserInput = {
@@ -447,6 +448,7 @@ export type AdUnlockCreateOrConnectWithoutChapterInput = {
 
 export type AdUnlockCreateManyChapterInputEnvelope = {
   data: Prisma.AdUnlockCreateManyChapterInput | Prisma.AdUnlockCreateManyChapterInput[]
+  skipDuplicates?: boolean
 }
 
 export type AdUnlockUpsertWithWhereUniqueWithoutChapterInput = {
@@ -1237,6 +1239,7 @@ export type AdUnlockCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many AdUnlocks.
    */
   data: Prisma.AdUnlockCreateManyInput | Prisma.AdUnlockCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1255,6 +1258,7 @@ export type AdUnlockCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many AdUnlocks.
    */
   data: Prisma.AdUnlockCreateManyInput | Prisma.AdUnlockCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

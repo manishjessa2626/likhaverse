@@ -406,6 +406,7 @@ export type LiveSessionAttendeeCreateOrConnectWithoutUserInput = {
 
 export type LiveSessionAttendeeCreateManyUserInputEnvelope = {
   data: Prisma.LiveSessionAttendeeCreateManyUserInput | Prisma.LiveSessionAttendeeCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type LiveSessionAttendeeUpsertWithWhereUniqueWithoutUserInput = {
@@ -453,6 +454,7 @@ export type LiveSessionAttendeeCreateOrConnectWithoutSessionInput = {
 
 export type LiveSessionAttendeeCreateManySessionInputEnvelope = {
   data: Prisma.LiveSessionAttendeeCreateManySessionInput | Prisma.LiveSessionAttendeeCreateManySessionInput[]
+  skipDuplicates?: boolean
 }
 
 export type LiveSessionAttendeeUpsertWithWhereUniqueWithoutSessionInput = {
@@ -1243,6 +1245,7 @@ export type LiveSessionAttendeeCreateManyArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many LiveSessionAttendees.
    */
   data: Prisma.LiveSessionAttendeeCreateManyInput | Prisma.LiveSessionAttendeeCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1261,6 +1264,7 @@ export type LiveSessionAttendeeCreateManyAndReturnArgs<ExtArgs extends runtime.T
    * The data used to create many LiveSessionAttendees.
    */
   data: Prisma.LiveSessionAttendeeCreateManyInput | Prisma.LiveSessionAttendeeCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

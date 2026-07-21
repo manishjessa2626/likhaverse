@@ -620,6 +620,7 @@ export type ChallengeCreateOrConnectWithoutOwnerInput = {
 
 export type ChallengeCreateManyOwnerInputEnvelope = {
   data: Prisma.ChallengeCreateManyOwnerInput | Prisma.ChallengeCreateManyOwnerInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChallengeUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -693,6 +694,7 @@ export type ChallengeCreateOrConnectWithoutClubInput = {
 
 export type ChallengeCreateManyClubInputEnvelope = {
   data: Prisma.ChallengeCreateManyClubInput | Prisma.ChallengeCreateManyClubInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChallengeUpsertWithWhereUniqueWithoutClubInput = {
@@ -1710,6 +1712,7 @@ export type ChallengeCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many Challenges.
    */
   data: Prisma.ChallengeCreateManyInput | Prisma.ChallengeCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1728,6 +1731,7 @@ export type ChallengeCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many Challenges.
    */
   data: Prisma.ChallengeCreateManyInput | Prisma.ChallengeCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

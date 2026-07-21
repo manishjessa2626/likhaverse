@@ -430,6 +430,7 @@ export type StoryReminderCreateOrConnectWithoutUserInput = {
 
 export type StoryReminderCreateManyUserInputEnvelope = {
   data: Prisma.StoryReminderCreateManyUserInput | Prisma.StoryReminderCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryReminderUpsertWithWhereUniqueWithoutUserInput = {
@@ -480,6 +481,7 @@ export type StoryReminderCreateOrConnectWithoutStoryInput = {
 
 export type StoryReminderCreateManyStoryInputEnvelope = {
   data: Prisma.StoryReminderCreateManyStoryInput | Prisma.StoryReminderCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryReminderUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1284,6 +1286,7 @@ export type StoryReminderCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many StoryReminders.
    */
   data: Prisma.StoryReminderCreateManyInput | Prisma.StoryReminderCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1302,6 +1305,7 @@ export type StoryReminderCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many StoryReminders.
    */
   data: Prisma.StoryReminderCreateManyInput | Prisma.StoryReminderCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

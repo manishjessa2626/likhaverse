@@ -574,6 +574,7 @@ export type ChapterUnlockCreateOrConnectWithoutUserInput = {
 
 export type ChapterUnlockCreateManyUserInputEnvelope = {
   data: Prisma.ChapterUnlockCreateManyUserInput | Prisma.ChapterUnlockCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChapterUnlockUpsertWithWhereUniqueWithoutUserInput = {
@@ -630,6 +631,7 @@ export type ChapterUnlockCreateOrConnectWithoutStoryInput = {
 
 export type ChapterUnlockCreateManyStoryInputEnvelope = {
   data: Prisma.ChapterUnlockCreateManyStoryInput | Prisma.ChapterUnlockCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChapterUnlockUpsertWithWhereUniqueWithoutStoryInput = {
@@ -673,6 +675,7 @@ export type ChapterUnlockCreateOrConnectWithoutChapterInput = {
 
 export type ChapterUnlockCreateManyChapterInputEnvelope = {
   data: Prisma.ChapterUnlockCreateManyChapterInput | Prisma.ChapterUnlockCreateManyChapterInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChapterUnlockUpsertWithWhereUniqueWithoutChapterInput = {
@@ -1549,6 +1552,7 @@ export type ChapterUnlockCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many ChapterUnlocks.
    */
   data: Prisma.ChapterUnlockCreateManyInput | Prisma.ChapterUnlockCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1567,6 +1571,7 @@ export type ChapterUnlockCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many ChapterUnlocks.
    */
   data: Prisma.ChapterUnlockCreateManyInput | Prisma.ChapterUnlockCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

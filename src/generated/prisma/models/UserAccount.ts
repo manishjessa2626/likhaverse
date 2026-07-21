@@ -386,6 +386,7 @@ export type UserAccountCreateOrConnectWithoutUserInput = {
 
 export type UserAccountCreateManyUserInputEnvelope = {
   data: Prisma.UserAccountCreateManyUserInput | Prisma.UserAccountCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type UserAccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -1165,6 +1166,7 @@ export type UserAccountCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many UserAccounts.
    */
   data: Prisma.UserAccountCreateManyInput | Prisma.UserAccountCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1183,6 +1185,7 @@ export type UserAccountCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many UserAccounts.
    */
   data: Prisma.UserAccountCreateManyInput | Prisma.UserAccountCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

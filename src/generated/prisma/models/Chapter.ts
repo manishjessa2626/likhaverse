@@ -729,6 +729,7 @@ export type ChapterCreateOrConnectWithoutStoryInput = {
 
 export type ChapterCreateManyStoryInputEnvelope = {
   data: Prisma.ChapterCreateManyStoryInput | Prisma.ChapterCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChapterUpsertWithWhereUniqueWithoutStoryInput = {
@@ -804,6 +805,7 @@ export type ChapterCreateOrConnectWithoutSeasonInput = {
 
 export type ChapterCreateManySeasonInputEnvelope = {
   data: Prisma.ChapterCreateManySeasonInput | Prisma.ChapterCreateManySeasonInput[]
+  skipDuplicates?: boolean
 }
 
 export type ChapterUpsertWithWhereUniqueWithoutSeasonInput = {
@@ -2205,6 +2207,7 @@ export type ChapterCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * The data used to create many Chapters.
    */
   data: Prisma.ChapterCreateManyInput | Prisma.ChapterCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2223,6 +2226,7 @@ export type ChapterCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many Chapters.
    */
   data: Prisma.ChapterCreateManyInput | Prisma.ChapterCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

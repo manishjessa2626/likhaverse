@@ -890,6 +890,7 @@ export type AIGenerationCreateOrConnectWithoutUserInput = {
 
 export type AIGenerationCreateManyUserInputEnvelope = {
   data: Prisma.AIGenerationCreateManyUserInput | Prisma.AIGenerationCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type AIGenerationUpsertWithWhereUniqueWithoutUserInput = {
@@ -984,6 +985,7 @@ export type AIGenerationCreateOrConnectWithoutStoryInput = {
 
 export type AIGenerationCreateManyStoryInputEnvelope = {
   data: Prisma.AIGenerationCreateManyStoryInput | Prisma.AIGenerationCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type AIGenerationUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1053,6 +1055,7 @@ export type AIGenerationCreateOrConnectWithoutCharacterInput = {
 
 export type AIGenerationCreateManyCharacterInputEnvelope = {
   data: Prisma.AIGenerationCreateManyCharacterInput | Prisma.AIGenerationCreateManyCharacterInput[]
+  skipDuplicates?: boolean
 }
 
 export type AIGenerationUpsertWithWhereUniqueWithoutCharacterInput = {
@@ -2259,6 +2262,7 @@ export type AIGenerationCreateManyArgs<ExtArgs extends runtime.Types.Extensions.
    * The data used to create many AIGenerations.
    */
   data: Prisma.AIGenerationCreateManyInput | Prisma.AIGenerationCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2277,6 +2281,7 @@ export type AIGenerationCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * The data used to create many AIGenerations.
    */
   data: Prisma.AIGenerationCreateManyInput | Prisma.AIGenerationCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

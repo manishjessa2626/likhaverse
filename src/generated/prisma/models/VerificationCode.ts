@@ -452,6 +452,7 @@ export type VerificationCodeCreateOrConnectWithoutUserInput = {
 
 export type VerificationCodeCreateManyUserInputEnvelope = {
   data: Prisma.VerificationCodeCreateManyUserInput | Prisma.VerificationCodeCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type VerificationCodeUpsertWithWhereUniqueWithoutUserInput = {
@@ -1264,6 +1265,7 @@ export type VerificationCodeCreateManyArgs<ExtArgs extends runtime.Types.Extensi
    * The data used to create many VerificationCodes.
    */
   data: Prisma.VerificationCodeCreateManyInput | Prisma.VerificationCodeCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1282,6 +1284,7 @@ export type VerificationCodeCreateManyAndReturnArgs<ExtArgs extends runtime.Type
    * The data used to create many VerificationCodes.
    */
   data: Prisma.VerificationCodeCreateManyInput | Prisma.VerificationCodeCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

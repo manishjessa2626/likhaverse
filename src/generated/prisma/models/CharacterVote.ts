@@ -499,6 +499,7 @@ export type CharacterVoteCreateOrConnectWithoutUserInput = {
 
 export type CharacterVoteCreateManyUserInputEnvelope = {
   data: Prisma.CharacterVoteCreateManyUserInput | Prisma.CharacterVoteCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type CharacterVoteUpsertWithWhereUniqueWithoutUserInput = {
@@ -552,6 +553,7 @@ export type CharacterVoteCreateOrConnectWithoutStoryInput = {
 
 export type CharacterVoteCreateManyStoryInputEnvelope = {
   data: Prisma.CharacterVoteCreateManyStoryInput | Prisma.CharacterVoteCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type CharacterVoteUpsertWithWhereUniqueWithoutStoryInput = {
@@ -593,6 +595,7 @@ export type CharacterVoteCreateOrConnectWithoutCharacterInput = {
 
 export type CharacterVoteCreateManyCharacterInputEnvelope = {
   data: Prisma.CharacterVoteCreateManyCharacterInput | Prisma.CharacterVoteCreateManyCharacterInput[]
+  skipDuplicates?: boolean
 }
 
 export type CharacterVoteUpsertWithWhereUniqueWithoutCharacterInput = {
@@ -1451,6 +1454,7 @@ export type CharacterVoteCreateManyArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many CharacterVotes.
    */
   data: Prisma.CharacterVoteCreateManyInput | Prisma.CharacterVoteCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1469,6 +1473,7 @@ export type CharacterVoteCreateManyAndReturnArgs<ExtArgs extends runtime.Types.E
    * The data used to create many CharacterVotes.
    */
   data: Prisma.CharacterVoteCreateManyInput | Prisma.CharacterVoteCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

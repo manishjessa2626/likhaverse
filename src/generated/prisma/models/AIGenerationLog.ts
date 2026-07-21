@@ -1396,6 +1396,7 @@ export type AIGenerationLogCreateManyArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many AIGenerationLogs.
    */
   data: Prisma.AIGenerationLogCreateManyInput | Prisma.AIGenerationLogCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1414,6 +1415,7 @@ export type AIGenerationLogCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    * The data used to create many AIGenerationLogs.
    */
   data: Prisma.AIGenerationLogCreateManyInput | Prisma.AIGenerationLogCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -406,6 +406,7 @@ export type SaveCreateOrConnectWithoutUserInput = {
 
 export type SaveCreateManyUserInputEnvelope = {
   data: Prisma.SaveCreateManyUserInput | Prisma.SaveCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type SaveUpsertWithWhereUniqueWithoutUserInput = {
@@ -453,6 +454,7 @@ export type SaveCreateOrConnectWithoutStoryInput = {
 
 export type SaveCreateManyStoryInputEnvelope = {
   data: Prisma.SaveCreateManyStoryInput | Prisma.SaveCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type SaveUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1243,6 +1245,7 @@ export type SaveCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Saves.
    */
   data: Prisma.SaveCreateManyInput | Prisma.SaveCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1261,6 +1264,7 @@ export type SaveCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Saves.
    */
   data: Prisma.SaveCreateManyInput | Prisma.SaveCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

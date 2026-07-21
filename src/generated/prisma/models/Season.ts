@@ -460,6 +460,7 @@ export type SeasonCreateOrConnectWithoutStoryInput = {
 
 export type SeasonCreateManyStoryInputEnvelope = {
   data: Prisma.SeasonCreateManyStoryInput | Prisma.SeasonCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type SeasonUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1324,6 +1325,7 @@ export type SeasonCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * The data used to create many Seasons.
    */
   data: Prisma.SeasonCreateManyInput | Prisma.SeasonCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1342,6 +1344,7 @@ export type SeasonCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many Seasons.
    */
   data: Prisma.SeasonCreateManyInput | Prisma.SeasonCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

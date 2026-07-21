@@ -430,6 +430,7 @@ export type DailyRewardCreateOrConnectWithoutUserInput = {
 
 export type DailyRewardCreateManyUserInputEnvelope = {
   data: Prisma.DailyRewardCreateManyUserInput | Prisma.DailyRewardCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type DailyRewardUpsertWithWhereUniqueWithoutUserInput = {
@@ -1209,6 +1210,7 @@ export type DailyRewardCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many DailyRewards.
    */
   data: Prisma.DailyRewardCreateManyInput | Prisma.DailyRewardCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1227,6 +1229,7 @@ export type DailyRewardCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many DailyRewards.
    */
   data: Prisma.DailyRewardCreateManyInput | Prisma.DailyRewardCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

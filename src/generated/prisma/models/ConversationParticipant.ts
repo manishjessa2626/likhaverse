@@ -406,6 +406,7 @@ export type ConversationParticipantCreateOrConnectWithoutUserInput = {
 
 export type ConversationParticipantCreateManyUserInputEnvelope = {
   data: Prisma.ConversationParticipantCreateManyUserInput | Prisma.ConversationParticipantCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ConversationParticipantUpsertWithWhereUniqueWithoutUserInput = {
@@ -453,6 +454,7 @@ export type ConversationParticipantCreateOrConnectWithoutConversationInput = {
 
 export type ConversationParticipantCreateManyConversationInputEnvelope = {
   data: Prisma.ConversationParticipantCreateManyConversationInput | Prisma.ConversationParticipantCreateManyConversationInput[]
+  skipDuplicates?: boolean
 }
 
 export type ConversationParticipantUpsertWithWhereUniqueWithoutConversationInput = {
@@ -1243,6 +1245,7 @@ export type ConversationParticipantCreateManyArgs<ExtArgs extends runtime.Types.
    * The data used to create many ConversationParticipants.
    */
   data: Prisma.ConversationParticipantCreateManyInput | Prisma.ConversationParticipantCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1261,6 +1264,7 @@ export type ConversationParticipantCreateManyAndReturnArgs<ExtArgs extends runti
    * The data used to create many ConversationParticipants.
    */
   data: Prisma.ConversationParticipantCreateManyInput | Prisma.ConversationParticipantCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

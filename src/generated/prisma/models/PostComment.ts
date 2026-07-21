@@ -424,6 +424,7 @@ export type PostCommentCreateOrConnectWithoutUserInput = {
 
 export type PostCommentCreateManyUserInputEnvelope = {
   data: Prisma.PostCommentCreateManyUserInput | Prisma.PostCommentCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type PostCommentUpsertWithWhereUniqueWithoutUserInput = {
@@ -474,6 +475,7 @@ export type PostCommentCreateOrConnectWithoutPostInput = {
 
 export type PostCommentCreateManyPostInputEnvelope = {
   data: Prisma.PostCommentCreateManyPostInput | Prisma.PostCommentCreateManyPostInput[]
+  skipDuplicates?: boolean
 }
 
 export type PostCommentUpsertWithWhereUniqueWithoutPostInput = {
@@ -1278,6 +1280,7 @@ export type PostCommentCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many PostComments.
    */
   data: Prisma.PostCommentCreateManyInput | Prisma.PostCommentCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1296,6 +1299,7 @@ export type PostCommentCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many PostComments.
    */
   data: Prisma.PostCommentCreateManyInput | Prisma.PostCommentCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

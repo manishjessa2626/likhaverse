@@ -516,6 +516,7 @@ export type FanArtCreateOrConnectWithoutUserInput = {
 
 export type FanArtCreateManyUserInputEnvelope = {
   data: Prisma.FanArtCreateManyUserInput | Prisma.FanArtCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type FanArtUpsertWithWhereUniqueWithoutUserInput = {
@@ -572,6 +573,7 @@ export type FanArtCreateOrConnectWithoutStoryInput = {
 
 export type FanArtCreateManyStoryInputEnvelope = {
   data: Prisma.FanArtCreateManyStoryInput | Prisma.FanArtCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type FanArtUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1404,6 +1406,7 @@ export type FanArtCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * The data used to create many FanArts.
    */
   data: Prisma.FanArtCreateManyInput | Prisma.FanArtCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1422,6 +1425,7 @@ export type FanArtCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many FanArts.
    */
   data: Prisma.FanArtCreateManyInput | Prisma.FanArtCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

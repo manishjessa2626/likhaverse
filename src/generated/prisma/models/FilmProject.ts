@@ -904,6 +904,7 @@ export type FilmProjectCreateOrConnectWithoutUserInput = {
 
 export type FilmProjectCreateManyUserInputEnvelope = {
   data: Prisma.FilmProjectCreateManyUserInput | Prisma.FilmProjectCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type FilmProjectUpsertWithWhereUniqueWithoutUserInput = {
@@ -1007,6 +1008,7 @@ export type FilmProjectCreateOrConnectWithoutStoryInput = {
 
 export type FilmProjectCreateManyStoryInputEnvelope = {
   data: Prisma.FilmProjectCreateManyStoryInput | Prisma.FilmProjectCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type FilmProjectUpsertWithWhereUniqueWithoutStoryInput = {
@@ -2204,6 +2206,7 @@ export type FilmProjectCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many FilmProjects.
    */
   data: Prisma.FilmProjectCreateManyInput | Prisma.FilmProjectCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2222,6 +2225,7 @@ export type FilmProjectCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many FilmProjects.
    */
   data: Prisma.FilmProjectCreateManyInput | Prisma.FilmProjectCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

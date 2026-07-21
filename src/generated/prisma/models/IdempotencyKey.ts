@@ -988,6 +988,7 @@ export type IdempotencyKeyCreateManyArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many IdempotencyKeys.
    */
   data: Prisma.IdempotencyKeyCreateManyInput | Prisma.IdempotencyKeyCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1006,6 +1007,7 @@ export type IdempotencyKeyCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * The data used to create many IdempotencyKeys.
    */
   data: Prisma.IdempotencyKeyCreateManyInput | Prisma.IdempotencyKeyCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**

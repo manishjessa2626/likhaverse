@@ -1060,6 +1060,7 @@ export type RateLimitCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many RateLimits.
    */
   data: Prisma.RateLimitCreateManyInput | Prisma.RateLimitCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1078,6 +1079,7 @@ export type RateLimitCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many RateLimits.
    */
   data: Prisma.RateLimitCreateManyInput | Prisma.RateLimitCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**

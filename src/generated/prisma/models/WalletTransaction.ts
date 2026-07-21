@@ -508,6 +508,7 @@ export type WalletTransactionCreateOrConnectWithoutUserInput = {
 
 export type WalletTransactionCreateManyUserInputEnvelope = {
   data: Prisma.WalletTransactionCreateManyUserInput | Prisma.WalletTransactionCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type WalletTransactionUpsertWithWhereUniqueWithoutUserInput = {
@@ -1320,6 +1321,7 @@ export type WalletTransactionCreateManyArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many WalletTransactions.
    */
   data: Prisma.WalletTransactionCreateManyInput | Prisma.WalletTransactionCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1338,6 +1340,7 @@ export type WalletTransactionCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * The data used to create many WalletTransactions.
    */
   data: Prisma.WalletTransactionCreateManyInput | Prisma.WalletTransactionCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

@@ -404,6 +404,7 @@ export type MyDayStoryCreateOrConnectWithoutUserInput = {
 
 export type MyDayStoryCreateManyUserInputEnvelope = {
   data: Prisma.MyDayStoryCreateManyUserInput | Prisma.MyDayStoryCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type MyDayStoryUpsertWithWhereUniqueWithoutUserInput = {
@@ -1194,6 +1195,7 @@ export type MyDayStoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * The data used to create many MyDayStories.
    */
   data: Prisma.MyDayStoryCreateManyInput | Prisma.MyDayStoryCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1212,6 +1214,7 @@ export type MyDayStoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * The data used to create many MyDayStories.
    */
   data: Prisma.MyDayStoryCreateManyInput | Prisma.MyDayStoryCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

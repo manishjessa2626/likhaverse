@@ -722,6 +722,7 @@ export type CharacterCreateOrConnectWithoutAuthorInput = {
 
 export type CharacterCreateManyAuthorInputEnvelope = {
   data: Prisma.CharacterCreateManyAuthorInput | Prisma.CharacterCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type CharacterUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -806,6 +807,7 @@ export type CharacterCreateOrConnectWithoutStoryInput = {
 
 export type CharacterCreateManyStoryInputEnvelope = {
   data: Prisma.CharacterCreateManyStoryInput | Prisma.CharacterCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type CharacterUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1990,6 +1992,7 @@ export type CharacterCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many Characters.
    */
   data: Prisma.CharacterCreateManyInput | Prisma.CharacterCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -2008,6 +2011,7 @@ export type CharacterCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many Characters.
    */
   data: Prisma.CharacterCreateManyInput | Prisma.CharacterCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

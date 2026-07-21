@@ -520,6 +520,7 @@ export type EnvironmentStudioCreateOrConnectWithoutAuthorInput = {
 
 export type EnvironmentStudioCreateManyAuthorInputEnvelope = {
   data: Prisma.EnvironmentStudioCreateManyAuthorInput | Prisma.EnvironmentStudioCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type EnvironmentStudioUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -582,6 +583,7 @@ export type EnvironmentStudioCreateOrConnectWithoutStoryInput = {
 
 export type EnvironmentStudioCreateManyStoryInputEnvelope = {
   data: Prisma.EnvironmentStudioCreateManyStoryInput | Prisma.EnvironmentStudioCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type EnvironmentStudioUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1442,6 +1444,7 @@ export type EnvironmentStudioCreateManyArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many EnvironmentStudios.
    */
   data: Prisma.EnvironmentStudioCreateManyInput | Prisma.EnvironmentStudioCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1460,6 +1463,7 @@ export type EnvironmentStudioCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * The data used to create many EnvironmentStudios.
    */
   data: Prisma.EnvironmentStudioCreateManyInput | Prisma.EnvironmentStudioCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

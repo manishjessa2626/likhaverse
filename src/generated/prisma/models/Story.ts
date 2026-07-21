@@ -1225,6 +1225,7 @@ export type StoryCreateOrConnectWithoutAuthorInput = {
 
 export type StoryCreateManyAuthorInputEnvelope = {
   data: Prisma.StoryCreateManyAuthorInput | Prisma.StoryCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -6169,6 +6170,7 @@ export type StoryCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * The data used to create many Stories.
    */
   data: Prisma.StoryCreateManyInput | Prisma.StoryCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -6187,6 +6189,7 @@ export type StoryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many Stories.
    */
   data: Prisma.StoryCreateManyInput | Prisma.StoryCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

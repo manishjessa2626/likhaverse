@@ -571,6 +571,7 @@ export type ReelCreateOrConnectWithoutUserInput = {
 
 export type ReelCreateManyUserInputEnvelope = {
   data: Prisma.ReelCreateManyUserInput | Prisma.ReelCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReelUpsertWithWhereUniqueWithoutUserInput = {
@@ -1582,6 +1583,7 @@ export type ReelCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * The data used to create many Reels.
    */
   data: Prisma.ReelCreateManyInput | Prisma.ReelCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1600,6 +1602,7 @@ export type ReelCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions
    * The data used to create many Reels.
    */
   data: Prisma.ReelCreateManyInput | Prisma.ReelCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

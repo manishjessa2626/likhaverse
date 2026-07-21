@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-echo "Running database migrations..."
-npx prisma migrate deploy 2>&1 || echo "Migration failed (DB may not be ready yet)"
+echo "Syncing database schema..."
+npx prisma db push 2>&1 && echo "Schema synced."
 
 echo "Starting application..."
 exec "$@"

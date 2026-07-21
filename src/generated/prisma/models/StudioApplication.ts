@@ -642,6 +642,7 @@ export type StudioApplicationCreateOrConnectWithoutAuthorInput = {
 
 export type StudioApplicationCreateManyAuthorInputEnvelope = {
   data: Prisma.StudioApplicationCreateManyAuthorInput | Prisma.StudioApplicationCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type StudioApplicationUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -713,6 +714,7 @@ export type StudioApplicationCreateOrConnectWithoutStoryInput = {
 
 export type StudioApplicationCreateManyStoryInputEnvelope = {
   data: Prisma.StudioApplicationCreateManyStoryInput | Prisma.StudioApplicationCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type StudioApplicationUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1615,6 +1617,7 @@ export type StudioApplicationCreateManyArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many StudioApplications.
    */
   data: Prisma.StudioApplicationCreateManyInput | Prisma.StudioApplicationCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1633,6 +1636,7 @@ export type StudioApplicationCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * The data used to create many StudioApplications.
    */
   data: Prisma.StudioApplicationCreateManyInput | Prisma.StudioApplicationCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

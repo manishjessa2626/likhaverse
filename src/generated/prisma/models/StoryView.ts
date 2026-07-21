@@ -400,6 +400,7 @@ export type StoryViewCreateOrConnectWithoutUserInput = {
 
 export type StoryViewCreateManyUserInputEnvelope = {
   data: Prisma.StoryViewCreateManyUserInput | Prisma.StoryViewCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryViewUpsertWithWhereUniqueWithoutUserInput = {
@@ -447,6 +448,7 @@ export type StoryViewCreateOrConnectWithoutStoryInput = {
 
 export type StoryViewCreateManyStoryInputEnvelope = {
   data: Prisma.StoryViewCreateManyStoryInput | Prisma.StoryViewCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryViewUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1237,6 +1239,7 @@ export type StoryViewCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * The data used to create many StoryViews.
    */
   data: Prisma.StoryViewCreateManyInput | Prisma.StoryViewCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1255,6 +1258,7 @@ export type StoryViewCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many StoryViews.
    */
   data: Prisma.StoryViewCreateManyInput | Prisma.StoryViewCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

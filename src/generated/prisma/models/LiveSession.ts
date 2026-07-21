@@ -578,6 +578,7 @@ export type LiveSessionCreateOrConnectWithoutHostInput = {
 
 export type LiveSessionCreateManyHostInputEnvelope = {
   data: Prisma.LiveSessionCreateManyHostInput | Prisma.LiveSessionCreateManyHostInput[]
+  skipDuplicates?: boolean
 }
 
 export type LiveSessionUpsertWithWhereUniqueWithoutHostInput = {
@@ -1517,6 +1518,7 @@ export type LiveSessionCreateManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * The data used to create many LiveSessions.
    */
   data: Prisma.LiveSessionCreateManyInput | Prisma.LiveSessionCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1535,6 +1537,7 @@ export type LiveSessionCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * The data used to create many LiveSessions.
    */
   data: Prisma.LiveSessionCreateManyInput | Prisma.LiveSessionCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

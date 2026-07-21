@@ -566,6 +566,7 @@ export type ReadingProgressCreateOrConnectWithoutUserInput = {
 
 export type ReadingProgressCreateManyUserInputEnvelope = {
   data: Prisma.ReadingProgressCreateManyUserInput | Prisma.ReadingProgressCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReadingProgressUpsertWithWhereUniqueWithoutUserInput = {
@@ -622,6 +623,7 @@ export type ReadingProgressCreateOrConnectWithoutStoryInput = {
 
 export type ReadingProgressCreateManyStoryInputEnvelope = {
   data: Prisma.ReadingProgressCreateManyStoryInput | Prisma.ReadingProgressCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReadingProgressUpsertWithWhereUniqueWithoutStoryInput = {
@@ -665,6 +667,7 @@ export type ReadingProgressCreateOrConnectWithoutChapterInput = {
 
 export type ReadingProgressCreateManyChapterInputEnvelope = {
   data: Prisma.ReadingProgressCreateManyChapterInput | Prisma.ReadingProgressCreateManyChapterInput[]
+  skipDuplicates?: boolean
 }
 
 export type ReadingProgressUpsertWithWhereUniqueWithoutChapterInput = {
@@ -1541,6 +1544,7 @@ export type ReadingProgressCreateManyArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many ReadingProgresses.
    */
   data: Prisma.ReadingProgressCreateManyInput | Prisma.ReadingProgressCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1559,6 +1563,7 @@ export type ReadingProgressCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    * The data used to create many ReadingProgresses.
    */
   data: Prisma.ReadingProgressCreateManyInput | Prisma.ReadingProgressCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

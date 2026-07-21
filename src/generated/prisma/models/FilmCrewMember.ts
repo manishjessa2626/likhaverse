@@ -363,6 +363,7 @@ export type FilmCrewMemberCreateOrConnectWithoutProjectInput = {
 
 export type FilmCrewMemberCreateManyProjectInputEnvelope = {
   data: Prisma.FilmCrewMemberCreateManyProjectInput | Prisma.FilmCrewMemberCreateManyProjectInput[]
+  skipDuplicates?: boolean
 }
 
 export type FilmCrewMemberUpsertWithWhereUniqueWithoutProjectInput = {
@@ -1131,6 +1132,7 @@ export type FilmCrewMemberCreateManyArgs<ExtArgs extends runtime.Types.Extension
    * The data used to create many FilmCrewMembers.
    */
   data: Prisma.FilmCrewMemberCreateManyInput | Prisma.FilmCrewMemberCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1149,6 +1151,7 @@ export type FilmCrewMemberCreateManyAndReturnArgs<ExtArgs extends runtime.Types.
    * The data used to create many FilmCrewMembers.
    */
   data: Prisma.FilmCrewMemberCreateManyInput | Prisma.FilmCrewMemberCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

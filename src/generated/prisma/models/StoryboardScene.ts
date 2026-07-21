@@ -594,6 +594,7 @@ export type StoryboardSceneCreateOrConnectWithoutAuthorInput = {
 
 export type StoryboardSceneCreateManyAuthorInputEnvelope = {
   data: Prisma.StoryboardSceneCreateManyAuthorInput | Prisma.StoryboardSceneCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryboardSceneUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -659,6 +660,7 @@ export type StoryboardSceneCreateOrConnectWithoutStoryInput = {
 
 export type StoryboardSceneCreateManyStoryInputEnvelope = {
   data: Prisma.StoryboardSceneCreateManyStoryInput | Prisma.StoryboardSceneCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type StoryboardSceneUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1533,6 +1535,7 @@ export type StoryboardSceneCreateManyArgs<ExtArgs extends runtime.Types.Extensio
    * The data used to create many StoryboardScenes.
    */
   data: Prisma.StoryboardSceneCreateManyInput | Prisma.StoryboardSceneCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1551,6 +1554,7 @@ export type StoryboardSceneCreateManyAndReturnArgs<ExtArgs extends runtime.Types
    * The data used to create many StoryboardScenes.
    */
   data: Prisma.StoryboardSceneCreateManyInput | Prisma.StoryboardSceneCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

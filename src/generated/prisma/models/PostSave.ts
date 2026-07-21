@@ -406,6 +406,7 @@ export type PostSaveCreateOrConnectWithoutUserInput = {
 
 export type PostSaveCreateManyUserInputEnvelope = {
   data: Prisma.PostSaveCreateManyUserInput | Prisma.PostSaveCreateManyUserInput[]
+  skipDuplicates?: boolean
 }
 
 export type PostSaveUpsertWithWhereUniqueWithoutUserInput = {
@@ -453,6 +454,7 @@ export type PostSaveCreateOrConnectWithoutPostInput = {
 
 export type PostSaveCreateManyPostInputEnvelope = {
   data: Prisma.PostSaveCreateManyPostInput | Prisma.PostSaveCreateManyPostInput[]
+  skipDuplicates?: boolean
 }
 
 export type PostSaveUpsertWithWhereUniqueWithoutPostInput = {
@@ -1243,6 +1245,7 @@ export type PostSaveCreateManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * The data used to create many PostSaves.
    */
   data: Prisma.PostSaveCreateManyInput | Prisma.PostSaveCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1261,6 +1264,7 @@ export type PostSaveCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * The data used to create many PostSaves.
    */
   data: Prisma.PostSaveCreateManyInput | Prisma.PostSaveCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */

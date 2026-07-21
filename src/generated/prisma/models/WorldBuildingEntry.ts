@@ -520,6 +520,7 @@ export type WorldBuildingEntryCreateOrConnectWithoutAuthorInput = {
 
 export type WorldBuildingEntryCreateManyAuthorInputEnvelope = {
   data: Prisma.WorldBuildingEntryCreateManyAuthorInput | Prisma.WorldBuildingEntryCreateManyAuthorInput[]
+  skipDuplicates?: boolean
 }
 
 export type WorldBuildingEntryUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -582,6 +583,7 @@ export type WorldBuildingEntryCreateOrConnectWithoutStoryInput = {
 
 export type WorldBuildingEntryCreateManyStoryInputEnvelope = {
   data: Prisma.WorldBuildingEntryCreateManyStoryInput | Prisma.WorldBuildingEntryCreateManyStoryInput[]
+  skipDuplicates?: boolean
 }
 
 export type WorldBuildingEntryUpsertWithWhereUniqueWithoutStoryInput = {
@@ -1442,6 +1444,7 @@ export type WorldBuildingEntryCreateManyArgs<ExtArgs extends runtime.Types.Exten
    * The data used to create many WorldBuildingEntries.
    */
   data: Prisma.WorldBuildingEntryCreateManyInput | Prisma.WorldBuildingEntryCreateManyInput[]
+  skipDuplicates?: boolean
 }
 
 /**
@@ -1460,6 +1463,7 @@ export type WorldBuildingEntryCreateManyAndReturnArgs<ExtArgs extends runtime.Ty
    * The data used to create many WorldBuildingEntries.
    */
   data: Prisma.WorldBuildingEntryCreateManyInput | Prisma.WorldBuildingEntryCreateManyInput[]
+  skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
