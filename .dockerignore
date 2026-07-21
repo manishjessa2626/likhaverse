@@ -11,6 +11,5 @@ dev.db
 dev.db-journal
 .git.zip
 tsconfig.tsbuildinfo
-scripts
 docs
 prompts
