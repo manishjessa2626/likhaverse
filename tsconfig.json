@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "services", "likhaverse-mobile-demo", "LikhaVerseMobile", "packages"]
+  "exclude": ["node_modules", "services", "likhaverse-mobile-demo", "LikhaVerseMobile", "packages", "scripts", "prisma/seed.ts"]
 }

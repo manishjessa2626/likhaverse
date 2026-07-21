@@ -1,13 +1,7 @@
 import { PrismaClient } from "../src/generated/prisma/client"
-import { PrismaLibSql } from "@prisma/adapter-libsql"
-import path from "path"
 
 async function main() {
-  const adapter = new PrismaLibSql({
-    url: "file:" + path.join(__dirname, "../dev.db"),
-  })
-
-  const prisma = new PrismaClient({ adapter })
+  const prisma = new PrismaClient()
 
   const superAdminEmail = "admin@likhaverse.com"
 
