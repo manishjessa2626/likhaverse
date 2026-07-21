@@ -1,0 +1,958 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id             String    @id @default(uuid())
+  name           String
+  email          String?   @unique
+  password       String?
+  phone          String?   @unique
+  provider       String    @default("email")
+  providerId     String?
+  isVerified     Boolean   @default(false)
+  role           String    @default("READER")
+  bio            String?
+  avatar         String?
+  emailVerified  Boolean   @default(false)
+  premium        Boolean   @default(false)
+  premiumSince   DateTime?
+  aiGenerationCount Int   @default(0)
+  aiGenerationResetAt DateTime?
+  walletBalance  Int       @default(0)
+  subscriptionStatus String @default("inactive")
+  subscriptionExpiry DateTime?
+  isVIP            Boolean   @default(false)
+  rewardStreak     Int      @default(0)
+  dailyEpisodesRead Int      @default(0)
+  lastReadReset    DateTime?
+  lastEpisodeUnlockTime DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([role])
+  @@index([name])
+
+  payments        Payment[]
+  stories         Story[]
+  comments        Comment[]
+  followers       Follow[]       @relation("Following")
+  following       Follow[]       @relation("FollowedBy")
+  reactions       Reaction[]
+  reports         Report[]
+  saves           Save[]
+  notifications   Notification[] @relation("NotificationRecipient")
+  actedNotifications Notification[] @relation("NotificationActor")
+  verificationCodes VerificationCode[]
+  characters      Character[]
+  aiGenerations   AIGeneration[]
+  sentMessages    Message[]      @relation("SentMessages")
+  receivedMessages Message[]     @relation("ReceivedMessages")
+  studioApplications StudioApplication[]
+  storyAnalyses StoryAnalysis[]
+  storyboardScenes StoryboardScene[]
+  worldBuildingEntries WorldBuildingEntry[]
+  environmentStudios EnvironmentStudio[]
+  readingProgress   ReadingProgress[]
+  storyLikes        StoryLike[]
+  accounts          UserAccount[]
+  storyViews        StoryView[]
+  storyReminders    StoryReminder[]
+  chapterUnlocks    ChapterUnlock[]
+  walletTransactions WalletTransaction[]
+  dailyRewards      DailyReward[]
+  adUnlocks         AdUnlock[]
+  conversationLinks ConversationParticipant[]
+  posts             Post[]
+  postLikes         PostLike[]
+  postComments      PostComment[]
+  myDayStories      MyDayStory[]
+  postSaves         PostSave[]
+  reels             Reel[]
+  reelLikes         ReelLike[]
+  reelComments      ReelComment[]
+  filmProjects      FilmProject[]
+  ownedClubs        Club[]         @relation("ClubOwner")
+  clubMemberships   ClubMember[]
+  ownedChallenges   Challenge[]    @relation("ChallengeOwner")
+  challengeEntries  ChallengeParticipant[]
+  hostedSessions    LiveSession[]  @relation("SessionHost")
+  sessionAttendance LiveSessionAttendee[]
+  hostedEvents      Event[]        @relation("EventHost")
+  eventAttendance   EventAttendee[]
+  fanArts           FanArt[]
+  characterVotes    CharacterVote[]
+}
+
+model Payment {
+  id        String   @id @default(uuid())
+  userId    String
+  amount    Int
+  method    String
+  type      String   @default("subscription")
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+}
+
+model UserAccount {
+  id         String   @id @default(uuid())
+  provider   String
+  providerId String
+  createdAt  DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerId])
+  @@index([userId])
+}
+
+model Story {
+  id               String   @id @default(uuid())
+  title            String
+  description      String?
+  cover            String?
+  tags             String?
+  status           String   @default("DRAFT")
+
+  @@index([status])
+  @@index([title])
+  @@index([tags])
+  @@index([status, viewCount])
+  @@index([status, updatedAt])
+  @@index([studioBadge, status, updatedAt])
+  @@index([original, status, viewCount])
+  @@index([authorId, status, updatedAt])
+  accessType       String   @default("FREEMIUM")
+  freePreviewChapters Int   @default(5)
+  wordCount        Int      @default(0)
+  viewCount        Int      @default(0)
+  completedAt      DateTime?
+  studioBadge      Boolean  @default(false)
+  completedBadge   Boolean  @default(false)
+  original         Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  chapters  Chapter[]
+  readingProgress ReadingProgress[]
+  comments  Comment[]
+  reactions Reaction[]
+  reports   Report[]
+  saves     Save[]
+  views     StoryView[]
+  seasons   Season[]
+  characters Character[]
+  aiGenerations AIGeneration[]
+  studioApplications StudioApplication[]
+  storyAnalyses StoryAnalysis[]
+  storyboardScenes StoryboardScene[]
+  worldBuildingEntries WorldBuildingEntry[]
+  environmentStudios EnvironmentStudio[]
+  storyLikes        StoryLike[]
+  storyReminders    StoryReminder[]
+  chapterUnlocks    ChapterUnlock[]
+  filmProjects      FilmProject[]
+  fanArts           FanArt[]
+  characterVotes    CharacterVote[]
+}
+
+model Season {
+  id        String   @id @default(uuid())
+  title     String
+  number    Int
+  createdAt DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  chapters Chapter[]
+
+  @@unique([storyId, number])
+}
+
+model Chapter {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  number    Int
+  wordCount Int      @default(0)
+  coinCost  Int      @default(5)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  storyId  String
+  story    Story   @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  seasonId String?
+  season   Season? @relation(fields: [seasonId], references: [id])
+
+  comments  Comment[]
+  reactions Reaction[]
+  readingProgress ReadingProgress[]
+  unlocks   ChapterUnlock[]
+  adUnlocks AdUnlock[]
+}
+
+model ChapterUnlock {
+  id        String   @id @default(uuid())
+  method    String   // COINS | AD | PREMIUM
+  coinsSpent Int?
+  createdAt DateTime @default(now())
+
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  storyId   String
+  story     Story   @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chapterId])
+  @@index([userId])
+  @@index([storyId])
+}
+
+model WalletTransaction {
+  id        String   @id @default(uuid())
+  type      String   // EARN_SPEND | DAILY_REWARD | PURCHASE | UNLOCK_SPEND
+  amount    Int      // positive = earned, negative = spent
+  balance   Int      // balance after transaction
+  description String?
+  streak     Int?
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model DailyReward {
+  id        String   @id @default(uuid())
+  date      String   // YYYY-MM-DD
+  amount    Int
+  claimedAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+  @@index([userId])
+}
+
+model AdUnlock {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Character {
+  id          String   @id @default(uuid())
+  name        String
+  age         String?
+  gender      String?
+  personality String?
+  appearance  String?
+  clothing    String?
+  species     String?
+  background  String?
+  artStyle    String?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  aiGenerations AIGeneration[]
+  characterVotes CharacterVote[]
+}
+
+model AIGeneration {
+  id        String   @id @default(uuid())
+  type      String
+  prompt    String
+  style     String?
+  enhancedPrompt String?
+  imageUrl  String?
+  thumbnailUrl String?
+  metadata  String?
+  status    String   @default("PENDING")
+  provider  String   @default("mock")
+  providerId String?
+  modelUsed String?
+  errorMessage String?
+  cost      Float?
+  durationMs Int?
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  storyId   String?
+  story     Story?   @relation(fields: [storyId], references: [id], onDelete: SetNull)
+  characterId String?
+  character Character? @relation(fields: [characterId], references: [id])
+  log      AIGenerationLog?
+}
+
+model AIGenerationLog {
+  id           String   @id @default(uuid())
+  generationId String   @unique
+  generation   AIGeneration @relation(fields: [generationId], references: [id], onDelete: Cascade)
+  providerName String
+  modelUsed    String?
+  cost         Float?
+  tokensIn     Int?
+  tokensOut    Int?
+  durationMs   Int?
+  status       String
+  errorMessage String?
+  rawResponse  String?
+  createdAt    DateTime @default(now())
+}
+
+model StudioApplication {
+  id            String   @id @default(uuid())
+  genre         String
+  totalChapters Int
+  wordCount     Int
+  reason        String
+  visualStyle   String
+  status        String   @default("PENDING")
+  reviewedAt    DateTime?
+  reviewNotes   String?
+  createdAt     DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model Conversation {
+  id          String   @id @default(uuid())
+  lastMessage String?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  participants ConversationParticipant[]
+  messages     Message[]
+}
+
+model ConversationParticipant {
+  id             String       @id @default(uuid())
+  userId         String
+  conversationId String
+  lastReadAt     DateTime?
+
+  user         User         @relation(fields: [userId], references: [id])
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, conversationId])
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  subject   String?
+  content   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  senderId   String
+  sender     User   @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId String
+  receiver   User   @relation("ReceivedMessages", fields: [receiverId], references: [id])
+
+  conversationId String?
+  conversation   Conversation? @relation(fields: [conversationId], references: [id])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  storyId   String?
+  story     Story?   @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  parentId  String?
+  parent    Comment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies   Comment[] @relation("CommentReplies")
+  reports   Report[]
+}
+
+model Follow {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+
+  followerId  String
+  follower    User     @relation("FollowedBy", fields: [followerId], references: [id])
+  followingId String
+  following   User     @relation("Following", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+}
+
+model Reaction {
+  id        String   @id @default(uuid())
+  type      String
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  storyId   String?
+  story     Story?   @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  chapterId String?
+  chapter   Chapter? @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chapterId, type])
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  reason      String
+  description String?
+  status      String   @default("PENDING")
+  createdAt   DateTime @default(now())
+
+  reporterId String
+  reporter   User   @relation(fields: [reporterId], references: [id])
+
+  storyId   String?
+  story     Story?   @relation(fields: [storyId], references: [id], onDelete: SetNull)
+  commentId String?
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: SetNull)
+}
+
+model Save {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, storyId])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  type      String
+  message   String
+  link      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId  String
+  user    User   @relation("NotificationRecipient", fields: [userId], references: [id])
+  actorId String?
+  actor   User?  @relation("NotificationActor", fields: [actorId], references: [id])
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model VerificationCode {
+  id        String   @id @default(uuid())
+  code      String
+  type      String   @default("EMAIL_VERIFY")
+  target    String?
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  @@index([target])
+}
+
+model StoryView {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  userId String?
+  user   User?  @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model WorldBuildingEntry {
+  id        String   @id @default(uuid())
+  type      String
+  title     String
+  content   String
+  metadata  String?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model EnvironmentStudio {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  mood        String?
+  imageUrl    String?
+  metadata    String?
+  createdAt   DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model StoryAnalysis {
+  id        String   @id @default(uuid())
+  type      String
+  content   String
+  metadata  String?
+  createdAt DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model StoryboardScene {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  sceneNumber Int
+  imageUrl    String?
+  chapterTitle String?
+  chapterNumber Int?
+  createdAt   DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model StoryLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  storyId String
+  story   Story  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, storyId])
+  @@index([storyId])
+}
+
+// ===========================
+// PHASE 6: FILMMAKER STUDIO
+// ===========================
+
+model FilmProject {
+  id              String   @id @default(uuid())
+  title           String
+  logline         String?
+  genre           String?
+  status          String   @default("DEVELOPMENT") // DEVELOPMENT | PRE_PRODUCTION | PRODUCTION | POST_PRODUCTION | RELEASED
+  screenplayStatus  String @default("PENDING")
+  storyboardStatus  String @default("PENDING")
+  shotListStatus    String @default("PENDING")
+  productionStatus  String @default("PENDING")
+  editingStatus     String @default("PENDING")
+  screenplayContent String?
+  storyboardData    String?
+  shotListData      String?
+  productionPlan    String?
+  editingNotes      String?
+  budgetEstimate    String?
+  posterUrl         String?
+  runtime           Int?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+
+  crew FilmCrewMember[]
+}
+
+model FilmCrewMember {
+  id        String   @id @default(uuid())
+  name      String
+  role      String   // DIRECTOR | SCREENWRITER | PRODUCER | CINEMATOGRAPHER | EDITOR | COMPOSER
+
+  projectId String
+  project   FilmProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, name, role])
+}
+
+// ===========================
+// PHASE 7: COMMUNITY
+// ===========================
+
+model Club {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  type        String   @default("WRITING") // WRITING | READING | GENRE
+  cover       String?
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  ownerId String
+  owner   User   @relation("ClubOwner", fields: [ownerId], references: [id])
+
+  members    ClubMember[]
+  challenges Challenge[]
+}
+
+model ClubMember {
+  id       String   @id @default(uuid())
+  role     String   @default("MEMBER") // OWNER | ADMIN | MODERATOR | MEMBER
+  joinedAt DateTime @default(now())
+
+  clubId String
+  club   Club @relation(fields: [clubId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+
+  @@unique([clubId, userId])
+}
+
+model Challenge {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  prompt      String?
+  type        String   @default("WRITING") // WRITING | READING | ART
+  startDate   DateTime
+  endDate     DateTime
+  rewardDesc  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  clubId  String?
+  club    Club?   @relation(fields: [clubId], references: [id], onDelete: SetNull)
+  ownerId String
+  owner   User    @relation("ChallengeOwner", fields: [ownerId], references: [id])
+
+  participants ChallengeParticipant[]
+}
+
+model ChallengeParticipant {
+  id        String   @id @default(uuid())
+  entry     String?
+  votes     Int      @default(0)
+  joinedAt  DateTime @default(now())
+
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+
+  @@unique([challengeId, userId])
+}
+
+model LiveSession {
+  id           String   @id @default(uuid())
+  title        String
+  description  String?
+  type         String   @default("WRITING") // WRITING | READING | QANDA
+  hostNotes    String?
+  scheduledAt  DateTime
+  duration     Int
+  maxAttendees Int?
+  createdAt    DateTime @default(now())
+
+  hostId String
+  host   User @relation("SessionHost", fields: [hostId], references: [id])
+
+  attendees LiveSessionAttendee[]
+}
+
+model LiveSessionAttendee {
+  id       String   @id @default(uuid())
+  joinedAt DateTime @default(now())
+
+  sessionId String
+  session   LiveSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+
+  @@unique([sessionId, userId])
+}
+
+model Event {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  type        String   @default("BOOK_LAUNCH") // BOOK_LAUNCH | QANDA | READING | WORKSHOP
+  cover       String?
+  scheduledAt DateTime
+  duration    Int
+  maxAttendees Int?
+  link        String?
+  createdAt   DateTime @default(now())
+
+  hostId String
+  host   User @relation("EventHost", fields: [hostId], references: [id])
+
+  attendees EventAttendee[]
+}
+
+model EventAttendee {
+  id        String   @id @default(uuid())
+  registeredAt DateTime @default(now())
+
+  eventId String
+  event   Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User  @relation(fields: [userId], references: [id])
+
+  @@unique([eventId, userId])
+}
+
+model FanArt {
+  id        String   @id @default(uuid())
+  imageUrl  String
+  caption   String?
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  userId  String
+  user    User  @relation(fields: [userId], references: [id])
+
+  @@index([storyId])
+}
+
+model CharacterVote {
+  id          String   @id @default(uuid())
+  type        String   // FAVORITE | BEST_ARC | BEST_DESIGN
+  createdAt   DateTime @default(now())
+
+  characterId String
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  storyId     String
+  story       Story     @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([characterId, userId, type])
+}
+
+model RateLimit {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  count     Int      @default(0)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StoryReminder {
+  id        String   @id @default(uuid())
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  userId  String
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  storyId String
+  story   Story   @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, storyId])
+}
+
+model ReadingProgress {
+  id            String   @id @default(uuid())
+  scrollPosition Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  userId    String
+  user      User    @relation(fields: [userId], references: [id])
+  storyId   String
+  story     Story   @relation(fields: [storyId], references: [id])
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id])
+
+  @@unique([userId, storyId])
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  type      String   @default("text") // text | image | book
+  content   String
+  mediaUrls String?  // JSON array of URLs
+  bookId    String?  // linked story/book id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  likes    PostLike[]
+  comments PostComment[]
+  saves    PostSave[]
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model PostLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  postId String
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+model PostComment {
+  id        String   @id @default(uuid())
+  text      String
+  createdAt DateTime @default(now())
+
+  postId String
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
+}
+
+model MyDayStory {
+  id        String   @id @default(uuid())
+  mediaUrl  String
+  caption   String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+  @@index([userId])
+}
+
+model PostSave {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  postId String
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, userId])
+}
+
+model Reel {
+  id        String   @id @default(uuid())
+  videoUrl  String
+  caption   String?
+  musicUrl  String?
+  audioUrl  String?
+  viewCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  likes    ReelLike[]
+  comments ReelComment[]
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model ReelLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  reelId String
+  reel   Reel @relation(fields: [reelId], references: [id], onDelete: Cascade)
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([reelId, userId])
+}
+
+model ReelComment {
+  id        String   @id @default(uuid())
+  text      String
+  createdAt DateTime @default(now())
+
+  reelId String
+  reel   Reel @relation(fields: [reelId], references: [id], onDelete: Cascade)
+  userId String
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([reelId])
+}
+
+model IdempotencyKey {
+  key       String   @id
+  status    String   @default("in_progress")
+  result    String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}

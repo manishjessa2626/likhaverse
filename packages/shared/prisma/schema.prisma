@@ -1,0 +1,318 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  READER
+  CREATOR
+  AUTHOR
+  VIP_GOLD
+  PREMIUM_CREATOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum SubscriptionStatus {
+  inactive
+  active
+  expired
+  cancelled
+}
+
+model User {
+  id             String             @id @default(uuid())
+  name           String
+  email          String?            @unique
+  password       String?
+  phone          String?            @unique
+  provider       String             @default("email")
+  providerId     String?
+  isVerified     Boolean            @default(false)
+  role           UserRole           @default(READER)
+  bio            String?
+  avatar         String?
+  emailVerified  Boolean            @default(false)
+  premium        Boolean            @default(false)
+  premiumSince   DateTime?
+  walletBalance  Int                @default(0)
+  subscriptionStatus SubscriptionStatus @default(inactive)
+  subscriptionExpiry DateTime?
+  isVIP          Boolean            @default(false)
+  dailyEpisodesRead Int             @default(0)
+  lastReadReset  DateTime?
+  lastEpisodeUnlockTime DateTime?
+  refreshToken   String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  payments            Payment[]
+  stories             Story[]
+  comments            Comment[]
+  followers           Follow[]       @relation("Following")
+  following           Follow[]       @relation("FollowedBy")
+  reactions           Reaction[]
+  reports             Report[]
+  saves               Save[]
+  notifications       Notification[] @relation("NotificationRecipient")
+  actedNotifications  Notification[] @relation("NotificationActor")
+  verificationCodes   VerificationCode[]
+  userAccounts        UserAccount[]
+  sessions            Session[]
+
+  @@index([role])
+  @@index([name])
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model UserAccount {
+  id         String @id @default(uuid())
+  userId     String
+  provider   String
+  providerId String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerId])
+  @@index([userId])
+}
+
+model RateLimit {
+  key       String   @id
+  count     Int      @default(1)
+  expiresAt DateTime
+
+  @@index([expiresAt])
+}
+
+model VerificationCode {
+  id        String   @id @default(uuid())
+  code      String
+  type      String   @default("EMAIL_VERIFY")
+  target    String?
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  @@index([target])
+}
+
+model Story {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @default("")
+  cover       String?
+  category    String?
+  tags        String   @default("")
+  status      String   @default("draft")
+  language    String   @default("en")
+  mature      Boolean  @default(false)
+  aiGenerated Boolean  @default(false)
+  viewCount   Int      @default(0)
+  likeCount   Int      @default(0)
+  saveCount   Int      @default(0)
+  commentCount Int     @default(0)
+  aiCover     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  episodes Episode[]
+  comments Comment[]
+  saves    Save[]
+  reactions Reaction[]
+  views    StoryView[]
+  reports  Report[]
+
+  @@index([authorId])
+  @@index([category])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Episode {
+  id           String   @id @default(uuid())
+  title        String
+  content      String   @default("")
+  description  String   @default("")
+  cover        String?
+  audioUrl     String?
+  duration     String?
+  seasonNumber Int      @default(1)
+  episodeNumber Int     @default(1)
+  wordCount    Int      @default(0)
+  viewCount    Int      @default(0)
+  likes        Int      @default(0)
+  status       String   @default("published")
+  isFree       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  readingProgress ReadingProgress[]
+
+  @@index([storyId])
+  @@index([storyId, episodeNumber])
+}
+
+model ReadingProgress {
+  id           String   @id @default(uuid())
+  progress     Float    @default(0)
+  completed    Boolean  @default(false)
+  lastReadAt   DateTime @default(now())
+
+  userId    String
+  episodeId String
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  episode Episode @relation(fields: [episodeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, episodeId])
+  @@index([userId])
+  @@index([episodeId])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  likes     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId  String
+  storyId String
+  user    User   @relation(fields: [userId], references: [id])
+  story   Story  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@index([storyId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Follow {
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+
+  followerId  String
+  followingId String
+
+  follower  User @relation("Following", fields: [followerId], references: [id])
+  following User @relation("FollowedBy", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+}
+
+model Reaction {
+  id        String   @id @default(uuid())
+  type      String   @default("like")
+  createdAt DateTime @default(now())
+
+  userId  String
+  storyId String
+  user    User   @relation(fields: [userId], references: [id])
+  story   Story  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, storyId])
+  @@index([storyId])
+}
+
+model Save {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId  String
+  storyId String
+  user    User   @relation(fields: [userId], references: [id])
+  story   Story  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, storyId])
+  @@index([userId])
+}
+
+model Report {
+  id          String   @id @default(uuid())
+  reason      String
+  description String?
+  createdAt   DateTime @default(now())
+
+  userId  String?
+  storyId String?
+  user    User?   @relation(fields: [userId], references: [id])
+  story   Story?  @relation(fields: [storyId], references: [id], onDelete: Cascade)
+}
+
+model StoryView {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  storyId String
+  story   Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@index([storyId])
+}
+
+model Payment {
+  id             String   @id @default(uuid())
+  amount         Int
+  currency       String   @default("PHP")
+  method         String   @default("card")
+  type           String   @default("subscription")
+  status         String   @default("completed")
+  referenceId    String?
+  metadata       String?
+  createdAt      DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  type      String
+  title     String?
+  message   String?
+  read      Boolean  @default(false)
+  link      String?
+  metadata  String?
+  createdAt DateTime @default(now())
+
+  recipientId String
+  actorId     String?
+
+  recipient User  @relation("NotificationRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+  actor     User? @relation("NotificationActor", fields: [actorId], references: [id])
+
+  @@index([recipientId])
+  @@index([recipientId, read])
+  @@index([createdAt])
+}
