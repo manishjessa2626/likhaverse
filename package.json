@@ -35,7 +35,9 @@
     "typescript": "^5.8.0"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "pg": "^8.13.0",
     "@sentry/nextjs": "^10.63.0",
     "@tailwindcss/postcss": "^4.3.2",
     "bcryptjs": "^3.0.3",
