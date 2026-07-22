@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -8,6 +8,7 @@ import { Menu, X, Bell, BookOpen, PenSquare, Settings, LogOut, LogIn, UserPlus, 
 import { getActivity, type ActivityItem } from "@/app/actions/activity"
 import { Logo } from "@/components/brand/Logo"
 import { ThemeToggle } from "@/components/ui/ThemeToggle"
+import { useRealtime } from "@/lib/realtime/RealtimeContext"
 
 function timeAgo(date: Date): string {
   const seconds = Math.floor((Date.now() - date.getTime()) / 1000)
@@ -76,17 +77,13 @@ function ActivityRow({ item }: { item: ActivityItem }) {
   )
 }
 
-export function SiteHeader({
-  initialNotifCount = 0,
-}: {
-  initialNotifCount?: number
-}) {
+export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [creatorOpen, setCreatorOpen] = useState(false)
   const [activityOpen, setActivityOpen] = useState(false)
   const [activityItems, setActivityItems] = useState<ActivityItem[]>([])
   const [activityLoading, setActivityLoading] = useState(false)
-  const [notifMainCount, setNotifMainCount] = useState(initialNotifCount)
+  const { unreadCount: notifMainCount } = useRealtime()
   const { data: session } = useSession()
   const pathname = usePathname()
   const router = useRouter()
@@ -105,25 +102,6 @@ export function SiteHeader({
     }
     return () => { document.body.style.overflow = "" }
   }, [menuOpen, activityOpen])
-
-  useEffect(() => {
-    if (!session?.user) return
-    let cancelled = false
-
-    async function refresh() {
-      try {
-        const res = await fetch("/api/notifications").then((r) => r.json())
-        if (cancelled) return
-        if (res.unread !== undefined) {
-          setNotifMainCount(res.unread)
-        }
-      } catch {}
-    }
-
-    refresh()
-    const interval = setInterval(refresh, 30000)
-    return () => { cancelled = true; clearInterval(interval) }
-  }, [session])
 
   useEffect(() => {
     if (!activityOpen || !session?.user) return

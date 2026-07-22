@@ -5,6 +5,8 @@ import { SiteHeader } from "@/components/layout/SiteHeader"
 import SessionProvider from "@/components/SessionProvider"
 import { PWARegister } from "@/components/PWARegister"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { RealtimeProvider } from "@/lib/realtime/RealtimeContext"
+import { ToastContainer } from "@/components/Toast"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,9 +75,12 @@ export default function RootLayout({
         <div className="pointer-events-none fixed inset-0 bg-gradient-to-b from-violet-200/30 dark:from-violet-950/30 via-transparent to-transparent" />
         <ThemeProvider>
           <SessionProvider>
-            <SiteHeader />
-            <main className="relative flex-1">{children}</main>
-            <PWARegister />
+            <RealtimeProvider>
+              <SiteHeader />
+              <main className="relative flex-1">{children}</main>
+              <PWARegister />
+              <ToastContainer />
+            </RealtimeProvider>
           </SessionProvider>
         </ThemeProvider>
       </body>
