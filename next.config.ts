@@ -1,7 +1,6 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  output: "standalone",
   transpilePackages: ["@sentry/nextjs"],
   serverExternalPackages: ["pino", "pino-pretty"],
   experimental: {

@@ -14,7 +14,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/prisma ./prisma
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_OPTIONS=--max-old-space-size=2048 --initial-old-space-size=512
+ENV NODE_OPTIONS=--max-old-space-size=1024
 RUN npx prisma generate && npx prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script > schema.sql && npx next build
 
 FROM base AS runner

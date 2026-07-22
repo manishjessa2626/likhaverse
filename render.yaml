@@ -1,9 +1,9 @@
 services:
   - type: web
     name: likhaverse
-    env: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
+    env: node
+    buildCommand: npx prisma generate && npx next build
+    startCommand: npx prisma db push && npx next start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
