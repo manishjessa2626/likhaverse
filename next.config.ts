@@ -4,13 +4,13 @@ const nextConfig: NextConfig = {
   output: "standalone",
   transpilePackages: ["@sentry/nextjs"],
   serverExternalPackages: ["pino", "pino-pretty"],
-  turbopack: {},
-  allowedDevOrigins: ["likhaverse"],
   experimental: {
+    cpus: 1,
     serverActions: {
       bodySizeLimit: "5mb",
     },
   },
+  allowedDevOrigins: ["likhaverse"],
   images: {
     remotePatterns: [
       {
