@@ -1,7 +1,7 @@
 import { PrismaClient } from "@/generated/prisma/client"
 import { Pool } from "pg"
 import { PrismaPg } from "@prisma/adapter-pg"
-import { readFileSync, existsSync } from "fs"
+import { SCHEMA_SQL } from "@/lib/schema-sql"
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL })
 const adapter = new PrismaPg(pool)
@@ -16,27 +16,17 @@ export const prisma = globalForPrisma.prisma ?? createClient()
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma
 
-// Auto-create tables if they don't exist
+// Auto-create tables on first access
 prisma.$connect()
   .then(() => prisma.$executeRawUnsafe(`SELECT 1 FROM "Story" LIMIT 1`))
   .then(() => prisma.$disconnect())
   .catch(() => {
-    try {
-      const possiblePaths = [
-        "/app/schema.sql",
-        process.cwd() + "/schema.sql",
-        __dirname + "/../../../schema.sql",
-      ]
-      const schemaPath = possiblePaths.find(existsSync)
-      if (!schemaPath) return
-      const sql = readFileSync(schemaPath, "utf8")
-      const statements = sql.split(";").map(s => s.trim()).filter(s => s.length > 0 && !s.startsWith("--"))
-      prisma.$connect().then(async () => {
-        for (const stmt of statements) {
-          try { await prisma.$executeRawUnsafe(stmt + ";") } catch {}
-        }
-        console.log("[prisma] Schema synced")
-        prisma.$disconnect()
-      })
-    } catch {}
+    const statements = SCHEMA_SQL.split(";").map(s => s.trim()).filter(s => s.length > 0 && !s.startsWith("--"))
+    prisma.$connect().then(async () => {
+      for (const stmt of statements) {
+        try { await prisma.$executeRawUnsafe(stmt + ";") } catch {}
+      }
+      console.log("[prisma] Schema synced")
+      prisma.$disconnect()
+    })
   })
