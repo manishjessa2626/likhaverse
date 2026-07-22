@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@sentry/nextjs"],
   serverExternalPackages: ["pino", "pino-pretty"],
   experimental: {
-    cpus: 1,
     serverActions: {
       bodySizeLimit: "5mb",
     },
