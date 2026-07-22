@@ -5,8 +5,22 @@ echo "=== LikhaVerse Startup ==="
 echo "Node version: $(node --version)"
 echo "DATABASE_URL set: $(test -n "$DATABASE_URL" && echo yes || echo no)"
 
+echo "--- Syncing database schema ---"
+cd /app
+node -e "
+  const { execSync } = require('child_process');
+  try {
+    const out = execSync('npx prisma db push --accept-data-loss 2>&1', { cwd: '/app', env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL } });
+    console.log(out.toString());
+    process.exit(0);
+  } catch (e) {
+    console.error(e.stderr?.toString() || e.message);
+    process.exit(1);
+  }
+" || echo "prisma db push failed — trying schema.sql fallback"
+
 if [ -f "/app/schema.sql" ]; then
-  echo "--- Applying database schema ---"
+  echo "--- Applying schema.sql fallback ---"
   node -e "
     const { Pool } = require('pg');
     const fs = require('fs');
@@ -18,9 +32,9 @@ if [ -f "/app/schema.sql" ]; then
         try { await p.query(s + ';') } catch {}
       }
       await p.end();
-      console.log('Schema applied');
+      console.log('Schema applied via fallback');
     })().then(() => process.exit(0)).catch(() => process.exit(0));
-  " || echo "Schema apply had errors (non-fatal)"
+  " || echo "Schema fallback had errors"
 fi
 
 echo "--- Starting application ---"
