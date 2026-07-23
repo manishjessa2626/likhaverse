@@ -16,9 +16,9 @@ async function getFirestore() {
 
   const app = getApps().length === 0
     ? initializeApp({
-        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-        projectId: process.env.FIREBASE_PROJECT_ID,
+        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCz7XixcIPTMfSB-phzyimax21gjLix1Og",
+        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "likhaverse.firebaseapp.com",
+        projectId: process.env.FIREBASE_PROJECT_ID || "likhaverse",
       })
     : getApps()[0]
 
