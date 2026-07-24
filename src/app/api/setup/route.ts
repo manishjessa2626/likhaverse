@@ -1,67 +1,85 @@
 import { NextResponse } from "next/server"
-import { execSync } from "child_process"
+import { prisma } from "@/lib/prisma"
+import { Pool } from "pg"
 import fs from "fs"
 import path from "path"
+import bcrypt from "bcryptjs"
 
 export const dynamic = "force-dynamic"
 
-function findPrismaBin(): string {
-  const cwd = process.cwd()
-  const candidates = [
-    path.join(cwd, "node_modules", "prisma", "build", "index.js"),
-    path.join(cwd, "..", "node_modules", "prisma", "build", "index.js"),
-    "/app/node_modules/prisma/build/index.js",
-  ]
-  for (const c of candidates) {
-    if (fs.existsSync(c)) return c
+async function applySchema(): Promise<string> {
+  const schemaPath = path.join(process.cwd(), "schema.sql")
+  if (!fs.existsSync(schemaPath)) return "schema.sql not found"
+
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+  const sql = fs.readFileSync(schemaPath, "utf8")
+
+  const stmts: string[] = []
+  let current = ""
+  for (const line of sql.split("\n")) {
+    const trimmed = line.trim()
+    if (trimmed.startsWith("--") || trimmed === "") continue
+    current += line + "\n"
+    if (trimmed.endsWith(";")) {
+      stmts.push(current.trim())
+      current = ""
+    }
   }
-  return "npx prisma"
+  if (current.trim()) stmts.push(current.trim())
+
+  let ok = 0
+  let fail = 0
+  const errors: string[] = []
+  for (const s of stmts) {
+    try {
+      await pool.query(s)
+      ok++
+    } catch (err: unknown) {
+      const e = err as { code?: string; message?: string }
+      if (e.code === "42P07" || e.code === "42710") {
+        ok++
+      } else {
+        fail++
+        if (fail <= 5) errors.push(e.message || String(e))
+      }
+    }
+  }
+  await pool.end()
+  return `${ok} ok, ${fail} failed${errors.length ? ": " + errors.join("; ") : ""}`
 }
 
-function findRoot(): string {
-  const cwd = process.cwd()
-  for (const dir of [cwd, path.join(cwd, ".."), "/app"]) {
-    if (fs.existsSync(path.join(dir, "prisma", "schema.prisma"))) return dir
-  }
-  return cwd
-}
+async function seed(): Promise<string> {
+  const existing = await prisma.user.count()
+  if (existing > 0) return `Skipped — ${existing} users already exist`
 
-function run(nodeCmd: string): string {
-  try {
-    return execSync(nodeCmd, {
-      cwd: process.cwd(),
-      env: {
-        ...process.env,
-        DATABASE_URL: process.env.DATABASE_URL,
-      },
-      encoding: "utf8",
-      timeout: 120000,
-    }).toString()
-  } catch (e: unknown) {
-    const err = e as { stderr?: Buffer | string; stdout?: Buffer | string; message?: string }
-    return (err.stdout?.toString() || "") + "\n" + (err.stderr?.toString() || "") + "\n" + (err.message || String(e))
-  }
+  const admin = await prisma.user.create({
+    data: {
+      name: "Admin",
+      email: "admin@likhaverse.com",
+      password: await bcrypt.hash("admin123", 10),
+      provider: "email",
+      role: "SUPER_ADMIN",
+      isVerified: true,
+    },
+  })
+
+  const author = await prisma.user.create({
+    data: {
+      name: "Author",
+      email: "author@likhaverse.com",
+      password: await bcrypt.hash("author123", 10),
+      provider: "email",
+      role: "AUTHOR",
+      isVerified: true,
+    },
+  })
+
+  return `Created admin (${admin.id}) and author (${author.id})`
 }
 
 export async function GET() {
   const results: Record<string, unknown> = {}
-  const bin = findPrismaBin()
-  const root = findRoot()
-  const schemaFile = path.join(root, "prisma", "schema.prisma")
-  const configFile = path.join(root, "prisma.config.ts")
-
-  results.prismaBin = bin
-  results.cwd = process.cwd()
-  results.root = root
-  results.schemaExists = fs.existsSync(schemaFile)
-  results.configExists = fs.existsSync(configFile)
-
-  const prismaCmd = bin.startsWith("npx") ? bin : `node ${bin}`
-  results.prismaDbPush = run(`${prismaCmd} db push --accept-data-loss --schema="${schemaFile}" --config="${configFile}" 2>&1`)
-
-  if (fs.existsSync(schemaFile)) {
-    results.seed = run(`${prismaCmd} db seed --schema="${schemaFile}" --config="${configFile}" 2>&1`)
-  }
-
+  results.schema = await applySchema()
+  results.seed = await seed()
   return NextResponse.json({ status: "ok", results })
 }

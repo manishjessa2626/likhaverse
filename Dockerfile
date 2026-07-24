@@ -14,7 +14,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/prisma ./prisma
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npx prisma generate && npx prisma migrate diff --from-empty --to-schema prisma/schema.prisma --script > schema.sql && npx next build
+RUN npx prisma generate && npx next build
 
 FROM base AS runner
 WORKDIR /app
@@ -28,11 +28,9 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/prisma.config.ts ./
-COPY --from=builder /app/schema.sql ./
 COPY --from=builder /app/src/generated ./src/generated
+COPY schema.sql ./
 COPY --from=builder /app/node_modules/.cache ./node_modules/.cache
-COPY --from=builder /app/node_modules/.bin/prisma ./node_modules/.bin/prisma
-COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 
 USER nextjs
