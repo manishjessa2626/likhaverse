@@ -13,27 +13,18 @@ node -e "
   const fs = require('fs');
   const path = require('path');
 
-  // Find prisma binary
-  const candidates = [
-    '/app/node_modules/.bin/prisma',
-    '/app/.next/standalone/node_modules/.bin/prisma',
-  ];
-  let prisma;
-  for (const c of candidates) {
-    try {
-      fs.accessSync(c, fs.constants.X_OK);
-      prisma = c;
-      break;
-    } catch {}
+  // Prisma binary: Docker COPY resolves symlinks, so .bin/prisma becomes a
+  // JS file with broken relative requires. Use the real path instead.
+  const prismaBin = '/app/node_modules/prisma/build/index.js';
+
+  if (!fs.existsSync(prismaBin)) {
+    console.error('Prisma CLI not found at', prismaBin);
+    process.exit(1);
   }
-  if (!prisma) {
-    console.error('Prisma binary not found, trying npx...');
-    prisma = 'npx prisma';
-  }
-  console.log('Using prisma:', prisma);
+  console.log('Using prisma:', prismaBin);
 
   try {
-    const cmd = prisma + ' db push --accept-data-loss --schema=/app/prisma/schema.prisma --config=/app/prisma.config.ts';
+    const cmd = 'node ' + prismaBin + ' db push --accept-data-loss --schema=/app/prisma/schema.prisma --config=/app/prisma.config.ts';
     console.log('Running:', cmd);
     const out = execSync(cmd, {
       cwd: '/app',

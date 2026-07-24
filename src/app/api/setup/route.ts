@@ -8,31 +8,27 @@ export const dynamic = "force-dynamic"
 function findPrismaBin(): string {
   const cwd = process.cwd()
   const candidates = [
-    path.join(cwd, "node_modules", ".bin", "prisma"),
-    path.join(cwd, "..", "node_modules", ".bin", "prisma"),
-    path.join("/app", "node_modules", ".bin", "prisma"),
+    path.join(cwd, "node_modules", "prisma", "build", "index.js"),
+    path.join(cwd, "..", "node_modules", "prisma", "build", "index.js"),
+    "/app/node_modules/prisma/build/index.js",
   ]
   for (const c of candidates) {
-    try {
-      fs.accessSync(c, fs.constants.X_OK)
-      return c
-    } catch {}
+    if (fs.existsSync(c)) return c
   }
   return "npx prisma"
 }
 
 function findRoot(): string {
   const cwd = process.cwd()
-  // Check if schema exists in cwd or parent
   for (const dir of [cwd, path.join(cwd, ".."), "/app"]) {
     if (fs.existsSync(path.join(dir, "prisma", "schema.prisma"))) return dir
   }
   return cwd
 }
 
-function run(cmd: string): string {
+function run(nodeCmd: string): string {
   try {
-    return execSync(cmd, {
+    return execSync(nodeCmd, {
       cwd: process.cwd(),
       env: {
         ...process.env,
@@ -60,10 +56,11 @@ export async function GET() {
   results.schemaExists = fs.existsSync(schemaFile)
   results.configExists = fs.existsSync(configFile)
 
-  results.prismaDbPush = run(`${bin} db push --accept-data-loss --schema="${schemaFile}" --config="${configFile}" 2>&1`)
+  const prismaCmd = bin.startsWith("npx") ? bin : `node ${bin}`
+  results.prismaDbPush = run(`${prismaCmd} db push --accept-data-loss --schema="${schemaFile}" --config="${configFile}" 2>&1`)
 
   if (fs.existsSync(schemaFile)) {
-    results.seed = run(`${bin} db seed --schema="${schemaFile}" --config="${configFile}" 2>&1`)
+    results.seed = run(`${prismaCmd} db seed --schema="${schemaFile}" --config="${configFile}" 2>&1`)
   }
 
   return NextResponse.json({ status: "ok", results })
