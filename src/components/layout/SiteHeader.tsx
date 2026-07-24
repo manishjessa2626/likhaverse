@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Menu, X, Bell, BookOpen, PenSquare, Settings, LogOut, LogIn, UserPlus, Search, Rss, ChevronRight, Activity, Heart, MessageCircle, UserPlus as UserPlusIcon, Bookmark, FileText, Film, Users } from "lucide-react"
 import { getActivity, type ActivityItem } from "@/app/actions/activity"
 import { Logo } from "@/components/brand/Logo"
@@ -86,7 +86,6 @@ export function SiteHeader() {
   const { unreadCount: notifMainCount } = useRealtime()
   const { data: session } = useSession()
   const pathname = usePathname()
-  const router = useRouter()
 
   const closeMenu = useCallback(() => { setMenuOpen(false); setCreatorOpen(false); setActivityOpen(false) }, [])
 
@@ -124,79 +123,102 @@ export function SiteHeader() {
             <Logo size="md" />
           </Link>
 
-          {/* Center nav tabs — hidden on mobile, shown inline when logged in */}
-          {session?.user && (
-            <div className="hidden md:flex items-center gap-1">
-              <Link
-                href="/"
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${
-                  pathname === "/"
-                    ? "bg-purple-200 text-purple-900"
-                    : "text-zinc-600 hover:text-purple-700 hover:bg-purple-100/50"
-                }`}
-              >
-                Reading
-              </Link>
+          {/* Center nav tabs — hidden on mobile */}
+          <div className="hidden md:flex items-center gap-1">
+            {/* Creator dropdown */}
+            <div className="relative group">
               <Link
                 href="/write"
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${
+                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all flex items-center gap-1 ${
                   pathname.startsWith("/write")
                     ? "bg-purple-200 text-purple-900"
                     : "text-zinc-600 hover:text-purple-700 hover:bg-purple-100/50"
                 }`}
               >
-                Writing
+                <PenSquare size={15} />
+                Creator
               </Link>
+              <div className="absolute top-full left-0 mt-1 w-48 rounded-xl border border-purple-200/60 bg-white/95 p-2 shadow-lg backdrop-blur-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 dark:border-zinc-700/60 dark:bg-zinc-900/95">
+                <Link
+                  href="/write"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-600 hover:bg-purple-100/50 hover:text-purple-700 transition-all"
+                >
+                  <BookOpen size={16} />
+                  My Stories
+                </Link>
+                <Link
+                  href="/write/new"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-600 hover:bg-purple-100/50 hover:text-purple-700 transition-all"
+                >
+                  <PenSquare size={16} />
+                  New Story
+                </Link>
+              </div>
+            </div>
+
+            {/* Studio dropdown */}
+            <div className="relative group">
               <Link
                 href="/studio"
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${
+                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all flex items-center gap-1 ${
                   pathname.startsWith("/studio")
                     ? "bg-purple-200 text-purple-900"
                     : "text-zinc-600 hover:text-purple-700 hover:bg-purple-100/50"
                 }`}
               >
+                <Film size={15} />
                 Studio
               </Link>
-              <Link
-                href="/film"
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${
-                  pathname.startsWith("/film")
-                    ? "bg-purple-200 text-purple-900"
-                    : "text-zinc-600 hover:text-purple-700 hover:bg-purple-100/50"
-                }`}
-              >
-                Film
-              </Link>
-              <Link
-                href="/community"
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all ${
-                  pathname.startsWith("/community")
-                    ? "bg-purple-200 text-purple-900"
-                    : "text-zinc-600 hover:text-purple-700 hover:bg-purple-100/50"
-                }`}
-              >
-                Community
-              </Link>
+              <div className="absolute top-full left-0 mt-1 w-56 rounded-xl border border-purple-200/60 bg-white/95 p-2 shadow-lg backdrop-blur-sm opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 dark:border-zinc-700/60 dark:bg-zinc-900/95">
+                <Link
+                  href="/studio"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-600 hover:bg-purple-100/50 hover:text-purple-700 transition-all"
+                >
+                  <Film size={16} />
+                  Filmmaker Studio
+                </Link>
+                <Link
+                  href="/film"
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-zinc-600 hover:bg-purple-100/50 hover:text-purple-700 transition-all"
+                >
+                  <span className="text-sm">🎬</span>
+                  Adapt to Film
+                </Link>
+              </div>
             </div>
-          )}
+
+            <Link
+              href="/feed"
+              className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-all flex items-center gap-1 ${
+                pathname === "/feed"
+                  ? "bg-purple-200 text-purple-900"
+                  : "text-zinc-600 hover:text-purple-700 hover:bg-purple-100/50"
+              }`}
+            >
+              <Rss size={15} />
+              Newsfeed
+            </Link>
+          </div>
 
           <div className="flex items-center gap-1">
+            {/* Search — always visible on desktop */}
+            <div className="hidden md:block">
+              <form action="/stories" method="GET" className="relative">
+                <input
+                  name="q"
+                  type="text"
+                  placeholder="Search stories, authors..."
+                  autoComplete="off"
+                  className="w-44 rounded-lg border border-purple-200 bg-white/60 pl-3 pr-7 py-1.5 text-sm text-zinc-800 placeholder-zinc-400 transition-all focus:w-60 focus:border-purple-300 focus:bg-white focus:outline-none dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:border-zinc-500 dark:focus:bg-zinc-800"
+                />
+                <Search size={14} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+              </form>
+            </div>
+
             <ThemeToggle />
+
             {session?.user ? (
               <>
-                <div className="hidden md:block">
-                  <form action="/stories" method="GET" className="relative">
-                    <input
-                      name="q"
-                      type="text"
-                      placeholder="Search stories, authors..."
-                      autoComplete="off"
-                      className="w-44 rounded-lg border border-purple-200 bg-white/60 pl-3 pr-7 py-1.5 text-sm text-zinc-800 placeholder-zinc-400 transition-all focus:w-60 focus:border-purple-300 focus:bg-white focus:outline-none dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-100 dark:placeholder-zinc-500 dark:focus:border-zinc-500 dark:focus:bg-zinc-800"
-                    />
-                    <Search size={14} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400" />
-                  </form>
-                </div>
-
                 <Link
                   href="/notifications"
                   className="relative flex h-9 w-9 items-center justify-center rounded-lg text-zinc-500 hover:bg-purple-100 hover:text-purple-700 transition-colors"

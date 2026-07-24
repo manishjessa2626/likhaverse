@@ -28,7 +28,7 @@ export function getRedis(): Redis | null {
         return Math.min(times * 200, 3000)
       },
       lazyConnect: true,
-      enableOfflineQueue: false,
+      enableOfflineQueue: true,
     })
 
     client.on("error", (err) => log.error({ err }, "Redis connection error"))
