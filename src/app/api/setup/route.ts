@@ -49,32 +49,22 @@ async function applySchema(): Promise<string> {
 }
 
 async function seed(): Promise<string> {
-  const existing = await prisma.user.count()
-  if (existing > 0) return `Skipped — ${existing} users already exist`
+  const adminPw = await bcrypt.hash("Admin123!", 10)
+  const authorPw = await bcrypt.hash("author123", 10)
 
-  const admin = await prisma.user.create({
-    data: {
-      name: "Admin",
-      email: "admin@likhaverse.com",
-      password: await bcrypt.hash("admin123", 10),
-      provider: "email",
-      role: "SUPER_ADMIN",
-      isVerified: true,
-    },
+  const admin = await prisma.user.upsert({
+    where: { email: "admin@likhaverse.com" },
+    update: { password: adminPw, role: "SUPER_ADMIN", isVerified: true },
+    create: { name: "Admin", email: "admin@likhaverse.com", password: adminPw, provider: "email", role: "SUPER_ADMIN", isVerified: true },
   })
 
-  const author = await prisma.user.create({
-    data: {
-      name: "Author",
-      email: "author@likhaverse.com",
-      password: await bcrypt.hash("author123", 10),
-      provider: "email",
-      role: "AUTHOR",
-      isVerified: true,
-    },
+  const author = await prisma.user.upsert({
+    where: { email: "author@likhaverse.com" },
+    update: { password: authorPw, role: "AUTHOR", isVerified: true },
+    create: { name: "Author", email: "author@likhaverse.com", password: authorPw, provider: "email", role: "AUTHOR", isVerified: true },
   })
 
-  return `Created admin (${admin.id}) and author (${author.id})`
+  return `Admin (${admin.id}) and author (${author.id}) ready`
 }
 
 export async function GET() {
