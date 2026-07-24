@@ -53,7 +53,12 @@ export async function POST(req: Request) {
       console.log(`[EMAIL OTP] Code for ${sanitized}: ${code}`)
     }
 
-    return NextResponse.json({ sent: true, message: "Code sent to your email" })
+    const response: Record<string, unknown> = { sent: true, message: "Code sent to your email" }
+    if (!process.env.SMTP_HOST) {
+      response.devCode = code
+    }
+
+    return NextResponse.json(response)
   } catch (err) {
     console.error("[EMAIL OTP SEND ERROR]", err)
     return NextResponse.json({ error: "Failed to send code" }, { status: 500 })

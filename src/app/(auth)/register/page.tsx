@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [code, setCode] = useState("")
+  const [devCode, setDevCode] = useState("")
 
   async function handleSendCode() {
     if (!name.trim()) { setError("Name is required"); return }
@@ -30,6 +31,7 @@ export default function RegisterPage() {
       })
       const data = await res.json()
       if (data.error) { setError(data.error); return }
+      if (data.devCode) setDevCode(data.devCode)
       setStep("verify")
     } catch {
       setError("Failed to send code")
@@ -156,6 +158,11 @@ export default function RegisterPage() {
                 <p className="text-center text-xs text-zinc-500">
                   Code sent to <span className="text-zinc-300">{email}</span>
                 </p>
+                {devCode && (
+                  <p className="text-center text-xs text-amber-400">
+                    Dev code: <span className="font-mono text-base">{devCode}</span>
+                  </p>
+                )}
                 <input
                   type="text"
                   value={code}
