@@ -90,31 +90,65 @@ export function AnimatedHero({ trending, session }: AnimatedHeroProps) {
           </h1>
         </div>
 
-        {/* Welcome for logged-in users */}
+        {/* Welcome for logged-in users — Netflix-style hero with featured story */}
         {session?.user ? (
           <>
-            <p className="text-xl font-medium text-purple-200 sm:text-2xl">
-              Welcome back, <span className="text-white">{session.user.name}</span>
-            </p>
-            <p className="mt-3 text-base text-purple-300/80 max-w-xl mx-auto">
-              Your universe is waiting. Pick up where you left off or create something new.
-            </p>
-            <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
-              <Link
-                href="/write"
-                className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-purple-600/30 transition-all hover:bg-purple-500 hover:scale-105 active:scale-95"
-              >
-                <PenSquare size={16} />
-                Continue Writing
-              </Link>
-              <Link
-                href="/library"
-                className="inline-flex items-center gap-2 rounded-xl border border-purple-400/40 bg-white/10 px-6 py-3 text-sm font-medium text-purple-200 backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-105 active:scale-95"
-              >
-                <Library size={16} />
-                My Library
-              </Link>
-            </div>
+            {heroStory ? (
+              <>
+                <p className="text-base font-medium text-purple-300">
+                  Welcome back, <span className="text-white">{session.user.name}</span>
+                </p>
+                <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-amber-300">
+                  Trending Now
+                </div>
+                <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl text-white drop-shadow-lg">
+                  {heroStory.title}
+                </h2>
+                <p className="mt-4 text-base text-purple-200/80 max-w-2xl mx-auto line-clamp-3">
+                  {heroStory.description}
+                </p>
+                <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
+                  <Link
+                    href={"/stories/" + heroStory.id}
+                    className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-purple-600/30 transition-all hover:bg-purple-500 hover:scale-105 active:scale-95"
+                  >
+                    Read Now <ArrowRight size={16} />
+                  </Link>
+                  <Link
+                    href="/write"
+                    className="inline-flex items-center gap-2 rounded-xl border border-purple-400/40 bg-white/10 px-6 py-3.5 text-sm font-medium text-purple-200 backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-105 active:scale-95"
+                  >
+                    <PenSquare size={16} />
+                    Write
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-xl font-medium text-purple-200 sm:text-2xl">
+                  Welcome back, <span className="text-white">{session.user.name}</span>
+                </p>
+                <p className="mt-3 text-base text-purple-300/80 max-w-xl mx-auto">
+                  Your universe is waiting. Pick up where you left off or create something new.
+                </p>
+                <div className="mt-8 flex items-center justify-center gap-3 flex-wrap">
+                  <Link
+                    href="/write"
+                    className="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-purple-600/30 transition-all hover:bg-purple-500 hover:scale-105 active:scale-95"
+                  >
+                    <PenSquare size={16} />
+                    Continue Writing
+                  </Link>
+                  <Link
+                    href="/library"
+                    className="inline-flex items-center gap-2 rounded-xl border border-purple-400/40 bg-white/10 px-6 py-3 text-sm font-medium text-purple-200 backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-105 active:scale-95"
+                  >
+                    <Library size={16} />
+                    My Library
+                  </Link>
+                </div>
+              </>
+            )}
           </>
         ) : (
           <>
@@ -137,18 +171,6 @@ export function AnimatedHero({ trending, session }: AnimatedHeroProps) {
               </Link>
             </div>
           </>
-        )}
-
-        {/* Featured story badge */}
-        {heroStory && (
-          <Link
-            href={"/stories/" + heroStory.id}
-            className="mt-8 inline-flex items-center gap-2 rounded-full border border-purple-400/30 bg-purple-300/10 px-4 py-2 text-xs text-purple-300 backdrop-blur-sm transition-all hover:bg-purple-300/20 hover:scale-105"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
-            Featured: <span className="font-medium text-white">{heroStory.title}</span>
-            <ArrowRight size={12} />
-          </Link>
         )}
       </div>
 
