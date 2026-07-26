@@ -12,6 +12,7 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
   const [expanded, setExpanded] = useState(false)
   const [speedOpen, setSpeedOpen] = useState(false)
   const [voiceOpen, setVoiceOpen] = useState(false)
+  const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([])
 
   const hasContent = !!content && content.length > 0
   const isActive = state.isPlaying || state.isPaused
@@ -20,12 +21,17 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
     if (!hasContent && isActive) stop()
   }, [hasContent])
 
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return
+    const update = () => setSystemVoices(window.speechSynthesis.getVoices() ?? [])
+    update()
+    window.speechSynthesis.onvoiceschanged = update
+    return () => { window.speechSynthesis.onvoiceschanged = null }
+  }, [])
+
   const isDark = settings.theme === "dark"
 
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2]
-  const systemVoices: SpeechSynthesisVoice[] = typeof window !== "undefined" && window.speechSynthesis
-    ? window.speechSynthesis.getVoices() ?? []
-    : []
   const personas = getVoicePersonas()
   const currentPreset = NARRATION_PRESETS.find((p) => p.id === state.preset) ?? NARRATION_PRESETS[4]
   const progress = state.totalSegments > 0 ? ((state.currentSegment + 1) / state.totalSegments) * 100 : 0

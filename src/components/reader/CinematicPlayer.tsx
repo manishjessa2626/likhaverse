@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Play, Pause, SkipBack, SkipForward, Volume2, X, Music, Headphones, Sparkles, Moon, Zap, Mic } from "lucide-react"
 import { useNarration } from "@/lib/reading/NarrationContext"
 import { useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
@@ -32,15 +32,21 @@ export function CinematicPlayer({
   const { settings } = useReadingSettings()
   const [speedOpen, setSpeedOpen] = useState(false)
   const [voiceOpen, setVoiceOpen] = useState(false)
+  const [systemVoices, setSystemVoices] = useState<SpeechSynthesisVoice[]>([])
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return
+    const update = () => setSystemVoices(window.speechSynthesis.getVoices() ?? [])
+    update()
+    window.speechSynthesis.onvoiceschanged = update
+    return () => { window.speechSynthesis.onvoiceschanged = null }
+  }, [])
 
   const isDark = settings.theme === "dark"
   const isActive = state.isPlaying || state.isPaused
   const progressPct = state.totalSegments > 0 ? (state.currentSegment / state.totalSegments) * 100 : 0
 
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2]
-  const systemVoices: SpeechSynthesisVoice[] = typeof window !== "undefined" && window.speechSynthesis
-    ? window.speechSynthesis.getVoices() ?? []
-    : []
   const personas = getVoicePersonas()
   const currentPreset = NARRATION_PRESETS.find((p) => p.id === state.preset) ?? NARRATION_PRESETS[4]
 

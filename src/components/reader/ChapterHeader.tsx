@@ -36,7 +36,7 @@ export function ChapterHeader({
       </h1>
 
       <p style={{ fontSize: "13px", color: "#6B6B6B" }}>
-        {wordCount.toLocaleString()} words
+        {wordCount.toLocaleString("en-US")} words
       </p>
 
       <div className="mt-8" style={{ borderTop: "1px solid #EAEAEA" }} />
