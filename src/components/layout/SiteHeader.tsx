@@ -111,6 +111,8 @@ export function SiteHeader() {
         setActivityItems(items)
         setActivityLoading(false)
       }
+    }).catch(() => {
+      if (!cancelled) setActivityLoading(false)
     })
     return () => { cancelled = true }
   }, [activityOpen, session])

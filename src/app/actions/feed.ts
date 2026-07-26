@@ -50,61 +50,65 @@ export async function createPost(formData: FormData) {
 }
 
 export async function getFeed(cursor?: string, limit = 10) {
-  const session = await getServerSession(authOptions)
+  try {
+    const session = await getServerSession(authOptions)
 
-  const where = cursor ? { createdAt: { lt: new Date(cursor) } } : {}
+    const where = cursor ? { createdAt: { lt: new Date(cursor) } } : {}
 
-  const posts = await prisma.post.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-    take: limit + 1,
-    include: {
-      user: { select: { id: true, name: true, avatar: true } },
-      likes: { select: { userId: true } },
-      saves: { select: { userId: true } },
-      comments: {
-        take: 2,
-        orderBy: { createdAt: "desc" },
-        include: {
-          user: { select: { id: true, name: true, avatar: true } },
+    const posts = await prisma.post.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      take: limit + 1,
+      include: {
+        user: { select: { id: true, name: true, avatar: true } },
+        likes: { select: { userId: true } },
+        saves: { select: { userId: true } },
+        comments: {
+          take: 2,
+          orderBy: { createdAt: "desc" },
+          include: {
+            user: { select: { id: true, name: true, avatar: true } },
+          },
         },
+        _count: { select: { likes: true, comments: true, saves: true } },
       },
-      _count: { select: { likes: true, comments: true, saves: true } },
-    },
-  })
+    })
 
-  const hasMore = posts.length > limit
-  const items = hasMore ? posts.slice(0, limit) : posts
-  const nextCursor = hasMore ? items[items.length - 1].createdAt.toISOString() : null
+    const hasMore = posts.length > limit
+    const items = hasMore ? posts.slice(0, limit) : posts
+    const nextCursor = hasMore ? items[items.length - 1].createdAt.toISOString() : null
 
-  const likedPostIds = session?.user
-    ? items.filter((p) => p.likes.some((l) => l.userId === session.user.id)).map((p) => p.id)
-    : []
+    const likedPostIds = session?.user
+      ? items.filter((p) => p.likes.some((l) => l.userId === session.user.id)).map((p) => p.id)
+      : []
 
-  const savedPostIds = session?.user
-    ? items.filter((p) => p.saves?.some((s) => s.userId === session.user.id)).map((p) => p.id)
-    : []
+    const savedPostIds = session?.user
+      ? items.filter((p) => p.saves?.some((s) => s.userId === session.user.id)).map((p) => p.id)
+      : []
 
-  const postsData = items.map(({ likes, saves, ...rest }) => ({
-    ...rest,
-    isLiked: likedPostIds.includes(rest.id),
-    isSaved: savedPostIds.includes(rest.id),
-  }))
+    const postsData = items.map(({ likes, saves, ...rest }) => ({
+      ...rest,
+      isLiked: likedPostIds.includes(rest.id),
+      isSaved: savedPostIds.includes(rest.id),
+    }))
 
-  const followingIds = session?.user
-    ? (await prisma.follow.findMany({
-        where: { followerId: session.user.id },
-        select: { followingId: true },
-      })).map((f) => f.followingId)
-    : []
+    const followingIds = session?.user
+      ? (await prisma.follow.findMany({
+          where: { followerId: session.user.id },
+          select: { followingId: true },
+        })).map((f) => f.followingId)
+      : []
 
-  const sorted = postsData.sort((a, b) => {
-    const aFollowed = followingIds.includes(a.userId) ? 1 : 0
-    const bFollowed = followingIds.includes(b.userId) ? 1 : 0
-    return bFollowed - aFollowed
-  })
+    const sorted = postsData.sort((a, b) => {
+      const aFollowed = followingIds.includes(a.userId) ? 1 : 0
+      const bFollowed = followingIds.includes(b.userId) ? 1 : 0
+      return bFollowed - aFollowed
+    })
 
-  return { posts: sorted, nextCursor, hasMore }
+    return { posts: sorted, nextCursor, hasMore }
+  } catch {
+    return { posts: [], nextCursor: null, hasMore: false }
+  }
 }
 
 export async function togglePostLike(postId: string) {
@@ -256,33 +260,37 @@ export async function createMyDayStory(formData: FormData) {
 }
 
 export async function getMyDayStories() {
-  const session = await getServerSession(authOptions)
-  const now = new Date()
+  try {
+    const session = await getServerSession(authOptions)
+    const now = new Date()
 
-  const stories = await prisma.myDayStory.findMany({
-    where: { expiresAt: { gt: now } },
-    orderBy: { createdAt: "desc" },
-    include: {
-      user: { select: { id: true, name: true, avatar: true } },
-    },
-  })
+    const stories = await prisma.myDayStory.findMany({
+      where: { expiresAt: { gt: now } },
+      orderBy: { createdAt: "desc" },
+      include: {
+        user: { select: { id: true, name: true, avatar: true } },
+      },
+    })
 
-  if (!session?.user) return { stories: [] }
+    if (!session?.user) return { stories: [] }
 
-  const followingIds = (await prisma.follow.findMany({
-    where: { followerId: session.user.id },
-    select: { followingId: true },
-  })).map((f) => f.followingId)
+    const followingIds = (await prisma.follow.findMany({
+      where: { followerId: session.user.id },
+      select: { followingId: true },
+    })).map((f) => f.followingId)
 
-  const sorted = stories.sort((a, b) => {
-    const aFollowed = followingIds.includes(a.userId) ? 1 : 0
-    const bFollowed = followingIds.includes(b.userId) ? 1 : 0
-    const aOwn = a.userId === session.user.id ? 2 : 0
-    const bOwn = b.userId === session.user.id ? 2 : 0
-    return Math.max(bFollowed, bOwn) - Math.max(aFollowed, aOwn)
-  })
+    const sorted = stories.sort((a, b) => {
+      const aFollowed = followingIds.includes(a.userId) ? 1 : 0
+      const bFollowed = followingIds.includes(b.userId) ? 1 : 0
+      const aOwn = a.userId === session.user.id ? 2 : 0
+      const bOwn = b.userId === session.user.id ? 2 : 0
+      return Math.max(bFollowed, bOwn) - Math.max(aFollowed, aOwn)
+    })
 
-  return { stories: sorted }
+    return { stories: sorted }
+  } catch {
+    return { stories: [] }
+  }
 }
 
 export async function deleteExpiredMyDayStories() {
@@ -350,35 +358,39 @@ export async function createReel(formData: FormData) {
 }
 
 export async function getReels(cursor?: string, limit = 5) {
-  const session = await getServerSession(authOptions)
+  try {
+    const session = await getServerSession(authOptions)
 
-  const where = cursor ? { createdAt: { lt: new Date(cursor) } } : {}
+    const where = cursor ? { createdAt: { lt: new Date(cursor) } } : {}
 
-  const reels = await prisma.reel.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-    take: limit + 1,
-    include: {
-      user: { select: { id: true, name: true, avatar: true } },
-      likes: { select: { userId: true } },
-      _count: { select: { likes: true, comments: true } },
-    },
-  })
+    const reels = await prisma.reel.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      take: limit + 1,
+      include: {
+        user: { select: { id: true, name: true, avatar: true } },
+        likes: { select: { userId: true } },
+        _count: { select: { likes: true, comments: true } },
+      },
+    })
 
-  const hasMore = reels.length > limit
-  const items = hasMore ? reels.slice(0, limit) : reels
-  const nextCursor = hasMore ? items[items.length - 1].createdAt.toISOString() : null
+    const hasMore = reels.length > limit
+    const items = hasMore ? reels.slice(0, limit) : reels
+    const nextCursor = hasMore ? items[items.length - 1].createdAt.toISOString() : null
 
-  const likedReelIds = session?.user
-    ? items.filter((r) => r.likes.some((l) => l.userId === session.user.id)).map((r) => r.id)
-    : []
+    const likedReelIds = session?.user
+      ? items.filter((r) => r.likes.some((l) => l.userId === session.user.id)).map((r) => r.id)
+      : []
 
-  const reelsData = items.map(({ likes, ...rest }) => ({
-    ...rest,
-    isLiked: likedReelIds.includes(rest.id),
-  }))
+    const reelsData = items.map(({ likes, ...rest }) => ({
+      ...rest,
+      isLiked: likedReelIds.includes(rest.id),
+    }))
 
-  return { reels: reelsData, nextCursor, hasMore }
+    return { reels: reelsData, nextCursor, hasMore }
+  } catch {
+    return { reels: [], nextCursor: null, hasMore: false }
+  }
 }
 
 export async function toggleReelLike(reelId: string) {
