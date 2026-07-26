@@ -38,7 +38,7 @@ export function CinematicPlayer({
   const progressPct = state.totalSegments > 0 ? (state.currentSegment / state.totalSegments) * 100 : 0
 
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2]
-  const systemVoices: SpeechSynthesisVoice[] = typeof window !== "undefined"
+  const systemVoices: SpeechSynthesisVoice[] = typeof window !== "undefined" && window.speechSynthesis
     ? window.speechSynthesis.getVoices() ?? []
     : []
   const personas = getVoicePersonas()

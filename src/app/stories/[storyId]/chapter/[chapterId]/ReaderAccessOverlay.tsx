@@ -16,8 +16,7 @@ export function ReaderAccessOverlay({ reason, nextUnlockTime, chapterNumber, sto
   const [show, setShow] = useState(true)
 
   useEffect(() => {
-    // Record that user accessed this chapter
-    recordEpisodeAccessAction(storyId, chapterNumber)
+    recordEpisodeAccessAction(storyId, chapterNumber).catch(() => {})
   }, [storyId, chapterNumber])
 
   if (!show) return null

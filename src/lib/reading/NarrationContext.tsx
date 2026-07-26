@@ -49,16 +49,20 @@ export function NarrationProvider({ children }: { children: ReactNode }) {
     setState((prev) => ({ ...prev, ...partial }))
   }, [])
 
-  engine.setCallbacks(
-    (idx: number) => {
-      segmentIdxRef.current = idx
-      const progress = state.totalSegments > 0 ? Math.round((idx / state.totalSegments) * 100) : 0
-      setState((prev) => ({ ...prev, currentSegment: idx, progress }))
-    },
-    () => {
-      setState((prev) => ({ ...prev, isPlaying: false, isPaused: false, currentSegment: 0, progress: 0 }))
-    },
-  )
+  useEffect(() => {
+    engine.setCallbacks(
+      (idx: number) => {
+        segmentIdxRef.current = idx
+        setState((prev) => {
+          const progress = prev.totalSegments > 0 ? Math.round((idx / prev.totalSegments) * 100) : 0
+          return { ...prev, currentSegment: idx, progress }
+        })
+      },
+      () => {
+        setState((prev) => ({ ...prev, isPlaying: false, isPaused: false, currentSegment: 0, progress: 0 }))
+      },
+    )
+  }, [engine])
 
   const play = useCallback((content: string, tags?: string | null) => {
     contentRef.current = content
