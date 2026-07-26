@@ -20,7 +20,7 @@ export function ChapterReactions({ chapterId }: { chapterId: string }) {
   const [pending, startTransition] = useTransition()
 
   useEffect(() => {
-    getChapterReactions(chapterId).then(setData)
+    getChapterReactions(chapterId).then(setData).catch(() => {})
   }, [chapterId])
 
   function handleReact(type: string) {

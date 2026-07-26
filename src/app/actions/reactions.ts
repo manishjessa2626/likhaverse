@@ -31,26 +31,30 @@ export async function toggleReaction(type: string, chapterId: string) {
 }
 
 export async function getChapterReactions(chapterId: string) {
-  const reactions = await prisma.reaction.groupBy({
-    by: ["type"],
-    where: { chapterId },
-    _count: true,
-  })
-
-  const session = await getServerSession(authOptions)
-  let userReactions: string[] = []
-  if (session?.user) {
-    const userReacts = await prisma.reaction.findMany({
-      where: { chapterId, userId: session.user.id },
-      select: { type: true },
+  try {
+    const reactions = await prisma.reaction.groupBy({
+      by: ["type"],
+      where: { chapterId },
+      _count: true,
     })
-    userReactions = userReacts.map((r) => r.type)
-  }
 
-  const counts: Record<string, number> = {}
-  for (const r of reactions) {
-    counts[r.type] = r._count
-  }
+    const session = await getServerSession(authOptions)
+    let userReactions: string[] = []
+    if (session?.user) {
+      const userReacts = await prisma.reaction.findMany({
+        where: { chapterId, userId: session.user.id },
+        select: { type: true },
+      })
+      userReactions = userReacts.map((r) => r.type)
+    }
 
-  return { counts, userReactions }
+    const counts: Record<string, number> = {}
+    for (const r of reactions) {
+      counts[r.type] = r._count
+    }
+
+    return { counts, userReactions }
+  } catch {
+    return { counts: {}, userReactions: [] }
+  }
 }

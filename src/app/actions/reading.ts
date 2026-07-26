@@ -55,11 +55,12 @@ export async function getReadingProgress(storyId: string) {
 }
 
 export async function getEpisodeList(storyId: string) {
-  const session = await getServerSession(authOptions)
-  if (!session?.user) return []
+  try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user) return []
 
-  const story = await prisma.story.findUnique({
-    where: { id: storyId },
+    const story = await prisma.story.findUnique({
+      where: { id: storyId },
     select: {
       id: true,
       title: true,
@@ -123,6 +124,9 @@ export async function getEpisodeList(storyId: string) {
       restrictionReason,
     }
   })
+  } catch {
+    return []
+  }
 }
 
 export type RestrictionReason = "DAILY_LIMIT" | "WAIT_TIMER" | null

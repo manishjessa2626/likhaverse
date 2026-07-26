@@ -36,6 +36,7 @@ export function EpisodeListDrawer({
     setLoading(true)
     getEpisodeList(storyId)
       .then(setEpisodes)
+      .catch(() => setEpisodes([]))
       .finally(() => setLoading(false))
   }, [storyId, initialOpen])
 
