@@ -78,6 +78,7 @@ export default async function LibraryPage() {
     continueReading: continueReading.map((r) => ({
       storyId: r.storyId,
       chapterId: r.chapterId,
+      scrollPosition: r.scrollPosition,
       story: r.story,
       chapter: r.chapter,
     })),

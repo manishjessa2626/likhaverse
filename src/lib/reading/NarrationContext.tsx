@@ -1,170 +1,151 @@
 "use client"
 
 import { createContext, useContext, useState, useRef, useCallback, useEffect, type ReactNode } from "react"
+import { WebSpeechProvider } from "@/lib/narration/providers/web-speech"
+import { NarrationEngine, mapTagsToGenre, createInitialPlayerState } from "@/lib/narration/engine"
+import type { PlayerState, Genre } from "@/lib/narration/types"
 
-function splitSentences(text: string): string[] {
-  return text
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0)
-}
-
-interface NarrationState {
-  isPlaying: boolean
-  isPaused: boolean
-  currentSentence: number
-  totalSentences: number
-  sentences: string[]
-  speed: number
-  voices: SpeechSynthesisVoice[]
-  selectedVoice: string | null
-  isSupported: boolean
+let engineInstance: NarrationEngine | null = null
+function getEngine(): NarrationEngine {
+  if (!engineInstance) {
+    engineInstance = new NarrationEngine(new WebSpeechProvider())
+  }
+  return engineInstance
 }
 
 interface NarrationContextType {
-  state: NarrationState
-  play: (content: string) => void
+  state: PlayerState
+  play: (content: string, tags?: string | null) => void
   pause: () => void
   resume: () => void
   stop: () => void
   skipForward: () => void
   skipBackward: () => void
   setSpeed: (speed: number) => void
-  setVoice: (voiceURI: string) => void
+  setPitch: (pitch: number) => void
+  setVoice: (voiceURI: string | null) => void
+  openPlayer: () => void
+  closePlayer: () => void
+  togglePlayer: () => void
+  genre: Genre
+  setContentTags: (tags: string | null) => void
 }
 
 const NarrationContext = createContext<NarrationContextType | null>(null)
 
-let globalVoices: SpeechSynthesisVoice[] = []
-if (typeof window !== "undefined" && window.speechSynthesis) {
-  globalVoices = window.speechSynthesis.getVoices()
-  window.speechSynthesis.onvoiceschanged = () => {
-    globalVoices = window.speechSynthesis.getVoices()
-  }
-}
-
 export function NarrationProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<NarrationState>({
-    isPlaying: false,
-    isPaused: false,
-    currentSentence: 0,
-    totalSentences: 0,
-    sentences: [],
-    speed: 1,
-    voices: [],
-    selectedVoice: null,
-    isSupported: typeof window !== "undefined" && "speechSynthesis" in window,
-  })
+  const engine = getEngine()
+  const [state, setState] = useState<PlayerState>(createInitialPlayerState())
+  const contentRef = useRef("")
+  const tagsRef = useRef<string | null>(null)
+  const segmentIdxRef = useRef(0)
 
-  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null)
-  const contentRef = useRef<string>("")
-  const sentenceIdxRef = useRef(0)
-
-  const stopSynth = useCallback(() => {
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      window.speechSynthesis.cancel()
-    }
+  const updateState = useCallback((partial: Partial<PlayerState>) => {
+    setState((prev) => ({ ...prev, ...partial }))
   }, [])
 
-  const speakSentence = useCallback((sentences: string[], idx: number, speed: number, voiceURI: string | null) => {
-    if (idx >= sentences.length) {
-      setState((prev) => ({ ...prev, isPlaying: false, isPaused: false, currentSentence: 0 }))
-      return
-    }
+  engine.setCallbacks(
+    (idx: number) => {
+      segmentIdxRef.current = idx
+      const progress = state.totalSegments > 0 ? Math.round((idx / state.totalSegments) * 100) : 0
+      setState((prev) => ({ ...prev, currentSegment: idx, progress }))
+    },
+    () => {
+      setState((prev) => ({ ...prev, isPlaying: false, isPaused: false, currentSegment: 0, progress: 0 }))
+    },
+  )
 
-    sentenceIdxRef.current = idx
-    setState((prev) => ({ ...prev, currentSentence: idx, isPaused: false, isPlaying: true }))
-
-    const utterance = new SpeechSynthesisUtterance(sentences[idx])
-    utterance.rate = speed
-    utterance.pitch = 1
-
-    if (voiceURI) {
-      const found = globalVoices.find((v) => v.voiceURI === voiceURI)
-      if (found) utterance.voice = found
-    }
-
-    utterance.onend = () => {
-      if (sentenceIdxRef.current < sentences.length - 1) {
-        speakSentence(sentences, idx + 1, speed, voiceURI)
-      } else {
-        setState((prev) => ({ ...prev, isPlaying: false, isPaused: false, currentSentence: 0 }))
-      }
-    }
-
-    utteranceRef.current = utterance
-    window.speechSynthesis.speak(utterance)
-  }, [])
-
-  const play = useCallback((content: string) => {
-    stopSynth()
+  const play = useCallback((content: string, tags?: string | null) => {
     contentRef.current = content
-    const sentences = splitSentences(content)
-    if (sentences.length === 0) return
-
-    setState((prev) => ({
-      ...prev,
-      sentences,
-      totalSentences: sentences.length,
-      currentSentence: 0,
-      isPaused: false,
+    if (tags !== undefined) {
+      tagsRef.current = tags
+      engine.setTags(tags)
+    }
+    engine.loadContent(content)
+    const segments = engine.getSegments()
+    const genre = engine.getGenre()
+    updateState({
       isPlaying: true,
-    }))
-
-    sentenceIdxRef.current = 0
-    speakSentence(sentences, 0, state.speed, state.selectedVoice)
-  }, [state.speed, state.selectedVoice, stopSynth, speakSentence])
+      isPaused: false,
+      currentSegment: 0,
+      totalSegments: segments.length,
+      segments,
+      progress: 0,
+      genre,
+      isOpen: true,
+    })
+    segmentIdxRef.current = 0
+    engine.play()
+  }, [engine, updateState])
 
   const pause = useCallback(() => {
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      window.speechSynthesis.pause()
-    }
-    setState((prev) => ({ ...prev, isPaused: true }))
-  }, [])
+    engine.pause()
+    updateState({ isPaused: true })
+  }, [engine, updateState])
 
   const resume = useCallback(() => {
-    if (typeof window !== "undefined" && window.speechSynthesis) {
-      window.speechSynthesis.resume()
-    }
-    setState((prev) => ({ ...prev, isPaused: false }))
-  }, [])
+    engine.resume()
+    updateState({ isPaused: false })
+  }, [engine, updateState])
 
   const stop = useCallback(() => {
-    stopSynth()
-    setState((prev) => ({ ...prev, isPlaying: false, isPaused: false, currentSentence: 0 }))
-  }, [stopSynth])
+    engine.stop()
+    updateState({ isPlaying: false, isPaused: false, currentSegment: 0, progress: 0 })
+  }, [engine, updateState])
 
   const skipForward = useCallback(() => {
     if (!contentRef.current) return
-    stopSynth()
-    const sentences = splitSentences(contentRef.current)
-    const next = Math.min(sentenceIdxRef.current + 3, sentences.length - 1)
-    setState((prev) => ({ ...prev, sentences, totalSentences: sentences.length }))
-    speakSentence(sentences, next, state.speed, state.selectedVoice)
-  }, [state.speed, state.selectedVoice, stopSynth, speakSentence])
+    engine.stop()
+    const next = Math.min(segmentIdxRef.current + 5, engine.getSegments().length - 1)
+    segmentIdxRef.current = next
+    engine.loadContent(contentRef.current)
+    engine.play()
+  }, [engine])
 
   const skipBackward = useCallback(() => {
     if (!contentRef.current) return
-    stopSynth()
-    const sentences = splitSentences(contentRef.current)
-    const prev = Math.max(sentenceIdxRef.current - 3, 0)
-    setState((prev) => ({ ...prev, sentences, totalSentences: sentences.length }))
-    speakSentence(sentences, prev, state.speed, state.selectedVoice)
-  }, [state.speed, state.selectedVoice, stopSynth, speakSentence])
+    engine.stop()
+    const prev = Math.max(segmentIdxRef.current - 5, 0)
+    segmentIdxRef.current = prev
+    engine.loadContent(contentRef.current)
+    engine.play()
+  }, [engine])
 
   const setSpeed = useCallback((speed: number) => {
-    setState((prev) => ({ ...prev, speed }))
+    engine.setUserSpeed(speed)
+    updateState({ speed })
+  }, [engine, updateState])
+
+  const setPitch = useCallback((pitch: number) => {
+    engine.setUserPitch(pitch)
+    updateState({ pitch })
+  }, [engine, updateState])
+
+  const setVoice = useCallback((voiceURI: string | null) => {
+    engine.getProvider().stop()
+    ;(window as any).__lvNarratorVoice = voiceURI
+    updateState({ voice: voiceURI })
+  }, [engine, updateState])
+
+  const openPlayer = useCallback(() => updateState({ isOpen: true }), [updateState])
+  const closePlayer = useCallback(() => {
+    stop()
+    updateState({ isOpen: false })
+  }, [stop, updateState])
+  const togglePlayer = useCallback(() => {
+    setState((prev) => ({ ...prev, isOpen: !prev.isOpen }))
   }, [])
 
-  const setVoice = useCallback((voiceURI: string) => {
-    setState((prev) => ({ ...prev, selectedVoice: voiceURI }))
-  }, [])
+  const setContentTags = useCallback((tags: string | null) => {
+    tagsRef.current = tags
+    engine.setTags(tags)
+    updateState({ genre: engine.getGenre() })
+  }, [engine, updateState])
 
   useEffect(() => {
     const updateVoices = () => {
-      setState((prev) => ({ ...prev, voices: globalVoices }))
+      engine.getProvider().getVoices()
     }
-    updateVoices()
     if (typeof window !== "undefined" && window.speechSynthesis) {
       window.speechSynthesis.onvoiceschanged = updateVoices
     }
@@ -173,16 +154,18 @@ export function NarrationProvider({ children }: { children: ReactNode }) {
         window.speechSynthesis.onvoiceschanged = null
       }
     }
-  }, [])
+  }, [engine])
 
   useEffect(() => {
-    return () => {
-      stopSynth()
-    }
-  }, [stopSynth])
+    return () => { engine.stop() }
+  }, [engine])
 
   return (
-    <NarrationContext.Provider value={{ state, play, pause, resume, stop, skipForward, skipBackward, setSpeed, setVoice }}>
+    <NarrationContext.Provider value={{
+      state, play, pause, resume, stop, skipForward, skipBackward,
+      setSpeed, setPitch, setVoice, openPlayer, closePlayer, togglePlayer,
+      genre: engine.getGenre(), setContentTags,
+    }}>
       {children}
     </NarrationContext.Provider>
   )

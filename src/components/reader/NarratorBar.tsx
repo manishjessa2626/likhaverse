@@ -6,12 +6,11 @@ import { useNarration } from "@/lib/reading/NarrationContext"
 import { useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
 
 export function NarratorBar({ content, storyTitle }: { content?: string; storyTitle?: string }) {
-  const { state, play, pause, resume, stop, skipForward, skipBackward, setSpeed, setVoice } = useNarration()
+  const { state, play, pause, resume, stop, skipForward, skipBackward, setSpeed, setVoice, openPlayer } = useNarration()
   const { settings } = useReadingSettings()
   const [expanded, setExpanded] = useState(false)
   const [speedOpen, setSpeedOpen] = useState(false)
   const [voiceOpen, setVoiceOpen] = useState(false)
-  const barRef = useRef<HTMLDivElement>(null)
 
   const hasContent = !!content && content.length > 0
   const isActive = state.isPlaying || state.isPaused
@@ -20,16 +19,18 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
     if (!hasContent && isActive) stop()
   }, [hasContent])
 
-  if (!state.isSupported) return null
-
   const isDark = settings.theme === "dark"
 
   const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2]
-  const progress = state.totalSentences > 0 ? ((state.currentSentence + 1) / state.totalSentences) * 100 : 0
+  const voices: SpeechSynthesisVoice[] = typeof window !== "undefined"
+    ? window.speechSynthesis.getVoices() ?? []
+    : []
+  const progress = state.totalSegments > 0 ? ((state.currentSegment + 1) / state.totalSegments) * 100 : 0
+
+  const currentSegmentText = state.segments[state.currentSegment]?.text ?? ""
 
   return (
     <div
-      ref={barRef}
       className={`fixed bottom-0 left-0 right-0 z-40 border-t transition-all duration-300 ${
         isDark ? "border-zinc-700/60 bg-zinc-900/95 backdrop-blur-lg" : "border-zinc-200/60 bg-white/95 backdrop-blur-lg"
       }`}
@@ -41,20 +42,18 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
           className="h-full transition-all duration-300 ease-out"
           style={{
             width: `${progress}%`,
-            background: isActive
-              ? "linear-gradient(to right, #a78bfa, #7c3aed)"
-              : "linear-gradient(to right, #a78bfa, #7c3aed)",
+            background: "linear-gradient(to right, #a78bfa, #7c3aed)",
             opacity: isActive ? 1 : 0.3,
           }}
         />
       </div>
 
       <div className="mx-auto flex max-w-4xl items-center gap-3 px-4 py-2.5">
-        {/* Collapse toggle */}
+        {/* Expand / Open full player */}
         <button
-          onClick={() => setExpanded(!expanded)}
+          onClick={() => { if (isActive) openPlayer() }}
           className="flex h-7 w-7 items-center justify-center rounded-md text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300 transition-colors"
-          aria-label={expanded ? "Collapse" : "Expand"}
+          aria-label="Open full player"
         >
           {expanded ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
         </button>
@@ -110,21 +109,28 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
           </button>
         )}
 
-        {/* Sentence counter */}
+        {/* Segment counter */}
         {isActive && (
           <span className="text-[11px] font-medium text-zinc-400 dark:text-zinc-500 whitespace-nowrap">
-            {state.currentSentence + 1}/{state.totalSentences}
+            {state.currentSegment + 1}/{state.totalSegments}
           </span>
         )}
 
         {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Current sentence (expanded) */}
+        {/* Current segment text (expanded) */}
         {isActive && expanded && (
           <p className="hidden sm:block text-xs text-zinc-500 dark:text-zinc-400 truncate max-w-[200px] italic">
-            &ldquo;{state.sentences[state.currentSentence]?.slice(0, 80)}&hellip;&rdquo;
+            &ldquo;{currentSegmentText.slice(0, 80)}&hellip;&rdquo;
           </p>
+        )}
+
+        {/* Genre badge */}
+        {state.genre !== "default" && (
+          <span className="hidden sm:inline text-[10px] text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
+            {state.genre}
+          </span>
         )}
 
         {/* Speed control */}
@@ -132,9 +138,7 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
           <button
             onClick={() => { setSpeedOpen(!speedOpen); setVoiceOpen(false) }}
             className={`flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-medium transition-colors ${
-              isDark
-                ? "text-zinc-400 hover:bg-zinc-800"
-                : "text-zinc-500 hover:bg-zinc-100"
+              isDark ? "text-zinc-400 hover:bg-zinc-800" : "text-zinc-500 hover:bg-zinc-100"
             }`}
           >
             <Volume2 size={12} />
@@ -164,18 +168,16 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
         </div>
 
         {/* Voice selection */}
-        {state.voices.length > 0 && (
+        {voices.length > 0 && (
           <div className="relative">
             <button
               onClick={() => { setVoiceOpen(!voiceOpen); setSpeedOpen(false) }}
               className={`rounded-md px-2 py-1 text-[11px] font-medium transition-colors ${
-                isDark
-                  ? "text-zinc-400 hover:bg-zinc-800"
-                  : "text-zinc-500 hover:bg-zinc-100"
+                isDark ? "text-zinc-400 hover:bg-zinc-800" : "text-zinc-500 hover:bg-zinc-100"
               }`}
             >
-              {state.selectedVoice
-                ? state.voices.find((v) => v.voiceURI === state.selectedVoice)?.name?.slice(0, 16) ?? "Voice"
+              {state.voice
+                ? voices.find((v: SpeechSynthesisVoice) => v.voiceURI === state.voice)?.name?.slice(0, 16) ?? "Voice"
                 : "Voice"}
             </button>
             {voiceOpen && (
@@ -185,36 +187,34 @@ export function NarratorBar({ content, storyTitle }: { content?: string; storyTi
                 }`}
               >
                 <button
-                  onClick={() => { setVoice(""); setVoiceOpen(false) }}
+                  onClick={() => { setVoice(null); setVoiceOpen(false) }}
                   className={`block w-full rounded px-3 py-1.5 text-left text-xs transition-colors ${
-                    !state.selectedVoice
+                    !state.voice
                       ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
                       : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700"
                   }`}
                 >
                   Default
                 </button>
-                {state.voices
-                  .filter((v) => v.lang.startsWith("en"))
-                  .map((v) => (
-                    <button
-                      key={v.voiceURI}
-                      onClick={() => { setVoice(v.voiceURI); setVoiceOpen(false) }}
-                      className={`block w-full rounded px-3 py-1.5 text-left text-xs transition-colors ${
-                        state.selectedVoice === v.voiceURI
-                          ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
-                          : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700"
-                      }`}
-                    >
-                      {v.name.slice(0, 24)}
-                    </button>
-                  ))}
+                {voices.filter((v: SpeechSynthesisVoice) => v.lang.startsWith("en")).map((v: SpeechSynthesisVoice) => (
+                  <button
+                    key={v.voiceURI}
+                    onClick={() => { setVoice(v.voiceURI); setVoiceOpen(false) }}
+                    className={`block w-full rounded px-3 py-1.5 text-left text-xs transition-colors ${
+                      state.voice === v.voiceURI
+                        ? "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400"
+                        : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700"
+                    }`}
+                  >
+                    {v.name.slice(0, 24)}
+                  </button>
+                ))}
               </div>
             )}
           </div>
         )}
 
-        {/* Close */}
+        {/* Close when playing */}
         {isActive && (
           <button
             onClick={stop}

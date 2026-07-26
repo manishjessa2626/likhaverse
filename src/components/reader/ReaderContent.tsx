@@ -3,21 +3,15 @@
 import { useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
 import { useNarration } from "@/lib/reading/NarrationContext"
 
-function splitSentences(text: string): string[] {
-  return text
-    .split(/(?<=[.!?])\s+/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0)
-}
-
-function highlightSentences(text: string, currentSentence: number, isActive: boolean): React.ReactNode[] {
-  const sentences = splitSentences(text)
-  return sentences.map((s, i) => {
-    const isCurrent = isActive && i === currentSentence
+function highlightSegments(text: string, currentSegment: number, isActive: boolean): React.ReactNode[] {
+  if (!isActive) return [text]
+  const segments = text.split(/(?<=[.!?])\s+/).map((s) => s.trim()).filter((s) => s.length > 0)
+  return segments.map((s, i) => {
+    const isCurrent = isActive && i === currentSegment
     return (
       <span
         key={i}
-        data-sentence-id={i}
+        data-segment-id={i}
         className="transition-all duration-300 rounded-sm"
         style={{
           backgroundColor: isCurrent ? "rgba(168, 85, 247, 0.15)" : "transparent",
@@ -25,7 +19,7 @@ function highlightSentences(text: string, currentSentence: number, isActive: boo
           padding: "1px 0",
         }}
       >
-        {s}{i < sentences.length - 1 ? " " : ""}
+        {s}{i < segments.length - 1 ? " " : ""}
       </span>
     )
   })
@@ -58,7 +52,7 @@ export function ReaderContent({
         wordBreak: "break-word",
       }}
     >
-      {isNarrating ? highlightSentences(content, state.currentSentence, isNarrating) : content}
+      {highlightSegments(content, state.currentSegment, isNarrating)}
     </div>
   )
 }

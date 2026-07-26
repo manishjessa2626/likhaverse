@@ -15,7 +15,7 @@ interface LibraryData {
   canWrite: boolean
   canUseStudio: boolean
   continueReading: Array<{
-    storyId: string; chapterId: string
+    storyId: string; chapterId: string; scrollPosition: number | null
     story: { id: string; title: string; cover: string | null; author: { id: string; name: string }; _count: { chapters: number } }
     chapter: { id: string; title: string; number: number }
   }>
@@ -109,15 +109,21 @@ export function LibraryClient({ data }: { data: LibraryData }) {
                       href={`/stories/${item.storyId}/chapter/${item.chapterId}`}
                       className="group flex-shrink-0 w-40 snap-start"
                     >
-                      <div className="aspect-[3/4] rounded-xl bg-zinc-800 overflow-hidden mb-2">
+                      <div className="aspect-[3/4] rounded-xl bg-zinc-800 overflow-hidden mb-2 relative">
                         {item.story.cover ? (
                           <img src={item.story.cover} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         ) : (
                           <div className="flex h-full items-center justify-center text-zinc-700 text-sm">No Cover</div>
                         )}
+                        <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-black/30">
+                          <div
+                            className="h-full bg-gradient-to-r from-amber-500 to-amber-400 rounded-r-full transition-all"
+                            style={{ width: `${item.scrollPosition ?? 0}%` }}
+                          />
+                        </div>
                       </div>
                       <p className="text-sm font-medium text-zinc-200 truncate group-hover:text-amber-400 transition-colors">{item.story.title}</p>
-                      <p className="text-xs text-zinc-600 truncate">Ch. {item.chapter.number}</p>
+                      <p className="text-xs text-zinc-500 truncate">Ch. {item.chapter.number} · {Math.round(item.scrollPosition ?? 0)}%</p>
                     </Link>
                   ))}
                 </div>

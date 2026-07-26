@@ -101,12 +101,21 @@ export const getHomepageData = cache(async function getHomepageData() {
 
 async function getPersonalContent(userId: string) {
   try {
-    const [recentViews, followingAuthors, bookmarkedIds] = await Promise.all([
+    const [recentViews, continueReading, followingAuthors, bookmarkedIds] = await Promise.all([
       prisma.storyView.findMany({
         where: { userId },
         orderBy: { createdAt: "desc" },
         take: 4,
         include: { story: { include: storyInclude } },
+      }),
+      prisma.readingProgress.findMany({
+        where: { userId },
+        orderBy: { updatedAt: "desc" },
+        take: 4,
+        include: {
+          story: { include: storyInclude },
+          chapter: { select: { id: true, number: true, title: true } },
+        },
       }),
       prisma.follow.findMany({
         where: { followerId: userId },
@@ -177,6 +186,7 @@ async function getPersonalContent(userId: string) {
 
     return {
       recentlyViewed,
+      continueReading,
       followingStories,
       recommended,
       followingIds,

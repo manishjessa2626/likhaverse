@@ -16,6 +16,7 @@ import { LockedChapterOverlay } from "@/components/reader/LockedChapterOverlay"
 import { ReaderAmbience } from "@/components/reader/ReaderAmbience"
 import { ReaderCompanion } from "@/components/reader/ReaderCompanion"
 import { isSaved } from "@/app/actions/saves"
+import { getReadingProgress } from "@/app/actions/reading"
 
 export async function generateMetadata({ params }: { params: Promise<{ storyId: string; chapterId: string }> }) {
   const { chapterId } = await params
@@ -146,8 +147,13 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
   const remainingChapters = nextChapter ? totalChapters - chapterIndex - 1 : 0
 
   let initialSaved = false
+  let initialScroll: number | null = null
   if (session?.user) {
     initialSaved = await isSaved(storyId)
+    const progress = await getReadingProgress(storyId)
+    if (progress && progress.chapterId === chapterId) {
+      initialScroll = progress.scrollPosition ?? null
+    }
   }
 
   const showLockedOverlay = !isUnlocked && !!session?.user && story.accessType !== "PREMIUM"
@@ -166,6 +172,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
       coverUrl={story.cover ?? undefined}
       authorName={story.author.name}
       tags={story.tags}
+      initialScroll={initialScroll}
     >
       {accessRestricted && (
         <ReaderAccessOverlay

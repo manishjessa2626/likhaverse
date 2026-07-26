@@ -58,6 +58,19 @@ export function ReadingProgressBar({
     }
   }, [initialScroll])
 
+  // Save on page unload/navigate away
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      const el = document.documentElement
+      const pct = Math.min(100, Math.max(0, (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100))
+      if (Math.abs(pct - savedRef.current) > 1) {
+        navigator.sendBeacon?.("/api/reading-progress", JSON.stringify({ storyId, chapterId, scrollPosition: pct }))
+      }
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload)
+  }, [storyId, chapterId])
+
   return (
     <div
       className={`fixed top-0 left-0 right-0 z-50 h-1 bg-zinc-200 dark:bg-zinc-700 transition-opacity duration-500 ${

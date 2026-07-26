@@ -2,47 +2,16 @@
 
 import { useState, useEffect, useCallback, type ReactNode } from "react"
 import Link from "next/link"
-import { ArrowLeft, Bookmark, List, Type as TypeIcon, Book, ScrollText, Volume2 } from "lucide-react"
+import { ArrowLeft, Bookmark, List, Type as TypeIcon, Book, ScrollText, Headphones } from "lucide-react"
 import { ReadingSettingsProvider, useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
 import { NarrationProvider, useNarration } from "@/lib/reading/NarrationContext"
 import { EpisodeListDrawer } from "./EpisodeListDrawer"
 import { ReadingSettingsPanel } from "./ReadingSettingsPanel"
 import { PageFlipReader } from "./PageFlipReader"
 import { NarratorBar } from "./NarratorBar"
+import { CinematicPlayer } from "./CinematicPlayer"
+import { ReadingProgressBar } from "./ReadingProgressBar"
 import { getReaderDarkTheme } from "@/lib/reading/genre-themes"
-
-function ProgressBar() {
-  const [progress, setProgress] = useState(0)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = document.documentElement
-    const handleScroll = () => {
-      const pct = Math.min(100, Math.max(0, (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100))
-      setProgress(pct)
-    }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
-    const timer = setTimeout(() => setVisible(true), 100)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      clearTimeout(timer)
-    }
-  }, [])
-
-  return (
-    <div
-      className={`fixed top-0 left-0 right-0 z-50 h-[3px] bg-zinc-200 dark:bg-zinc-800 transition-opacity duration-500 ${
-        visible ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      <div
-        className="h-full bg-amber-500 dark:bg-amber-400 transition-all duration-150 ease-out"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
-  )
-}
 
 function TopBar({
   storyId,
@@ -130,10 +99,10 @@ function TopBar({
                 ? "text-purple-500 bg-purple-50 dark:bg-purple-900/20"
                 : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
             }`}
-            aria-label={isNarrating ? "Stop narration" : "Narrate story"}
-            title={isNarrating ? "Narrating..." : "Narrate"}
+            aria-label="Listen Mode"
+            title="Listen Mode"
           >
-            <Volume2 size={16} />
+            <Headphones size={16} />
           </button>
 
           <button
@@ -149,7 +118,7 @@ function TopBar({
   )
 }
 
-function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle, coverUrl, storyTitle, authorName, tags }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string; coverUrl?: string; storyTitle?: string; authorName?: string; tags?: string | null }) {
+function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle, coverUrl, storyTitle, authorName, tags, storyId, chapterId }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string; coverUrl?: string; storyTitle?: string; authorName?: string; tags?: string | null; storyId?: string; chapterId?: string }) {
   const { settings } = useReadingSettings()
   const isPageMode = settings.readingMode === "page" && content
   const genreTheme = settings.theme === "dark" ? getReaderDarkTheme(tags ?? null) : null
@@ -183,7 +152,7 @@ function ReaderContentWrapper({ children, content, chapterNumber, totalChapters,
                 </h1>
               </header>
             )}
-            <PageFlipReader content={content} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags} />
+            <PageFlipReader content={content} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags} storyId={storyId} chapterId={chapterId} />
           </div>
           <div className="mx-auto px-4 sm:px-6 pb-16" style={{ maxWidth: "680px" }}>
             {children}
@@ -216,6 +185,7 @@ function PremiumReaderInner({
   coverUrl,
   authorName,
   tags,
+  initialScroll,
   children,
 }: {
   storyId: string
@@ -229,20 +199,25 @@ function PremiumReaderInner({
   coverUrl?: string
   authorName?: string
   tags?: string | null
+  initialScroll?: number | null
   children: ReactNode
 }) {
   const [episodeListOpen, setEpisodeListOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
-  const { state, play, stop } = useNarration()
+  const [playerOpen, setPlayerOpen] = useState(false)
+  const { state, play, stop, setContentTags } = useNarration()
   const isNarrating = state.isPlaying || state.isPaused
 
   const handleNarrate = useCallback(() => {
-    if (isNarrating) {
+    if (isNarrating && state.isOpen) {
       stop()
+      setPlayerOpen(false)
     } else if (content) {
-      play(content)
+      setContentTags(tags ?? null)
+      play(content, tags ?? null)
+      setPlayerOpen(true)
     }
-  }, [isNarrating, content, play, stop])
+  }, [isNarrating, state.isOpen, content, tags, play, stop, setContentTags])
 
   return (
     <>
@@ -256,7 +231,7 @@ function PremiumReaderInner({
 
       {settingsOpen && <ReadingSettingsPanel onClose={() => setSettingsOpen(false)} />}
 
-      <ProgressBar />
+      <ReadingProgressBar storyId={storyId} chapterId={chapterId} initialScroll={initialScroll ?? null} />
 
       <TopBar
         storyId={storyId}
@@ -269,11 +244,23 @@ function PremiumReaderInner({
         isNarrating={isNarrating}
       />
 
-      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags}>
+      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags} storyId={storyId} chapterId={chapterId}>
         {children}
       </ReaderContentWrapper>
 
-      <NarratorBar content={content} storyTitle={storyTitle} />
+      {/* Cinematic Player (full-screen) */}
+      {playerOpen && (
+        <CinematicPlayer
+          storyTitle={storyTitle}
+          authorName={authorName}
+          chapterTitle={chapterTitle}
+          coverUrl={coverUrl}
+          onClose={() => setPlayerOpen(false)}
+        />
+      )}
+
+      {/* NarratorBar (minimized) — show when playing but player is closed */}
+      {!playerOpen && <NarratorBar content={content} storyTitle={storyTitle} />}
     </>
   )
 }
@@ -291,6 +278,7 @@ export function PremiumReaderLayout({
   coverUrl,
   authorName,
   tags,
+  initialScroll,
   children,
 }: {
   storyId: string
@@ -305,6 +293,7 @@ export function PremiumReaderLayout({
   coverUrl?: string
   authorName?: string
   tags?: string | null
+  initialScroll?: number | null
   children: ReactNode
 }) {
   return (
@@ -322,6 +311,7 @@ export function PremiumReaderLayout({
           coverUrl={coverUrl}
           authorName={authorName}
           tags={tags}
+          initialScroll={initialScroll}
         >
           {children}
         </PremiumReaderInner>

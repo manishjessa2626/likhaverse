@@ -128,12 +128,32 @@ export default async function HomePage() {
       <div className="relative z-30 -mt-16 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* ── Continue Reading ── */}
-          {session?.user && personal?.recentlyViewed && personal.recentlyViewed.length > 0 && (
+          {session?.user && personal?.continueReading && personal.continueReading.length > 0 && (
             <section className="mb-8 rounded-2xl border border-purple-200/50 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-zinc-700/50 dark:bg-zinc-800/70">
               <SectionHeader title="📖 Continue Reading" subtitle="Pick up where you left off" />
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
-                {personal.recentlyViewed.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
+                {personal.continueReading.map((item: any) => (
+                  <Link
+                    key={item.storyId}
+                    href={`/stories/${item.storyId}/chapter/${item.chapterId}`}
+                    className="group flex-shrink-0 w-36 snap-start"
+                  >
+                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-2 relative bg-purple-100 dark:bg-zinc-800">
+                      {item.story.cover ? (
+                        <img src={item.story.cover} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                      ) : (
+                        <div className="flex h-full items-center justify-center text-purple-300 dark:text-zinc-600 text-xs">No Cover</div>
+                      )}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/10 dark:bg-white/10">
+                        <div
+                          className="h-full bg-gradient-to-r from-purple-500 to-amber-500 transition-all"
+                          style={{ width: `${item.scrollPosition ?? 0}%` }}
+                        />
+                      </div>
+                    </div>
+                    <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200 truncate group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{item.story.title}</p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-500">Ch. {item.chapter.number} · {Math.round(item.scrollPosition ?? 0)}%</p>
+                  </Link>
                 ))}
               </div>
             </section>

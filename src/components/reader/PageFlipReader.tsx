@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
 import { getReaderDarkTheme } from "@/lib/reading/genre-themes"
+import { saveReadingProgress } from "@/app/actions/reading"
 
 function estimateCharsPerPage(fontSize: number): number {
   const viewportH = typeof window !== "undefined" ? window.innerHeight : 800
@@ -30,7 +31,7 @@ function splitIntoPages(paragraphs: string[], charsPerPage: number): string[][] 
   return pages
 }
 
-export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags }: { content: string; coverUrl?: string; storyTitle?: string; authorName?: string; tags?: string | null }) {
+export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags, storyId, chapterId }: { content: string; coverUrl?: string; storyTitle?: string; authorName?: string; tags?: string | null; storyId?: string; chapterId?: string }) {
   const { settings } = useReadingSettings()
   const genreTheme = settings.theme === "dark" ? getReaderDarkTheme(tags ?? null) : null
   const hasCover = !!(coverUrl || storyTitle)
@@ -116,6 +117,17 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags
   }
 
   const totalPages = hasCover ? pages.length + 1 : pages.length
+  const lastSavedPctRef = useRef(0)
+  const progressPct = totalPages > 1 ? Math.round((currentPage / (totalPages - 1)) * 100) : 0
+  useEffect(() => {
+    if (!storyId || !chapterId) return
+    const pct = currentPage === 0 ? 0 : progressPct
+    if (Math.abs(pct - lastSavedPctRef.current) >= 10) {
+      lastSavedPctRef.current = pct
+      saveReadingProgress(storyId, chapterId, pct)
+    }
+  }, [currentPage, storyId, chapterId, progressPct])
+
   const isCoverPage = hasCover && currentPage === 0
   const contentPageIndex = hasCover ? currentPage - 1 : currentPage
   const pageText = !isCoverPage ? pages[contentPageIndex]?.join("\n\n") ?? "" : ""
