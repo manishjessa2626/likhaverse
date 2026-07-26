@@ -37,7 +37,7 @@ export class WebSpeechProvider implements NarrationProvider {
     const utterance = new SpeechSynthesisUtterance(chunk.text)
     utterance.rate = chunk.rate
     utterance.pitch = chunk.pitch
-    utterance.volume = 1
+    utterance.volume = chunk.volume
 
     if ((window as any).__lvNarratorVoice) {
       const voiceURI = (window as any).__lvNarratorVoice

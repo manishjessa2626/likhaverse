@@ -4,6 +4,7 @@ export interface SpeakChunk {
   text: string
   rate: number
   pitch: number
+  volume: number
   pauseAfterMs: number
   onStart?: () => void
   onEnd?: () => void

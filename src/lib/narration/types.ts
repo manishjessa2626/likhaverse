@@ -75,4 +75,5 @@ export interface PlayerState {
   pitch: number
   volume: number
   genre: Genre
+  preset: string
 }

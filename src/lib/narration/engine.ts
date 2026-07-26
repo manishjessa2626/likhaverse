@@ -2,6 +2,7 @@ import type { Genre, NarrationSegment, PlayerState } from "./types"
 import { analyzeSentences } from "./sentence-analyzer"
 import { getGenreProfile, computeDelivery } from "./pacing"
 import type { NarrationProvider } from "./provider"
+import type { NarrationPreset } from "./voices"
 
 function mapTagsToGenre(tags?: string | null): Genre {
   if (!tags) return "default"
@@ -43,6 +44,7 @@ export function createInitialPlayerState(): PlayerState {
     pitch: 1,
     volume: 1,
     genre: "default",
+    preset: "neutral",
   }
 }
 
@@ -54,6 +56,7 @@ export class NarrationEngine {
   private tags: string | null = null
   private userSpeed = 1
   private userPitch = 1
+  private preset: NarrationPreset | null = null
   private onSegmentChange?: (index: number) => void
   private onComplete?: () => void
 
@@ -68,6 +71,7 @@ export class NarrationEngine {
 
   setUserSpeed(speed: number) { this.userSpeed = speed }
   setUserPitch(pitch: number) { this.userPitch = pitch }
+  setPreset(preset: NarrationPreset | null) { this.preset = preset }
 
   setCallbacks(onSegmentChange?: (index: number) => void, onComplete?: () => void) {
     this.onSegmentChange = onSegmentChange
@@ -91,11 +95,12 @@ export class NarrationEngine {
 
     const profile = getGenreProfile(this.genre)
     const chunks = this.segments.slice(this.currentIndex).map((seg) => {
-      const delivery = computeDelivery(seg, profile, this.userSpeed, this.userPitch)
+      const delivery = computeDelivery(seg, profile, this.userSpeed, this.userPitch, this.preset)
       return {
         text: seg.text,
         rate: delivery.rate,
         pitch: delivery.pitch,
+        volume: delivery.volume,
         pauseAfterMs: delivery.pauseMs,
         onStart: () => {
           this.onSegmentChange?.(this.currentIndex)

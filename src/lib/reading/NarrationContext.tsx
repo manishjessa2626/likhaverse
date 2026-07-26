@@ -4,6 +4,7 @@ import { createContext, useContext, useState, useRef, useCallback, useEffect, ty
 import { WebSpeechProvider } from "@/lib/narration/providers/web-speech"
 import { NarrationEngine, mapTagsToGenre, createInitialPlayerState } from "@/lib/narration/engine"
 import type { PlayerState, Genre } from "@/lib/narration/types"
+import { NARRATION_PRESETS, getVoicePersonas, findBestSystemVoice } from "@/lib/narration/voices"
 
 let engineInstance: NarrationEngine | null = null
 function getEngine(): NarrationEngine {
@@ -24,6 +25,8 @@ interface NarrationContextType {
   setSpeed: (speed: number) => void
   setPitch: (pitch: number) => void
   setVoice: (voiceURI: string | null) => void
+  setPreset: (presetId: string) => void
+  playVoiceSample: (voiceURI: string) => void
   openPlayer: () => void
   closePlayer: () => void
   togglePlayer: () => void
@@ -32,6 +35,8 @@ interface NarrationContextType {
 }
 
 const NarrationContext = createContext<NarrationContextType | null>(null)
+
+const VOICE_SAMPLE_TEXT = "The night was quiet, and the stars began to appear one by one."
 
 export function NarrationProvider({ children }: { children: ReactNode }) {
   const engine = getEngine()
@@ -127,6 +132,37 @@ export function NarrationProvider({ children }: { children: ReactNode }) {
     updateState({ voice: voiceURI })
   }, [engine, updateState])
 
+  const setPreset = useCallback((presetId: string) => {
+    const preset = NARRATION_PRESETS.find((p) => p.id === presetId) ?? null
+    engine.setPreset(preset)
+    updateState({ preset: presetId })
+
+    // Auto-select a matching voice based on the preset
+    const personas = getVoicePersonas()
+    const matched = personas.find((p) => p.voiceType === preset?.preferredVoiceType)
+    if (matched && typeof window !== "undefined") {
+      const voices = window.speechSynthesis.getVoices()
+      const best = findBestSystemVoice(matched.voiceType, voices)
+      if (best) {
+        ;(window as any).__lvNarratorVoice = best.voiceURI
+        updateState({ voice: best.voiceURI })
+      }
+    }
+  }, [engine, updateState])
+
+  const playVoiceSample = useCallback((voiceURI: string) => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return
+    window.speechSynthesis.cancel()
+    const utterance = new SpeechSynthesisUtterance(VOICE_SAMPLE_TEXT)
+    utterance.rate = 1
+    utterance.pitch = 1
+    utterance.volume = 1
+    const voices = window.speechSynthesis.getVoices()
+    const found = voices.find((v) => v.voiceURI === voiceURI)
+    if (found) utterance.voice = found
+    window.speechSynthesis.speak(utterance)
+  }, [])
+
   const openPlayer = useCallback(() => updateState({ isOpen: true }), [updateState])
   const closePlayer = useCallback(() => {
     stop()
@@ -163,7 +199,8 @@ export function NarrationProvider({ children }: { children: ReactNode }) {
   return (
     <NarrationContext.Provider value={{
       state, play, pause, resume, stop, skipForward, skipBackward,
-      setSpeed, setPitch, setVoice, openPlayer, closePlayer, togglePlayer,
+      setSpeed, setPitch, setVoice, setPreset, playVoiceSample,
+      openPlayer, closePlayer, togglePlayer,
       genre: engine.getGenre(), setContentTags,
     }}>
       {children}

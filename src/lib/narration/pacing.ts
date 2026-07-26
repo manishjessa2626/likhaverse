@@ -1,4 +1,5 @@
 import type { Genre, GenreDeliveryProfile, NarrationSegment } from "./types"
+import type { NarrationPreset } from "./voices"
 
 const GENRE_PROFILES: Record<string, GenreDeliveryProfile> = {
   comedy: {
@@ -123,16 +124,25 @@ export function computeDelivery(
   profile: GenreDeliveryProfile,
   userSpeed: number,
   userPitch: number,
-): { rate: number; pitch: number; pauseMs: number } {
+  preset?: NarrationPreset | null,
+): { rate: number; pitch: number; pauseMs: number; volume: number } {
   let rate = profile.baseSpeed * userSpeed
   let pitch = profile.basePitch * userPitch
+  let volume = 1
+
+  if (preset) {
+    rate *= preset.speedMultiplier
+    pitch *= preset.pitchMultiplier
+  }
 
   if (segment.type === "dialogue") {
     pitch += profile.dialoguePitchShift
+    volume += 0.05
   }
 
   if (segment.type === "action") {
     rate += 0.08
+    volume += 0.1
   }
 
   if (segment.emotion) {
@@ -140,14 +150,23 @@ export function computeDelivery(
     const sShift = profile.emotionSpeedShift[segment.emotion] ?? 0
     pitch += pShift
     rate += sShift
+
+    if (segment.emotion === "anger" || segment.emotion === "excitement" || segment.emotion === "shock") {
+      volume += 0.15
+    }
+    if (segment.emotion === "fear" || segment.emotion === "tension" || segment.emotion === "calm") {
+      volume -= 0.1
+    }
   }
 
   if (segment.punctuation === "!") {
     rate += 0.05
     pitch += 0.08
+    volume += 0.15
   }
   if (segment.punctuation === "?") {
     pitch += 0.03
+    volume += 0.05
   }
 
   let pauseMs = profile.pauseAfterSentence
@@ -159,13 +178,19 @@ export function computeDelivery(
   if (segment.isParagraphEnd) pauseMs = profile.pauseAfterParagraph
   if (segment.type === "scene_break") pauseMs = profile.pauseAfterSceneBreak
 
-  if (segment.emotion === "tension" || segment.emotion === "fear") {
-    pauseMs += 200
-  }
+  if (segment.emotion === "tension" || segment.emotion === "fear") pauseMs += 200
+
+  if (preset) pauseMs *= preset.pauseMultiplier
+
+  // Breathing micro-pause for long sentences
+  const wordCount = segment.text.split(/\s+/).length
+  if (wordCount > 20) pauseMs += 80
+  if (wordCount > 35) pauseMs += 120
 
   return {
     rate: Math.max(0.5, Math.min(2, rate)),
     pitch: Math.max(0.5, Math.min(2, pitch)),
+    volume: Math.max(0.5, Math.min(1, volume)),
     pauseMs,
   }
 }
