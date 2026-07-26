@@ -38,6 +38,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
         select: {
           id: true,
           title: true,
+          cover: true,
           tags: true,
           freePreviewChapters: true,
           accessType: true,
@@ -162,6 +163,8 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
       totalChapters={story._count.chapters}
       chapterTitle={chapter.title}
       wordCount={chapter.wordCount}
+      coverUrl={story.cover ?? undefined}
+      authorName={story.author.name}
     >
       {accessRestricted && (
         <ReaderAccessOverlay

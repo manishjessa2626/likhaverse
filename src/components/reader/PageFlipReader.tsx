@@ -29,8 +29,9 @@ function splitIntoPages(paragraphs: string[], charsPerPage: number): string[][] 
   return pages
 }
 
-export function PageFlipReader({ content }: { content: string }) {
+export function PageFlipReader({ content, coverUrl, storyTitle, authorName }: { content: string; coverUrl?: string; storyTitle?: string; authorName?: string }) {
   const { settings } = useReadingSettings()
+  const hasCover = !!(coverUrl || storyTitle)
   const [currentPage, setCurrentPage] = useState(0)
   const [flipState, setFlipState] = useState<"idle" | "forward" | "backward">("idle")
   const [pages, setPages] = useState<string[][]>([])
@@ -112,10 +113,16 @@ export function PageFlipReader({ content }: { content: string }) {
     )
   }
 
-  const totalPages = pages.length
-  const pageText = pages[currentPage]?.join("\n\n") ?? ""
-  const nextPageText = currentPage < totalPages - 1 ? pages[currentPage + 1]?.join("\n\n") ?? "" : null
-  const prevPageText = currentPage > 0 ? pages[currentPage - 1]?.join("\n\n") ?? "" : null
+  const totalPages = hasCover ? pages.length + 1 : pages.length
+  const isCoverPage = hasCover && currentPage === 0
+  const contentPageIndex = hasCover ? currentPage - 1 : currentPage
+  const pageText = !isCoverPage ? pages[contentPageIndex]?.join("\n\n") ?? "" : ""
+  const nextContentIdx = hasCover
+    ? currentPage === 0 ? 0 : contentPageIndex + 1
+    : contentPageIndex + 1
+  const nextPageText = currentPage < totalPages - 1
+    ? (hasCover && currentPage === 0 ? pages[0]?.join("\n\n") : pages[nextContentIdx]?.join("\n\n")) ?? null
+    : null
 
   const isDark = settings.theme === "dark"
   const pageColor = isDark ? "#2A2A2A" : "#F5F0E8"
@@ -150,7 +157,7 @@ export function PageFlipReader({ content }: { content: string }) {
           }}
         />
 
-        {/* Page pages stack edge (right side) */}
+        {/* Page stack edge (right side) */}
         {currentPage < totalPages - 1 && (
           <div
             className="absolute top-2 bottom-2 z-20"
@@ -184,68 +191,69 @@ export function PageFlipReader({ content }: { content: string }) {
           }}
         />
 
-        {/* Current page */}
-        <div
-          className="relative z-30 flex flex-col"
-          style={{
-            minHeight: "calc(100vh - 180px)",
-            backgroundColor: pageColor,
-            margin: "0 18px",
-            transform: isFlipping
-              ? flipState === "forward"
-                ? "perspective(1800px) rotateY(-12deg) scale(0.97)"
-                : "perspective(1800px) rotateY(12deg) scale(0.97)"
-              : "perspective(1800px) rotateY(0deg) scale(1)",
-            transformOrigin: flipState === "forward" ? "left center" : "right center",
-            transition: isFlipping
-              ? "transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s ease"
-              : "transform 0.35s ease, box-shadow 0.35s ease",
-            boxShadow: isFlipping
-              ? flipState === "forward"
-                ? `-8px 0 24px ${shadowColor}`
-                : `8px 0 24px ${shadowColor}`
-              : `0 1px 6px ${shadowColor.replace("0.", "0.06")}`,
-          }}
-        >
-          {/* Page content */}
-          <div className="flex-1 px-6 sm:px-10 py-10 overflow-y-auto">
-            <div
-              className="leading-relaxed tracking-wide"
-              style={{
-                fontFamily,
-                fontSize: `${settings.fontSize}px`,
-                lineHeight,
-                color: textColor,
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-word",
-                opacity: isFlipping ? 0.6 : 1,
-                transition: "opacity 0.2s ease",
-              }}
-            >
-              {pageText}
-            </div>
-          </div>
-
-          {/* Flip shadow overlay */}
-          {isFlipping && (
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: flipState === "forward"
-                  ? `linear-gradient(to right, rgba(0,0,0,0.08), transparent 60%)`
-                  : `linear-gradient(to left, rgba(0,0,0,0.08), transparent 60%)`,
-              }}
-            />
-          )}
-        </div>
-
-        {/* Next page shown underneath during flip */}
-        {isFlipping && flipState === "forward" && nextPageText && (
+        {/* Current page — Cover */}
+        {isCoverPage ? (
           <div
-            className="absolute inset-0 z-20 flex"
+            className="relative z-30 flex flex-col items-center justify-center"
             style={{
+              minHeight: "calc(100vh - 180px)",
+              backgroundColor: isDark ? "#1E1A2E" : "#2A1A4E",
               margin: "0 18px",
+              transform: isFlipping && flipState === "forward"
+                ? "perspective(1800px) rotateY(-12deg) scale(0.97)"
+                : "perspective(1800px) rotateY(0deg) scale(1)",
+              transformOrigin: "left center",
+              transition: "transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)",
+            }}
+          >
+            {coverUrl ? (
+              <img src={coverUrl} alt={storyTitle ?? ""} className="absolute inset-0 h-full w-full object-cover opacity-40" />
+            ) : null}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="relative z-10 px-8 py-12 text-center">
+              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white/10 text-4xl">
+                📖
+              </div>
+              <h1
+                className="text-3xl font-black tracking-tight text-white sm:text-4xl drop-shadow-lg"
+                style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+              >
+                {storyTitle}
+              </h1>
+              {authorName && (
+                <p className="mt-3 text-sm text-purple-200/80">by {authorName}</p>
+              )}
+              <div className="mx-auto mt-8 h-px w-16 bg-white/20" />
+              <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-purple-300/60">
+                LikhaVerse
+              </p>
+            </div>
+            {isFlipping && (
+              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.15), transparent 60%)" }} />
+            )}
+          </div>
+        ) : (
+          /* Current page — Content */
+          <div
+            className="relative z-30 flex flex-col"
+            style={{
+              minHeight: "calc(100vh - 180px)",
               backgroundColor: pageColor,
+              margin: "0 18px",
+              transform: isFlipping
+                ? flipState === "forward"
+                  ? "perspective(1800px) rotateY(-12deg) scale(0.97)"
+                  : "perspective(1800px) rotateY(12deg) scale(0.97)"
+                : "perspective(1800px) rotateY(0deg) scale(1)",
+              transformOrigin: flipState === "forward" ? "left center" : "right center",
+              transition: isFlipping
+                ? "transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.45s ease"
+                : "transform 0.35s ease, box-shadow 0.35s ease",
+              boxShadow: isFlipping
+                ? flipState === "forward"
+                  ? `-8px 0 24px ${shadowColor}`
+                  : `8px 0 24px ${shadowColor}`
+                : `0 1px 6px ${shadowColor.replace("0.", "0.06")}`,
             }}
           >
             <div className="flex-1 px-6 sm:px-10 py-10 overflow-y-auto">
@@ -258,7 +266,38 @@ export function PageFlipReader({ content }: { content: string }) {
                   color: textColor,
                   whiteSpace: "pre-wrap",
                   wordBreak: "break-word",
-                  opacity: 0.7,
+                  opacity: isFlipping ? 0.6 : 1,
+                  transition: "opacity 0.2s ease",
+                }}
+              >
+                {pageText}
+              </div>
+            </div>
+            {isFlipping && (
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: flipState === "forward"
+                    ? "linear-gradient(to right, rgba(0,0,0,0.08), transparent 60%)"
+                    : "linear-gradient(to left, rgba(0,0,0,0.08), transparent 60%)",
+                }}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Next page underneath during flip */}
+        {isFlipping && flipState === "forward" && nextPageText && !isCoverPage && (
+          <div
+            className="absolute inset-0 z-20 flex"
+            style={{ margin: "0 18px", backgroundColor: pageColor }}
+          >
+            <div className="flex-1 px-6 sm:px-10 py-10 overflow-y-auto">
+              <div
+                className="leading-relaxed tracking-wide"
+                style={{
+                  fontFamily, fontSize: `${settings.fontSize}px`, lineHeight,
+                  color: textColor, whiteSpace: "pre-wrap", wordBreak: "break-word", opacity: 0.7,
                 }}
               >
                 {nextPageText}
@@ -276,11 +315,11 @@ export function PageFlipReader({ content }: { content: string }) {
           className="flex items-center gap-1 rounded px-3 py-1.5 text-xs font-medium disabled:opacity-20 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         >
           <ChevronLeft size={14} />
-          Prev
+          {isCoverPage ? "Close" : "Prev"}
         </button>
 
         <span className="text-xs font-medium" style={{ color: mutedColor }}>
-          {currentPage + 1} — {totalPages}
+          {isCoverPage ? "Cover" : `${currentPage} — ${totalPages - 1}`}
         </span>
 
         <button
@@ -288,7 +327,7 @@ export function PageFlipReader({ content }: { content: string }) {
           disabled={currentPage >= totalPages - 1 || isFlipping}
           className="flex items-center gap-1 rounded px-3 py-1.5 text-xs font-medium disabled:opacity-20 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         >
-          Next
+          {isCoverPage ? "Open" : "Next"}
           <ChevronRight size={14} />
         </button>
       </div>

@@ -129,13 +129,13 @@ function TopBar({
   )
 }
 
-function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string }) {
+function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle, coverUrl, storyTitle, authorName }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string; coverUrl?: string; storyTitle?: string; authorName?: string }) {
   const { settings } = useReadingSettings()
   const isPageMode = settings.readingMode === "page" && content
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 ${isPageMode ? "overflow-hidden" : ""}`}
+      className="min-h-screen transition-colors duration-300"
       style={{
         backgroundColor: settings.theme === "dark" ? "#191919" : "#FAF9F6",
         color: settings.theme === "dark" ? "#EDEDED" : "#2C2C2C",
@@ -162,7 +162,7 @@ function ReaderContentWrapper({ children, content, chapterNumber, totalChapters,
                 </h1>
               </header>
             )}
-            <PageFlipReader content={content} />
+            <PageFlipReader content={content} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} />
           </div>
           <div className="mx-auto px-4 sm:px-6 pb-16" style={{ maxWidth: "680px" }}>
             {children}
@@ -193,6 +193,8 @@ export function PremiumReaderLayout({
   totalChapters,
   chapterTitle,
   wordCount,
+  coverUrl,
+  authorName,
   children,
 }: {
   storyId: string
@@ -204,6 +206,8 @@ export function PremiumReaderLayout({
   totalChapters?: number
   chapterTitle?: string
   wordCount?: number
+  coverUrl?: string
+  authorName?: string
   children: ReactNode
 }) {
   const [episodeListOpen, setEpisodeListOpen] = useState(false)
@@ -232,7 +236,7 @@ export function PremiumReaderLayout({
         onOpenSettings={() => setSettingsOpen(true)}
       />
 
-      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle}>
+      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName}>
         {children}
       </ReaderContentWrapper>
     </ReadingSettingsProvider>
