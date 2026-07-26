@@ -30,7 +30,7 @@ export function CommentSection({ storyId, chapterId }: { storyId: string; chapte
   const [comments, setComments] = useState<Comment[]>([])
 
   useEffect(() => {
-    getComments(storyId, chapterId).then(setComments)
+    getComments(storyId, chapterId).then(setComments).catch(() => {})
   }, [storyId, chapterId, state])
 
   return (

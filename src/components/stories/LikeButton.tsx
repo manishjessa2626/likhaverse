@@ -15,7 +15,7 @@ export function LikeButton({ storyId }: { storyId: string }) {
     ]).then(([liked, count]) => {
       setLiked(liked)
       setCount(count)
-    })
+    }).catch(() => {})
   }, [storyId])
 
   function handleLike() {

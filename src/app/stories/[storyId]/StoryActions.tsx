@@ -9,7 +9,7 @@ export function StoryActions({ storyId }: { storyId: string }) {
   const [pending, startTransition] = useTransition()
 
   useEffect(() => {
-    isSaved(storyId).then(setSaved)
+    isSaved(storyId).then(setSaved).catch(() => {})
   }, [storyId])
 
   function handleSave() {

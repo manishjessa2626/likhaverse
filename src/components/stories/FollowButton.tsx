@@ -16,7 +16,7 @@ export function FollowButton({ authorId }: { authorId: string }) {
     ]).then(([following, count]) => {
       setFollowing(following)
       setFollowerCount(count)
-    })
+    }).catch(() => {})
   }, [authorId])
 
   function handleFollow() {
