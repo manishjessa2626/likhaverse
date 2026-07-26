@@ -158,6 +158,10 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
       chapterId={chapterId}
       initialSaved={initialSaved}
       content={chapter.content}
+      chapterNumber={chapter.number}
+      totalChapters={story._count.chapters}
+      chapterTitle={chapter.title}
+      wordCount={chapter.wordCount}
     >
       {accessRestricted && (
         <ReaderAccessOverlay

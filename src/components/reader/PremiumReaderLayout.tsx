@@ -129,7 +129,7 @@ function TopBar({
   )
 }
 
-function ReaderContentWrapper({ children, content }: { children: ReactNode; content?: string }) {
+function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string }) {
   const { settings } = useReadingSettings()
   const isPageMode = settings.readingMode === "page" && content
 
@@ -144,7 +144,26 @@ function ReaderContentWrapper({ children, content }: { children: ReactNode; cont
       {isPageMode ? (
         <div className="pt-16">
           <style>{`[data-lv-text="true"] { display: none; }`}</style>
-          <PageFlipReader content={content} />
+          <div className="mx-auto px-4 sm:px-6 pb-16" style={{ maxWidth: "680px" }}>
+            {chapterTitle && (
+              <header className="mb-6 text-center">
+                <p className="text-xs uppercase tracking-[0.15em] font-medium mb-3" style={{ color: "#6B6B6B" }}>
+                  Episode {chapterNumber} of {totalChapters}
+                </p>
+                <h1
+                  className="font-semibold leading-tight"
+                  style={{
+                    fontSize: "24px",
+                    color: "inherit",
+                    fontFamily: "Georgia, 'Times New Roman', serif",
+                  }}
+                >
+                  {chapterTitle}
+                </h1>
+              </header>
+            )}
+            <PageFlipReader content={content} />
+          </div>
           <div className="mx-auto px-4 sm:px-6 pb-16" style={{ maxWidth: "680px" }}>
             {children}
           </div>
@@ -170,6 +189,10 @@ export function PremiumReaderLayout({
   chapterId,
   initialSaved,
   content,
+  chapterNumber,
+  totalChapters,
+  chapterTitle,
+  wordCount,
   children,
 }: {
   storyId: string
@@ -177,6 +200,10 @@ export function PremiumReaderLayout({
   chapterId: string
   initialSaved: boolean
   content?: string
+  chapterNumber?: number
+  totalChapters?: number
+  chapterTitle?: string
+  wordCount?: number
   children: ReactNode
 }) {
   const [episodeListOpen, setEpisodeListOpen] = useState(false)
@@ -205,7 +232,7 @@ export function PremiumReaderLayout({
         onOpenSettings={() => setSettingsOpen(true)}
       />
 
-      <ReaderContentWrapper content={content}>
+      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle}>
         {children}
       </ReaderContentWrapper>
     </ReadingSettingsProvider>
