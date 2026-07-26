@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useCallback, type ReactNode } from "react"
 import Link from "next/link"
-import { ArrowLeft, Bookmark, List, Type as TypeIcon, Book, ScrollText } from "lucide-react"
+import { ArrowLeft, Bookmark, List, Type as TypeIcon, Book, ScrollText, Volume2 } from "lucide-react"
 import { ReadingSettingsProvider, useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
+import { NarrationProvider, useNarration } from "@/lib/reading/NarrationContext"
 import { EpisodeListDrawer } from "./EpisodeListDrawer"
 import { ReadingSettingsPanel } from "./ReadingSettingsPanel"
 import { PageFlipReader } from "./PageFlipReader"
+import { NarratorBar } from "./NarratorBar"
 import { getReaderDarkTheme } from "@/lib/reading/genre-themes"
 
 function ProgressBar() {
@@ -49,6 +51,8 @@ function TopBar({
   initialSaved,
   onOpenEpisodeList,
   onOpenSettings,
+  onNarrate,
+  isNarrating,
 }: {
   storyId: string
   storyTitle: string
@@ -56,6 +60,8 @@ function TopBar({
   initialSaved: boolean
   onOpenEpisodeList: () => void
   onOpenSettings: () => void
+  onNarrate: () => void
+  isNarrating: boolean
 }) {
   const [saved, setSaved] = useState(initialSaved)
   const { settings, setReadingMode } = useReadingSettings()
@@ -115,6 +121,19 @@ function TopBar({
             aria-label="Reading settings"
           >
             <TypeIcon size={16} />
+          </button>
+
+          <button
+            onClick={onNarrate}
+            className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+              isNarrating
+                ? "text-purple-500 bg-purple-50 dark:bg-purple-900/20"
+                : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+            }`}
+            aria-label={isNarrating ? "Stop narration" : "Narrate story"}
+            title={isNarrating ? "Narrating..." : "Narrate"}
+          >
+            <Volume2 size={16} />
           </button>
 
           <button
@@ -185,6 +204,80 @@ function ReaderContentWrapper({ children, content, chapterNumber, totalChapters,
   )
 }
 
+function PremiumReaderInner({
+  storyId,
+  storyTitle,
+  chapterId,
+  initialSaved,
+  content,
+  chapterNumber,
+  totalChapters,
+  chapterTitle,
+  coverUrl,
+  authorName,
+  tags,
+  children,
+}: {
+  storyId: string
+  storyTitle: string
+  chapterId: string
+  initialSaved: boolean
+  content?: string
+  chapterNumber?: number
+  totalChapters?: number
+  chapterTitle?: string
+  coverUrl?: string
+  authorName?: string
+  tags?: string | null
+  children: ReactNode
+}) {
+  const [episodeListOpen, setEpisodeListOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const { state, play, stop } = useNarration()
+  const isNarrating = state.isPlaying || state.isPaused
+
+  const handleNarrate = useCallback(() => {
+    if (isNarrating) {
+      stop()
+    } else if (content) {
+      play(content)
+    }
+  }, [isNarrating, content, play, stop])
+
+  return (
+    <>
+      <EpisodeListDrawer
+        storyId={storyId}
+        storyTitle={storyTitle}
+        currentChapterId={chapterId}
+        open={episodeListOpen}
+        onOpenChange={setEpisodeListOpen}
+      />
+
+      {settingsOpen && <ReadingSettingsPanel onClose={() => setSettingsOpen(false)} />}
+
+      <ProgressBar />
+
+      <TopBar
+        storyId={storyId}
+        storyTitle={storyTitle}
+        chapterId={chapterId}
+        initialSaved={initialSaved}
+        onOpenEpisodeList={() => setEpisodeListOpen(true)}
+        onOpenSettings={() => setSettingsOpen(true)}
+        onNarrate={handleNarrate}
+        isNarrating={isNarrating}
+      />
+
+      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags}>
+        {children}
+      </ReaderContentWrapper>
+
+      <NarratorBar content={content} storyTitle={storyTitle} />
+    </>
+  )
+}
+
 export function PremiumReaderLayout({
   storyId,
   storyTitle,
@@ -214,35 +307,25 @@ export function PremiumReaderLayout({
   tags?: string | null
   children: ReactNode
 }) {
-  const [episodeListOpen, setEpisodeListOpen] = useState(false)
-  const [settingsOpen, setSettingsOpen] = useState(false)
-
   return (
     <ReadingSettingsProvider>
-      <EpisodeListDrawer
-        storyId={storyId}
-        storyTitle={storyTitle}
-        currentChapterId={chapterId}
-        open={episodeListOpen}
-        onOpenChange={setEpisodeListOpen}
-      />
-
-      {settingsOpen && <ReadingSettingsPanel onClose={() => setSettingsOpen(false)} />}
-
-      <ProgressBar />
-
-      <TopBar
-        storyId={storyId}
-        storyTitle={storyTitle}
-        chapterId={chapterId}
-        initialSaved={initialSaved}
-        onOpenEpisodeList={() => setEpisodeListOpen(true)}
-        onOpenSettings={() => setSettingsOpen(true)}
-      />
-
-      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags}>
-        {children}
-      </ReaderContentWrapper>
+      <NarrationProvider>
+        <PremiumReaderInner
+          storyId={storyId}
+          storyTitle={storyTitle}
+          chapterId={chapterId}
+          initialSaved={initialSaved}
+          content={content}
+          chapterNumber={chapterNumber}
+          totalChapters={totalChapters}
+          chapterTitle={chapterTitle}
+          coverUrl={coverUrl}
+          authorName={authorName}
+          tags={tags}
+        >
+          {children}
+        </PremiumReaderInner>
+      </NarrationProvider>
     </ReadingSettingsProvider>
   )
 }
