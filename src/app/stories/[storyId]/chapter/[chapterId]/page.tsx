@@ -157,6 +157,7 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
       storyTitle={story.title}
       chapterId={chapterId}
       initialSaved={initialSaved}
+      content={chapter.content}
     >
       {accessRestricted && (
         <ReaderAccessOverlay
@@ -188,7 +189,9 @@ export default async function ChapterPage({ params }: { params: Promise<{ storyI
           />
 
           {isUnlocked ? (
-            <ReaderContent content={chapter.content} />
+            <div data-lv-text="true">
+              <ReaderContent content={chapter.content} />
+            </div>
           ) : (
             <p className="text-sm text-zinc-500 text-center py-20">
               This chapter is locked. Upgrade to premium to continue reading.

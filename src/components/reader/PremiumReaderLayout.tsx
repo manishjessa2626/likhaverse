@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useCallback, type ReactNode } from "react"
 import Link from "next/link"
-import { ArrowLeft, Bookmark, List, Type as TypeIcon } from "lucide-react"
+import { ArrowLeft, Bookmark, List, Type as TypeIcon, Book, ScrollText } from "lucide-react"
 import { ReadingSettingsProvider, useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
 import { EpisodeListDrawer } from "./EpisodeListDrawer"
 import { ReadingSettingsPanel } from "./ReadingSettingsPanel"
+import { PageFlipReader } from "./PageFlipReader"
 
 function ProgressBar() {
   const [progress, setProgress] = useState(0)
@@ -56,6 +57,7 @@ function TopBar({
   onOpenSettings: () => void
 }) {
   const [saved, setSaved] = useState(initialSaved)
+  const { settings, setReadingMode } = useReadingSettings()
 
   const toggleBookmark = useCallback(async () => {
     const prev = saved
@@ -98,6 +100,15 @@ function TopBar({
           </button>
 
           <button
+            onClick={() => setReadingMode(settings.readingMode === "scroll" ? "page" : "scroll")}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300 transition-colors"
+            aria-label={settings.readingMode === "scroll" ? "Switch to page view" : "Switch to scroll view"}
+            title={settings.readingMode === "scroll" ? "Page view" : "Scroll view"}
+          >
+            {settings.readingMode === "scroll" ? <Book size={16} /> : <ScrollText size={16} />}
+          </button>
+
+          <button
             onClick={onOpenSettings}
             className="flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300 transition-colors"
             aria-label="Reading settings"
@@ -118,26 +129,37 @@ function TopBar({
   )
 }
 
-function ReaderContentWrapper({ children }: { children: ReactNode }) {
+function ReaderContentWrapper({ children, content }: { children: ReactNode; content?: string }) {
   const { settings } = useReadingSettings()
+  const isPageMode = settings.readingMode === "page" && content
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300"
+      className={`min-h-screen transition-colors duration-300 ${isPageMode ? "overflow-hidden" : ""}`}
       style={{
         backgroundColor: settings.theme === "dark" ? "#191919" : "#FAF9F6",
         color: settings.theme === "dark" ? "#EDEDED" : "#2C2C2C",
       }}
     >
-      <div
-        className="mx-auto px-4 sm:px-6 pb-16 animate-fadeIn"
-        style={{
-          maxWidth: "680px",
-          paddingTop: "88px",
-        }}
-      >
-        {children}
-      </div>
+      {isPageMode ? (
+        <div className="pt-16">
+          <style>{`[data-lv-text="true"] { display: none; }`}</style>
+          <PageFlipReader content={content} />
+          <div className="mx-auto px-4 sm:px-6 pb-16" style={{ maxWidth: "680px" }}>
+            {children}
+          </div>
+        </div>
+      ) : (
+        <div
+          className="mx-auto px-4 sm:px-6 pb-16 animate-fadeIn"
+          style={{
+            maxWidth: "680px",
+            paddingTop: "88px",
+          }}
+        >
+          {children}
+        </div>
+      )}
     </div>
   )
 }
@@ -147,12 +169,14 @@ export function PremiumReaderLayout({
   storyTitle,
   chapterId,
   initialSaved,
+  content,
   children,
 }: {
   storyId: string
   storyTitle: string
   chapterId: string
   initialSaved: boolean
+  content?: string
   children: ReactNode
 }) {
   const [episodeListOpen, setEpisodeListOpen] = useState(false)
@@ -181,7 +205,7 @@ export function PremiumReaderLayout({
         onOpenSettings={() => setSettingsOpen(true)}
       />
 
-      <ReaderContentWrapper>
+      <ReaderContentWrapper content={content}>
         {children}
       </ReaderContentWrapper>
     </ReadingSettingsProvider>

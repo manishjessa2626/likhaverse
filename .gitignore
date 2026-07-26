@@ -50,3 +50,7 @@ backups/
 
 # Sentry
 .sentryclirc
+.git.zip
+.github/
+LikhaVerseMobile/
+README.md

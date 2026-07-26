@@ -6,12 +6,14 @@ import { useTheme } from "@/components/ThemeProvider"
 export type ReaderFontStyle = "serif" | "sans"
 export type ReaderTheme = "light" | "dark"
 export type ReaderLineSpacing = "normal" | "relaxed"
+export type ReadingMode = "scroll" | "page"
 
 export interface ReadingSettings {
   fontSize: number
   theme: ReaderTheme
   fontStyle: ReaderFontStyle
   lineSpacing: ReaderLineSpacing
+  readingMode: ReadingMode
 }
 
 const STORAGE_KEY = "lv-reader-settings"
@@ -21,6 +23,7 @@ const DEFAULT_SETTINGS: ReadingSettings = {
   theme: "light",
   fontStyle: "serif",
   lineSpacing: "normal",
+  readingMode: "scroll",
 }
 
 interface ReadingSettingsContextType {
@@ -29,6 +32,7 @@ interface ReadingSettingsContextType {
   setTheme: (theme: ReaderTheme) => void
   setFontStyle: (style: ReaderFontStyle) => void
   setLineSpacing: (spacing: ReaderLineSpacing) => void
+  setReadingMode: (mode: ReadingMode) => void
   resetSettings: () => void
 }
 
@@ -84,12 +88,16 @@ export function ReadingSettingsProvider({ children }: { children: ReactNode }) {
     setSettings((prev) => ({ ...prev, lineSpacing }))
   }, [])
 
+  const setReadingMode = useCallback((readingMode: ReadingMode) => {
+    setSettings((prev) => ({ ...prev, readingMode }))
+  }, [])
+
   const resetSettings = useCallback(() => {
     setSettings(DEFAULT_SETTINGS)
   }, [])
 
   return (
-    <ReadingSettingsContext.Provider value={{ settings, setFontSize, setTheme, setFontStyle, setLineSpacing, resetSettings }}>
+    <ReadingSettingsContext.Provider value={{ settings, setFontSize, setTheme, setFontStyle, setLineSpacing, setReadingMode, resetSettings }}>
       {children}
     </ReadingSettingsContext.Provider>
   )

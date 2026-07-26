@@ -1,10 +1,10 @@
 "use client"
 
 import { useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
-import { X, Sun, Moon, Type, AlignLeft } from "lucide-react"
+import { X, Sun, Moon, Type, AlignLeft, Book, ScrollText } from "lucide-react"
 
 export function ReadingSettingsPanel({ onClose }: { onClose: () => void }) {
-  const { settings, setFontSize, setTheme, setFontStyle, setLineSpacing, resetSettings } = useReadingSettings()
+  const { settings, setFontSize, setTheme, setFontStyle, setLineSpacing, setReadingMode, resetSettings } = useReadingSettings()
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center" onClick={onClose}>
@@ -24,6 +24,35 @@ export function ReadingSettingsPanel({ onClose }: { onClose: () => void }) {
         </div>
 
         <div className="space-y-5">
+          {/* Reading Mode */}
+          <div>
+            <label className="mb-2 block text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Reading Mode</label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setReadingMode("scroll")}
+                className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                  settings.readingMode === "scroll"
+                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+                    : "border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                }`}
+              >
+                <ScrollText size={16} />
+                Scroll
+              </button>
+              <button
+                onClick={() => setReadingMode("page")}
+                className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium transition-all ${
+                  settings.readingMode === "page"
+                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
+                    : "border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                }`}
+              >
+                <Book size={16} />
+                Page
+              </button>
+            </div>
+          </div>
+
           {/* Font Size */}
           <div>
             <div className="mb-2 flex items-center justify-between">
