@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useReadingSettings } from "@/lib/reading/ReadingSettingsContext"
+import { getReaderDarkTheme } from "@/lib/reading/genre-themes"
 
 function estimateCharsPerPage(fontSize: number): number {
   const viewportH = typeof window !== "undefined" ? window.innerHeight : 800
@@ -29,8 +30,9 @@ function splitIntoPages(paragraphs: string[], charsPerPage: number): string[][] 
   return pages
 }
 
-export function PageFlipReader({ content, coverUrl, storyTitle, authorName }: { content: string; coverUrl?: string; storyTitle?: string; authorName?: string }) {
+export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags }: { content: string; coverUrl?: string; storyTitle?: string; authorName?: string; tags?: string | null }) {
   const { settings } = useReadingSettings()
+  const genreTheme = settings.theme === "dark" ? getReaderDarkTheme(tags ?? null) : null
   const hasCover = !!(coverUrl || storyTitle)
   const [currentPage, setCurrentPage] = useState(0)
   const [flipState, setFlipState] = useState<"idle" | "forward" | "backward">("idle")
@@ -125,10 +127,10 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName }: { 
     : null
 
   const isDark = settings.theme === "dark"
-  const pageColor = isDark ? "#2A2A2A" : "#F5F0E8"
-  const textColor = isDark ? "#D4D4D4" : "#1A1A1A"
+  const pageColor = genreTheme ? genreTheme.page : isDark ? "#2A2A2A" : "#F5F0E8"
+  const textColor = genreTheme ? genreTheme.text : isDark ? "#D4D4D4" : "#1A1A1A"
   const mutedColor = isDark ? "#666" : "#999"
-  const spineColor = isDark ? "#1E1E1E" : "#E8E0D0"
+  const spineColor = genreTheme ? genreTheme.spine : isDark ? "#1E1E1E" : "#E8E0D0"
   const shadowColor = isDark ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.12)"
 
   const isFlipping = flipState !== "idle"
@@ -145,7 +147,7 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName }: { 
         className="relative overflow-hidden rounded-sm"
         style={{
           minHeight: "calc(100vh - 180px)",
-          backgroundColor: isDark ? "#1A1A1A" : "#E8E0D0",
+          backgroundColor: genreTheme ? genreTheme.bg : isDark ? "#1A1A1A" : "#E8E0D0",
           boxShadow: `0 4px 40px ${shadowColor}`,
         }}
       >
@@ -197,7 +199,7 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName }: { 
             className="relative z-30 flex flex-col items-center justify-center"
             style={{
               minHeight: "calc(100vh - 180px)",
-              backgroundColor: isDark ? "#1E1A2E" : "#2A1A4E",
+              backgroundColor: genreTheme ? genreTheme.coverBg : isDark ? "#1E1A2E" : "#2A1A4E",
               margin: "0 18px",
               transform: isFlipping && flipState === "forward"
                 ? "perspective(1800px) rotateY(-12deg) scale(0.97)"

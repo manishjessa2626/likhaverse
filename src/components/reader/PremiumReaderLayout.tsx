@@ -7,6 +7,7 @@ import { ReadingSettingsProvider, useReadingSettings } from "@/lib/reading/Readi
 import { EpisodeListDrawer } from "./EpisodeListDrawer"
 import { ReadingSettingsPanel } from "./ReadingSettingsPanel"
 import { PageFlipReader } from "./PageFlipReader"
+import { getReaderDarkTheme } from "@/lib/reading/genre-themes"
 
 function ProgressBar() {
   const [progress, setProgress] = useState(0)
@@ -129,16 +130,17 @@ function TopBar({
   )
 }
 
-function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle, coverUrl, storyTitle, authorName }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string; coverUrl?: string; storyTitle?: string; authorName?: string }) {
+function ReaderContentWrapper({ children, content, chapterNumber, totalChapters, chapterTitle, coverUrl, storyTitle, authorName, tags }: { children: ReactNode; content?: string; chapterNumber?: number; totalChapters?: number; chapterTitle?: string; coverUrl?: string; storyTitle?: string; authorName?: string; tags?: string | null }) {
   const { settings } = useReadingSettings()
   const isPageMode = settings.readingMode === "page" && content
+  const genreTheme = settings.theme === "dark" ? getReaderDarkTheme(tags ?? null) : null
 
   return (
     <div
       className="min-h-screen transition-colors duration-300"
       style={{
-        backgroundColor: settings.theme === "dark" ? "#191919" : "#FAF9F6",
-        color: settings.theme === "dark" ? "#EDEDED" : "#2C2C2C",
+        backgroundColor: genreTheme ? genreTheme.bg : settings.theme === "dark" ? "#191919" : "#FAF9F6",
+        color: genreTheme ? genreTheme.text : settings.theme === "dark" ? "#EDEDED" : "#2C2C2C",
       }}
     >
       {isPageMode ? (
@@ -162,7 +164,7 @@ function ReaderContentWrapper({ children, content, chapterNumber, totalChapters,
                 </h1>
               </header>
             )}
-            <PageFlipReader content={content} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} />
+            <PageFlipReader content={content} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags} />
           </div>
           <div className="mx-auto px-4 sm:px-6 pb-16" style={{ maxWidth: "680px" }}>
             {children}
@@ -195,6 +197,7 @@ export function PremiumReaderLayout({
   wordCount,
   coverUrl,
   authorName,
+  tags,
   children,
 }: {
   storyId: string
@@ -208,6 +211,7 @@ export function PremiumReaderLayout({
   wordCount?: number
   coverUrl?: string
   authorName?: string
+  tags?: string | null
   children: ReactNode
 }) {
   const [episodeListOpen, setEpisodeListOpen] = useState(false)
@@ -236,7 +240,7 @@ export function PremiumReaderLayout({
         onOpenSettings={() => setSettingsOpen(true)}
       />
 
-      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName}>
+      <ReaderContentWrapper content={content} chapterNumber={chapterNumber} totalChapters={totalChapters} chapterTitle={chapterTitle} coverUrl={coverUrl} storyTitle={storyTitle} authorName={authorName} tags={tags}>
         {children}
       </ReaderContentWrapper>
     </ReadingSettingsProvider>

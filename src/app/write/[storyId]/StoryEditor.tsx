@@ -8,6 +8,7 @@ import { BookOpen, Plus, Trash2 } from "lucide-react"
 import { useAmbience } from "@/hooks/useAmbience"
 import { AmbienceOverlay } from "@/components/studio/AmbienceOverlay"
 import { AmbienceControls } from "@/components/studio/AmbienceControls"
+import { getEditorTheme } from "@/lib/reading/genre-themes"
 
 function Spinner({ className = "h-4 w-4" }: { className?: string }) {
   return <span className={`inline-block animate-spin rounded-full border-2 border-current border-t-transparent ${className}`} />
@@ -299,7 +300,7 @@ export function StoryEditor({ story }: { story: StoryData }) {
   return (
     <div
       className="min-h-screen text-zinc-100 transition-all duration-700"
-      style={{ background: ambience.state.enabled && ambience.state.intensity > 0 ? undefined : "#000" }}
+      style={{ background: ambience.state.enabled && ambience.state.intensity > 0 ? undefined : getEditorTheme(story.tags).bg }}
     >
       <AmbienceOverlay
         theme={ambience.activeTheme}
