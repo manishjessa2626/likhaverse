@@ -266,6 +266,12 @@ export function StoryEditor({ story }: { story: StoryData }) {
       uploadData.append("file", coverFile)
       const res = await fetch("/api/upload", { method: "POST", body: uploadData })
       const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || "Failed to upload cover")
+        setSavingMeta(false)
+        setUploading(false)
+        return
+      }
       if (data.url) coverUrl = data.url
       setUploading(false)
     }
@@ -278,8 +284,8 @@ export function StoryEditor({ story }: { story: StoryData }) {
         status,
         accessType,
         freePreviewChapters,
+        ...(coverUrl ? { cover: coverUrl } : {}),
       }
-      if (coverUrl) body.cover = coverUrl
 
       const res = await fetch(`/api/stories/${story.id}`, {
         method: "PATCH",
@@ -289,7 +295,10 @@ export function StoryEditor({ story }: { story: StoryData }) {
       if (!res.ok) {
         const data = await res.json()
         setError(data.error || "Failed to save")
+        return
       }
+      setCoverFile(null)
+      setCoverPreview(null)
       router.refresh()
     } catch {
       setError("Failed to save")
