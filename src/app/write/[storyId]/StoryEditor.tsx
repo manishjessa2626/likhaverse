@@ -179,6 +179,9 @@ export function StoryEditor({ story }: { story: StoryData }) {
   const [freePreviewChapters, setFreePreviewChapters] = useState(story.freePreviewChapters)
   const [savingMeta, setSavingMeta] = useState(false)
   const [addingChapter, setAddingChapter] = useState(false)
+  const [coverFile, setCoverFile] = useState<File | null>(null)
+  const [coverPreview, setCoverPreview] = useState<string | null>(null)
+  const [uploading, setUploading] = useState(false)
   const [error, setError] = useState("")
   const ambience = useAmbience()
 
@@ -245,21 +248,43 @@ export function StoryEditor({ story }: { story: StoryData }) {
     }
   }
 
+  const handleCoverSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setCoverFile(file)
+    setCoverPreview(URL.createObjectURL(file))
+  }
+
   const saveMetadata = async () => {
     setSavingMeta(true)
     setError("")
+
+    let coverUrl = ""
+    if (coverFile) {
+      setUploading(true)
+      const uploadData = new FormData()
+      uploadData.append("file", coverFile)
+      const res = await fetch("/api/upload", { method: "POST", body: uploadData })
+      const data = await res.json()
+      if (data.url) coverUrl = data.url
+      setUploading(false)
+    }
+
     try {
+      const body: Record<string, unknown> = {
+        title: title.trim(),
+        description,
+        tags,
+        status,
+        accessType,
+        freePreviewChapters,
+      }
+      if (coverUrl) body.cover = coverUrl
+
       const res = await fetch(`/api/stories/${story.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: title.trim(),
-          description,
-          tags,
-          status,
-          accessType,
-          freePreviewChapters,
-        }),
+        body: JSON.stringify(body),
       })
       if (!res.ok) {
         const data = await res.json()
@@ -358,6 +383,32 @@ export function StoryEditor({ story }: { story: StoryData }) {
           />
         </div>
 
+        <div className="mb-8">
+          <label className="mb-2 block text-sm font-medium text-zinc-500">Cover Image</label>
+          <div className="flex items-start gap-4">
+            <div className="aspect-[3/4] w-28 shrink-0 rounded-lg border-2 border-dashed border-zinc-700 flex items-center justify-center overflow-hidden bg-zinc-900">
+              {coverPreview ? (
+                <img src={coverPreview} alt="Cover" className="h-full w-full object-cover" />
+              ) : story.cover ? (
+                <img src={story.cover} alt="Cover" className="h-full w-full object-cover" />
+              ) : (
+                <svg className="h-6 w-6 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+              )}
+            </div>
+            <div className="flex-1">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleCoverSelect}
+                className="block w-full text-sm text-zinc-500 file:mr-3 file:rounded-lg file:border-0 file:bg-zinc-700 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-zinc-200 hover:file:bg-zinc-600"
+              />
+              <p className="mt-1 text-xs text-zinc-600">600x800px recommended. JPG, PNG or WebP.</p>
+            </div>
+          </div>
+        </div>
+
         <div className="mb-8 grid gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-6">
             <div>
@@ -422,10 +473,12 @@ export function StoryEditor({ story }: { story: StoryData }) {
             </div>
             <button
               onClick={saveMetadata}
-              disabled={savingMeta}
+              disabled={savingMeta || uploading}
               className="w-full rounded-lg bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-200 hover:bg-zinc-700 disabled:opacity-50 transition-colors"
             >
-              {savingMeta ? (
+              {uploading ? (
+                <span className="flex items-center justify-center gap-1.5"><Spinner /> Uploading cover...</span>
+              ) : savingMeta ? (
                 <span className="flex items-center justify-center gap-1.5"><Spinner /> Saving...</span>
               ) : "Save Metadata"}
             </button>
