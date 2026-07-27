@@ -53,36 +53,59 @@ function SectionHeader({ title, subtitle, link }: {
 
 function StoryCard({ story }: { story: any }) {
   const tag = story.tags?.split(",")[0]?.trim() ?? ""
+  const hasCover = !!story.cover
   return (
     <Link
       href={"/stories/" + story.id}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-purple-200/40 bg-white/60 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 dark:border-zinc-700/40 dark:bg-zinc-800/60"
+      className="group relative flex flex-col overflow-hidden rounded-lg bg-white/60 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1.5 dark:bg-zinc-800/60"
+      style={hasCover ? { boxShadow: "0 2px 8px rgba(0,0,0,0.12), 2px 0 6px rgba(0,0,0,0.08)" } : {}}
     >
-      <div className="relative h-44 overflow-hidden bg-gradient-to-br from-violet-700 via-purple-800 to-indigo-900">
-        {story.cover ? (
-          <img src={story.cover} alt="" className="absolute inset-0 h-full w-full object-cover opacity-50 transition-all duration-500 group-hover:scale-105 group-hover:opacity-70" />
-        ) : null}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-        <div className="relative flex h-full flex-col justify-end p-4">
-          {tag && (
-            <span className="mb-1.5 w-fit rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
-              {getTagEmoji(tag)} {tag}
-            </span>
-          )}
-          <h3 className="text-base font-bold text-white drop-shadow-lg line-clamp-2">{story.title}</h3>
-          {story.description && (
-            <p className="mt-1 text-xs text-zinc-300 line-clamp-2">{story.description}</p>
-          )}
+      {hasCover ? (
+        <>
+          <div className="relative aspect-[3/4] overflow-hidden bg-zinc-100 dark:bg-zinc-800">
+            <img
+              src={story.cover}
+              alt={story.title}
+              className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06),inset_2px_0_6px_rgba(0,0,0,0.1)] pointer-events-none" />
+            {/* Spine shadow on left */}
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-r from-black/15 to-transparent pointer-events-none" />
+            {/* Category tag at top-right */}
+            {tag && (
+              <span className="absolute top-2 left-2 rounded-full bg-black/50 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white/80 backdrop-blur-sm">
+                {getTagEmoji(tag)} {tag}
+              </span>
+            )}
+            {/* Bottom gradient with title */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-3 pt-8">
+              <h3 className="text-sm font-bold text-white drop-shadow-sm line-clamp-1">{story.title}</h3>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-br from-violet-700 via-purple-800 to-indigo-900">
+          <div className="flex h-full flex-col justify-end p-4">
+            {tag && (
+              <span className="mb-1.5 w-fit rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur-sm">
+                {getTagEmoji(tag)} {tag}
+              </span>
+            )}
+            <h3 className="text-base font-bold text-white drop-shadow-lg line-clamp-2">{story.title}</h3>
+            {story.description && (
+              <p className="mt-1 text-xs text-zinc-300 line-clamp-2">{story.description}</p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="flex items-center justify-between p-3">
+      )}
+      <div className="flex items-center justify-between px-3 py-2.5">
         <div className="flex items-center gap-2 min-w-0">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-[10px] font-bold text-white">
+          <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-[9px] font-bold text-white">
             {story.author.name?.[0] ?? "?"}
           </div>
-          <span className="truncate text-xs text-zinc-500 dark:text-zinc-400">{story.author.name}</span>
+          <span className="truncate text-[11px] text-zinc-500 dark:text-zinc-400">{story.author.name}</span>
         </div>
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2 shrink-0">
           <span className="text-[10px] text-zinc-400 dark:text-zinc-500">{story._count.chapters} ch</span>
           <span className="text-[10px] text-zinc-400 dark:text-zinc-500">{story._count.saves} ❤</span>
         </div>
@@ -125,7 +148,7 @@ export default async function HomePage() {
     <div className="min-h-screen bg-[#D4C5F0] dark:bg-zinc-950 transition-colors duration-300">
       <AnimatedHero trending={trending} session={session} />
 
-      <div className="relative z-30 -mt-16 pb-20">
+      <div className="relative z-30 -mt-8 pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* ── Continue Reading ── */}
           {session?.user && personal?.continueReading && personal.continueReading.length > 0 && (
@@ -138,9 +161,13 @@ export default async function HomePage() {
                     href={`/stories/${item.storyId}/chapter/${item.chapterId}`}
                     className="group flex-shrink-0 w-36 snap-start"
                   >
-                    <div className="aspect-[3/4] rounded-xl overflow-hidden mb-2 relative bg-purple-100 dark:bg-zinc-800">
+                    <div className="aspect-[3/4] rounded-lg overflow-hidden mb-2 relative bg-purple-100 dark:bg-zinc-800 shadow-md">
                       {item.story.cover ? (
-                        <img src={item.story.cover} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                        <>
+                          <img src={item.story.cover} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                          <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08),inset_2px_0_6px_rgba(0,0,0,0.12)] pointer-events-none" />
+                          <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-r from-black/20 to-transparent pointer-events-none" />
+                        </>
                       ) : (
                         <div className="flex h-full items-center justify-center text-purple-300 dark:text-zinc-600 text-xs">No Cover</div>
                       )}
