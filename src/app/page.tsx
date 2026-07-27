@@ -127,12 +127,12 @@ function MediaPlaceholder({ icon, label, description }: { icon: string; label: s
 function GenreSection({ tag, label, stories }: { tag: string; label: string; stories: any[] }) {
   if (!stories || stories.length === 0) return null
   return (
-    <section className="py-6">
+    <section className="py-8">
       <SectionHeader
         title={`${getTagEmoji(tag)} ${label}`}
         link={{ href: `/stories?genre=${tag}`, label: "View all" }}
       />
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
         {stories.map((s) => <StoryCard key={s.id} story={s} />)}
       </div>
     </section>
@@ -154,7 +154,7 @@ export default async function HomePage() {
           {session?.user && personal?.continueReading && personal.continueReading.length > 0 && (
             <section className="mb-8 rounded-2xl border border-purple-200/50 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-zinc-700/50 dark:bg-zinc-800/70">
               <SectionHeader title="📖 Continue Reading" subtitle="Pick up where you left off" />
-              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
+              <div className="flex gap-5 overflow-x-auto pb-2 scrollbar-none snap-x snap-mandatory">
                 {personal.continueReading.map((item: any) => (
                   <Link
                     key={item.storyId}
@@ -190,73 +190,73 @@ export default async function HomePage() {
           {trending.length > 0 && (
             <section className="py-6">
               <SectionHeader title="🔥 Trending Now" subtitle="Most read this week" link={{ href: "/stories", label: "Discover more" }} />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {trending.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
-                ))}
-              </div>
-            </section>
-          )}
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {trending.map((s: any) => (
+          <StoryCard key={s.id} story={s} />
+        ))}
+      </div>
+    </section>
+  )}
 
-          {/* ── Editor's Picks ── */}
-          {editorsPicks.length > 0 && (
-            <section className={`rounded-2xl bg-gradient-to-b ${getGradient(0)} p-6`}>
-              <SectionHeader title="⭐ Editor's Picks" subtitle="Curated by the LikhaVerse team" />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {editorsPicks.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
-                ))}
-              </div>
-            </section>
-          )}
+  {/* ── Editor's Picks ── */}
+  {editorsPicks.length > 0 && (
+    <section className={`rounded-2xl bg-gradient-to-b ${getGradient(0)} p-6`}>
+      <SectionHeader title="⭐ Editor's Picks" subtitle="Curated by the LikhaVerse team" />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {editorsPicks.map((s: any) => (
+          <StoryCard key={s.id} story={s} />
+        ))}
+      </div>
+    </section>
+  )}
 
-          {/* ── Following ── */}
-          {session?.user && personal?.followingStories && personal.followingStories.length > 0 && (
-            <section className="py-6">
-              <SectionHeader title="👥 Following" subtitle="New from authors you follow" />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {personal.followingStories.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
-                ))}
-              </div>
-            </section>
-          )}
+  {/* ── Following ── */}
+  {session?.user && personal?.followingStories && personal.followingStories.length > 0 && (
+    <section className="py-8">
+      <SectionHeader title="👥 Following" subtitle="New from authors you follow" />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {personal.followingStories.map((s: any) => (
+          <StoryCard key={s.id} story={s} />
+        ))}
+      </div>
+    </section>
+  )}
 
-          {/* ── AI Recommendations ── */}
-          {session?.user && personal?.recommended && personal.recommended.length > 0 && (
-            <section className={`rounded-2xl bg-gradient-to-b ${getGradient(1)} p-6`}>
-              <SectionHeader title="✨ Recommended For You" subtitle="Based on your reading history" />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {personal.recommended.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
-                ))}
-              </div>
-            </section>
-          )}
+  {/* ── AI Recommendations ── */}
+  {session?.user && personal?.recommended && personal.recommended.length > 0 && (
+    <section className={`rounded-2xl bg-gradient-to-b ${getGradient(1)} p-6`}>
+      <SectionHeader title="✨ Recommended For You" subtitle="Based on your reading history" />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {personal.recommended.map((s: any) => (
+          <StoryCard key={s.id} story={s} />
+        ))}
+      </div>
+    </section>
+  )}
 
-          {/* ── Latest Chapters ── */}
-          {latestChapters.length > 0 && (
-            <section className="py-6">
-              <SectionHeader title="🆕 Latest Chapters" subtitle="Recently updated stories" link={{ href: "/stories?sort=recent", label: "See all" }} />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {latestChapters.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
-                ))}
-              </div>
-            </section>
-          )}
+  {/* ── Latest Chapters ── */}
+  {latestChapters.length > 0 && (
+    <section className="py-8">
+      <SectionHeader title="🆕 Latest Chapters" subtitle="Recently updated stories" link={{ href: "/stories?sort=recent", label: "See all" }} />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {latestChapters.map((s: any) => (
+          <StoryCard key={s.id} story={s} />
+        ))}
+      </div>
+    </section>
+  )}
 
-          {/* ── Originals ── */}
-          {originals.length > 0 && (
-            <section className={`rounded-2xl bg-gradient-to-b ${getGradient(2)} p-6`}>
-              <SectionHeader title="🎬 Original Series" subtitle="LikhaVerse exclusives" link={{ href: "/stories?original=true", label: "Explore" }} />
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {originals.map((s: any) => (
-                  <StoryCard key={s.id} story={s} />
-                ))}
-              </div>
-            </section>
-          )}
+  {/* ── Originals ── */}
+  {originals.length > 0 && (
+    <section className={`rounded-2xl bg-gradient-to-b ${getGradient(2)} p-6`}>
+      <SectionHeader title="🎬 Original Series" subtitle="LikhaVerse exclusives" link={{ href: "/stories?original=true", label: "Explore" }} />
+      <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
+        {originals.map((s: any) => (
+          <StoryCard key={s.id} story={s} />
+        ))}
+      </div>
+    </section>
+  )}
 
           {/* ── Genre Sections ── */}
           <div className="mt-4 space-y-2">
