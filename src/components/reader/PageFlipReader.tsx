@@ -208,42 +208,43 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags
         {/* Current page — Book Cover */}
         {isCoverPage ? (
           <div
-            className="relative z-30 flex flex-col"
+            className="relative z-30 flex flex-col items-center justify-center"
             style={{
               minHeight: "calc(100vh - 180px)",
-              backgroundColor: genreTheme ? genreTheme.coverBg : isDark ? "#1E1A2E" : "#1A1A2E",
               margin: "0 18px",
-              transform: isFlipping && flipState === "forward"
-                ? "perspective(1800px) rotateY(-12deg) scale(0.97)"
-                : "perspective(1800px) rotateY(0deg) scale(1)",
-              transformOrigin: "left center",
-              transition: "transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)",
             }}
           >
-            {coverUrl ? (
-              <>
-                <img src={coverUrl} alt={storyTitle ?? ""} className="absolute inset-0 h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-              </>
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-800 via-purple-900 to-indigo-950" />
-            )}
-            <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1),inset_3px_0_12px_rgba(0,0,0,0.15)] pointer-events-none" />
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-r from-black/25 to-transparent pointer-events-none" />
-            <div className="relative z-10 mt-auto px-8 pb-12 text-center">
-              <h1
-                className="text-3xl font-black tracking-tight text-white sm:text-4xl drop-shadow-xl"
-                style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
-              >
-                {storyTitle}
-              </h1>
-              {authorName && (
-                <p className="mt-3 text-sm text-white/70">by {authorName}</p>
+            <div
+              className="relative w-56 sm:w-64 rounded-lg overflow-hidden shadow-2xl"
+              style={{
+                transform: isFlipping && flipState === "forward"
+                  ? "perspective(1800px) rotateY(-12deg) scale(0.97)"
+                  : "perspective(1800px) rotateY(0deg) scale(1)",
+                transformOrigin: "left center",
+                transition: "transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)",
+              }}
+            >
+              {coverUrl ? (
+                <>
+                  <div className="aspect-[3/4] bg-zinc-100 dark:bg-zinc-800">
+                    <img src={coverUrl} alt={storyTitle ?? ""} className="h-full w-full object-cover" />
+                  </div>
+                  <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1),inset_3px_0_12px_rgba(0,0,0,0.15)] pointer-events-none" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-r from-black/25 to-transparent pointer-events-none" />
+                </>
+              ) : (
+                <div className="aspect-[3/4] bg-gradient-to-br from-violet-800 via-purple-900 to-indigo-950 flex flex-col items-center justify-center p-6 text-center">
+                  <h1
+                    className="text-xl font-black tracking-tight text-white drop-shadow-xl"
+                    style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+                  >
+                    {storyTitle}
+                  </h1>
+                  {authorName && (
+                    <p className="mt-2 text-xs text-white/60">by {authorName}</p>
+                  )}
+                </div>
               )}
-              <div className="mx-auto mt-8 h-px w-12 bg-white/20" />
-              <p className="mt-5 text-[10px] uppercase tracking-[0.25em] text-white/40">
-                LikhaVerse
-              </p>
             </div>
             {isFlipping && (
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to right, rgba(0,0,0,0.15), transparent 60%)" }} />

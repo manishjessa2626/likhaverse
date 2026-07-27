@@ -169,7 +169,7 @@ function ReaderContentWrapper({ children, content, chapterNumber, totalChapters,
           {coverUrl && (
             <div className="mb-10 flex flex-col items-center">
               <div
-                className="w-48 sm:w-56 rounded-lg overflow-hidden shadow-xl"
+                className="w-56 sm:w-64 rounded-lg overflow-hidden shadow-xl"
                 style={{
                   boxShadow: "0 4px 24px rgba(0,0,0,0.18), 2px 0 12px rgba(0,0,0,0.1)",
                 }}
