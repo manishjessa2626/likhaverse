@@ -98,6 +98,18 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags
     else if (x > rect.width - third) goNext()
   }
 
+  const totalPages = hasCover ? pages.length + 1 : pages.length
+  const lastSavedPctRef = useRef(0)
+  const progressPct = totalPages > 1 ? Math.round((currentPage / (totalPages - 1)) * 100) : 0
+  useEffect(() => {
+    if (!storyId || !chapterId) return
+    const pct = currentPage === 0 ? 0 : progressPct
+    if (Math.abs(pct - lastSavedPctRef.current) >= 10) {
+      lastSavedPctRef.current = pct
+      saveReadingProgress(storyId, chapterId, pct)
+    }
+  }, [currentPage, storyId, chapterId, progressPct])
+
   if (pages.length === 0) {
     return (
       <div className="mx-auto px-4 sm:px-6 py-16" style={{ maxWidth: "680px" }}>
@@ -115,18 +127,6 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags
       </div>
     )
   }
-
-  const totalPages = hasCover ? pages.length + 1 : pages.length
-  const lastSavedPctRef = useRef(0)
-  const progressPct = totalPages > 1 ? Math.round((currentPage / (totalPages - 1)) * 100) : 0
-  useEffect(() => {
-    if (!storyId || !chapterId) return
-    const pct = currentPage === 0 ? 0 : progressPct
-    if (Math.abs(pct - lastSavedPctRef.current) >= 10) {
-      lastSavedPctRef.current = pct
-      saveReadingProgress(storyId, chapterId, pct)
-    }
-  }, [currentPage, storyId, chapterId, progressPct])
 
   const isCoverPage = hasCover && currentPage === 0
   const contentPageIndex = hasCover ? currentPage - 1 : currentPage
