@@ -61,9 +61,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{
-          __html: `(function(){try{var e=localStorage.getItem("theme");var t=e==="dark"||(!e&&matchMedia("(prefers-color-scheme:dark)").matches);if(t)document.documentElement.classList.add("dark");else document.documentElement.classList.remove("dark")}catch(e){}})()`
-        }} />
+        <style>{`@media(prefers-color-scheme:dark){:root:not(.dark){background:#09090b}}`}</style>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
