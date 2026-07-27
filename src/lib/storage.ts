@@ -27,8 +27,8 @@ export async function uploadFile(
 export async function deleteFile(fileUrl: string): Promise<void> {
   if (!fileUrl) return
   const apiPrefix = "/api/uploads/"
-  const localPath = fileUrl.startsWith(apiPrefix) ? fileUrl.slice(apiPrefix.length) : fileUrl
+  const filename = fileUrl.startsWith(apiPrefix) ? fileUrl.slice(apiPrefix.length) : fileUrl
   try {
-    await unlink(path.join(UPLOAD_DIR, localPath))
+    await unlink(path.join(UPLOAD_DIR, "uploads", filename))
   } catch {}
 }
