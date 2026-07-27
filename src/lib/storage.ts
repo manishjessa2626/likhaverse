@@ -6,9 +6,19 @@ export async function uploadFile(
   storagePath: string,
   _contentType: string
 ): Promise<string> {
-  const fullPath = path.join(process.cwd(), "public", storagePath)
-  await mkdir(path.dirname(fullPath), { recursive: true })
-  await writeFile(fullPath, buffer)
+  const publicDir = path.join(process.cwd(), "public")
+  const fullPath = path.join(publicDir, storagePath)
+  const dir = path.dirname(fullPath)
+  try {
+    await mkdir(dir, { recursive: true })
+  } catch (err) {
+    throw new Error(`Cannot create directory ${dir}: ${err instanceof Error ? err.message : err}`)
+  }
+  try {
+    await writeFile(fullPath, buffer)
+  } catch (err) {
+    throw new Error(`Cannot write file ${fullPath}: ${err instanceof Error ? err.message : err}`)
+  }
   return `/${storagePath}`
 }
 

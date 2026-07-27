@@ -51,10 +51,17 @@ export async function POST(request: Request) {
     const filename = `${session.user.id}-${Date.now()}.${ext}`
     const storagePath = `uploads/${filename}`
 
-    const url = await uploadFile(buffer, storagePath, file.type)
-
-    return NextResponse.json({ url })
+    try {
+      const url = await uploadFile(buffer, storagePath, file.type)
+      return NextResponse.json({ url })
+    } catch (writeError) {
+      const message = writeError instanceof Error ? writeError.message : String(writeError)
+      console.error("[Upload] File write failed:", message)
+      return NextResponse.json({ error: "Failed to save file on server." }, { status: 500 })
+    }
   } catch (error) {
-    return apiError(error, "Upload failed")
+    const message = error instanceof Error ? error.message : String(error)
+    console.error("[Upload] Unexpected error:", message)
+    return NextResponse.json({ error: `Upload failed: ${message}` }, { status: 500 })
   }
 }
