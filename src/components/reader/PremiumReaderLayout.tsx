@@ -162,10 +162,44 @@ function ReaderContentWrapper({ children, content, chapterNumber, totalChapters,
         <div
           className="mx-auto px-4 sm:px-6 pb-16 animate-fadeIn"
           style={{
-            maxWidth: "680px",
+            maxWidth: "720px",
             paddingTop: "88px",
           }}
         >
+          {coverUrl && (
+            <div className="mb-10 flex flex-col items-center">
+              <div
+                className="w-48 sm:w-56 rounded-lg overflow-hidden shadow-xl"
+                style={{
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.18), 2px 0 12px rgba(0,0,0,0.1)",
+                }}
+              >
+                <div className="relative aspect-[3/4] bg-zinc-100 dark:bg-zinc-800">
+                  <img
+                    src={coverUrl}
+                    alt={storyTitle}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.08),inset_2px_0_8px_rgba(0,0,0,0.12)] pointer-events-none" />
+                  <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-r from-black/20 to-transparent pointer-events-none" />
+                </div>
+              </div>
+              {storyTitle && (
+                <h1 className="mt-5 text-2xl font-bold text-center tracking-tight">{storyTitle}</h1>
+              )}
+              {authorName && (
+                <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">by {authorName}</p>
+              )}
+              {chapterTitle && (
+                <div className="mt-6 text-center">
+                  <p className="text-xs uppercase tracking-[0.15em] font-medium text-zinc-400 dark:text-zinc-500">
+                    Episode {chapterNumber} of {totalChapters}
+                  </p>
+                  <h2 className="mt-1 text-lg font-semibold">{chapterTitle}</h2>
+                </div>
+              )}
+            </div>
+          )}
           {children}
         </div>
       )}

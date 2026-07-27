@@ -205,13 +205,13 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags
           }}
         />
 
-        {/* Current page — Cover */}
+        {/* Current page — Book Cover */}
         {isCoverPage ? (
           <div
-            className="relative z-30 flex flex-col items-center justify-center"
+            className="relative z-30 flex flex-col"
             style={{
               minHeight: "calc(100vh - 180px)",
-              backgroundColor: genreTheme ? genreTheme.coverBg : isDark ? "#1E1A2E" : "#2A1A4E",
+              backgroundColor: genreTheme ? genreTheme.coverBg : isDark ? "#1E1A2E" : "#1A1A2E",
               margin: "0 18px",
               transform: isFlipping && flipState === "forward"
                 ? "perspective(1800px) rotateY(-12deg) scale(0.97)"
@@ -221,24 +221,27 @@ export function PageFlipReader({ content, coverUrl, storyTitle, authorName, tags
             }}
           >
             {coverUrl ? (
-              <img src={coverUrl} alt={storyTitle ?? ""} className="absolute inset-0 h-full w-full object-cover opacity-40" />
-            ) : null}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            <div className="relative z-10 px-8 py-12 text-center">
-              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-white/10 text-4xl">
-                📖
-              </div>
+              <>
+                <img src={coverUrl} alt={storyTitle ?? ""} className="absolute inset-0 h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-800 via-purple-900 to-indigo-950" />
+            )}
+            <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1),inset_3px_0_12px_rgba(0,0,0,0.15)] pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-r from-black/25 to-transparent pointer-events-none" />
+            <div className="relative z-10 mt-auto px-8 pb-12 text-center">
               <h1
-                className="text-3xl font-black tracking-tight text-white sm:text-4xl drop-shadow-lg"
+                className="text-3xl font-black tracking-tight text-white sm:text-4xl drop-shadow-xl"
                 style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
               >
                 {storyTitle}
               </h1>
               {authorName && (
-                <p className="mt-3 text-sm text-purple-200/80">by {authorName}</p>
+                <p className="mt-3 text-sm text-white/70">by {authorName}</p>
               )}
-              <div className="mx-auto mt-8 h-px w-16 bg-white/20" />
-              <p className="mt-6 text-[11px] uppercase tracking-[0.2em] text-purple-300/60">
+              <div className="mx-auto mt-8 h-px w-12 bg-white/20" />
+              <p className="mt-5 text-[10px] uppercase tracking-[0.25em] text-white/40">
                 LikhaVerse
               </p>
             </div>
