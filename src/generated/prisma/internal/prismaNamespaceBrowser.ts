@@ -106,7 +106,11 @@ export const ModelName = {
   ReelComment: 'ReelComment',
   IdempotencyKey: 'IdempotencyKey',
   ParentPin: 'ParentPin',
-  JuniorProfile: 'JuniorProfile'
+  JuniorProfile: 'JuniorProfile',
+  JuniorReadingProgress: 'JuniorReadingProgress',
+  JuniorBookmark: 'JuniorBookmark',
+  JuniorDraft: 'JuniorDraft',
+  JuniorSubmission: 'JuniorSubmission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -908,12 +912,79 @@ export const JuniorProfileScalarFieldEnum = {
 export type JuniorProfileScalarFieldEnum = (typeof JuniorProfileScalarFieldEnum)[keyof typeof JuniorProfileScalarFieldEnum]
 
 
+export const JuniorReadingProgressScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  currentPage: 'currentPage',
+  totalPages: 'totalPages',
+  completed: 'completed',
+  lastReadAt: 'lastReadAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorReadingProgressScalarFieldEnum = (typeof JuniorReadingProgressScalarFieldEnum)[keyof typeof JuniorReadingProgressScalarFieldEnum]
+
+
+export const JuniorBookmarkScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  page: 'page',
+  createdAt: 'createdAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorBookmarkScalarFieldEnum = (typeof JuniorBookmarkScalarFieldEnum)[keyof typeof JuniorBookmarkScalarFieldEnum]
+
+
+export const JuniorDraftScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  chapters: 'chapters',
+  coverImage: 'coverImage',
+  illustrations: 'illustrations',
+  fontSize: 'fontSize',
+  wordCount: 'wordCount',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorDraftScalarFieldEnum = (typeof JuniorDraftScalarFieldEnum)[keyof typeof JuniorDraftScalarFieldEnum]
+
+
+export const JuniorSubmissionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  chapters: 'chapters',
+  coverImage: 'coverImage',
+  illustrations: 'illustrations',
+  status: 'status',
+  parentFeedback: 'parentFeedback',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  juniorId: 'juniorId',
+  draftId: 'draftId'
+} as const
+
+export type JuniorSubmissionScalarFieldEnum = (typeof JuniorSubmissionScalarFieldEnum)[keyof typeof JuniorSubmissionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -930,4 +1001,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

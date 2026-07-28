@@ -321,6 +321,10 @@ export type JuniorProfileWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"JuniorProfile"> | Date | string
   parentUserId?: Prisma.StringFilter<"JuniorProfile"> | string
   parentUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  readingProgress?: Prisma.JuniorReadingProgressListRelationFilter
+  bookmarks?: Prisma.JuniorBookmarkListRelationFilter
+  drafts?: Prisma.JuniorDraftListRelationFilter
+  submissions?: Prisma.JuniorSubmissionListRelationFilter
 }
 
 export type JuniorProfileOrderByWithRelationInput = {
@@ -341,6 +345,10 @@ export type JuniorProfileOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   parentUserId?: Prisma.SortOrder
   parentUser?: Prisma.UserOrderByWithRelationInput
+  readingProgress?: Prisma.JuniorReadingProgressOrderByRelationAggregateInput
+  bookmarks?: Prisma.JuniorBookmarkOrderByRelationAggregateInput
+  drafts?: Prisma.JuniorDraftOrderByRelationAggregateInput
+  submissions?: Prisma.JuniorSubmissionOrderByRelationAggregateInput
 }
 
 export type JuniorProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -364,6 +372,10 @@ export type JuniorProfileWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"JuniorProfile"> | Date | string
   parentUserId?: Prisma.StringFilter<"JuniorProfile"> | string
   parentUser?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  readingProgress?: Prisma.JuniorReadingProgressListRelationFilter
+  bookmarks?: Prisma.JuniorBookmarkListRelationFilter
+  drafts?: Prisma.JuniorDraftListRelationFilter
+  submissions?: Prisma.JuniorSubmissionListRelationFilter
 }, "id">
 
 export type JuniorProfileOrderByWithAggregationInput = {
@@ -429,6 +441,10 @@ export type JuniorProfileCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   parentUser: Prisma.UserCreateNestedOneWithoutJuniorProfilesInput
+  readingProgress?: Prisma.JuniorReadingProgressCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionCreateNestedManyWithoutJuniorInput
 }
 
 export type JuniorProfileUncheckedCreateInput = {
@@ -448,6 +464,10 @@ export type JuniorProfileUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   parentUserId: string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftUncheckedCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionUncheckedCreateNestedManyWithoutJuniorInput
 }
 
 export type JuniorProfileUpdateInput = {
@@ -467,6 +487,10 @@ export type JuniorProfileUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parentUser?: Prisma.UserUpdateOneRequiredWithoutJuniorProfilesNestedInput
+  readingProgress?: Prisma.JuniorReadingProgressUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUpdateManyWithoutJuniorNestedInput
 }
 
 export type JuniorProfileUncheckedUpdateInput = {
@@ -486,6 +510,10 @@ export type JuniorProfileUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   parentUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUncheckedUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUncheckedUpdateManyWithoutJuniorNestedInput
 }
 
 export type JuniorProfileCreateManyInput = {
@@ -627,6 +655,11 @@ export type JuniorProfileSumOrderByAggregateInput = {
   streak?: Prisma.SortOrder
 }
 
+export type JuniorProfileScalarRelationFilter = {
+  is?: Prisma.JuniorProfileWhereInput
+  isNot?: Prisma.JuniorProfileWhereInput
+}
+
 export type JuniorProfileCreateNestedManyWithoutParentUserInput = {
   create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutParentUserInput, Prisma.JuniorProfileUncheckedCreateWithoutParentUserInput> | Prisma.JuniorProfileCreateWithoutParentUserInput[] | Prisma.JuniorProfileUncheckedCreateWithoutParentUserInput[]
   connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutParentUserInput | Prisma.JuniorProfileCreateOrConnectWithoutParentUserInput[]
@@ -669,6 +702,62 @@ export type JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput = {
   deleteMany?: Prisma.JuniorProfileScalarWhereInput | Prisma.JuniorProfileScalarWhereInput[]
 }
 
+export type JuniorProfileCreateNestedOneWithoutReadingProgressInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutReadingProgressInput, Prisma.JuniorProfileUncheckedCreateWithoutReadingProgressInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutReadingProgressInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+}
+
+export type JuniorProfileUpdateOneRequiredWithoutReadingProgressNestedInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutReadingProgressInput, Prisma.JuniorProfileUncheckedCreateWithoutReadingProgressInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutReadingProgressInput
+  upsert?: Prisma.JuniorProfileUpsertWithoutReadingProgressInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuniorProfileUpdateToOneWithWhereWithoutReadingProgressInput, Prisma.JuniorProfileUpdateWithoutReadingProgressInput>, Prisma.JuniorProfileUncheckedUpdateWithoutReadingProgressInput>
+}
+
+export type JuniorProfileCreateNestedOneWithoutBookmarksInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutBookmarksInput, Prisma.JuniorProfileUncheckedCreateWithoutBookmarksInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutBookmarksInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+}
+
+export type JuniorProfileUpdateOneRequiredWithoutBookmarksNestedInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutBookmarksInput, Prisma.JuniorProfileUncheckedCreateWithoutBookmarksInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutBookmarksInput
+  upsert?: Prisma.JuniorProfileUpsertWithoutBookmarksInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuniorProfileUpdateToOneWithWhereWithoutBookmarksInput, Prisma.JuniorProfileUpdateWithoutBookmarksInput>, Prisma.JuniorProfileUncheckedUpdateWithoutBookmarksInput>
+}
+
+export type JuniorProfileCreateNestedOneWithoutDraftsInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutDraftsInput, Prisma.JuniorProfileUncheckedCreateWithoutDraftsInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutDraftsInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+}
+
+export type JuniorProfileUpdateOneRequiredWithoutDraftsNestedInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutDraftsInput, Prisma.JuniorProfileUncheckedCreateWithoutDraftsInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutDraftsInput
+  upsert?: Prisma.JuniorProfileUpsertWithoutDraftsInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuniorProfileUpdateToOneWithWhereWithoutDraftsInput, Prisma.JuniorProfileUpdateWithoutDraftsInput>, Prisma.JuniorProfileUncheckedUpdateWithoutDraftsInput>
+}
+
+export type JuniorProfileCreateNestedOneWithoutSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutSubmissionsInput, Prisma.JuniorProfileUncheckedCreateWithoutSubmissionsInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutSubmissionsInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+}
+
+export type JuniorProfileUpdateOneRequiredWithoutSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.JuniorProfileCreateWithoutSubmissionsInput, Prisma.JuniorProfileUncheckedCreateWithoutSubmissionsInput>
+  connectOrCreate?: Prisma.JuniorProfileCreateOrConnectWithoutSubmissionsInput
+  upsert?: Prisma.JuniorProfileUpsertWithoutSubmissionsInput
+  connect?: Prisma.JuniorProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.JuniorProfileUpdateToOneWithWhereWithoutSubmissionsInput, Prisma.JuniorProfileUpdateWithoutSubmissionsInput>, Prisma.JuniorProfileUncheckedUpdateWithoutSubmissionsInput>
+}
+
 export type JuniorProfileCreateWithoutParentUserInput = {
   id?: string
   displayName: string
@@ -685,6 +774,10 @@ export type JuniorProfileCreateWithoutParentUserInput = {
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  readingProgress?: Prisma.JuniorReadingProgressCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionCreateNestedManyWithoutJuniorInput
 }
 
 export type JuniorProfileUncheckedCreateWithoutParentUserInput = {
@@ -703,6 +796,10 @@ export type JuniorProfileUncheckedCreateWithoutParentUserInput = {
   archivedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftUncheckedCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionUncheckedCreateNestedManyWithoutJuniorInput
 }
 
 export type JuniorProfileCreateOrConnectWithoutParentUserInput = {
@@ -753,6 +850,422 @@ export type JuniorProfileScalarWhereInput = {
   parentUserId?: Prisma.StringFilter<"JuniorProfile"> | string
 }
 
+export type JuniorProfileCreateWithoutReadingProgressInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUser: Prisma.UserCreateNestedOneWithoutJuniorProfilesInput
+  bookmarks?: Prisma.JuniorBookmarkCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileUncheckedCreateWithoutReadingProgressInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUserId: string
+  bookmarks?: Prisma.JuniorBookmarkUncheckedCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftUncheckedCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionUncheckedCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileCreateOrConnectWithoutReadingProgressInput = {
+  where: Prisma.JuniorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutReadingProgressInput, Prisma.JuniorProfileUncheckedCreateWithoutReadingProgressInput>
+}
+
+export type JuniorProfileUpsertWithoutReadingProgressInput = {
+  update: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutReadingProgressInput, Prisma.JuniorProfileUncheckedUpdateWithoutReadingProgressInput>
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutReadingProgressInput, Prisma.JuniorProfileUncheckedCreateWithoutReadingProgressInput>
+  where?: Prisma.JuniorProfileWhereInput
+}
+
+export type JuniorProfileUpdateToOneWithWhereWithoutReadingProgressInput = {
+  where?: Prisma.JuniorProfileWhereInput
+  data: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutReadingProgressInput, Prisma.JuniorProfileUncheckedUpdateWithoutReadingProgressInput>
+}
+
+export type JuniorProfileUpdateWithoutReadingProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUser?: Prisma.UserUpdateOneRequiredWithoutJuniorProfilesNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileUncheckedUpdateWithoutReadingProgressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  bookmarks?: Prisma.JuniorBookmarkUncheckedUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUncheckedUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUncheckedUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileCreateWithoutBookmarksInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUser: Prisma.UserCreateNestedOneWithoutJuniorProfilesInput
+  readingProgress?: Prisma.JuniorReadingProgressCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileUncheckedCreateWithoutBookmarksInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUserId: string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftUncheckedCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionUncheckedCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileCreateOrConnectWithoutBookmarksInput = {
+  where: Prisma.JuniorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutBookmarksInput, Prisma.JuniorProfileUncheckedCreateWithoutBookmarksInput>
+}
+
+export type JuniorProfileUpsertWithoutBookmarksInput = {
+  update: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutBookmarksInput, Prisma.JuniorProfileUncheckedUpdateWithoutBookmarksInput>
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutBookmarksInput, Prisma.JuniorProfileUncheckedCreateWithoutBookmarksInput>
+  where?: Prisma.JuniorProfileWhereInput
+}
+
+export type JuniorProfileUpdateToOneWithWhereWithoutBookmarksInput = {
+  where?: Prisma.JuniorProfileWhereInput
+  data: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutBookmarksInput, Prisma.JuniorProfileUncheckedUpdateWithoutBookmarksInput>
+}
+
+export type JuniorProfileUpdateWithoutBookmarksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUser?: Prisma.UserUpdateOneRequiredWithoutJuniorProfilesNestedInput
+  readingProgress?: Prisma.JuniorReadingProgressUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileUncheckedUpdateWithoutBookmarksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUncheckedUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUncheckedUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileCreateWithoutDraftsInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUser: Prisma.UserCreateNestedOneWithoutJuniorProfilesInput
+  readingProgress?: Prisma.JuniorReadingProgressCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileUncheckedCreateWithoutDraftsInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUserId: string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedCreateNestedManyWithoutJuniorInput
+  submissions?: Prisma.JuniorSubmissionUncheckedCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileCreateOrConnectWithoutDraftsInput = {
+  where: Prisma.JuniorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutDraftsInput, Prisma.JuniorProfileUncheckedCreateWithoutDraftsInput>
+}
+
+export type JuniorProfileUpsertWithoutDraftsInput = {
+  update: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutDraftsInput, Prisma.JuniorProfileUncheckedUpdateWithoutDraftsInput>
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutDraftsInput, Prisma.JuniorProfileUncheckedCreateWithoutDraftsInput>
+  where?: Prisma.JuniorProfileWhereInput
+}
+
+export type JuniorProfileUpdateToOneWithWhereWithoutDraftsInput = {
+  where?: Prisma.JuniorProfileWhereInput
+  data: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutDraftsInput, Prisma.JuniorProfileUncheckedUpdateWithoutDraftsInput>
+}
+
+export type JuniorProfileUpdateWithoutDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUser?: Prisma.UserUpdateOneRequiredWithoutJuniorProfilesNestedInput
+  readingProgress?: Prisma.JuniorReadingProgressUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileUncheckedUpdateWithoutDraftsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUncheckedUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileCreateWithoutSubmissionsInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUser: Prisma.UserCreateNestedOneWithoutJuniorProfilesInput
+  readingProgress?: Prisma.JuniorReadingProgressCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileUncheckedCreateWithoutSubmissionsInput = {
+  id?: string
+  displayName: string
+  avatar?: string | null
+  age: number
+  readingLevel?: string
+  theme?: string
+  booksRead?: number
+  storiesWritten?: number
+  readingMinutes?: number
+  currentBookId?: string | null
+  currentChapterId?: string | null
+  streak?: number
+  archivedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  parentUserId: string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedCreateNestedManyWithoutJuniorInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedCreateNestedManyWithoutJuniorInput
+  drafts?: Prisma.JuniorDraftUncheckedCreateNestedManyWithoutJuniorInput
+}
+
+export type JuniorProfileCreateOrConnectWithoutSubmissionsInput = {
+  where: Prisma.JuniorProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutSubmissionsInput, Prisma.JuniorProfileUncheckedCreateWithoutSubmissionsInput>
+}
+
+export type JuniorProfileUpsertWithoutSubmissionsInput = {
+  update: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutSubmissionsInput, Prisma.JuniorProfileUncheckedUpdateWithoutSubmissionsInput>
+  create: Prisma.XOR<Prisma.JuniorProfileCreateWithoutSubmissionsInput, Prisma.JuniorProfileUncheckedCreateWithoutSubmissionsInput>
+  where?: Prisma.JuniorProfileWhereInput
+}
+
+export type JuniorProfileUpdateToOneWithWhereWithoutSubmissionsInput = {
+  where?: Prisma.JuniorProfileWhereInput
+  data: Prisma.XOR<Prisma.JuniorProfileUpdateWithoutSubmissionsInput, Prisma.JuniorProfileUncheckedUpdateWithoutSubmissionsInput>
+}
+
+export type JuniorProfileUpdateWithoutSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUser?: Prisma.UserUpdateOneRequiredWithoutJuniorProfilesNestedInput
+  readingProgress?: Prisma.JuniorReadingProgressUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUpdateManyWithoutJuniorNestedInput
+}
+
+export type JuniorProfileUncheckedUpdateWithoutSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  age?: Prisma.IntFieldUpdateOperationsInput | number
+  readingLevel?: Prisma.StringFieldUpdateOperationsInput | string
+  theme?: Prisma.StringFieldUpdateOperationsInput | string
+  booksRead?: Prisma.IntFieldUpdateOperationsInput | number
+  storiesWritten?: Prisma.IntFieldUpdateOperationsInput | number
+  readingMinutes?: Prisma.IntFieldUpdateOperationsInput | number
+  currentBookId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentChapterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streak?: Prisma.IntFieldUpdateOperationsInput | number
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  parentUserId?: Prisma.StringFieldUpdateOperationsInput | string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUncheckedUpdateManyWithoutJuniorNestedInput
+}
+
 export type JuniorProfileCreateManyParentUserInput = {
   id?: string
   displayName: string
@@ -787,6 +1300,10 @@ export type JuniorProfileUpdateWithoutParentUserInput = {
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readingProgress?: Prisma.JuniorReadingProgressUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUpdateManyWithoutJuniorNestedInput
 }
 
 export type JuniorProfileUncheckedUpdateWithoutParentUserInput = {
@@ -805,6 +1322,10 @@ export type JuniorProfileUncheckedUpdateWithoutParentUserInput = {
   archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readingProgress?: Prisma.JuniorReadingProgressUncheckedUpdateManyWithoutJuniorNestedInput
+  bookmarks?: Prisma.JuniorBookmarkUncheckedUpdateManyWithoutJuniorNestedInput
+  drafts?: Prisma.JuniorDraftUncheckedUpdateManyWithoutJuniorNestedInput
+  submissions?: Prisma.JuniorSubmissionUncheckedUpdateManyWithoutJuniorNestedInput
 }
 
 export type JuniorProfileUncheckedUpdateManyWithoutParentUserInput = {
@@ -826,6 +1347,62 @@ export type JuniorProfileUncheckedUpdateManyWithoutParentUserInput = {
 }
 
 
+/**
+ * Count Type JuniorProfileCountOutputType
+ */
+
+export type JuniorProfileCountOutputType = {
+  readingProgress: number
+  bookmarks: number
+  drafts: number
+  submissions: number
+}
+
+export type JuniorProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  readingProgress?: boolean | JuniorProfileCountOutputTypeCountReadingProgressArgs
+  bookmarks?: boolean | JuniorProfileCountOutputTypeCountBookmarksArgs
+  drafts?: boolean | JuniorProfileCountOutputTypeCountDraftsArgs
+  submissions?: boolean | JuniorProfileCountOutputTypeCountSubmissionsArgs
+}
+
+/**
+ * JuniorProfileCountOutputType without action
+ */
+export type JuniorProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JuniorProfileCountOutputType
+   */
+  select?: Prisma.JuniorProfileCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * JuniorProfileCountOutputType without action
+ */
+export type JuniorProfileCountOutputTypeCountReadingProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JuniorReadingProgressWhereInput
+}
+
+/**
+ * JuniorProfileCountOutputType without action
+ */
+export type JuniorProfileCountOutputTypeCountBookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JuniorBookmarkWhereInput
+}
+
+/**
+ * JuniorProfileCountOutputType without action
+ */
+export type JuniorProfileCountOutputTypeCountDraftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JuniorDraftWhereInput
+}
+
+/**
+ * JuniorProfileCountOutputType without action
+ */
+export type JuniorProfileCountOutputTypeCountSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.JuniorSubmissionWhereInput
+}
+
 
 export type JuniorProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -845,6 +1422,11 @@ export type JuniorProfileSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updatedAt?: boolean
   parentUserId?: boolean
   parentUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  readingProgress?: boolean | Prisma.JuniorProfile$readingProgressArgs<ExtArgs>
+  bookmarks?: boolean | Prisma.JuniorProfile$bookmarksArgs<ExtArgs>
+  drafts?: boolean | Prisma.JuniorProfile$draftsArgs<ExtArgs>
+  submissions?: boolean | Prisma.JuniorProfile$submissionsArgs<ExtArgs>
+  _count?: boolean | Prisma.JuniorProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["juniorProfile"]>
 
 export type JuniorProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -909,6 +1491,11 @@ export type JuniorProfileSelectScalar = {
 export type JuniorProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "displayName" | "avatar" | "age" | "readingLevel" | "theme" | "booksRead" | "storiesWritten" | "readingMinutes" | "currentBookId" | "currentChapterId" | "streak" | "archivedAt" | "createdAt" | "updatedAt" | "parentUserId", ExtArgs["result"]["juniorProfile"]>
 export type JuniorProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   parentUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  readingProgress?: boolean | Prisma.JuniorProfile$readingProgressArgs<ExtArgs>
+  bookmarks?: boolean | Prisma.JuniorProfile$bookmarksArgs<ExtArgs>
+  drafts?: boolean | Prisma.JuniorProfile$draftsArgs<ExtArgs>
+  submissions?: boolean | Prisma.JuniorProfile$submissionsArgs<ExtArgs>
+  _count?: boolean | Prisma.JuniorProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type JuniorProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   parentUser?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -921,6 +1508,10 @@ export type $JuniorProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "JuniorProfile"
   objects: {
     parentUser: Prisma.$UserPayload<ExtArgs>
+    readingProgress: Prisma.$JuniorReadingProgressPayload<ExtArgs>[]
+    bookmarks: Prisma.$JuniorBookmarkPayload<ExtArgs>[]
+    drafts: Prisma.$JuniorDraftPayload<ExtArgs>[]
+    submissions: Prisma.$JuniorSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1334,6 +1925,10 @@ readonly fields: JuniorProfileFieldRefs;
 export interface Prisma__JuniorProfileClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   parentUser<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  readingProgress<T extends Prisma.JuniorProfile$readingProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JuniorProfile$readingProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuniorReadingProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bookmarks<T extends Prisma.JuniorProfile$bookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JuniorProfile$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuniorBookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  drafts<T extends Prisma.JuniorProfile$draftsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JuniorProfile$draftsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuniorDraftPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  submissions<T extends Prisma.JuniorProfile$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.JuniorProfile$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuniorSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1777,6 +2372,102 @@ export type JuniorProfileDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many JuniorProfiles to delete.
    */
   limit?: number
+}
+
+/**
+ * JuniorProfile.readingProgress
+ */
+export type JuniorProfile$readingProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JuniorReadingProgress
+   */
+  select?: Prisma.JuniorReadingProgressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JuniorReadingProgress
+   */
+  omit?: Prisma.JuniorReadingProgressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JuniorReadingProgressInclude<ExtArgs> | null
+  where?: Prisma.JuniorReadingProgressWhereInput
+  orderBy?: Prisma.JuniorReadingProgressOrderByWithRelationInput | Prisma.JuniorReadingProgressOrderByWithRelationInput[]
+  cursor?: Prisma.JuniorReadingProgressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JuniorReadingProgressScalarFieldEnum | Prisma.JuniorReadingProgressScalarFieldEnum[]
+}
+
+/**
+ * JuniorProfile.bookmarks
+ */
+export type JuniorProfile$bookmarksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JuniorBookmark
+   */
+  select?: Prisma.JuniorBookmarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JuniorBookmark
+   */
+  omit?: Prisma.JuniorBookmarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JuniorBookmarkInclude<ExtArgs> | null
+  where?: Prisma.JuniorBookmarkWhereInput
+  orderBy?: Prisma.JuniorBookmarkOrderByWithRelationInput | Prisma.JuniorBookmarkOrderByWithRelationInput[]
+  cursor?: Prisma.JuniorBookmarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JuniorBookmarkScalarFieldEnum | Prisma.JuniorBookmarkScalarFieldEnum[]
+}
+
+/**
+ * JuniorProfile.drafts
+ */
+export type JuniorProfile$draftsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JuniorDraft
+   */
+  select?: Prisma.JuniorDraftSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JuniorDraft
+   */
+  omit?: Prisma.JuniorDraftOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JuniorDraftInclude<ExtArgs> | null
+  where?: Prisma.JuniorDraftWhereInput
+  orderBy?: Prisma.JuniorDraftOrderByWithRelationInput | Prisma.JuniorDraftOrderByWithRelationInput[]
+  cursor?: Prisma.JuniorDraftWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JuniorDraftScalarFieldEnum | Prisma.JuniorDraftScalarFieldEnum[]
+}
+
+/**
+ * JuniorProfile.submissions
+ */
+export type JuniorProfile$submissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the JuniorSubmission
+   */
+  select?: Prisma.JuniorSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the JuniorSubmission
+   */
+  omit?: Prisma.JuniorSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.JuniorSubmissionInclude<ExtArgs> | null
+  where?: Prisma.JuniorSubmissionWhereInput
+  orderBy?: Prisma.JuniorSubmissionOrderByWithRelationInput | Prisma.JuniorSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.JuniorSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.JuniorSubmissionScalarFieldEnum | Prisma.JuniorSubmissionScalarFieldEnum[]
 }
 
 /**

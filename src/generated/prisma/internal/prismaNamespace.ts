@@ -452,7 +452,11 @@ export const ModelName = {
   ReelComment: 'ReelComment',
   IdempotencyKey: 'IdempotencyKey',
   ParentPin: 'ParentPin',
-  JuniorProfile: 'JuniorProfile'
+  JuniorProfile: 'JuniorProfile',
+  JuniorReadingProgress: 'JuniorReadingProgress',
+  JuniorBookmark: 'JuniorBookmark',
+  JuniorDraft: 'JuniorDraft',
+  JuniorSubmission: 'JuniorSubmission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -468,7 +472,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile"
+    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile" | "juniorReadingProgress" | "juniorBookmark" | "juniorDraft" | "juniorSubmission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4616,6 +4620,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JuniorReadingProgress: {
+      payload: Prisma.$JuniorReadingProgressPayload<ExtArgs>
+      fields: Prisma.JuniorReadingProgressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JuniorReadingProgressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JuniorReadingProgressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
+        }
+        findFirst: {
+          args: Prisma.JuniorReadingProgressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JuniorReadingProgressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
+        }
+        findMany: {
+          args: Prisma.JuniorReadingProgressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>[]
+        }
+        create: {
+          args: Prisma.JuniorReadingProgressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
+        }
+        createMany: {
+          args: Prisma.JuniorReadingProgressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JuniorReadingProgressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>[]
+        }
+        delete: {
+          args: Prisma.JuniorReadingProgressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
+        }
+        update: {
+          args: Prisma.JuniorReadingProgressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
+        }
+        deleteMany: {
+          args: Prisma.JuniorReadingProgressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JuniorReadingProgressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JuniorReadingProgressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>[]
+        }
+        upsert: {
+          args: Prisma.JuniorReadingProgressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
+        }
+        aggregate: {
+          args: Prisma.JuniorReadingProgressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorReadingProgress>
+        }
+        groupBy: {
+          args: Prisma.JuniorReadingProgressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorReadingProgressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JuniorReadingProgressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorReadingProgressCountAggregateOutputType> | number
+        }
+      }
+    }
+    JuniorBookmark: {
+      payload: Prisma.$JuniorBookmarkPayload<ExtArgs>
+      fields: Prisma.JuniorBookmarkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JuniorBookmarkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JuniorBookmarkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>
+        }
+        findFirst: {
+          args: Prisma.JuniorBookmarkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JuniorBookmarkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>
+        }
+        findMany: {
+          args: Prisma.JuniorBookmarkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>[]
+        }
+        create: {
+          args: Prisma.JuniorBookmarkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>
+        }
+        createMany: {
+          args: Prisma.JuniorBookmarkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JuniorBookmarkCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>[]
+        }
+        delete: {
+          args: Prisma.JuniorBookmarkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>
+        }
+        update: {
+          args: Prisma.JuniorBookmarkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>
+        }
+        deleteMany: {
+          args: Prisma.JuniorBookmarkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JuniorBookmarkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JuniorBookmarkUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>[]
+        }
+        upsert: {
+          args: Prisma.JuniorBookmarkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBookmarkPayload>
+        }
+        aggregate: {
+          args: Prisma.JuniorBookmarkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorBookmark>
+        }
+        groupBy: {
+          args: Prisma.JuniorBookmarkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorBookmarkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JuniorBookmarkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorBookmarkCountAggregateOutputType> | number
+        }
+      }
+    }
+    JuniorDraft: {
+      payload: Prisma.$JuniorDraftPayload<ExtArgs>
+      fields: Prisma.JuniorDraftFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JuniorDraftFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JuniorDraftFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>
+        }
+        findFirst: {
+          args: Prisma.JuniorDraftFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JuniorDraftFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>
+        }
+        findMany: {
+          args: Prisma.JuniorDraftFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>[]
+        }
+        create: {
+          args: Prisma.JuniorDraftCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>
+        }
+        createMany: {
+          args: Prisma.JuniorDraftCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JuniorDraftCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>[]
+        }
+        delete: {
+          args: Prisma.JuniorDraftDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>
+        }
+        update: {
+          args: Prisma.JuniorDraftUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>
+        }
+        deleteMany: {
+          args: Prisma.JuniorDraftDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JuniorDraftUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JuniorDraftUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>[]
+        }
+        upsert: {
+          args: Prisma.JuniorDraftUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorDraftPayload>
+        }
+        aggregate: {
+          args: Prisma.JuniorDraftAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorDraft>
+        }
+        groupBy: {
+          args: Prisma.JuniorDraftGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorDraftGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JuniorDraftCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorDraftCountAggregateOutputType> | number
+        }
+      }
+    }
+    JuniorSubmission: {
+      payload: Prisma.$JuniorSubmissionPayload<ExtArgs>
+      fields: Prisma.JuniorSubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JuniorSubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JuniorSubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.JuniorSubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JuniorSubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.JuniorSubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.JuniorSubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.JuniorSubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JuniorSubmissionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>[]
+        }
+        delete: {
+          args: Prisma.JuniorSubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>
+        }
+        update: {
+          args: Prisma.JuniorSubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.JuniorSubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JuniorSubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JuniorSubmissionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>[]
+        }
+        upsert: {
+          args: Prisma.JuniorSubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorSubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.JuniorSubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorSubmission>
+        }
+        groupBy: {
+          args: Prisma.JuniorSubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorSubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JuniorSubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorSubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5438,12 +5738,79 @@ export const JuniorProfileScalarFieldEnum = {
 export type JuniorProfileScalarFieldEnum = (typeof JuniorProfileScalarFieldEnum)[keyof typeof JuniorProfileScalarFieldEnum]
 
 
+export const JuniorReadingProgressScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  currentPage: 'currentPage',
+  totalPages: 'totalPages',
+  completed: 'completed',
+  lastReadAt: 'lastReadAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorReadingProgressScalarFieldEnum = (typeof JuniorReadingProgressScalarFieldEnum)[keyof typeof JuniorReadingProgressScalarFieldEnum]
+
+
+export const JuniorBookmarkScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  page: 'page',
+  createdAt: 'createdAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorBookmarkScalarFieldEnum = (typeof JuniorBookmarkScalarFieldEnum)[keyof typeof JuniorBookmarkScalarFieldEnum]
+
+
+export const JuniorDraftScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  chapters: 'chapters',
+  coverImage: 'coverImage',
+  illustrations: 'illustrations',
+  fontSize: 'fontSize',
+  wordCount: 'wordCount',
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorDraftScalarFieldEnum = (typeof JuniorDraftScalarFieldEnum)[keyof typeof JuniorDraftScalarFieldEnum]
+
+
+export const JuniorSubmissionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  chapters: 'chapters',
+  coverImage: 'coverImage',
+  illustrations: 'illustrations',
+  status: 'status',
+  parentFeedback: 'parentFeedback',
+  submittedAt: 'submittedAt',
+  reviewedAt: 'reviewedAt',
+  juniorId: 'juniorId',
+  draftId: 'draftId'
+} as const
+
+export type JuniorSubmissionScalarFieldEnum = (typeof JuniorSubmissionScalarFieldEnum)[keyof typeof JuniorSubmissionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -5460,6 +5827,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -5528,6 +5904,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
  * Reference to a field of type 'Float[]'
  */
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 /**
@@ -5737,6 +6127,10 @@ export type GlobalOmitConfig = {
   idempotencyKey?: Prisma.IdempotencyKeyOmit
   parentPin?: Prisma.ParentPinOmit
   juniorProfile?: Prisma.JuniorProfileOmit
+  juniorReadingProgress?: Prisma.JuniorReadingProgressOmit
+  juniorBookmark?: Prisma.JuniorBookmarkOmit
+  juniorDraft?: Prisma.JuniorDraftOmit
+  juniorSubmission?: Prisma.JuniorSubmissionOmit
 }
 
 /* Types for Logging */

@@ -995,4 +995,82 @@ model JuniorProfile {
   parentUser   User   @relation(fields: [parentUserId], references: [id], onDelete: Cascade)
 
   @@index([parentUserId])
+
+  readingProgress JuniorReadingProgress[]
+  bookmarks       JuniorBookmark[]
+  drafts          JuniorDraft[]
+  submissions     JuniorSubmission[]
+}
+
+// ===========================
+// LIKHAVERSE JUNIOR — Phase 4 (Reading & Writing)
+// ===========================
+
+model JuniorReadingProgress {
+  id          String   @id @default(uuid())
+  storyId     String
+  currentPage Int      @default(0)
+  totalPages  Int      @default(0)
+  completed   Boolean  @default(false)
+  lastReadAt  DateTime @default(now())
+
+  juniorId String
+  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@unique([juniorId, storyId])
+  @@index([juniorId])
+}
+
+model JuniorBookmark {
+  id        String   @id @default(uuid())
+  storyId   String
+  page      Int
+  createdAt DateTime @default(now())
+
+  juniorId String
+  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@index([juniorId, storyId])
+  @@index([juniorId])
+}
+
+model JuniorDraft {
+  id            String   @id @default(uuid())
+  title         String
+  content       String?
+  chapters      Json?    // array of { title, content }
+  coverImage    String?
+  illustrations Json?    // array of { url, caption }
+  fontSize      Int      @default(24)
+  wordCount     Int      @default(0)
+  updatedAt     DateTime @updatedAt
+  createdAt     DateTime @default(now())
+
+  juniorId String
+  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@index([juniorId])
+  @@index([updatedAt])
+}
+
+model JuniorSubmission {
+  id             String    @id @default(uuid())
+  title          String
+  content        String?
+  chapters       Json?     // array of { title, content }
+  coverImage     String?
+  illustrations  Json?     // array of { url, caption }
+  status         String    @default("PENDING") // PENDING | APPROVED | REJECTED
+  parentFeedback String?
+  submittedAt    DateTime  @default(now())
+  reviewedAt     DateTime?
+
+  juniorId String
+  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
+
+  draftId String?
+  // no relation to JuniorDraft — draft may be deleted after submission
+
+  @@index([juniorId, status])
+  @@index([juniorId])
 }
