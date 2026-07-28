@@ -106,10 +106,7 @@ export const ModelName = {
   ReelComment: 'ReelComment',
   IdempotencyKey: 'IdempotencyKey',
   ParentPin: 'ParentPin',
-  JuniorProfile: 'JuniorProfile',
-  JuniorReadingProgress: 'JuniorReadingProgress',
-  JuniorBadge: 'JuniorBadge',
-  JuniorStory: 'JuniorStory'
+  JuniorProfile: 'JuniorProfile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -880,10 +877,10 @@ export type IdempotencyKeyScalarFieldEnum = (typeof IdempotencyKeyScalarFieldEnu
 
 export const ParentPinScalarFieldEnum = {
   id: 'id',
-  pin: 'pin',
+  hashedPin: 'hashedPin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  parentUserId: 'parentUserId'
 } as const
 
 export type ParentPinScalarFieldEnum = (typeof ParentPinScalarFieldEnum)[keyof typeof ParentPinScalarFieldEnum]
@@ -891,64 +888,24 @@ export type ParentPinScalarFieldEnum = (typeof ParentPinScalarFieldEnum)[keyof t
 
 export const JuniorProfileScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  displayName: 'displayName',
   avatar: 'avatar',
   age: 'age',
   readingLevel: 'readingLevel',
-  favoriteGenres: 'favoriteGenres',
-  pinCode: 'pinCode',
+  theme: 'theme',
+  booksRead: 'booksRead',
+  storiesWritten: 'storiesWritten',
+  readingMinutes: 'readingMinutes',
+  currentBookId: 'currentBookId',
+  currentChapterId: 'currentChapterId',
+  streak: 'streak',
+  archivedAt: 'archivedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  parentId: 'parentId'
+  parentUserId: 'parentUserId'
 } as const
 
 export type JuniorProfileScalarFieldEnum = (typeof JuniorProfileScalarFieldEnum)[keyof typeof JuniorProfileScalarFieldEnum]
-
-
-export const JuniorReadingProgressScalarFieldEnum = {
-  id: 'id',
-  booksRead: 'booksRead',
-  readingTimeMinutes: 'readingTimeMinutes',
-  storiesWritten: 'storiesWritten',
-  currentBookTitle: 'currentBookTitle',
-  currentBookProgress: 'currentBookProgress',
-  lastReadAt: 'lastReadAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  juniorId: 'juniorId'
-} as const
-
-export type JuniorReadingProgressScalarFieldEnum = (typeof JuniorReadingProgressScalarFieldEnum)[keyof typeof JuniorReadingProgressScalarFieldEnum]
-
-
-export const JuniorBadgeScalarFieldEnum = {
-  id: 'id',
-  badgeType: 'badgeType',
-  title: 'title',
-  description: 'description',
-  icon: 'icon',
-  awardedAt: 'awardedAt',
-  juniorId: 'juniorId'
-} as const
-
-export type JuniorBadgeScalarFieldEnum = (typeof JuniorBadgeScalarFieldEnum)[keyof typeof JuniorBadgeScalarFieldEnum]
-
-
-export const JuniorStoryScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  content: 'content',
-  heroType: 'heroType',
-  setting: 'setting',
-  plotType: 'plotType',
-  wordCount: 'wordCount',
-  isPublished: 'isPublished',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  juniorId: 'juniorId'
-} as const
-
-export type JuniorStoryScalarFieldEnum = (typeof JuniorStoryScalarFieldEnum)[keyof typeof JuniorStoryScalarFieldEnum]
 
 
 export const SortOrder = {

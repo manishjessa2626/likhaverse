@@ -1,6 +1,24 @@
 import { NextResponse } from "next/server"
-import { prisma } from "@/lib/prisma"
 import { apiError, getSessionOrThrow } from "@/lib/api-auth"
+import {
+  getJuniorProfileById,
+  updateJuniorProfile,
+  archiveJuniorProfile,
+} from "@/lib/junior-service"
+
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ juniorId: string }> },
+) {
+  try {
+    const { juniorId } = await params
+    const session = await getSessionOrThrow()
+    const profile = await getJuniorProfileById(juniorId, session.user.id)
+    return NextResponse.json(profile)
+  } catch (error) {
+    return apiError(error, "Failed to fetch junior profile")
+  }
+}
 
 export async function PATCH(
   request: Request,
@@ -10,29 +28,24 @@ export async function PATCH(
     const { juniorId } = await params
     const session = await getSessionOrThrow()
     const body = await request.json()
-    const { name, age, readingLevel, favoriteGenres, avatar, pinCode } = body
 
-    const junior = await prisma.juniorProfile.findUnique({ where: { id: juniorId } })
-
-    if (!junior || junior.parentId !== session.user.id) {
-      return NextResponse.json({ error: "Junior profile not found" }, { status: 404 })
-    }
-
-    const updated = await prisma.juniorProfile.update({
-      where: { id: juniorId },
-      data: {
-        ...(name !== undefined && { name }),
-        ...(age !== undefined && { age }),
-        ...(readingLevel !== undefined && { readingLevel }),
-        ...(favoriteGenres !== undefined && { favoriteGenres }),
-        ...(avatar !== undefined && { avatar }),
-        ...(pinCode !== undefined && { pinCode }),
-      },
-      include: { readingProgress: true },
-    })
-
+    const updated = await updateJuniorProfile(juniorId, session.user.id, body)
     return NextResponse.json(updated)
   } catch (error) {
     return apiError(error, "Failed to update junior profile")
+  }
+}
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ juniorId: string }> },
+) {
+  try {
+    const { juniorId } = await params
+    const session = await getSessionOrThrow()
+    await archiveJuniorProfile(juniorId, session.user.id)
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    return apiError(error, "Failed to archive junior profile")
   }
 }

@@ -754,8 +754,8 @@ export type UserCreateInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -834,8 +834,8 @@ export type UserUncheckedCreateInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUpdateInput = {
@@ -914,8 +914,8 @@ export type UserUpdateInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -994,8 +994,8 @@ export type UserUncheckedUpdateInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -2019,8 +2019,8 @@ export type UserCreateWithoutPaymentsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -2098,8 +2098,8 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2193,8 +2193,8 @@ export type UserUpdateWithoutPaymentsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -2272,8 +2272,8 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -2351,8 +2351,8 @@ export type UserCreateWithoutAccountsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -2430,8 +2430,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -2525,8 +2525,8 @@ export type UserUpdateWithoutAccountsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -2604,8 +2604,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStoriesInput = {
@@ -2683,8 +2683,8 @@ export type UserCreateWithoutStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStoriesInput = {
@@ -2762,8 +2762,8 @@ export type UserUncheckedCreateWithoutStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStoriesInput = {
@@ -2857,8 +2857,8 @@ export type UserUpdateWithoutStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoriesInput = {
@@ -2936,8 +2936,8 @@ export type UserUncheckedUpdateWithoutStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutChapterUnlocksInput = {
@@ -3015,8 +3015,8 @@ export type UserCreateWithoutChapterUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutChapterUnlocksInput = {
@@ -3094,8 +3094,8 @@ export type UserUncheckedCreateWithoutChapterUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutChapterUnlocksInput = {
@@ -3189,8 +3189,8 @@ export type UserUpdateWithoutChapterUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChapterUnlocksInput = {
@@ -3268,8 +3268,8 @@ export type UserUncheckedUpdateWithoutChapterUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutWalletTransactionsInput = {
@@ -3347,8 +3347,8 @@ export type UserCreateWithoutWalletTransactionsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutWalletTransactionsInput = {
@@ -3426,8 +3426,8 @@ export type UserUncheckedCreateWithoutWalletTransactionsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutWalletTransactionsInput = {
@@ -3521,8 +3521,8 @@ export type UserUpdateWithoutWalletTransactionsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalletTransactionsInput = {
@@ -3600,8 +3600,8 @@ export type UserUncheckedUpdateWithoutWalletTransactionsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutDailyRewardsInput = {
@@ -3679,8 +3679,8 @@ export type UserCreateWithoutDailyRewardsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutDailyRewardsInput = {
@@ -3758,8 +3758,8 @@ export type UserUncheckedCreateWithoutDailyRewardsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutDailyRewardsInput = {
@@ -3853,8 +3853,8 @@ export type UserUpdateWithoutDailyRewardsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyRewardsInput = {
@@ -3932,8 +3932,8 @@ export type UserUncheckedUpdateWithoutDailyRewardsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutAdUnlocksInput = {
@@ -4011,8 +4011,8 @@ export type UserCreateWithoutAdUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutAdUnlocksInput = {
@@ -4090,8 +4090,8 @@ export type UserUncheckedCreateWithoutAdUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutAdUnlocksInput = {
@@ -4185,8 +4185,8 @@ export type UserUpdateWithoutAdUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdUnlocksInput = {
@@ -4264,8 +4264,8 @@ export type UserUncheckedUpdateWithoutAdUnlocksInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
@@ -4343,8 +4343,8 @@ export type UserCreateWithoutCharactersInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
@@ -4422,8 +4422,8 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -4517,8 +4517,8 @@ export type UserUpdateWithoutCharactersInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
@@ -4596,8 +4596,8 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutAiGenerationsInput = {
@@ -4675,8 +4675,8 @@ export type UserCreateWithoutAiGenerationsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutAiGenerationsInput = {
@@ -4754,8 +4754,8 @@ export type UserUncheckedCreateWithoutAiGenerationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutAiGenerationsInput = {
@@ -4849,8 +4849,8 @@ export type UserUpdateWithoutAiGenerationsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAiGenerationsInput = {
@@ -4928,8 +4928,8 @@ export type UserUncheckedUpdateWithoutAiGenerationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStudioApplicationsInput = {
@@ -5007,8 +5007,8 @@ export type UserCreateWithoutStudioApplicationsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStudioApplicationsInput = {
@@ -5086,8 +5086,8 @@ export type UserUncheckedCreateWithoutStudioApplicationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStudioApplicationsInput = {
@@ -5181,8 +5181,8 @@ export type UserUpdateWithoutStudioApplicationsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStudioApplicationsInput = {
@@ -5260,8 +5260,8 @@ export type UserUncheckedUpdateWithoutStudioApplicationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutConversationLinksInput = {
@@ -5339,8 +5339,8 @@ export type UserCreateWithoutConversationLinksInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationLinksInput = {
@@ -5418,8 +5418,8 @@ export type UserUncheckedCreateWithoutConversationLinksInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationLinksInput = {
@@ -5513,8 +5513,8 @@ export type UserUpdateWithoutConversationLinksInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationLinksInput = {
@@ -5592,8 +5592,8 @@ export type UserUncheckedUpdateWithoutConversationLinksInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -5671,8 +5671,8 @@ export type UserCreateWithoutSentMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -5750,8 +5750,8 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -5834,8 +5834,8 @@ export type UserCreateWithoutReceivedMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReceivedMessagesInput = {
@@ -5913,8 +5913,8 @@ export type UserUncheckedCreateWithoutReceivedMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReceivedMessagesInput = {
@@ -6008,8 +6008,8 @@ export type UserUpdateWithoutSentMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -6087,8 +6087,8 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUpsertWithoutReceivedMessagesInput = {
@@ -6177,8 +6177,8 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
@@ -6256,8 +6256,8 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
@@ -6335,8 +6335,8 @@ export type UserCreateWithoutCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -6414,8 +6414,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -6509,8 +6509,8 @@ export type UserUpdateWithoutCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -6588,8 +6588,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutFollowingInput = {
@@ -6667,8 +6667,8 @@ export type UserCreateWithoutFollowingInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowingInput = {
@@ -6746,8 +6746,8 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowingInput = {
@@ -6830,8 +6830,8 @@ export type UserCreateWithoutFollowersInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowersInput = {
@@ -6909,8 +6909,8 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowersInput = {
@@ -7004,8 +7004,8 @@ export type UserUpdateWithoutFollowingInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -7083,8 +7083,8 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUpsertWithoutFollowersInput = {
@@ -7173,8 +7173,8 @@ export type UserUpdateWithoutFollowersInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -7252,8 +7252,8 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutReactionsInput = {
@@ -7331,8 +7331,8 @@ export type UserCreateWithoutReactionsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReactionsInput = {
@@ -7410,8 +7410,8 @@ export type UserUncheckedCreateWithoutReactionsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReactionsInput = {
@@ -7505,8 +7505,8 @@ export type UserUpdateWithoutReactionsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReactionsInput = {
@@ -7584,8 +7584,8 @@ export type UserUncheckedUpdateWithoutReactionsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
@@ -7663,8 +7663,8 @@ export type UserCreateWithoutReportsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
@@ -7742,8 +7742,8 @@ export type UserUncheckedCreateWithoutReportsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -7837,8 +7837,8 @@ export type UserUpdateWithoutReportsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
@@ -7916,8 +7916,8 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutSavesInput = {
@@ -7995,8 +7995,8 @@ export type UserCreateWithoutSavesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutSavesInput = {
@@ -8074,8 +8074,8 @@ export type UserUncheckedCreateWithoutSavesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutSavesInput = {
@@ -8169,8 +8169,8 @@ export type UserUpdateWithoutSavesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavesInput = {
@@ -8248,8 +8248,8 @@ export type UserUncheckedUpdateWithoutSavesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -8327,8 +8327,8 @@ export type UserCreateWithoutNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -8406,8 +8406,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -8490,8 +8490,8 @@ export type UserCreateWithoutActedNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutActedNotificationsInput = {
@@ -8569,8 +8569,8 @@ export type UserUncheckedCreateWithoutActedNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutActedNotificationsInput = {
@@ -8664,8 +8664,8 @@ export type UserUpdateWithoutNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -8743,8 +8743,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUpsertWithoutActedNotificationsInput = {
@@ -8833,8 +8833,8 @@ export type UserUpdateWithoutActedNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActedNotificationsInput = {
@@ -8912,8 +8912,8 @@ export type UserUncheckedUpdateWithoutActedNotificationsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
@@ -8991,8 +8991,8 @@ export type UserCreateWithoutVerificationCodesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
@@ -9070,8 +9070,8 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -9165,8 +9165,8 @@ export type UserUpdateWithoutVerificationCodesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
@@ -9244,8 +9244,8 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStoryViewsInput = {
@@ -9323,8 +9323,8 @@ export type UserCreateWithoutStoryViewsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStoryViewsInput = {
@@ -9402,8 +9402,8 @@ export type UserUncheckedCreateWithoutStoryViewsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStoryViewsInput = {
@@ -9497,8 +9497,8 @@ export type UserUpdateWithoutStoryViewsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryViewsInput = {
@@ -9576,8 +9576,8 @@ export type UserUncheckedUpdateWithoutStoryViewsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutWorldBuildingEntriesInput = {
@@ -9655,8 +9655,8 @@ export type UserCreateWithoutWorldBuildingEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutWorldBuildingEntriesInput = {
@@ -9734,8 +9734,8 @@ export type UserUncheckedCreateWithoutWorldBuildingEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutWorldBuildingEntriesInput = {
@@ -9829,8 +9829,8 @@ export type UserUpdateWithoutWorldBuildingEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorldBuildingEntriesInput = {
@@ -9908,8 +9908,8 @@ export type UserUncheckedUpdateWithoutWorldBuildingEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutEnvironmentStudiosInput = {
@@ -9987,8 +9987,8 @@ export type UserCreateWithoutEnvironmentStudiosInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutEnvironmentStudiosInput = {
@@ -10066,8 +10066,8 @@ export type UserUncheckedCreateWithoutEnvironmentStudiosInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutEnvironmentStudiosInput = {
@@ -10161,8 +10161,8 @@ export type UserUpdateWithoutEnvironmentStudiosInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEnvironmentStudiosInput = {
@@ -10240,8 +10240,8 @@ export type UserUncheckedUpdateWithoutEnvironmentStudiosInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStoryAnalysesInput = {
@@ -10319,8 +10319,8 @@ export type UserCreateWithoutStoryAnalysesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStoryAnalysesInput = {
@@ -10398,8 +10398,8 @@ export type UserUncheckedCreateWithoutStoryAnalysesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStoryAnalysesInput = {
@@ -10493,8 +10493,8 @@ export type UserUpdateWithoutStoryAnalysesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryAnalysesInput = {
@@ -10572,8 +10572,8 @@ export type UserUncheckedUpdateWithoutStoryAnalysesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStoryboardScenesInput = {
@@ -10651,8 +10651,8 @@ export type UserCreateWithoutStoryboardScenesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStoryboardScenesInput = {
@@ -10730,8 +10730,8 @@ export type UserUncheckedCreateWithoutStoryboardScenesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStoryboardScenesInput = {
@@ -10825,8 +10825,8 @@ export type UserUpdateWithoutStoryboardScenesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryboardScenesInput = {
@@ -10904,8 +10904,8 @@ export type UserUncheckedUpdateWithoutStoryboardScenesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStoryLikesInput = {
@@ -10983,8 +10983,8 @@ export type UserCreateWithoutStoryLikesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStoryLikesInput = {
@@ -11062,8 +11062,8 @@ export type UserUncheckedCreateWithoutStoryLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStoryLikesInput = {
@@ -11157,8 +11157,8 @@ export type UserUpdateWithoutStoryLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryLikesInput = {
@@ -11236,8 +11236,8 @@ export type UserUncheckedUpdateWithoutStoryLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutFilmProjectsInput = {
@@ -11315,8 +11315,8 @@ export type UserCreateWithoutFilmProjectsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutFilmProjectsInput = {
@@ -11394,8 +11394,8 @@ export type UserUncheckedCreateWithoutFilmProjectsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutFilmProjectsInput = {
@@ -11489,8 +11489,8 @@ export type UserUpdateWithoutFilmProjectsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFilmProjectsInput = {
@@ -11568,8 +11568,8 @@ export type UserUncheckedUpdateWithoutFilmProjectsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutOwnedClubsInput = {
@@ -11647,8 +11647,8 @@ export type UserCreateWithoutOwnedClubsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedClubsInput = {
@@ -11726,8 +11726,8 @@ export type UserUncheckedCreateWithoutOwnedClubsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedClubsInput = {
@@ -11821,8 +11821,8 @@ export type UserUpdateWithoutOwnedClubsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedClubsInput = {
@@ -11900,8 +11900,8 @@ export type UserUncheckedUpdateWithoutOwnedClubsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutClubMembershipsInput = {
@@ -11979,8 +11979,8 @@ export type UserCreateWithoutClubMembershipsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutClubMembershipsInput = {
@@ -12058,8 +12058,8 @@ export type UserUncheckedCreateWithoutClubMembershipsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutClubMembershipsInput = {
@@ -12153,8 +12153,8 @@ export type UserUpdateWithoutClubMembershipsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClubMembershipsInput = {
@@ -12232,8 +12232,8 @@ export type UserUncheckedUpdateWithoutClubMembershipsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutOwnedChallengesInput = {
@@ -12311,8 +12311,8 @@ export type UserCreateWithoutOwnedChallengesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedChallengesInput = {
@@ -12390,8 +12390,8 @@ export type UserUncheckedCreateWithoutOwnedChallengesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedChallengesInput = {
@@ -12485,8 +12485,8 @@ export type UserUpdateWithoutOwnedChallengesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedChallengesInput = {
@@ -12564,8 +12564,8 @@ export type UserUncheckedUpdateWithoutOwnedChallengesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutChallengeEntriesInput = {
@@ -12643,8 +12643,8 @@ export type UserCreateWithoutChallengeEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutChallengeEntriesInput = {
@@ -12722,8 +12722,8 @@ export type UserUncheckedCreateWithoutChallengeEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutChallengeEntriesInput = {
@@ -12817,8 +12817,8 @@ export type UserUpdateWithoutChallengeEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallengeEntriesInput = {
@@ -12896,8 +12896,8 @@ export type UserUncheckedUpdateWithoutChallengeEntriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutHostedSessionsInput = {
@@ -12975,8 +12975,8 @@ export type UserCreateWithoutHostedSessionsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutHostedSessionsInput = {
@@ -13054,8 +13054,8 @@ export type UserUncheckedCreateWithoutHostedSessionsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutHostedSessionsInput = {
@@ -13149,8 +13149,8 @@ export type UserUpdateWithoutHostedSessionsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHostedSessionsInput = {
@@ -13228,8 +13228,8 @@ export type UserUncheckedUpdateWithoutHostedSessionsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutSessionAttendanceInput = {
@@ -13307,8 +13307,8 @@ export type UserCreateWithoutSessionAttendanceInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionAttendanceInput = {
@@ -13386,8 +13386,8 @@ export type UserUncheckedCreateWithoutSessionAttendanceInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionAttendanceInput = {
@@ -13481,8 +13481,8 @@ export type UserUpdateWithoutSessionAttendanceInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionAttendanceInput = {
@@ -13560,8 +13560,8 @@ export type UserUncheckedUpdateWithoutSessionAttendanceInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutHostedEventsInput = {
@@ -13639,8 +13639,8 @@ export type UserCreateWithoutHostedEventsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutHostedEventsInput = {
@@ -13718,8 +13718,8 @@ export type UserUncheckedCreateWithoutHostedEventsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutHostedEventsInput = {
@@ -13813,8 +13813,8 @@ export type UserUpdateWithoutHostedEventsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHostedEventsInput = {
@@ -13892,8 +13892,8 @@ export type UserUncheckedUpdateWithoutHostedEventsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutEventAttendanceInput = {
@@ -13971,8 +13971,8 @@ export type UserCreateWithoutEventAttendanceInput = {
   hostedEvents?: Prisma.EventCreateNestedManyWithoutHostInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutEventAttendanceInput = {
@@ -14050,8 +14050,8 @@ export type UserUncheckedCreateWithoutEventAttendanceInput = {
   hostedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutHostInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutEventAttendanceInput = {
@@ -14145,8 +14145,8 @@ export type UserUpdateWithoutEventAttendanceInput = {
   hostedEvents?: Prisma.EventUpdateManyWithoutHostNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventAttendanceInput = {
@@ -14224,8 +14224,8 @@ export type UserUncheckedUpdateWithoutEventAttendanceInput = {
   hostedEvents?: Prisma.EventUncheckedUpdateManyWithoutHostNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutFanArtsInput = {
@@ -14303,8 +14303,8 @@ export type UserCreateWithoutFanArtsInput = {
   hostedEvents?: Prisma.EventCreateNestedManyWithoutHostInput
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutFanArtsInput = {
@@ -14382,8 +14382,8 @@ export type UserUncheckedCreateWithoutFanArtsInput = {
   hostedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutHostInput
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutFanArtsInput = {
@@ -14477,8 +14477,8 @@ export type UserUpdateWithoutFanArtsInput = {
   hostedEvents?: Prisma.EventUpdateManyWithoutHostNestedInput
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFanArtsInput = {
@@ -14556,8 +14556,8 @@ export type UserUncheckedUpdateWithoutFanArtsInput = {
   hostedEvents?: Prisma.EventUncheckedUpdateManyWithoutHostNestedInput
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutCharacterVotesInput = {
@@ -14635,8 +14635,8 @@ export type UserCreateWithoutCharacterVotesInput = {
   hostedEvents?: Prisma.EventCreateNestedManyWithoutHostInput
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutCharacterVotesInput = {
@@ -14714,8 +14714,8 @@ export type UserUncheckedCreateWithoutCharacterVotesInput = {
   hostedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutHostInput
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutCharacterVotesInput = {
@@ -14809,8 +14809,8 @@ export type UserUpdateWithoutCharacterVotesInput = {
   hostedEvents?: Prisma.EventUpdateManyWithoutHostNestedInput
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharacterVotesInput = {
@@ -14888,8 +14888,8 @@ export type UserUncheckedUpdateWithoutCharacterVotesInput = {
   hostedEvents?: Prisma.EventUncheckedUpdateManyWithoutHostNestedInput
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutStoryRemindersInput = {
@@ -14967,8 +14967,8 @@ export type UserCreateWithoutStoryRemindersInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutStoryRemindersInput = {
@@ -15046,8 +15046,8 @@ export type UserUncheckedCreateWithoutStoryRemindersInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutStoryRemindersInput = {
@@ -15141,8 +15141,8 @@ export type UserUpdateWithoutStoryRemindersInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryRemindersInput = {
@@ -15220,8 +15220,8 @@ export type UserUncheckedUpdateWithoutStoryRemindersInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutReadingProgressInput = {
@@ -15299,8 +15299,8 @@ export type UserCreateWithoutReadingProgressInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReadingProgressInput = {
@@ -15378,8 +15378,8 @@ export type UserUncheckedCreateWithoutReadingProgressInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReadingProgressInput = {
@@ -15473,8 +15473,8 @@ export type UserUpdateWithoutReadingProgressInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReadingProgressInput = {
@@ -15552,8 +15552,8 @@ export type UserUncheckedUpdateWithoutReadingProgressInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutPostsInput = {
@@ -15631,8 +15631,8 @@ export type UserCreateWithoutPostsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -15710,8 +15710,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -15805,8 +15805,8 @@ export type UserUpdateWithoutPostsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -15884,8 +15884,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutPostLikesInput = {
@@ -15963,8 +15963,8 @@ export type UserCreateWithoutPostLikesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutPostLikesInput = {
@@ -16042,8 +16042,8 @@ export type UserUncheckedCreateWithoutPostLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutPostLikesInput = {
@@ -16137,8 +16137,8 @@ export type UserUpdateWithoutPostLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostLikesInput = {
@@ -16216,8 +16216,8 @@ export type UserUncheckedUpdateWithoutPostLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutPostCommentsInput = {
@@ -16295,8 +16295,8 @@ export type UserCreateWithoutPostCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutPostCommentsInput = {
@@ -16374,8 +16374,8 @@ export type UserUncheckedCreateWithoutPostCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutPostCommentsInput = {
@@ -16469,8 +16469,8 @@ export type UserUpdateWithoutPostCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostCommentsInput = {
@@ -16548,8 +16548,8 @@ export type UserUncheckedUpdateWithoutPostCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutMyDayStoriesInput = {
@@ -16627,8 +16627,8 @@ export type UserCreateWithoutMyDayStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutMyDayStoriesInput = {
@@ -16706,8 +16706,8 @@ export type UserUncheckedCreateWithoutMyDayStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutMyDayStoriesInput = {
@@ -16801,8 +16801,8 @@ export type UserUpdateWithoutMyDayStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMyDayStoriesInput = {
@@ -16880,8 +16880,8 @@ export type UserUncheckedUpdateWithoutMyDayStoriesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutPostSavesInput = {
@@ -16959,8 +16959,8 @@ export type UserCreateWithoutPostSavesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutPostSavesInput = {
@@ -17038,8 +17038,8 @@ export type UserUncheckedCreateWithoutPostSavesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutPostSavesInput = {
@@ -17133,8 +17133,8 @@ export type UserUpdateWithoutPostSavesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostSavesInput = {
@@ -17212,8 +17212,8 @@ export type UserUncheckedUpdateWithoutPostSavesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutReelsInput = {
@@ -17291,8 +17291,8 @@ export type UserCreateWithoutReelsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReelsInput = {
@@ -17370,8 +17370,8 @@ export type UserUncheckedCreateWithoutReelsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReelsInput = {
@@ -17465,8 +17465,8 @@ export type UserUpdateWithoutReelsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReelsInput = {
@@ -17544,8 +17544,8 @@ export type UserUncheckedUpdateWithoutReelsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutReelLikesInput = {
@@ -17623,8 +17623,8 @@ export type UserCreateWithoutReelLikesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReelLikesInput = {
@@ -17702,8 +17702,8 @@ export type UserUncheckedCreateWithoutReelLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReelLikesInput = {
@@ -17797,8 +17797,8 @@ export type UserUpdateWithoutReelLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReelLikesInput = {
@@ -17876,8 +17876,8 @@ export type UserUncheckedUpdateWithoutReelLikesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutReelCommentsInput = {
@@ -17955,8 +17955,8 @@ export type UserCreateWithoutReelCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutReelCommentsInput = {
@@ -18034,8 +18034,8 @@ export type UserUncheckedCreateWithoutReelCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutReelCommentsInput = {
@@ -18129,8 +18129,8 @@ export type UserUpdateWithoutReelCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReelCommentsInput = {
@@ -18208,8 +18208,8 @@ export type UserUncheckedUpdateWithoutReelCommentsInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutParentPinInput = {
@@ -18288,7 +18288,7 @@ export type UserCreateWithoutParentPinInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutParentPinInput = {
@@ -18367,7 +18367,7 @@ export type UserUncheckedCreateWithoutParentPinInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutParentPinInput = {
@@ -18462,7 +18462,7 @@ export type UserUpdateWithoutParentPinInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentPinInput = {
@@ -18541,7 +18541,7 @@ export type UserUncheckedUpdateWithoutParentPinInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 export type UserCreateWithoutJuniorProfilesInput = {
@@ -18620,7 +18620,7 @@ export type UserCreateWithoutJuniorProfilesInput = {
   eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinCreateNestedOneWithoutUserInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
 }
 
 export type UserUncheckedCreateWithoutJuniorProfilesInput = {
@@ -18699,7 +18699,7 @@ export type UserUncheckedCreateWithoutJuniorProfilesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
-  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutUserInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
 }
 
 export type UserCreateOrConnectWithoutJuniorProfilesInput = {
@@ -18794,7 +18794,7 @@ export type UserUpdateWithoutJuniorProfilesInput = {
   eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUpdateOneWithoutUserNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJuniorProfilesInput = {
@@ -18873,7 +18873,7 @@ export type UserUncheckedUpdateWithoutJuniorProfilesInput = {
   eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
-  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutUserNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
 }
 
 

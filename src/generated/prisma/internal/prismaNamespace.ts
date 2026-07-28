@@ -452,10 +452,7 @@ export const ModelName = {
   ReelComment: 'ReelComment',
   IdempotencyKey: 'IdempotencyKey',
   ParentPin: 'ParentPin',
-  JuniorProfile: 'JuniorProfile',
-  JuniorReadingProgress: 'JuniorReadingProgress',
-  JuniorBadge: 'JuniorBadge',
-  JuniorStory: 'JuniorStory'
+  JuniorProfile: 'JuniorProfile'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -471,7 +468,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile" | "juniorReadingProgress" | "juniorBadge" | "juniorStory"
+    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4619,228 +4616,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    JuniorReadingProgress: {
-      payload: Prisma.$JuniorReadingProgressPayload<ExtArgs>
-      fields: Prisma.JuniorReadingProgressFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.JuniorReadingProgressFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.JuniorReadingProgressFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
-        }
-        findFirst: {
-          args: Prisma.JuniorReadingProgressFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.JuniorReadingProgressFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
-        }
-        findMany: {
-          args: Prisma.JuniorReadingProgressFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>[]
-        }
-        create: {
-          args: Prisma.JuniorReadingProgressCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
-        }
-        createMany: {
-          args: Prisma.JuniorReadingProgressCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.JuniorReadingProgressCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>[]
-        }
-        delete: {
-          args: Prisma.JuniorReadingProgressDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
-        }
-        update: {
-          args: Prisma.JuniorReadingProgressUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
-        }
-        deleteMany: {
-          args: Prisma.JuniorReadingProgressDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.JuniorReadingProgressUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.JuniorReadingProgressUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>[]
-        }
-        upsert: {
-          args: Prisma.JuniorReadingProgressUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorReadingProgressPayload>
-        }
-        aggregate: {
-          args: Prisma.JuniorReadingProgressAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorReadingProgress>
-        }
-        groupBy: {
-          args: Prisma.JuniorReadingProgressGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.JuniorReadingProgressGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.JuniorReadingProgressCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.JuniorReadingProgressCountAggregateOutputType> | number
-        }
-      }
-    }
-    JuniorBadge: {
-      payload: Prisma.$JuniorBadgePayload<ExtArgs>
-      fields: Prisma.JuniorBadgeFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.JuniorBadgeFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.JuniorBadgeFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>
-        }
-        findFirst: {
-          args: Prisma.JuniorBadgeFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.JuniorBadgeFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>
-        }
-        findMany: {
-          args: Prisma.JuniorBadgeFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>[]
-        }
-        create: {
-          args: Prisma.JuniorBadgeCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>
-        }
-        createMany: {
-          args: Prisma.JuniorBadgeCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.JuniorBadgeCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>[]
-        }
-        delete: {
-          args: Prisma.JuniorBadgeDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>
-        }
-        update: {
-          args: Prisma.JuniorBadgeUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>
-        }
-        deleteMany: {
-          args: Prisma.JuniorBadgeDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.JuniorBadgeUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.JuniorBadgeUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>[]
-        }
-        upsert: {
-          args: Prisma.JuniorBadgeUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorBadgePayload>
-        }
-        aggregate: {
-          args: Prisma.JuniorBadgeAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorBadge>
-        }
-        groupBy: {
-          args: Prisma.JuniorBadgeGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.JuniorBadgeGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.JuniorBadgeCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.JuniorBadgeCountAggregateOutputType> | number
-        }
-      }
-    }
-    JuniorStory: {
-      payload: Prisma.$JuniorStoryPayload<ExtArgs>
-      fields: Prisma.JuniorStoryFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.JuniorStoryFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.JuniorStoryFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>
-        }
-        findFirst: {
-          args: Prisma.JuniorStoryFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.JuniorStoryFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>
-        }
-        findMany: {
-          args: Prisma.JuniorStoryFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>[]
-        }
-        create: {
-          args: Prisma.JuniorStoryCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>
-        }
-        createMany: {
-          args: Prisma.JuniorStoryCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.JuniorStoryCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>[]
-        }
-        delete: {
-          args: Prisma.JuniorStoryDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>
-        }
-        update: {
-          args: Prisma.JuniorStoryUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>
-        }
-        deleteMany: {
-          args: Prisma.JuniorStoryDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.JuniorStoryUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.JuniorStoryUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>[]
-        }
-        upsert: {
-          args: Prisma.JuniorStoryUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorStoryPayload>
-        }
-        aggregate: {
-          args: Prisma.JuniorStoryAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorStory>
-        }
-        groupBy: {
-          args: Prisma.JuniorStoryGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.JuniorStoryGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.JuniorStoryCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.JuniorStoryCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -5632,10 +5407,10 @@ export type IdempotencyKeyScalarFieldEnum = (typeof IdempotencyKeyScalarFieldEnu
 
 export const ParentPinScalarFieldEnum = {
   id: 'id',
-  pin: 'pin',
+  hashedPin: 'hashedPin',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  parentUserId: 'parentUserId'
 } as const
 
 export type ParentPinScalarFieldEnum = (typeof ParentPinScalarFieldEnum)[keyof typeof ParentPinScalarFieldEnum]
@@ -5643,64 +5418,24 @@ export type ParentPinScalarFieldEnum = (typeof ParentPinScalarFieldEnum)[keyof t
 
 export const JuniorProfileScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  displayName: 'displayName',
   avatar: 'avatar',
   age: 'age',
   readingLevel: 'readingLevel',
-  favoriteGenres: 'favoriteGenres',
-  pinCode: 'pinCode',
+  theme: 'theme',
+  booksRead: 'booksRead',
+  storiesWritten: 'storiesWritten',
+  readingMinutes: 'readingMinutes',
+  currentBookId: 'currentBookId',
+  currentChapterId: 'currentChapterId',
+  streak: 'streak',
+  archivedAt: 'archivedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  parentId: 'parentId'
+  parentUserId: 'parentUserId'
 } as const
 
 export type JuniorProfileScalarFieldEnum = (typeof JuniorProfileScalarFieldEnum)[keyof typeof JuniorProfileScalarFieldEnum]
-
-
-export const JuniorReadingProgressScalarFieldEnum = {
-  id: 'id',
-  booksRead: 'booksRead',
-  readingTimeMinutes: 'readingTimeMinutes',
-  storiesWritten: 'storiesWritten',
-  currentBookTitle: 'currentBookTitle',
-  currentBookProgress: 'currentBookProgress',
-  lastReadAt: 'lastReadAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  juniorId: 'juniorId'
-} as const
-
-export type JuniorReadingProgressScalarFieldEnum = (typeof JuniorReadingProgressScalarFieldEnum)[keyof typeof JuniorReadingProgressScalarFieldEnum]
-
-
-export const JuniorBadgeScalarFieldEnum = {
-  id: 'id',
-  badgeType: 'badgeType',
-  title: 'title',
-  description: 'description',
-  icon: 'icon',
-  awardedAt: 'awardedAt',
-  juniorId: 'juniorId'
-} as const
-
-export type JuniorBadgeScalarFieldEnum = (typeof JuniorBadgeScalarFieldEnum)[keyof typeof JuniorBadgeScalarFieldEnum]
-
-
-export const JuniorStoryScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  content: 'content',
-  heroType: 'heroType',
-  setting: 'setting',
-  plotType: 'plotType',
-  wordCount: 'wordCount',
-  isPublished: 'isPublished',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  juniorId: 'juniorId'
-} as const
-
-export type JuniorStoryScalarFieldEnum = (typeof JuniorStoryScalarFieldEnum)[keyof typeof JuniorStoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -6002,9 +5737,6 @@ export type GlobalOmitConfig = {
   idempotencyKey?: Prisma.IdempotencyKeyOmit
   parentPin?: Prisma.ParentPinOmit
   juniorProfile?: Prisma.JuniorProfileOmit
-  juniorReadingProgress?: Prisma.JuniorReadingProgressOmit
-  juniorBadge?: Prisma.JuniorBadgeOmit
-  juniorStory?: Prisma.JuniorStoryOmit
 }
 
 /* Types for Logging */

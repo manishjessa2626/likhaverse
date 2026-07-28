@@ -297,18 +297,3 @@ export type ParentPin = Prisma.ParentPinModel
  * 
  */
 export type JuniorProfile = Prisma.JuniorProfileModel
-/**
- * Model JuniorReadingProgress
- * 
- */
-export type JuniorReadingProgress = Prisma.JuniorReadingProgressModel
-/**
- * Model JuniorBadge
- * 
- */
-export type JuniorBadge = Prisma.JuniorBadgeModel
-/**
- * Model JuniorStory
- * 
- */
-export type JuniorStory = Prisma.JuniorStoryModel

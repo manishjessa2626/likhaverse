@@ -961,85 +961,38 @@ model IdempotencyKey {
 }
 
 // ===========================
-// LIKHAVERSE JUNIOR
+// LIKHAVERSE JUNIOR — Phase 1
 // ===========================
 
 model ParentPin {
   id        String   @id @default(uuid())
-  pin       String   // hashed 4-6 digit PIN
+  hashedPin String   // bcrypt-hashed 4-6 digit PIN
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parentUserId String @unique
+  parentUser   User   @relation(fields: [parentUserId], references: [id], onDelete: Cascade)
 }
 
 model JuniorProfile {
-  id           String   @id @default(uuid())
-  name         String
-  avatar       String?  // emoji or avatar URL
-  age          Int
-  readingLevel String   @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED
-  favoriteGenres String? // comma-separated
-  pinCode      String?  // optional child PIN for verification
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id             String    @id @default(uuid())
+  displayName    String
+  avatar         String?   // emoji
+  age            Int
+  readingLevel   String    @default("BEGINNER") // BEGINNER | INTERMEDIATE | ADVANCED
+  theme          String    @default("LIGHT")
+  booksRead      Int       @default(0)
+  storiesWritten Int       @default(0)
+  readingMinutes Int       @default(0)
+  currentBookId  String?
+  currentChapterId String?
+  streak         Int       @default(0)
+  archivedAt     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
-  parentId String
-  parent   User   @relation(fields: [parentId], references: [id])
+  parentUserId String
+  parentUser   User   @relation(fields: [parentUserId], references: [id], onDelete: Cascade)
 
-  readingProgress JuniorReadingProgress[]
-  badges         JuniorBadge[]
-  stories        JuniorStory[]
-
-  @@index([parentId])
-}
-
-model JuniorReadingProgress {
-  id        String   @id @default(uuid())
-  booksRead Int      @default(0)
-  readingTimeMinutes Int @default(0)
-  storiesWritten Int @default(0)
-  currentBookTitle String?
-  currentBookProgress Float? // 0-100
-  lastReadAt DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  juniorId  String  @unique
-  junior    JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
-}
-
-model JuniorBadge {
-  id         String   @id @default(uuid())
-  badgeType  String   // FIRST_BOOK | READ_7_DAYS | FIRST_STORY | FANTASY_EXPLORER | SPACE_ADVENTURER | READING_CHAMPION
-  title      String
-  description String?
-  icon       String
-  awardedAt  DateTime @default(now())
-
-  juniorId String
-  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
-
-  @@unique([juniorId, badgeType])
-  @@index([juniorId])
-}
-
-model JuniorStory {
-  id         String   @id @default(uuid())
-  title      String
-  content    String
-  heroType   String?  // DOG | CAT | FOX | WIZARD | PRINCESS | ASTRONAUT
-  setting    String?  // FOREST | CASTLE | MOON | OCEAN | SCHOOL
-  plotType   String?  // TREASURE_HUNT | MEET_DRAGON | MAKE_FRIEND | BIRTHDAY
-  wordCount  Int      @default(0)
-  isPublished Boolean @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  juniorId String
-  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
-
-  @@index([juniorId])
-  @@index([isPublished])
+  @@index([parentUserId])
 }
