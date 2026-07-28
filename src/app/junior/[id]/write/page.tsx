@@ -2,8 +2,9 @@
 
 import { useState, useCallback, useEffect, useRef } from "react"
 import { useParams } from "next/navigation"
-import { PenLine, Save, Trash2, Image, BookUp, Clock, FileText, ChevronDown } from "lucide-react"
+import { PenLine, Save, Trash2, Image, BookUp, Clock, FileText } from "lucide-react"
 import { ChapterEditor, type Chapter } from "@/components/junior/ChapterEditor"
+import { ImaginationPrompts } from "@/components/junior/ImaginationPrompts"
 
 interface SavedDraft {
   id: string
@@ -39,6 +40,7 @@ export default function JuniorWritePage() {
   const [drafts, setDrafts] = useState<SavedDraft[]>([])
   const [showDrafts, setShowDrafts] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [imagination, setImagination] = useState({ role: "", location: "", scenario: "" })
   const [submitted, setSubmitted] = useState(false)
   const autosaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [encouragement] = useState(() => WORDS_OF_ENCOURAGEMENT[Math.floor(Math.random() * WORDS_OF_ENCOURAGEMENT.length)])
@@ -182,6 +184,7 @@ export default function JuniorWritePage() {
     setCoverImage(null)
     setIllustrations([])
     setSubmitted(false)
+    setImagination({ role: "", location: "", scenario: "" })
   }
 
   if (submitted) {
@@ -257,6 +260,10 @@ export default function JuniorWritePage() {
           )}
         </div>
       )}
+
+      <div className="mb-4">
+        <ImaginationPrompts selected={imagination} onSelect={setImagination} />
+      </div>
 
       <input
         type="text"
