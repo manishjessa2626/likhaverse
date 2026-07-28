@@ -1209,3 +1209,181 @@ ALTER TABLE "ReelComment" ADD CONSTRAINT "ReelComment_reelId_fkey" FOREIGN KEY (
 -- AddForeignKey
 ALTER TABLE "ReelComment" ADD CONSTRAINT "ReelComment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- AlterTable: Add ageRating to Story
+ALTER TABLE "Story" ADD COLUMN IF NOT EXISTS "ageRating" TEXT NOT NULL DEFAULT 'ALL';
+
+-- CreateTable: ParentPin
+CREATE TABLE IF NOT EXISTS "ParentPin" (
+    "id" TEXT NOT NULL,
+    "hashedPin" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "parentUserId" TEXT NOT NULL,
+    CONSTRAINT "ParentPin_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: JuniorProfile
+CREATE TABLE IF NOT EXISTS "JuniorProfile" (
+    "id" TEXT NOT NULL,
+    "displayName" TEXT NOT NULL,
+    "avatar" TEXT,
+    "age" INTEGER NOT NULL,
+    "readingLevel" TEXT NOT NULL DEFAULT 'BEGINNER',
+    "theme" TEXT NOT NULL DEFAULT 'LIGHT',
+    "booksRead" INTEGER NOT NULL DEFAULT 0,
+    "storiesWritten" INTEGER NOT NULL DEFAULT 0,
+    "readingMinutes" INTEGER NOT NULL DEFAULT 0,
+    "currentBookId" TEXT,
+    "currentChapterId" TEXT,
+    "streak" INTEGER NOT NULL DEFAULT 0,
+    "archivedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "parentUserId" TEXT NOT NULL,
+    CONSTRAINT "JuniorProfile_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: JuniorReadingProgress
+CREATE TABLE IF NOT EXISTS "JuniorReadingProgress" (
+    "id" TEXT NOT NULL,
+    "storyId" TEXT NOT NULL,
+    "currentPage" INTEGER NOT NULL DEFAULT 0,
+    "totalPages" INTEGER NOT NULL DEFAULT 0,
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "lastReadAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "juniorId" TEXT NOT NULL,
+    CONSTRAINT "JuniorReadingProgress_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: JuniorBookmark
+CREATE TABLE IF NOT EXISTS "JuniorBookmark" (
+    "id" TEXT NOT NULL,
+    "storyId" TEXT NOT NULL,
+    "page" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "juniorId" TEXT NOT NULL,
+    CONSTRAINT "JuniorBookmark_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: JuniorDraft
+CREATE TABLE IF NOT EXISTS "JuniorDraft" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT,
+    "chapters" JSONB,
+    "coverImage" TEXT,
+    "illustrations" JSONB,
+    "fontSize" INTEGER NOT NULL DEFAULT 24,
+    "wordCount" INTEGER NOT NULL DEFAULT 0,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "juniorId" TEXT NOT NULL,
+    CONSTRAINT "JuniorDraft_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: JuniorSubmission
+CREATE TABLE IF NOT EXISTS "JuniorSubmission" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT,
+    "chapters" JSONB,
+    "coverImage" TEXT,
+    "illustrations" JSONB,
+    "status" TEXT NOT NULL DEFAULT 'PENDING',
+    "parentFeedback" TEXT,
+    "submittedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "reviewedAt" TIMESTAMP(3),
+    "juniorId" TEXT NOT NULL,
+    "draftId" TEXT,
+    CONSTRAINT "JuniorSubmission_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: JuniorAchievement
+CREATE TABLE IF NOT EXISTS "JuniorAchievement" (
+    "id" TEXT NOT NULL,
+    "key" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "icon" TEXT NOT NULL,
+    "earnedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "juniorId" TEXT NOT NULL,
+    CONSTRAINT "JuniorAchievement_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable: FamilyBook
+CREATE TABLE IF NOT EXISTS "FamilyBook" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT,
+    "authorName" TEXT NOT NULL,
+    "coverImage" TEXT,
+    "message" TEXT,
+    "sharedById" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "juniorId" TEXT NOT NULL,
+    CONSTRAINT "FamilyBook_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX IF NOT EXISTS "ParentPin_parentUserId_key" ON "ParentPin"("parentUserId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorProfile_parentUserId_idx" ON "JuniorProfile"("parentUserId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX IF NOT EXISTS "JuniorReadingProgress_juniorId_storyId_key" ON "JuniorReadingProgress"("juniorId", "storyId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorReadingProgress_juniorId_idx" ON "JuniorReadingProgress"("juniorId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorBookmark_juniorId_storyId_idx" ON "JuniorBookmark"("juniorId", "storyId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorBookmark_juniorId_idx" ON "JuniorBookmark"("juniorId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorDraft_juniorId_idx" ON "JuniorDraft"("juniorId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorDraft_updatedAt_idx" ON "JuniorDraft"("updatedAt");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorSubmission_juniorId_status_idx" ON "JuniorSubmission"("juniorId", "status");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorSubmission_juniorId_idx" ON "JuniorSubmission"("juniorId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX IF NOT EXISTS "JuniorAchievement_juniorId_key_key" ON "JuniorAchievement"("juniorId", "key");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "JuniorAchievement_juniorId_idx" ON "JuniorAchievement"("juniorId");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "FamilyBook_juniorId_createdAt_idx" ON "FamilyBook"("juniorId", "createdAt");
+
+-- AddForeignKey
+ALTER TABLE "ParentPin" ADD CONSTRAINT "ParentPin_parentUserId_fkey" FOREIGN KEY ("parentUserId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "JuniorProfile" ADD CONSTRAINT "JuniorProfile_parentUserId_fkey" FOREIGN KEY ("parentUserId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "JuniorReadingProgress" ADD CONSTRAINT "JuniorReadingProgress_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "JuniorBookmark" ADD CONSTRAINT "JuniorBookmark_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "JuniorDraft" ADD CONSTRAINT "JuniorDraft_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "JuniorSubmission" ADD CONSTRAINT "JuniorSubmission_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "JuniorAchievement" ADD CONSTRAINT "JuniorAchievement_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "FamilyBook" ADD CONSTRAINT "FamilyBook_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
