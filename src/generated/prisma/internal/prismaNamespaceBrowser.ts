@@ -110,7 +110,9 @@ export const ModelName = {
   JuniorReadingProgress: 'JuniorReadingProgress',
   JuniorBookmark: 'JuniorBookmark',
   JuniorDraft: 'JuniorDraft',
-  JuniorSubmission: 'JuniorSubmission'
+  JuniorSubmission: 'JuniorSubmission',
+  JuniorAchievement: 'JuniorAchievement',
+  FamilyBook: 'FamilyBook'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -969,6 +971,34 @@ export const JuniorSubmissionScalarFieldEnum = {
 } as const
 
 export type JuniorSubmissionScalarFieldEnum = (typeof JuniorSubmissionScalarFieldEnum)[keyof typeof JuniorSubmissionScalarFieldEnum]
+
+
+export const JuniorAchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  description: 'description',
+  icon: 'icon',
+  earnedAt: 'earnedAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorAchievementScalarFieldEnum = (typeof JuniorAchievementScalarFieldEnum)[keyof typeof JuniorAchievementScalarFieldEnum]
+
+
+export const FamilyBookScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorName: 'authorName',
+  coverImage: 'coverImage',
+  message: 'message',
+  sharedById: 'sharedById',
+  createdAt: 'createdAt',
+  juniorId: 'juniorId'
+} as const
+
+export type FamilyBookScalarFieldEnum = (typeof FamilyBookScalarFieldEnum)[keyof typeof FamilyBookScalarFieldEnum]
 
 
 export const SortOrder = {

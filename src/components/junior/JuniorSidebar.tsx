@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { useParams, usePathname } from "next/navigation"
-import { Home, BookOpen, PenLine, Trophy, BarChart3, Settings, Sparkles } from "lucide-react"
+import { Home, BookOpen, PenLine, Trophy, BarChart3, Settings, Sparkles, HeartHandshake } from "lucide-react"
 
 const items = [
   { href: "home", label: "Home", icon: Home },
   { href: "library", label: "Library", icon: BookOpen },
   { href: "write", label: "Write", icon: PenLine },
+  { href: "bookshelf", label: "Family Bookshelf", icon: HeartHandshake },
   { href: "achievements", label: "Achievements", icon: Trophy },
   { href: "progress", label: "Progress", icon: BarChart3 },
   { href: "settings", label: "Settings", icon: Settings },

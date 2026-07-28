@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { BackButton } from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/Button"
-import { ChevronDown, ChevronRight, Check, X, BookOpen, Trophy } from "lucide-react"
+import { ChevronDown, ChevronRight, Check, X, BookOpen, Trophy, HeartHandshake } from "lucide-react"
 
 interface JuniorProfile {
   id: string
@@ -358,6 +358,62 @@ function ProgressSection({ juniorId }: { juniorId: string }) {
   )
 }
 
+function ShareStorySection({ juniorId, onShared }: { juniorId: string; onShared: () => void }) {
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+  const [authorName, setAuthorName] = useState("")
+  const [message, setMessage] = useState("")
+  const [sending, setSending] = useState(false)
+  const [done, setDone] = useState(false)
+
+  const handleShare = async () => {
+    if (!title.trim() || !authorName.trim()) return
+    setSending(true)
+    try {
+      const res = await fetch("/api/junior/bookshelf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ juniorId, title: title.trim(), content, authorName: authorName.trim(), message: message.trim() || undefined }),
+      })
+      if (res.ok) { setDone(true); setTitle(""); setContent(""); setAuthorName(""); setMessage(""); onShared() }
+    } catch {} finally { setSending(false) }
+  }
+
+  if (done) {
+    return <p className="text-[11px] text-green-600 mt-2">✅ Story shared to bookshelf!</p>
+  }
+
+  return (
+    <div className="mt-3 border-t border-zinc-100 pt-3 dark:border-zinc-800">
+      <p className="text-[11px] font-semibold text-zinc-500 mb-2 flex items-center gap-1">
+        <HeartHandshake size={12} />
+        Share a Story to Bookshelf
+      </p>
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          <input value={authorName} onChange={(e) => setAuthorName(e.target.value)}
+            placeholder="Who? (e.g. Mom, Grandpa, Ate)"
+            className="w-2/5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[10px] outline-none focus:border-purple-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100" />
+          <input value={title} onChange={(e) => setTitle(e.target.value)}
+            placeholder="Story title"
+            className="flex-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[10px] outline-none focus:border-purple-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100" />
+        </div>
+        <textarea value={content} onChange={(e) => setContent(e.target.value)}
+          placeholder="Write the story here..."
+          rows={3}
+          className="w-full rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[10px] outline-none focus:border-purple-400 resize-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100" />
+        <input value={message} onChange={(e) => setMessage(e.target.value)}
+          placeholder="A personal message (optional)"
+          className="w-full rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[10px] outline-none focus:border-purple-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100" />
+        <button onClick={handleShare} disabled={!title.trim() || !authorName.trim() || sending}
+          className="rounded-lg bg-pink-500 px-3 py-1.5 text-[10px] font-medium text-white hover:bg-pink-600 disabled:opacity-50">
+          {sending ? "Sharing..." : "Share to Bookshelf 💝"}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export default function JuniorSettingsPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -501,6 +557,7 @@ export default function JuniorSettingsPage() {
 
               {expandedProfile === p.id && (
                 <>
+                  <ShareStorySection juniorId={p.id} onShared={() => {}} />
                   <SubmissionsSection juniorId={p.id} />
                   <ProgressSection juniorId={p.id} />
                 </>

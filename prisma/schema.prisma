@@ -1000,6 +1000,8 @@ model JuniorProfile {
   bookmarks       JuniorBookmark[]
   drafts          JuniorDraft[]
   submissions     JuniorSubmission[]
+  achievements    JuniorAchievement[]
+  bookshelf       FamilyBook[]
 }
 
 // ===========================
@@ -1073,4 +1075,39 @@ model JuniorSubmission {
 
   @@index([juniorId, status])
   @@index([juniorId])
+}
+
+// ===========================
+// LIKHAVERSE JUNIOR — Phase 7 (Achievements & Family Bookshelf)
+// ===========================
+
+model JuniorAchievement {
+  id          String   @id @default(uuid())
+  key         String   // unique achievement key (e.g. "first_story", "read_5")
+  label       String
+  description String
+  icon        String   // emoji
+  earnedAt    DateTime @default(now())
+
+  juniorId String
+  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@unique([juniorId, key])
+  @@index([juniorId])
+}
+
+model FamilyBook {
+  id          String   @id @default(uuid())
+  title       String
+  content     String?
+  authorName  String   // who shared it (e.g. "Mom", "Grandpa", "Kuya")
+  coverImage  String?
+  message     String?  // personal note from family member
+  sharedById  String   // user ID of the sharer
+  createdAt   DateTime @default(now())
+
+  juniorId String
+  junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
+
+  @@index([juniorId, createdAt])
 }

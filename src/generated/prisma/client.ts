@@ -341,3 +341,13 @@ export type JuniorDraft = Prisma.JuniorDraftModel
  * 
  */
 export type JuniorSubmission = Prisma.JuniorSubmissionModel
+/**
+ * Model JuniorAchievement
+ * 
+ */
+export type JuniorAchievement = Prisma.JuniorAchievementModel
+/**
+ * Model FamilyBook
+ * 
+ */
+export type FamilyBook = Prisma.FamilyBookModel

@@ -456,7 +456,9 @@ export const ModelName = {
   JuniorReadingProgress: 'JuniorReadingProgress',
   JuniorBookmark: 'JuniorBookmark',
   JuniorDraft: 'JuniorDraft',
-  JuniorSubmission: 'JuniorSubmission'
+  JuniorSubmission: 'JuniorSubmission',
+  JuniorAchievement: 'JuniorAchievement',
+  FamilyBook: 'FamilyBook'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -472,7 +474,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile" | "juniorReadingProgress" | "juniorBookmark" | "juniorDraft" | "juniorSubmission"
+    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile" | "juniorReadingProgress" | "juniorBookmark" | "juniorDraft" | "juniorSubmission" | "juniorAchievement" | "familyBook"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4916,6 +4918,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JuniorAchievement: {
+      payload: Prisma.$JuniorAchievementPayload<ExtArgs>
+      fields: Prisma.JuniorAchievementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JuniorAchievementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JuniorAchievementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>
+        }
+        findFirst: {
+          args: Prisma.JuniorAchievementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JuniorAchievementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>
+        }
+        findMany: {
+          args: Prisma.JuniorAchievementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>[]
+        }
+        create: {
+          args: Prisma.JuniorAchievementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>
+        }
+        createMany: {
+          args: Prisma.JuniorAchievementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.JuniorAchievementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>[]
+        }
+        delete: {
+          args: Prisma.JuniorAchievementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>
+        }
+        update: {
+          args: Prisma.JuniorAchievementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>
+        }
+        deleteMany: {
+          args: Prisma.JuniorAchievementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JuniorAchievementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.JuniorAchievementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>[]
+        }
+        upsert: {
+          args: Prisma.JuniorAchievementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JuniorAchievementPayload>
+        }
+        aggregate: {
+          args: Prisma.JuniorAchievementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJuniorAchievement>
+        }
+        groupBy: {
+          args: Prisma.JuniorAchievementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorAchievementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JuniorAchievementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JuniorAchievementCountAggregateOutputType> | number
+        }
+      }
+    }
+    FamilyBook: {
+      payload: Prisma.$FamilyBookPayload<ExtArgs>
+      fields: Prisma.FamilyBookFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FamilyBookFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FamilyBookFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>
+        }
+        findFirst: {
+          args: Prisma.FamilyBookFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FamilyBookFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>
+        }
+        findMany: {
+          args: Prisma.FamilyBookFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>[]
+        }
+        create: {
+          args: Prisma.FamilyBookCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>
+        }
+        createMany: {
+          args: Prisma.FamilyBookCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FamilyBookCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>[]
+        }
+        delete: {
+          args: Prisma.FamilyBookDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>
+        }
+        update: {
+          args: Prisma.FamilyBookUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>
+        }
+        deleteMany: {
+          args: Prisma.FamilyBookDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FamilyBookUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FamilyBookUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>[]
+        }
+        upsert: {
+          args: Prisma.FamilyBookUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FamilyBookPayload>
+        }
+        aggregate: {
+          args: Prisma.FamilyBookAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFamilyBook>
+        }
+        groupBy: {
+          args: Prisma.FamilyBookGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyBookGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FamilyBookCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FamilyBookCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5797,6 +5947,34 @@ export const JuniorSubmissionScalarFieldEnum = {
 export type JuniorSubmissionScalarFieldEnum = (typeof JuniorSubmissionScalarFieldEnum)[keyof typeof JuniorSubmissionScalarFieldEnum]
 
 
+export const JuniorAchievementScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  label: 'label',
+  description: 'description',
+  icon: 'icon',
+  earnedAt: 'earnedAt',
+  juniorId: 'juniorId'
+} as const
+
+export type JuniorAchievementScalarFieldEnum = (typeof JuniorAchievementScalarFieldEnum)[keyof typeof JuniorAchievementScalarFieldEnum]
+
+
+export const FamilyBookScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  authorName: 'authorName',
+  coverImage: 'coverImage',
+  message: 'message',
+  sharedById: 'sharedById',
+  createdAt: 'createdAt',
+  juniorId: 'juniorId'
+} as const
+
+export type FamilyBookScalarFieldEnum = (typeof FamilyBookScalarFieldEnum)[keyof typeof FamilyBookScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -6131,6 +6309,8 @@ export type GlobalOmitConfig = {
   juniorBookmark?: Prisma.JuniorBookmarkOmit
   juniorDraft?: Prisma.JuniorDraftOmit
   juniorSubmission?: Prisma.JuniorSubmissionOmit
+  juniorAchievement?: Prisma.JuniorAchievementOmit
+  familyBook?: Prisma.FamilyBookOmit
 }
 
 /* Types for Logging */
