@@ -14,6 +14,8 @@ const SECURITY_HEADERS: Record<string, string> = {
 const JUNIOR_ALLOWED_STARTS = [
   "/junior", "/api/junior", "/api/uploads",
   "/api/auth", "/api/family/pin", "/api/family/pin/",
+  "/api/family/junior",
+  "/api/stories",
   "/_next", "/favicon", "/logo",
 ]
 
