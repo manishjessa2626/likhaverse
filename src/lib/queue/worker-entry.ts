@@ -63,26 +63,16 @@ registerHandler(JobType.CLEANUP_EXPIRED, async () => {
 })
 
 registerHandler(JobType.SYNC_FIRESTORE, async (job) => {
-  const { model, id, userId, type, message } = job.data as Record<string, any>
+  const { model, id } = job.data as Record<string, any>
 
-  if (!process.env.FIREBASE_PROJECT_ID || process.env.FIREBASE_PROJECT_ID === "demo") {
+  if (!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID === "demo") {
     return
   }
 
   try {
-    const { doc, setDoc, getFirestore } = await import("firebase/firestore")
-    const { initializeApp, getApps } = await import("firebase/app")
-    const firebaseConfig = {
-      apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCz7XixcIPTMfSB-phzyimax21gjLix1Og",
-      authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "likhaverse.firebaseapp.com",
-      projectId: process.env.FIREBASE_PROJECT_ID || "likhaverse",
-    }
-
-    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
-    const db = getFirestore(app)
-
-    if (model === "notification") {
-      await setDoc(doc(db, "notifications", id), { userId, type, message, read: false, createdAt: new Date().toISOString() })
+    const { syncToFirestore } = await import("../firestore-sync")
+    if (model && id) {
+      await syncToFirestore(model, id)
     }
   } catch (err) {
     log.warn({ err, model, id }, "Firestore sync failed (non-critical)")

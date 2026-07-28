@@ -1,3 +1,4 @@
+import { db } from "./firebase"
 import { createLogger } from "./observability/logger"
 
 const log = createLogger("firestore-sync")
@@ -5,24 +6,9 @@ const log = createLogger("firestore-sync")
 export type SyncableModel = "notification" | "message" | "conversation" | "post"
 
 function isFirebaseConfigured(): boolean {
-  const projectId = process.env.FIREBASE_PROJECT_ID
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
   if (!projectId || projectId === "demo" || projectId === "") return false
   return true
-}
-
-async function getFirestore() {
-  const { initializeApp, getApps } = await import("firebase/app")
-  const { getFirestore: getFS } = await import("firebase/firestore")
-
-  const app = getApps().length === 0
-    ? initializeApp({
-        apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCz7XixcIPTMfSB-phzyimax21gjLix1Og",
-        authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "likhaverse.firebaseapp.com",
-        projectId: process.env.FIREBASE_PROJECT_ID || "likhaverse",
-      })
-    : getApps()[0]
-
-  return getFS(app)
 }
 
 export async function syncNotificationToFirestore(notification: {
@@ -42,7 +28,6 @@ export async function syncNotificationToFirestore(notification: {
 
   try {
     const { doc, setDoc } = await import("firebase/firestore")
-    const db = await getFirestore()
     const collection = ["FOLLOW", "SYSTEM"].includes(notification.type) ? "notifications_main" : "notifications_feed"
 
     await setDoc(doc(db, collection, notification.id), {
@@ -74,7 +59,6 @@ export async function syncMessageToFirestore(message: {
 
   try {
     const { doc, setDoc } = await import("firebase/firestore")
-    const db = await getFirestore()
 
     await setDoc(doc(db, "messages", message.id), {
       content: message.content,
@@ -101,7 +85,6 @@ export async function syncConversationToFirestore(conversation: {
 
   try {
     const { doc, setDoc } = await import("firebase/firestore")
-    const db = await getFirestore()
 
     await setDoc(doc(db, "conversations", conversation.id), {
       participantIds: conversation.participants.map((p) => p.userId),
@@ -128,7 +111,6 @@ export async function syncPostToFirestore(post: {
 
   try {
     const { doc, setDoc } = await import("firebase/firestore")
-    const db = await getFirestore()
 
     await setDoc(doc(db, "posts", post.id), {
       content: post.content,
@@ -149,7 +131,6 @@ export async function markNotificationReadFirestore(notificationId: string, cate
   if (!isFirebaseConfigured()) return
   try {
     const { doc, updateDoc } = await import("firebase/firestore")
-    const db = await getFirestore()
     const collection = category === "system" ? "notifications_main" : "notifications_feed"
     await updateDoc(doc(db, collection, notificationId), { read: true })
     log.debug({ id: notificationId }, "Notification marked read in Firestore")
@@ -162,7 +143,6 @@ export async function markAllNotificationsReadFirestore(userId: string, category
   if (!isFirebaseConfigured()) return
   try {
     const { collection, query, where, getDocs, writeBatch, doc } = await import("firebase/firestore")
-    const db = await getFirestore()
     const colName = category === "system" ? "notifications_main" : "notifications_feed"
     const q = query(collection(db, colName), where("userId", "==", userId), where("read", "==", false))
     const snapshot = await getDocs(q)

@@ -1212,6 +1212,14 @@ ALTER TABLE "ReelComment" ADD CONSTRAINT "ReelComment_userId_fkey" FOREIGN KEY (
 -- AlterTable: Add ageRating to Story
 ALTER TABLE "Story" ADD COLUMN IF NOT EXISTS "ageRating" TEXT NOT NULL DEFAULT 'ALL';
 
+-- AlterTable: Add firebaseUid, username, verifiedAt to User
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "firebaseUid" TEXT;
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "username" TEXT;
+ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "verifiedAt" TIMESTAMP(3);
+
+CREATE UNIQUE INDEX IF NOT EXISTS "User_firebaseUid_key" ON "User"("firebaseUid");
+CREATE UNIQUE INDEX IF NOT EXISTS "User_username_key" ON "User"("username");
+
 -- CreateTable: ParentPin
 CREATE TABLE IF NOT EXISTS "ParentPin" (
     "id" TEXT NOT NULL,

@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { signIn } from "next-auth/react"
 
 const LOGIN_TIMEOUT = 10_000
@@ -25,6 +27,7 @@ function sanitizeName(input: string): string {
 type View = "main" | "email" | "phone"
 
 export default function LoginPage() {
+  const router = useRouter()
   const [view, setView] = useState<View>("main")
   const [error, setError] = useState("")
   const [pending, setPending] = useState("")
@@ -34,6 +37,7 @@ export default function LoginPage() {
   const [phone, setPhone] = useState("")
   const [phoneName, setPhoneName] = useState("")
   const [phoneCode, setPhoneCode] = useState("")
+  const [verifyEmail, setVerifyEmail] = useState("")
   const contentRef = useRef<HTMLDivElement>(null)
   const [height, setHeight] = useState<number | undefined>()
 
@@ -101,16 +105,56 @@ export default function LoginPage() {
     e.preventDefault()
     setPending("email")
     setError("")
+    setVerifyEmail("")
     try {
-      const result = await withTimeout(
-        signIn("credentials", { email, password, redirect: false }),
+      const { signInWithEmailAndPassword } = await import("firebase/auth")
+      const { auth } = await import("@/lib/firebase")
+
+      const userCredential = await withTimeout(
+        signInWithEmailAndPassword(auth, email, password),
         LOGIN_TIMEOUT,
       )
-      if (result?.error) { setError("Invalid email or password"); return }
-      if (!result?.ok) { setError("Login failed"); return }
+
+      await userCredential.user.reload()
+
+      if (!userCredential.user.emailVerified) {
+        setVerifyEmail(email)
+        setPending("")
+        return
+      }
+
+      const firebaseUid = userCredential.user.uid
+
+      const userRes = await fetch(`/api/auth/user-by-firebase-uid?uid=${firebaseUid}`)
+      if (!userRes.ok) { setError("Account not found"); return }
+      const userData = await userRes.json()
+
+      const signInResult = await withTimeout(
+        signIn("firebase", {
+          userId: userData.id,
+          email: userData.email,
+          name: userData.name,
+          role: userData.role,
+          redirect: false,
+        }),
+        LOGIN_TIMEOUT,
+      )
+
+      if (signInResult?.error) { setError("Login failed"); return }
       window.location.href = "/"
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Something went wrong")
+      const fbErr = err as { code?: string }
+      if (fbErr.code === "auth/user-not-found" || fbErr.code === "auth/invalid-credential" || fbErr.code === "auth/wrong-password") {
+        setError("Invalid email or password")
+      } else if (fbErr.code === "auth/invalid-email") {
+        setError("Invalid email format")
+      } else if (fbErr.code === "auth/too-many-requests") {
+        setError("Too many attempts. Please wait a moment.")
+      } else if (fbErr.code === "auth/network-request-failed") {
+        setError("Network error. Check your connection.")
+      } else {
+        setError(err instanceof Error ? err.message : "Something went wrong")
+      }
     } finally {
       setPending("")
     }
@@ -271,48 +315,74 @@ export default function LoginPage() {
             )}
 
             {view === "email" && (
-              <form onSubmit={handleEmailLogin} className="space-y-3">
-                <button type="button" onClick={reset} className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300">
-                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                  </svg>
-                  Back
-                </button>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Email"
-                  className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-white/[0.2] focus:bg-white/[0.06] focus:outline-none"
-                />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Password"
-                  className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-white/[0.2] focus:bg-white/[0.06] focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full rounded-xl bg-white px-4 py-3 text-sm font-semibold text-zinc-900 transition-all duration-150 hover:scale-[1.02] active:scale-[0.97] disabled:opacity-50 disabled:hover:scale-100"
-                >
-                  {pending === "email" ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent" />
-                      Logging in...
-                    </span>
-                  ) : "Log In"}
-                </button>
-                <p className="text-center text-xs text-zinc-600">
-                  No account?{" "}
-                  <a href="/register" className="font-medium text-zinc-300 hover:text-white">
-                    Register
-                  </a>
-                </p>
-              </form>
+              <div className="space-y-3">
+                <form onSubmit={handleEmailLogin} className="space-y-3">
+                  <button type="button" onClick={reset} className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300">
+                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                    Back
+                  </button>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    placeholder="Email"
+                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-white/[0.2] focus:bg-white/[0.06] focus:outline-none"
+                  />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Password"
+                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white placeholder-zinc-600 focus:border-white/[0.2] focus:bg-white/[0.06] focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-full rounded-xl bg-white px-4 py-3 text-sm font-semibold text-zinc-900 transition-all duration-150 hover:scale-[1.02] active:scale-[0.97] disabled:opacity-50 disabled:hover:scale-100"
+                  >
+                    {pending === "email" ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-900 border-t-transparent" />
+                        Logging in...
+                      </span>
+                    ) : "Log In"}
+                  </button>
+                  <p className="text-center text-xs text-zinc-600">
+                    No account?{" "}
+                    <a href="/register" className="font-medium text-zinc-300 hover:text-white">
+                      Register
+                    </a>
+                  </p>
+                </form>
+                {verifyEmail && (
+                  <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-4 text-center space-y-3">
+                    <p className="text-sm font-medium text-amber-300">Email verification required</p>
+                    <p className="text-xs text-zinc-400">Please verify your email before signing in.</p>
+                    <p className="text-xs text-zinc-500 break-all">{verifyEmail}</p>
+                    <div className="flex flex-col gap-2 pt-1">
+                      <button onClick={async () => {
+                        try {
+                          const { auth } = await import("@/lib/firebase")
+                          const { sendEmailVerification, signInWithEmailAndPassword } = await import("firebase/auth")
+                          const cred = await signInWithEmailAndPassword(auth, verifyEmail, password)
+                          await sendEmailVerification(cred.user, { url: `${window.location.origin}/auth/verify-email`, handleCodeInApp: false })
+                          setError("")
+                          reset()
+                        } catch { setError("Failed to resend. Try again.") }
+                      }} className="text-sm font-medium text-amber-400 hover:text-amber-300">
+                        Resend Verification
+                      </button>
+                      <Link href="/register" className="text-xs text-zinc-500 hover:text-zinc-300">
+                        Change Email
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
             )}
 
             {view === "phone" && !codeSent && (
