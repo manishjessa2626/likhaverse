@@ -25,17 +25,24 @@ export default function JuniorAchievementsPage() {
   const id = params.id as string
   const [achievements, setAchievements] = useState<Achievement[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
 
   useEffect(() => {
+    let cancelled = false
     fetch(`/api/junior/achievements?juniorId=${id}`)
-      .then((r) => r.json())
-      .then((data) => setAchievements(Array.isArray(data) ? data : []))
-      .catch(() => {})
-      .finally(() => setLoading(false))
+      .then((r) => { if (!r.ok) throw new Error("Failed to load"); return r.json() })
+      .then((data) => { if (!cancelled) setAchievements(Array.isArray(data) ? data : []) })
+      .catch((err) => { if (!cancelled) setError(err.message) })
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [id])
 
   if (loading) {
     return <div className="flex min-h-screen items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-400 border-t-purple-600" /></div>
+  }
+
+  if (error) {
+    return <div className="mx-auto max-w-3xl p-4 md:p-8"><div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center dark:border-red-900 dark:bg-red-900/20"><p className="text-red-600 dark:text-red-400 text-sm">{error}</p></div></div>
   }
 
   const earned = achievements.filter((a) => a.earned).length

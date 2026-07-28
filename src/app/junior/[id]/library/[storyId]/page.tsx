@@ -104,6 +104,7 @@ export default function JuniorStoryReaderPage() {
           <span className="text-xs text-zinc-400">{page + 1} / {totalPages}</span>
           <button
             onClick={toggleBookmark}
+            aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
             className={`rounded-xl border px-2.5 py-1.5 text-xs font-medium backdrop-blur-sm transition-all ${
               bookmarked
                 ? "border-orange-200 bg-orange-50 text-orange-600 dark:border-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
@@ -135,19 +136,19 @@ export default function JuniorStoryReaderPage() {
         </div>
 
         <div className="mt-4 flex items-center justify-center gap-4">
-          <button onClick={handlePrev} disabled={page === 0}
+          <button onClick={handlePrev} disabled={page === 0} aria-label="Previous page"
             className="rounded-xl border border-purple-200/60 bg-white/70 p-2.5 text-zinc-600 backdrop-blur-sm hover:bg-white disabled:opacity-30 dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-400">
             <ChevronLeft size={20} />
           </button>
           <div className="flex gap-1.5">
             {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i} onClick={() => goToPage(i)}
+              <button key={i} onClick={() => goToPage(i)} aria-label={`Go to page ${i + 1}`}
                 className={`h-2 rounded-full transition-all ${
                   i === page ? "w-6 bg-purple-500" : "w-2 bg-purple-200 dark:bg-zinc-600"
                 }`} />
             ))}
           </div>
-          <button onClick={handleNext} disabled={page >= totalPages - 1}
+          <button onClick={handleNext} disabled={page >= totalPages - 1} aria-label="Next page"
             className="rounded-xl border border-purple-200/60 bg-white/70 p-2.5 text-zinc-600 backdrop-blur-sm hover:bg-white disabled:opacity-30 dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-400">
             <ChevronRight size={20} />
           </button>

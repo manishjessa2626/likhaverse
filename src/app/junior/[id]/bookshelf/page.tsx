@@ -19,19 +19,26 @@ export default function JuniorBookshelfPage() {
   const id = params.id as string
   const [books, setBooks] = useState<FamilyBook[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
   const [reading, setReading] = useState<FamilyBook | null>(null)
   const [page, setPage] = useState(0)
 
   useEffect(() => {
+    let cancelled = false
     fetch(`/api/junior/bookshelf?juniorId=${id}`)
-      .then((r) => r.json())
-      .then((data) => setBooks(Array.isArray(data) ? data : []))
-      .catch(() => {})
-      .finally(() => setLoading(false))
+      .then((r) => { if (!r.ok) throw new Error("Failed to load bookshelf"); return r.json() })
+      .then((data) => { if (!cancelled) setBooks(Array.isArray(data) ? data : []) })
+      .catch((err) => { if (!cancelled) setError(err.message) })
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [id])
 
   if (loading) {
     return <div className="flex min-h-screen items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-400 border-t-purple-600" /></div>
+  }
+
+  if (error) {
+    return <div className="mx-auto max-w-3xl p-4 md:p-8"><div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center dark:border-red-900 dark:bg-red-900/20"><p className="text-red-600 dark:text-red-400 text-sm">{error}</p></div></div>
   }
 
   if (reading) {
@@ -73,17 +80,17 @@ export default function JuniorBookshelfPage() {
             </div>
           </div>
           <div className="mt-4 flex items-center justify-center gap-4">
-            <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0}
+            <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0} aria-label="Previous page"
               className="rounded-xl border border-purple-200/60 bg-white/70 p-2.5 text-zinc-600 backdrop-blur-sm disabled:opacity-30 dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-400">
               <ChevronLeft size={20} />
             </button>
             <div className="flex gap-1.5">
               {Array.from({ length: totalPages }, (_, i) => (
-                <button key={i} onClick={() => setPage(i)}
+                <button key={i} onClick={() => setPage(i)} aria-label={`Go to page ${i + 1}`}
                   className={`h-2 rounded-full transition-all ${i === page ? "w-6 bg-pink-500" : "w-2 bg-pink-200 dark:bg-zinc-600"}`} />
               ))}
             </div>
-            <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}
+            <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1} aria-label="Next page"
               className="rounded-xl border border-purple-200/60 bg-white/70 p-2.5 text-zinc-600 backdrop-blur-sm disabled:opacity-30 dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-400">
               <ChevronRight size={20} />
             </button>

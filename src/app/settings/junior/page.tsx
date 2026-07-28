@@ -272,7 +272,7 @@ function SubmissionsSection({ juniorId }: { juniorId: string }) {
         {submissions.slice(0, 10).map((s) => (
           <div key={s.id} className="rounded-lg border border-zinc-100 bg-zinc-50/50 p-3 dark:border-zinc-800 dark:bg-zinc-800/30">
             <div className="flex items-start gap-3">
-              {s.coverImage && <img src={s.coverImage} alt="" className="h-10 w-8 rounded object-cover shrink-0" />}
+              {s.coverImage && <img src={s.coverImage} alt={s.title} className="h-10 w-8 rounded object-cover shrink-0" />}
               <div className="flex-1 min-w-0">
                 <p className="text-xs font-medium text-zinc-800 dark:text-zinc-100 truncate">{s.title}</p>
                 <p className="text-[10px] text-zinc-500">

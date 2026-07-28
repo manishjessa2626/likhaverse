@@ -42,6 +42,7 @@ export default function JuniorWritePage() {
   const [submitting, setSubmitting] = useState(false)
   const [imagination, setImagination] = useState({ role: "", location: "", scenario: "" })
   const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const autosaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [encouragement] = useState(() => WORDS_OF_ENCOURAGEMENT[Math.floor(Math.random() * WORDS_OF_ENCOURAGEMENT.length)])
 
@@ -156,6 +157,7 @@ export default function JuniorWritePage() {
   const handlePublish = async () => {
     if (!title.trim()) return
     setSubmitting(true)
+    setSubmitError("")
     try {
       const res = await fetch("/api/junior/writing/submissions", {
         method: "POST",
@@ -169,8 +171,10 @@ export default function JuniorWritePage() {
           coverImage,
         }),
       })
-      if (res.ok) setSubmitted(true)
-    } catch {} finally {
+      if (res.ok) { setSubmitted(true); return }
+      const err = await res.json()
+      setSubmitError(err.error || "Failed to submit")
+    } catch { setSubmitError("Something went wrong") } finally {
       setSubmitting(false)
     }
   }
@@ -321,6 +325,8 @@ export default function JuniorWritePage() {
           className="w-full rounded-xl border border-purple-200/60 bg-white/70 p-4 text-zinc-700 placeholder:text-zinc-300 focus:border-purple-400 focus:outline-none dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-300 leading-relaxed resize-y"
         />
       )}
+
+      {submitError && <p className="mb-4 rounded-xl bg-red-50 px-4 py-2 text-xs text-red-600 dark:bg-red-900/30 dark:text-red-400">{submitError}</p>}
 
       {illustrations.length > 0 && (
         <div className="mt-4 flex gap-3 overflow-x-auto pb-2">

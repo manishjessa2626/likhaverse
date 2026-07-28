@@ -37,15 +37,18 @@ export default function JuniorHomePage() {
   const [progress, setProgress] = useState<ReadingProgress[]>([])
   const [stories, setStories] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
   const id = params.id as string
 
   useEffect(() => {
+    let cancelled = false
     Promise.all([
-      fetch(`/api/family/junior/${id}`).then((r) => r.json()),
+      fetch(`/api/family/junior/${id}`).then((r) => { if (!r.ok) throw new Error("Failed to load profile"); return r.json() }),
       fetch(`/api/junior/reading/progress?juniorId=${id}`).then((r) => r.json()),
       fetch("/api/stories").then((r) => r.json()),
     ])
       .then(([profileData, progressData, storiesData]) => {
+        if (cancelled) return
         setProfile(profileData)
         setProgress(Array.isArray(progressData) ? progressData : [])
         const list: { id: string; title: string }[] = storiesData.stories || storiesData || []
@@ -53,12 +56,17 @@ export default function JuniorHomePage() {
         list.forEach((s) => { map[s.id] = s.title })
         setStories(map)
       })
-      .catch(() => {})
-      .finally(() => setLoading(false))
+      .catch((err) => { if (!cancelled) setError(err.message || "Something went wrong") })
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [id])
 
   if (loading) {
     return <div className="flex min-h-screen items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-400 border-t-purple-600" /></div>
+  }
+
+  if (error) {
+    return <div className="flex min-h-screen items-center justify-center p-4"><div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center dark:border-red-900 dark:bg-red-900/20"><p className="text-red-600 dark:text-red-400 text-sm">{error}</p></div></div>
   }
 
   if (!profile) {

@@ -37,17 +37,20 @@ export default function JuniorLibraryPage() {
   const [progress, setProgress] = useState<ReadingProgress[]>([])
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState("")
   const [search, setSearch] = useState("")
   const [category, setCategory] = useState("all")
   const id = params.id as string
 
   useEffect(() => {
+    let cancelled = false
     Promise.all([
       fetch("/api/stories").then((r) => r.json()),
       fetch(`/api/junior/reading/progress?juniorId=${id}`).then((r) => r.json()),
       fetch(`/api/junior/reading/bookmarks?juniorId=${id}`).then((r) => r.json()),
     ])
       .then(([storiesData, progressData, bookmarksData]) => {
+        if (cancelled) return
         const list: Story[] = storiesData.stories || storiesData || []
         setStories(list.filter((s: Story) =>
           SAFE_AGE_RATINGS.includes(s.ageRating) ||
@@ -56,8 +59,9 @@ export default function JuniorLibraryPage() {
         setProgress(Array.isArray(progressData) ? progressData : [])
         setBookmarks(Array.isArray(bookmarksData) ? bookmarksData : [])
       })
-      .catch(() => {})
-      .finally(() => setLoading(false))
+      .catch(() => { if (!cancelled) setError("Failed to load library") })
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [id])
 
   const filtered = stories.filter((s) => {
@@ -77,6 +81,10 @@ export default function JuniorLibraryPage() {
 
   if (loading) {
     return <div className="flex min-h-screen items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-400 border-t-purple-600" /></div>
+  }
+
+  if (error) {
+    return <div className="mx-auto max-w-4xl p-4 md:p-8"><div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-center dark:border-red-900 dark:bg-red-900/20"><p className="text-red-600 dark:text-red-400 text-sm">{error}</p></div></div>
   }
 
   return (
