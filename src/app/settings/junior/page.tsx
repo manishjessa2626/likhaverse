@@ -5,7 +5,8 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { BackButton } from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/Button"
-import { ChevronDown, ChevronRight, Check, X, BookOpen, Trophy, HeartHandshake } from "lucide-react"
+import { ChevronDown, ChevronRight, Check, X, BookOpen, Trophy, HeartHandshake, LogIn } from "lucide-react"
+import { PinGate } from "@/components/junior/PinGate"
 
 interface JuniorProfile {
   id: string
@@ -428,6 +429,7 @@ export default function JuniorSettingsPage() {
   const [archiveTarget, setArchiveTarget] = useState<JuniorProfile | null>(null)
   const [pinVerifyFor, setPinVerifyFor] = useState<"archive" | null>(null)
   const [resetPinOpen, setResetPinOpen] = useState(false)
+  const [switchingProfile, setSwitchingProfile] = useState<JuniorProfile | null>(null)
 
   const [message, setMessage] = useState("")
   const [error, setError] = useState("")
@@ -479,6 +481,25 @@ export default function JuniorSettingsPage() {
     if (!res.ok) { const err = await res.json(); throw new Error(err.error || "Failed to reset PIN") }
     setMessage("PIN updated!")
     setResetPinOpen(false)
+  }
+
+  const handleSwitch = async (profile: JuniorProfile) => {
+    setSwitchingProfile(null)
+    try {
+      const res = await fetch("/api/junior/switch", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ juniorId: profile.id, action: "enter" }),
+      })
+      const data = await res.json()
+      if (res.ok && data.redirect) {
+        router.push(data.redirect)
+      } else {
+        setError("Failed to enter junior mode")
+      }
+    } catch {
+      setError("Something went wrong")
+    }
   }
 
   if (status === "loading" || loading) {
@@ -542,9 +563,14 @@ export default function JuniorSettingsPage() {
                     <span>🔥 {p.streak} day streak</span>
                   </div>
                 </div>
-                <div className="flex gap-2 shrink-0">
-                  <Button variant="secondary" size="sm" onClick={() => setEditTarget(p)}>Edit</Button>
-                  <Button variant="danger" size="sm" onClick={() => { setArchiveTarget(p); setPinVerifyFor("archive") }}>Archive</Button>
+                <div className="flex flex-col gap-1.5 shrink-0">
+                  <Button variant="primary" size="sm" onClick={() => setSwitchingProfile(p)} className="flex items-center gap-1.5">
+                    <LogIn size={14} /> Enter
+                  </Button>
+                  <div className="flex gap-1.5">
+                    <Button variant="secondary" size="sm" onClick={() => setEditTarget(p)}>Edit</Button>
+                    <Button variant="danger" size="sm" onClick={() => { setArchiveTarget(p); setPinVerifyFor("archive") }}>Archive</Button>
+                  </div>
                 </div>
               </div>
 
@@ -608,6 +634,15 @@ export default function JuniorSettingsPage() {
         <PinVerifyDialog title="Archive Profile" message={`Enter your PIN to archive ${archiveTarget.displayName}'s profile`}
           onSuccess={() => handleArchive(archiveTarget.id)}
           onCancel={() => { setArchiveTarget(null); setPinVerifyFor(null) }} />
+      )}
+
+      {switchingProfile && (
+        <PinGate
+          title="Enter Junior Mode"
+          message={`Enter your Parent PIN to switch to ${switchingProfile.displayName}'s world`}
+          onSuccess={() => handleSwitch(switchingProfile)}
+          onCancel={() => setSwitchingProfile(null)}
+        />
       )}
     </div>
   )
