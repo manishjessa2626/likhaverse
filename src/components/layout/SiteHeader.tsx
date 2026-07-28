@@ -372,7 +372,8 @@ export function SiteHeader() {
 
               {/* Settings */}
               <p className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-zinc-600 pt-4">Settings</p>
-              <NavLink href="/settings/accounts" icon={<Settings size={18} />} label="Settings" onClick={closeMenu} active={pathname.startsWith("/settings")} />
+              <NavLink href="/settings/accounts" icon={<Settings size={18} />} label="Account" onClick={closeMenu} active={pathname === "/settings/accounts"} />
+              <NavLink href="/settings/junior" icon={<Heart size={18} />} label="Parent Dashboard" onClick={closeMenu} active={pathname === "/settings/junior"} />
               <NavLink href="/premium" icon={<span className="text-amber-400">💎</span>} label="Go VIP" onClick={closeMenu} active={pathname === "/premium"} />
 
               {/* Account */}
