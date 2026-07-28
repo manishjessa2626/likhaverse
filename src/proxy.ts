@@ -11,12 +11,42 @@ const SECURITY_HEADERS: Record<string, string> = {
   "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
 }
 
-export function proxy(request: NextRequest) {
-  const response = NextResponse.next()
+const JUNIOR_BLOCKED_STARTS = [
+  "/ai", "/create", "/premium", "/admin", "/dashboard",
+  "/studio", "/wallet",
+  "/api/ai", "/api/premium", "/api/admin",
+  "/api/dashboard", "/api/studio", "/api/wallet",
+  "/api/family/junior",
+]
 
+const JUNIOR_ALLOWED_STARTS = [
+  "/junior", "/api/junior", "/api/uploads",
+  "/api/auth", "/api/family/pin",
+  "/_next", "/favicon", "/logo",
+]
+
+export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  const juniorActive = request.cookies.get("junior_active")?.value
+
+  if (juniorActive) {
+    const isBlocked = JUNIOR_BLOCKED_STARTS.some(
+      (p) => pathname === p || pathname.startsWith(p + "/"),
+    )
+    const isAllowed = JUNIOR_ALLOWED_STARTS.some(
+      (p) => pathname === p || pathname.startsWith(p + "/"),
+    ) || pathname === "/"
+
+    if (isBlocked && !isAllowed) {
+      const url = request.nextUrl.clone()
+      url.pathname = `/junior/${juniorActive}/home`
+      return NextResponse.redirect(url)
+    }
+  }
+
+  const response = NextResponse.next()
   Object.entries(SECURITY_HEADERS).forEach(([key, value]) => response.headers.set(key, value))
   response.headers.set("X-Request-Id", crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`)
-
   return response
 }
 
