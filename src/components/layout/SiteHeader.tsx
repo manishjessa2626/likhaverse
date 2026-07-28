@@ -355,7 +355,6 @@ export function SiteHeader() {
               </div>
 
               <NavLink href="/feed" icon={<Rss size={18} />} label="Newsfeed" onClick={closeMenu} active={pathname === "/feed"} />
-              <NavLink href="/family" icon={<Heart size={18} />} label="Family" onClick={closeMenu} active={pathname.startsWith("/family")} />
               <NavLink href="/film" icon={<Film size={18} />} label="Filmmaker Studio" onClick={closeMenu} active={pathname.startsWith("/film")} />
               <NavLink href="/community" icon={<Users size={18} />} label="Community" onClick={closeMenu} active={pathname.startsWith("/community")} />
 
