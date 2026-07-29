@@ -20,6 +20,7 @@ export const CATEGORIES: Category[] = [
   { id: "family", label: "Family", emoji: "👨‍👩‍👧‍👦", keywords: ["family", "parent", "sibling", "home", "friend"] },
   { id: "bedtime", label: "Bedtime", emoji: "🌙", keywords: ["bedtime", "sleep", "dream", "night", "moon", "star"] },
   { id: "history", label: "History", emoji: "🏛️", keywords: ["history", "ancient", "king", "queen", "castle", "knight"] },
+  { id: "fairytale", label: "Fairy Tale", emoji: "👑", keywords: ["fairy tale", "fairy", "princess", "prince", "castle", "queen", "king", "magic", "enchanted", "cinderella", "snow white", "sleeping beauty", "rapunzel", "beauty and the beast"] },
   { id: "comics", label: "Comics", emoji: "💬", keywords: ["comic", "funny", "joke", "laugh", "humor"] },
 ]
 
