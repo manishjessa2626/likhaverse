@@ -64,6 +64,10 @@ export default function LoginPage() {
         if (popupErr?.code === "auth/unauthorized-domain") {
           throw new Error("This domain is not authorized for Google sign-in. Add 'localhost' to Firebase Console > Authentication > Settings > Authorized domains.")
         }
+        if (popupErr?.code === "auth/operation-not-allowed") {
+          console.error("[auth/login-google]", popupErr.code)
+          throw new Error("Google sign-in is disabled. Enable it in Firebase Console → Authentication → Sign-in method → Google.")
+        }
         throw popupErr
       }
       const idToken = await result.user.getIdToken()
@@ -152,6 +156,9 @@ export default function LoginPage() {
         setError("Too many attempts. Please wait a moment.")
       } else if (fbErr.code === "auth/network-request-failed") {
         setError("Network error. Check your connection.")
+      } else if (fbErr.code === "auth/operation-not-allowed") {
+        console.error("[auth/login-email]", fbErr.code)
+        setError("Email login is disabled. Enable it in Firebase Console → Authentication → Sign-in method → Email/Password.")
       } else {
         setError(err instanceof Error ? err.message : "Something went wrong")
       }

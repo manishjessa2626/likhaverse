@@ -58,9 +58,11 @@ export default function RegisterPage() {
       if (d.error) { setError(d.error); return }
       router.push(`/auth/check-email?email=${encodeURIComponent(email.trim())}`)
     } catch (x: any) {
+      console.error("[auth/register]", x?.code || x)
       const m: Record<string, string> = {
         "auth/email-already-in-use": "Email already registered",
         "auth/weak-password": "Password too weak",
+        "auth/operation-not-allowed": "Email sign-up is disabled. Enable it in Firebase Console → Authentication → Sign-in method → Email/Password.",
       }
       setError(m[x.code] || x.message || "Failed")
     } finally { setPending(false) }

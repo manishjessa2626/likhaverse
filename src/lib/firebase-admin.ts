@@ -10,22 +10,32 @@ function initAdminApp() {
   if (getApps().length) return
 
   if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
-    const serviceAccount = JSON.parse(
-      process.env.FIREBASE_SERVICE_ACCOUNT_KEY,
-    ) as ServiceAccount
-    initializeApp({ credential: cert(serviceAccount) })
-  } else if (hasCredentials) {
-    initializeApp({
-      credential: cert({
-        projectId: process.env.FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: (process.env.FIREBASE_PRIVATE_KEY ?? "").replace(/\\n/g, "\n"),
-      }),
-    })
-  } else {
-    console.warn("[firebase-admin] No Firebase Admin credentials found — running in demo mode")
-    initializeApp({ projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "demo" })
+    try {
+      const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY) as ServiceAccount
+      initializeApp({ credential: cert(serviceAccount) })
+      return
+    } catch (e) {
+      console.error("[firebase-admin] FIREBASE_SERVICE_ACCOUNT_KEY is invalid — falling back:", e)
+    }
   }
+
+  if (hasCredentials) {
+    try {
+      initializeApp({
+        credential: cert({
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+          privateKey: (process.env.FIREBASE_PRIVATE_KEY ?? "").replace(/\\n/g, "\n"),
+        }),
+      })
+      return
+    } catch (e) {
+      console.error("[firebase-admin] Invalid Firebase Admin credentials — running in demo mode:", e)
+    }
+  }
+
+  console.warn("[firebase-admin] No Firebase Admin credentials found — running in demo mode")
+  initializeApp({ projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "demo" })
 }
 
 export const adminApp = (() => { initAdminApp(); return getApps()[0] })()

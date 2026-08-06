@@ -40,7 +40,13 @@ export default function WelcomePage() {
       })
       window.location.href = "/"
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Google sign-in failed")
+      const e = err as { code?: string }
+      if (e.code === "auth/operation-not-allowed") {
+        console.error("[welcome/google]", e.code)
+        setError("Google sign-in is disabled. Enable it in Firebase Console → Authentication → Sign-in method → Google.")
+      } else {
+        setError(err instanceof Error ? err.message : "Google sign-in failed")
+      }
     } finally {
       setPending(null)
     }
@@ -70,7 +76,13 @@ export default function WelcomePage() {
       })
       window.location.href = "/"
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Facebook sign-in failed")
+      const e = err as { code?: string }
+      if (e.code === "auth/operation-not-allowed") {
+        console.error("[welcome/facebook]", e.code)
+        setError("Facebook sign-in is disabled. Enable it in Firebase Console → Authentication → Sign-in method → Facebook.")
+      } else {
+        setError(err instanceof Error ? err.message : "Facebook sign-in failed")
+      }
     } finally {
       setPending(null)
     }
@@ -113,7 +125,13 @@ export default function WelcomePage() {
       sessionStorage.setItem("otp_mode", "phone")
       router.push("/verify-otp")
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Failed to send code")
+      const e = err as { code?: string }
+      if (e.code === "auth/operation-not-allowed") {
+        console.error("[welcome/phone]", e.code)
+        setError("Phone sign-in is disabled. Enable it in Firebase Console → Authentication → Sign-in method → Phone.")
+      } else {
+        setError(err instanceof Error ? err.message : "Failed to send code")
+      }
     } finally {
       setPending(null)
     }
