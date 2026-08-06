@@ -51,6 +51,8 @@ export type StoryMinAggregateOutputType = {
   viewCount: number | null
   completedAt: Date | null
   ageRating: string | null
+  juniorApproved: boolean | null
+  featuredInJunior: boolean | null
   studioBadge: boolean | null
   completedBadge: boolean | null
   original: boolean | null
@@ -72,6 +74,8 @@ export type StoryMaxAggregateOutputType = {
   viewCount: number | null
   completedAt: Date | null
   ageRating: string | null
+  juniorApproved: boolean | null
+  featuredInJunior: boolean | null
   studioBadge: boolean | null
   completedBadge: boolean | null
   original: boolean | null
@@ -93,6 +97,8 @@ export type StoryCountAggregateOutputType = {
   viewCount: number
   completedAt: number
   ageRating: number
+  juniorApproved: number
+  featuredInJunior: number
   studioBadge: number
   completedBadge: number
   original: number
@@ -128,6 +134,8 @@ export type StoryMinAggregateInputType = {
   viewCount?: true
   completedAt?: true
   ageRating?: true
+  juniorApproved?: true
+  featuredInJunior?: true
   studioBadge?: true
   completedBadge?: true
   original?: true
@@ -149,6 +157,8 @@ export type StoryMaxAggregateInputType = {
   viewCount?: true
   completedAt?: true
   ageRating?: true
+  juniorApproved?: true
+  featuredInJunior?: true
   studioBadge?: true
   completedBadge?: true
   original?: true
@@ -170,6 +180,8 @@ export type StoryCountAggregateInputType = {
   viewCount?: true
   completedAt?: true
   ageRating?: true
+  juniorApproved?: true
+  featuredInJunior?: true
   studioBadge?: true
   completedBadge?: true
   original?: true
@@ -278,6 +290,8 @@ export type StoryGroupByOutputType = {
   viewCount: number
   completedAt: Date | null
   ageRating: string
+  juniorApproved: boolean
+  featuredInJunior: boolean
   studioBadge: boolean
   completedBadge: boolean
   original: boolean
@@ -322,6 +336,8 @@ export type StoryWhereInput = {
   viewCount?: Prisma.IntFilter<"Story"> | number
   completedAt?: Prisma.DateTimeNullableFilter<"Story"> | Date | string | null
   ageRating?: Prisma.StringFilter<"Story"> | string
+  juniorApproved?: Prisma.BoolFilter<"Story"> | boolean
+  featuredInJunior?: Prisma.BoolFilter<"Story"> | boolean
   studioBadge?: Prisma.BoolFilter<"Story"> | boolean
   completedBadge?: Prisma.BoolFilter<"Story"> | boolean
   original?: Prisma.BoolFilter<"Story"> | boolean
@@ -365,6 +381,8 @@ export type StoryOrderByWithRelationInput = {
   viewCount?: Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   ageRating?: Prisma.SortOrder
+  juniorApproved?: Prisma.SortOrder
+  featuredInJunior?: Prisma.SortOrder
   studioBadge?: Prisma.SortOrder
   completedBadge?: Prisma.SortOrder
   original?: Prisma.SortOrder
@@ -411,6 +429,8 @@ export type StoryWhereUniqueInput = Prisma.AtLeast<{
   viewCount?: Prisma.IntFilter<"Story"> | number
   completedAt?: Prisma.DateTimeNullableFilter<"Story"> | Date | string | null
   ageRating?: Prisma.StringFilter<"Story"> | string
+  juniorApproved?: Prisma.BoolFilter<"Story"> | boolean
+  featuredInJunior?: Prisma.BoolFilter<"Story"> | boolean
   studioBadge?: Prisma.BoolFilter<"Story"> | boolean
   completedBadge?: Prisma.BoolFilter<"Story"> | boolean
   original?: Prisma.BoolFilter<"Story"> | boolean
@@ -454,6 +474,8 @@ export type StoryOrderByWithAggregationInput = {
   viewCount?: Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   ageRating?: Prisma.SortOrder
+  juniorApproved?: Prisma.SortOrder
+  featuredInJunior?: Prisma.SortOrder
   studioBadge?: Prisma.SortOrder
   completedBadge?: Prisma.SortOrder
   original?: Prisma.SortOrder
@@ -483,6 +505,8 @@ export type StoryScalarWhereWithAggregatesInput = {
   viewCount?: Prisma.IntWithAggregatesFilter<"Story"> | number
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Story"> | Date | string | null
   ageRating?: Prisma.StringWithAggregatesFilter<"Story"> | string
+  juniorApproved?: Prisma.BoolWithAggregatesFilter<"Story"> | boolean
+  featuredInJunior?: Prisma.BoolWithAggregatesFilter<"Story"> | boolean
   studioBadge?: Prisma.BoolWithAggregatesFilter<"Story"> | boolean
   completedBadge?: Prisma.BoolWithAggregatesFilter<"Story"> | boolean
   original?: Prisma.BoolWithAggregatesFilter<"Story"> | boolean
@@ -504,6 +528,8 @@ export type StoryCreateInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -546,6 +572,8 @@ export type StoryUncheckedCreateInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -588,6 +616,8 @@ export type StoryUpdateInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -630,6 +660,8 @@ export type StoryUncheckedUpdateInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -672,6 +704,8 @@ export type StoryCreateManyInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -693,6 +727,8 @@ export type StoryUpdateManyMutationInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -713,6 +749,8 @@ export type StoryUncheckedUpdateManyInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -744,6 +782,8 @@ export type StoryCountOrderByAggregateInput = {
   viewCount?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
+  juniorApproved?: Prisma.SortOrder
+  featuredInJunior?: Prisma.SortOrder
   studioBadge?: Prisma.SortOrder
   completedBadge?: Prisma.SortOrder
   original?: Prisma.SortOrder
@@ -771,6 +811,8 @@ export type StoryMaxOrderByAggregateInput = {
   viewCount?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
+  juniorApproved?: Prisma.SortOrder
+  featuredInJunior?: Prisma.SortOrder
   studioBadge?: Prisma.SortOrder
   completedBadge?: Prisma.SortOrder
   original?: Prisma.SortOrder
@@ -792,6 +834,8 @@ export type StoryMinOrderByAggregateInput = {
   viewCount?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
+  juniorApproved?: Prisma.SortOrder
+  featuredInJunior?: Prisma.SortOrder
   studioBadge?: Prisma.SortOrder
   completedBadge?: Prisma.SortOrder
   original?: Prisma.SortOrder
@@ -1173,6 +1217,8 @@ export type StoryCreateWithoutAuthorInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1214,6 +1260,8 @@ export type StoryUncheckedCreateWithoutAuthorInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1284,6 +1332,8 @@ export type StoryScalarWhereInput = {
   viewCount?: Prisma.IntFilter<"Story"> | number
   completedAt?: Prisma.DateTimeNullableFilter<"Story"> | Date | string | null
   ageRating?: Prisma.StringFilter<"Story"> | string
+  juniorApproved?: Prisma.BoolFilter<"Story"> | boolean
+  featuredInJunior?: Prisma.BoolFilter<"Story"> | boolean
   studioBadge?: Prisma.BoolFilter<"Story"> | boolean
   completedBadge?: Prisma.BoolFilter<"Story"> | boolean
   original?: Prisma.BoolFilter<"Story"> | boolean
@@ -1305,6 +1355,8 @@ export type StoryCreateWithoutSeasonsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1346,6 +1398,8 @@ export type StoryUncheckedCreateWithoutSeasonsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1403,6 +1457,8 @@ export type StoryUpdateWithoutSeasonsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1444,6 +1500,8 @@ export type StoryUncheckedUpdateWithoutSeasonsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1485,6 +1543,8 @@ export type StoryCreateWithoutChaptersInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1526,6 +1586,8 @@ export type StoryUncheckedCreateWithoutChaptersInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1583,6 +1645,8 @@ export type StoryUpdateWithoutChaptersInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1624,6 +1688,8 @@ export type StoryUncheckedUpdateWithoutChaptersInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1665,6 +1731,8 @@ export type StoryCreateWithoutChapterUnlocksInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1706,6 +1774,8 @@ export type StoryUncheckedCreateWithoutChapterUnlocksInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1763,6 +1833,8 @@ export type StoryUpdateWithoutChapterUnlocksInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1804,6 +1876,8 @@ export type StoryUncheckedUpdateWithoutChapterUnlocksInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1845,6 +1919,8 @@ export type StoryCreateWithoutCharactersInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1886,6 +1962,8 @@ export type StoryUncheckedCreateWithoutCharactersInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -1943,6 +2021,8 @@ export type StoryUpdateWithoutCharactersInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1984,6 +2064,8 @@ export type StoryUncheckedUpdateWithoutCharactersInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2025,6 +2107,8 @@ export type StoryCreateWithoutAiGenerationsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2066,6 +2150,8 @@ export type StoryUncheckedCreateWithoutAiGenerationsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2123,6 +2209,8 @@ export type StoryUpdateWithoutAiGenerationsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2164,6 +2252,8 @@ export type StoryUncheckedUpdateWithoutAiGenerationsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2205,6 +2295,8 @@ export type StoryCreateWithoutStudioApplicationsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2246,6 +2338,8 @@ export type StoryUncheckedCreateWithoutStudioApplicationsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2303,6 +2397,8 @@ export type StoryUpdateWithoutStudioApplicationsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2344,6 +2440,8 @@ export type StoryUncheckedUpdateWithoutStudioApplicationsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2385,6 +2483,8 @@ export type StoryCreateWithoutCommentsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2426,6 +2526,8 @@ export type StoryUncheckedCreateWithoutCommentsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2483,6 +2585,8 @@ export type StoryUpdateWithoutCommentsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2524,6 +2628,8 @@ export type StoryUncheckedUpdateWithoutCommentsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2565,6 +2671,8 @@ export type StoryCreateWithoutReactionsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2606,6 +2714,8 @@ export type StoryUncheckedCreateWithoutReactionsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2663,6 +2773,8 @@ export type StoryUpdateWithoutReactionsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2704,6 +2816,8 @@ export type StoryUncheckedUpdateWithoutReactionsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2745,6 +2859,8 @@ export type StoryCreateWithoutReportsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2786,6 +2902,8 @@ export type StoryUncheckedCreateWithoutReportsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2843,6 +2961,8 @@ export type StoryUpdateWithoutReportsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2884,6 +3004,8 @@ export type StoryUncheckedUpdateWithoutReportsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2925,6 +3047,8 @@ export type StoryCreateWithoutSavesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -2966,6 +3090,8 @@ export type StoryUncheckedCreateWithoutSavesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3023,6 +3149,8 @@ export type StoryUpdateWithoutSavesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3064,6 +3192,8 @@ export type StoryUncheckedUpdateWithoutSavesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3105,6 +3235,8 @@ export type StoryCreateWithoutViewsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3146,6 +3278,8 @@ export type StoryUncheckedCreateWithoutViewsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3203,6 +3337,8 @@ export type StoryUpdateWithoutViewsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3244,6 +3380,8 @@ export type StoryUncheckedUpdateWithoutViewsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3285,6 +3423,8 @@ export type StoryCreateWithoutWorldBuildingEntriesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3326,6 +3466,8 @@ export type StoryUncheckedCreateWithoutWorldBuildingEntriesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3383,6 +3525,8 @@ export type StoryUpdateWithoutWorldBuildingEntriesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3424,6 +3568,8 @@ export type StoryUncheckedUpdateWithoutWorldBuildingEntriesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3465,6 +3611,8 @@ export type StoryCreateWithoutEnvironmentStudiosInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3506,6 +3654,8 @@ export type StoryUncheckedCreateWithoutEnvironmentStudiosInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3563,6 +3713,8 @@ export type StoryUpdateWithoutEnvironmentStudiosInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3604,6 +3756,8 @@ export type StoryUncheckedUpdateWithoutEnvironmentStudiosInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3645,6 +3799,8 @@ export type StoryCreateWithoutStoryAnalysesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3686,6 +3842,8 @@ export type StoryUncheckedCreateWithoutStoryAnalysesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3743,6 +3901,8 @@ export type StoryUpdateWithoutStoryAnalysesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3784,6 +3944,8 @@ export type StoryUncheckedUpdateWithoutStoryAnalysesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3825,6 +3987,8 @@ export type StoryCreateWithoutStoryboardScenesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3866,6 +4030,8 @@ export type StoryUncheckedCreateWithoutStoryboardScenesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -3923,6 +4089,8 @@ export type StoryUpdateWithoutStoryboardScenesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3964,6 +4132,8 @@ export type StoryUncheckedUpdateWithoutStoryboardScenesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4005,6 +4175,8 @@ export type StoryCreateWithoutStoryLikesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4046,6 +4218,8 @@ export type StoryUncheckedCreateWithoutStoryLikesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4103,6 +4277,8 @@ export type StoryUpdateWithoutStoryLikesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4144,6 +4320,8 @@ export type StoryUncheckedUpdateWithoutStoryLikesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4185,6 +4363,8 @@ export type StoryCreateWithoutFilmProjectsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4226,6 +4406,8 @@ export type StoryUncheckedCreateWithoutFilmProjectsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4283,6 +4465,8 @@ export type StoryUpdateWithoutFilmProjectsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4324,6 +4508,8 @@ export type StoryUncheckedUpdateWithoutFilmProjectsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4365,6 +4551,8 @@ export type StoryCreateWithoutFanArtsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4406,6 +4594,8 @@ export type StoryUncheckedCreateWithoutFanArtsInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4463,6 +4653,8 @@ export type StoryUpdateWithoutFanArtsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4504,6 +4696,8 @@ export type StoryUncheckedUpdateWithoutFanArtsInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4545,6 +4739,8 @@ export type StoryCreateWithoutCharacterVotesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4586,6 +4782,8 @@ export type StoryUncheckedCreateWithoutCharacterVotesInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4643,6 +4841,8 @@ export type StoryUpdateWithoutCharacterVotesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4684,6 +4884,8 @@ export type StoryUncheckedUpdateWithoutCharacterVotesInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4725,6 +4927,8 @@ export type StoryCreateWithoutStoryRemindersInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4766,6 +4970,8 @@ export type StoryUncheckedCreateWithoutStoryRemindersInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4823,6 +5029,8 @@ export type StoryUpdateWithoutStoryRemindersInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4864,6 +5072,8 @@ export type StoryUncheckedUpdateWithoutStoryRemindersInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4905,6 +5115,8 @@ export type StoryCreateWithoutReadingProgressInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -4946,6 +5158,8 @@ export type StoryUncheckedCreateWithoutReadingProgressInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -5003,6 +5217,8 @@ export type StoryUpdateWithoutReadingProgressInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5044,6 +5260,8 @@ export type StoryUncheckedUpdateWithoutReadingProgressInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5085,6 +5303,8 @@ export type StoryCreateManyAuthorInput = {
   viewCount?: number
   completedAt?: Date | string | null
   ageRating?: string
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -5105,6 +5325,8 @@ export type StoryUpdateWithoutAuthorInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5146,6 +5368,8 @@ export type StoryUncheckedUpdateWithoutAuthorInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5187,6 +5411,8 @@ export type StoryUncheckedUpdateManyWithoutAuthorInput = {
   viewCount?: Prisma.IntFieldUpdateOperationsInput | number
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
+  juniorApproved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featuredInJunior?: Prisma.BoolFieldUpdateOperationsInput | boolean
   studioBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   completedBadge?: Prisma.BoolFieldUpdateOperationsInput | boolean
   original?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5418,6 +5644,8 @@ export type StorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   viewCount?: boolean
   completedAt?: boolean
   ageRating?: boolean
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -5462,6 +5690,8 @@ export type StorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   viewCount?: boolean
   completedAt?: boolean
   ageRating?: boolean
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -5484,6 +5714,8 @@ export type StorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   viewCount?: boolean
   completedAt?: boolean
   ageRating?: boolean
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -5506,6 +5738,8 @@ export type StorySelectScalar = {
   viewCount?: boolean
   completedAt?: boolean
   ageRating?: boolean
+  juniorApproved?: boolean
+  featuredInJunior?: boolean
   studioBadge?: boolean
   completedBadge?: boolean
   original?: boolean
@@ -5514,7 +5748,7 @@ export type StorySelectScalar = {
   authorId?: boolean
 }
 
-export type StoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "cover" | "tags" | "status" | "accessType" | "freePreviewChapters" | "wordCount" | "viewCount" | "completedAt" | "ageRating" | "studioBadge" | "completedBadge" | "original" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["story"]>
+export type StoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "cover" | "tags" | "status" | "accessType" | "freePreviewChapters" | "wordCount" | "viewCount" | "completedAt" | "ageRating" | "juniorApproved" | "featuredInJunior" | "studioBadge" | "completedBadge" | "original" | "createdAt" | "updatedAt" | "authorId", ExtArgs["result"]["story"]>
 export type StoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   chapters?: boolean | Prisma.Story$chaptersArgs<ExtArgs>
@@ -5586,6 +5820,8 @@ export type $StoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     viewCount: number
     completedAt: Date | null
     ageRating: string
+    juniorApproved: boolean
+    featuredInJunior: boolean
     studioBadge: boolean
     completedBadge: boolean
     original: boolean
@@ -6049,6 +6285,8 @@ export interface StoryFieldRefs {
   readonly viewCount: Prisma.FieldRef<"Story", 'Int'>
   readonly completedAt: Prisma.FieldRef<"Story", 'DateTime'>
   readonly ageRating: Prisma.FieldRef<"Story", 'String'>
+  readonly juniorApproved: Prisma.FieldRef<"Story", 'Boolean'>
+  readonly featuredInJunior: Prisma.FieldRef<"Story", 'Boolean'>
   readonly studioBadge: Prisma.FieldRef<"Story", 'Boolean'>
   readonly completedBadge: Prisma.FieldRef<"Story", 'Boolean'>
   readonly original: Prisma.FieldRef<"Story", 'Boolean'>

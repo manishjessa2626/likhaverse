@@ -15,6 +15,7 @@ interface Story {
   cover: string | null
   description: string | null
   tags: string | null
+  ageRating: string
   status: string
   accessType: string
   freePreviewChapters: number
@@ -55,6 +56,7 @@ export default function EditStoryPage({ params }: { params: Promise<{ storyId: s
           cover: s.cover,
           description: s.description,
           tags: s.tags,
+          ageRating: s.ageRating || "EARLY_READERS",
           status: s.status,
           accessType: s.accessType || "FREEMIUM",
           freePreviewChapters: s.freePreviewChapters,
@@ -240,20 +242,41 @@ export default function EditStoryPage({ params }: { params: Promise<{ storyId: s
             </div>
           </div>
 
-          <div>
-            <label htmlFor="status" className="block text-sm font-medium mb-1">
-              Status
-            </label>
-            <select
-              id="status"
-              name="status"
-              defaultValue={story.status}
-              className="block w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="DRAFT">Draft</option>
-              <option value="PUBLISHED">Published</option>
-              <option value="COMPLETED">Completed</option>
-            </select>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="ageRating" className="block text-sm font-medium mb-1">
+                Age Rating
+              </label>
+              <select
+                id="ageRating"
+                name="ageRating"
+                defaultValue={story.ageRating}
+                className="block w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="EARLY_READERS">Early Readers (3-5)</option>
+                <option value="JUNIOR_6">Junior 6+</option>
+                <option value="JUNIOR_9">Junior 9+</option>
+                <option value="TEEN_13">Teen 13+</option>
+                <option value="TEEN_16">Teen 16+</option>
+                <option value="ADULT_18">Adult 18+</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="status" className="block text-sm font-medium mb-1">
+                Status
+              </label>
+              <select
+                id="status"
+                name="status"
+                defaultValue={story.status}
+                className="block w-full rounded-lg border px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="DRAFT">Draft</option>
+                <option value="PUBLISHED">Published</option>
+                <option value="COMPLETED">Completed</option>
+              </select>
+            </div>
           </div>
 
         <div className="flex items-center gap-3">

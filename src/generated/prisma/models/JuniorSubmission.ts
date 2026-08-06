@@ -27,10 +27,12 @@ export type AggregateJuniorSubmission = {
 export type JuniorSubmissionMinAggregateOutputType = {
   id: string | null
   title: string | null
+  genre: string | null
   content: string | null
   coverImage: string | null
   status: string | null
   parentFeedback: string | null
+  notifiedAt: Date | null
   submittedAt: Date | null
   reviewedAt: Date | null
   juniorId: string | null
@@ -40,10 +42,12 @@ export type JuniorSubmissionMinAggregateOutputType = {
 export type JuniorSubmissionMaxAggregateOutputType = {
   id: string | null
   title: string | null
+  genre: string | null
   content: string | null
   coverImage: string | null
   status: string | null
   parentFeedback: string | null
+  notifiedAt: Date | null
   submittedAt: Date | null
   reviewedAt: Date | null
   juniorId: string | null
@@ -53,12 +57,15 @@ export type JuniorSubmissionMaxAggregateOutputType = {
 export type JuniorSubmissionCountAggregateOutputType = {
   id: number
   title: number
+  genre: number
   content: number
   chapters: number
   coverImage: number
   illustrations: number
   status: number
+  moderationFlags: number
   parentFeedback: number
+  notifiedAt: number
   submittedAt: number
   reviewedAt: number
   juniorId: number
@@ -70,10 +77,12 @@ export type JuniorSubmissionCountAggregateOutputType = {
 export type JuniorSubmissionMinAggregateInputType = {
   id?: true
   title?: true
+  genre?: true
   content?: true
   coverImage?: true
   status?: true
   parentFeedback?: true
+  notifiedAt?: true
   submittedAt?: true
   reviewedAt?: true
   juniorId?: true
@@ -83,10 +92,12 @@ export type JuniorSubmissionMinAggregateInputType = {
 export type JuniorSubmissionMaxAggregateInputType = {
   id?: true
   title?: true
+  genre?: true
   content?: true
   coverImage?: true
   status?: true
   parentFeedback?: true
+  notifiedAt?: true
   submittedAt?: true
   reviewedAt?: true
   juniorId?: true
@@ -96,12 +107,15 @@ export type JuniorSubmissionMaxAggregateInputType = {
 export type JuniorSubmissionCountAggregateInputType = {
   id?: true
   title?: true
+  genre?: true
   content?: true
   chapters?: true
   coverImage?: true
   illustrations?: true
   status?: true
+  moderationFlags?: true
   parentFeedback?: true
+  notifiedAt?: true
   submittedAt?: true
   reviewedAt?: true
   juniorId?: true
@@ -184,12 +198,15 @@ export type JuniorSubmissionGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type JuniorSubmissionGroupByOutputType = {
   id: string
   title: string
+  genre: string | null
   content: string | null
   chapters: runtime.JsonValue | null
   coverImage: string | null
   illustrations: runtime.JsonValue | null
   status: string
+  moderationFlags: runtime.JsonValue | null
   parentFeedback: string | null
+  notifiedAt: Date | null
   submittedAt: Date
   reviewedAt: Date | null
   juniorId: string
@@ -220,12 +237,15 @@ export type JuniorSubmissionWhereInput = {
   NOT?: Prisma.JuniorSubmissionWhereInput | Prisma.JuniorSubmissionWhereInput[]
   id?: Prisma.StringFilter<"JuniorSubmission"> | string
   title?: Prisma.StringFilter<"JuniorSubmission"> | string
+  genre?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   content?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   chapters?: Prisma.JsonNullableFilter<"JuniorSubmission">
   coverImage?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   illustrations?: Prisma.JsonNullableFilter<"JuniorSubmission">
   status?: Prisma.StringFilter<"JuniorSubmission"> | string
+  moderationFlags?: Prisma.JsonNullableFilter<"JuniorSubmission">
   parentFeedback?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
+  notifiedAt?: Prisma.DateTimeNullableFilter<"JuniorSubmission"> | Date | string | null
   submittedAt?: Prisma.DateTimeFilter<"JuniorSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"JuniorSubmission"> | Date | string | null
   juniorId?: Prisma.StringFilter<"JuniorSubmission"> | string
@@ -236,12 +256,15 @@ export type JuniorSubmissionWhereInput = {
 export type JuniorSubmissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   chapters?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
   illustrations?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderationFlags?: Prisma.SortOrderInput | Prisma.SortOrder
   parentFeedback?: Prisma.SortOrderInput | Prisma.SortOrder
+  notifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   juniorId?: Prisma.SortOrder
@@ -255,12 +278,15 @@ export type JuniorSubmissionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.JuniorSubmissionWhereInput[]
   NOT?: Prisma.JuniorSubmissionWhereInput | Prisma.JuniorSubmissionWhereInput[]
   title?: Prisma.StringFilter<"JuniorSubmission"> | string
+  genre?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   content?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   chapters?: Prisma.JsonNullableFilter<"JuniorSubmission">
   coverImage?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   illustrations?: Prisma.JsonNullableFilter<"JuniorSubmission">
   status?: Prisma.StringFilter<"JuniorSubmission"> | string
+  moderationFlags?: Prisma.JsonNullableFilter<"JuniorSubmission">
   parentFeedback?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
+  notifiedAt?: Prisma.DateTimeNullableFilter<"JuniorSubmission"> | Date | string | null
   submittedAt?: Prisma.DateTimeFilter<"JuniorSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"JuniorSubmission"> | Date | string | null
   juniorId?: Prisma.StringFilter<"JuniorSubmission"> | string
@@ -271,12 +297,15 @@ export type JuniorSubmissionWhereUniqueInput = Prisma.AtLeast<{
 export type JuniorSubmissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   chapters?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
   illustrations?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderationFlags?: Prisma.SortOrderInput | Prisma.SortOrder
   parentFeedback?: Prisma.SortOrderInput | Prisma.SortOrder
+  notifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   juniorId?: Prisma.SortOrder
@@ -292,12 +321,15 @@ export type JuniorSubmissionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.JuniorSubmissionScalarWhereWithAggregatesInput | Prisma.JuniorSubmissionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"JuniorSubmission"> | string
   title?: Prisma.StringWithAggregatesFilter<"JuniorSubmission"> | string
+  genre?: Prisma.StringNullableWithAggregatesFilter<"JuniorSubmission"> | string | null
   content?: Prisma.StringNullableWithAggregatesFilter<"JuniorSubmission"> | string | null
   chapters?: Prisma.JsonNullableWithAggregatesFilter<"JuniorSubmission">
   coverImage?: Prisma.StringNullableWithAggregatesFilter<"JuniorSubmission"> | string | null
   illustrations?: Prisma.JsonNullableWithAggregatesFilter<"JuniorSubmission">
   status?: Prisma.StringWithAggregatesFilter<"JuniorSubmission"> | string
+  moderationFlags?: Prisma.JsonNullableWithAggregatesFilter<"JuniorSubmission">
   parentFeedback?: Prisma.StringNullableWithAggregatesFilter<"JuniorSubmission"> | string | null
+  notifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"JuniorSubmission"> | Date | string | null
   submittedAt?: Prisma.DateTimeWithAggregatesFilter<"JuniorSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"JuniorSubmission"> | Date | string | null
   juniorId?: Prisma.StringWithAggregatesFilter<"JuniorSubmission"> | string
@@ -307,12 +339,15 @@ export type JuniorSubmissionScalarWhereWithAggregatesInput = {
 export type JuniorSubmissionCreateInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: string | null
+  notifiedAt?: Date | string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   draftId?: string | null
@@ -322,12 +357,15 @@ export type JuniorSubmissionCreateInput = {
 export type JuniorSubmissionUncheckedCreateInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: string | null
+  notifiedAt?: Date | string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   juniorId: string
@@ -337,12 +375,15 @@ export type JuniorSubmissionUncheckedCreateInput = {
 export type JuniorSubmissionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   draftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -352,12 +393,15 @@ export type JuniorSubmissionUpdateInput = {
 export type JuniorSubmissionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   juniorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -367,12 +411,15 @@ export type JuniorSubmissionUncheckedUpdateInput = {
 export type JuniorSubmissionCreateManyInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: string | null
+  notifiedAt?: Date | string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   juniorId: string
@@ -382,12 +429,15 @@ export type JuniorSubmissionCreateManyInput = {
 export type JuniorSubmissionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   draftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -396,12 +446,15 @@ export type JuniorSubmissionUpdateManyMutationInput = {
 export type JuniorSubmissionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   juniorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -421,12 +474,15 @@ export type JuniorSubmissionOrderByRelationAggregateInput = {
 export type JuniorSubmissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
   content?: Prisma.SortOrder
   chapters?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   illustrations?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  moderationFlags?: Prisma.SortOrder
   parentFeedback?: Prisma.SortOrder
+  notifiedAt?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   juniorId?: Prisma.SortOrder
@@ -436,10 +492,12 @@ export type JuniorSubmissionCountOrderByAggregateInput = {
 export type JuniorSubmissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   status?: Prisma.SortOrder
   parentFeedback?: Prisma.SortOrder
+  notifiedAt?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   juniorId?: Prisma.SortOrder
@@ -449,10 +507,12 @@ export type JuniorSubmissionMaxOrderByAggregateInput = {
 export type JuniorSubmissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   status?: Prisma.SortOrder
   parentFeedback?: Prisma.SortOrder
+  notifiedAt?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   juniorId?: Prisma.SortOrder
@@ -504,12 +564,15 @@ export type JuniorSubmissionUncheckedUpdateManyWithoutJuniorNestedInput = {
 export type JuniorSubmissionCreateWithoutJuniorInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: string | null
+  notifiedAt?: Date | string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   draftId?: string | null
@@ -518,12 +581,15 @@ export type JuniorSubmissionCreateWithoutJuniorInput = {
 export type JuniorSubmissionUncheckedCreateWithoutJuniorInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: string | null
+  notifiedAt?: Date | string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   draftId?: string | null
@@ -561,12 +627,15 @@ export type JuniorSubmissionScalarWhereInput = {
   NOT?: Prisma.JuniorSubmissionScalarWhereInput | Prisma.JuniorSubmissionScalarWhereInput[]
   id?: Prisma.StringFilter<"JuniorSubmission"> | string
   title?: Prisma.StringFilter<"JuniorSubmission"> | string
+  genre?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   content?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   chapters?: Prisma.JsonNullableFilter<"JuniorSubmission">
   coverImage?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
   illustrations?: Prisma.JsonNullableFilter<"JuniorSubmission">
   status?: Prisma.StringFilter<"JuniorSubmission"> | string
+  moderationFlags?: Prisma.JsonNullableFilter<"JuniorSubmission">
   parentFeedback?: Prisma.StringNullableFilter<"JuniorSubmission"> | string | null
+  notifiedAt?: Prisma.DateTimeNullableFilter<"JuniorSubmission"> | Date | string | null
   submittedAt?: Prisma.DateTimeFilter<"JuniorSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"JuniorSubmission"> | Date | string | null
   juniorId?: Prisma.StringFilter<"JuniorSubmission"> | string
@@ -576,12 +645,15 @@ export type JuniorSubmissionScalarWhereInput = {
 export type JuniorSubmissionCreateManyJuniorInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: string | null
+  notifiedAt?: Date | string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   draftId?: string | null
@@ -590,12 +662,15 @@ export type JuniorSubmissionCreateManyJuniorInput = {
 export type JuniorSubmissionUpdateWithoutJuniorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   draftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -604,12 +679,15 @@ export type JuniorSubmissionUpdateWithoutJuniorInput = {
 export type JuniorSubmissionUncheckedUpdateWithoutJuniorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   draftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -618,12 +696,15 @@ export type JuniorSubmissionUncheckedUpdateWithoutJuniorInput = {
 export type JuniorSubmissionUncheckedUpdateManyWithoutJuniorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   illustrations?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  moderationFlags?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   parentFeedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   draftId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -634,12 +715,15 @@ export type JuniorSubmissionUncheckedUpdateManyWithoutJuniorInput = {
 export type JuniorSubmissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
   illustrations?: boolean
   status?: boolean
+  moderationFlags?: boolean
   parentFeedback?: boolean
+  notifiedAt?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   juniorId?: boolean
@@ -650,12 +734,15 @@ export type JuniorSubmissionSelect<ExtArgs extends runtime.Types.Extensions.Inte
 export type JuniorSubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
   illustrations?: boolean
   status?: boolean
+  moderationFlags?: boolean
   parentFeedback?: boolean
+  notifiedAt?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   juniorId?: boolean
@@ -666,12 +753,15 @@ export type JuniorSubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
 export type JuniorSubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
   illustrations?: boolean
   status?: boolean
+  moderationFlags?: boolean
   parentFeedback?: boolean
+  notifiedAt?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   juniorId?: boolean
@@ -682,19 +772,22 @@ export type JuniorSubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
 export type JuniorSubmissionSelectScalar = {
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
   illustrations?: boolean
   status?: boolean
+  moderationFlags?: boolean
   parentFeedback?: boolean
+  notifiedAt?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   juniorId?: boolean
   draftId?: boolean
 }
 
-export type JuniorSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "chapters" | "coverImage" | "illustrations" | "status" | "parentFeedback" | "submittedAt" | "reviewedAt" | "juniorId" | "draftId", ExtArgs["result"]["juniorSubmission"]>
+export type JuniorSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "genre" | "content" | "chapters" | "coverImage" | "illustrations" | "status" | "moderationFlags" | "parentFeedback" | "notifiedAt" | "submittedAt" | "reviewedAt" | "juniorId" | "draftId", ExtArgs["result"]["juniorSubmission"]>
 export type JuniorSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   junior?: boolean | Prisma.JuniorProfileDefaultArgs<ExtArgs>
 }
@@ -713,12 +806,15 @@ export type $JuniorSubmissionPayload<ExtArgs extends runtime.Types.Extensions.In
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
+    genre: string | null
     content: string | null
     chapters: runtime.JsonValue | null
     coverImage: string | null
     illustrations: runtime.JsonValue | null
     status: string
+    moderationFlags: runtime.JsonValue | null
     parentFeedback: string | null
+    notifiedAt: Date | null
     submittedAt: Date
     reviewedAt: Date | null
     juniorId: string
@@ -1149,12 +1245,15 @@ export interface Prisma__JuniorSubmissionClient<T, Null = never, ExtArgs extends
 export interface JuniorSubmissionFieldRefs {
   readonly id: Prisma.FieldRef<"JuniorSubmission", 'String'>
   readonly title: Prisma.FieldRef<"JuniorSubmission", 'String'>
+  readonly genre: Prisma.FieldRef<"JuniorSubmission", 'String'>
   readonly content: Prisma.FieldRef<"JuniorSubmission", 'String'>
   readonly chapters: Prisma.FieldRef<"JuniorSubmission", 'Json'>
   readonly coverImage: Prisma.FieldRef<"JuniorSubmission", 'String'>
   readonly illustrations: Prisma.FieldRef<"JuniorSubmission", 'Json'>
   readonly status: Prisma.FieldRef<"JuniorSubmission", 'String'>
+  readonly moderationFlags: Prisma.FieldRef<"JuniorSubmission", 'Json'>
   readonly parentFeedback: Prisma.FieldRef<"JuniorSubmission", 'String'>
+  readonly notifiedAt: Prisma.FieldRef<"JuniorSubmission", 'DateTime'>
   readonly submittedAt: Prisma.FieldRef<"JuniorSubmission", 'DateTime'>
   readonly reviewedAt: Prisma.FieldRef<"JuniorSubmission", 'DateTime'>
   readonly juniorId: Prisma.FieldRef<"JuniorSubmission", 'String'>

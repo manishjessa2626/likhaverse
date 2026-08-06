@@ -14,6 +14,7 @@ const CreateStorySchema = z.object({
   cover: z.string().optional(),
   tags: z.string().trim().optional(),
   freePreviewChapters: z.coerce.number().int().min(1).max(100).default(5),
+  ageRating: z.enum(["EARLY_READERS", "JUNIOR_6", "JUNIOR_9", "TEEN_13", "TEEN_16", "ADULT_18"]).default("EARLY_READERS"),
 })
 
 const UpdateStorySchema = CreateStorySchema.partial().extend({
@@ -32,6 +33,7 @@ export async function createStory(prevState: unknown, formData: FormData) {
       cover: formData.get("cover"),
       tags: formData.get("tags"),
       freePreviewChapters: formData.get("freePreviewChapters"),
+      ageRating: formData.get("ageRating"),
     })
 
     if (!validated.success) {
@@ -71,6 +73,7 @@ export async function updateStory(storyId: string, prevState: unknown, formData:
       freePreviewChapters: formData.get("freePreviewChapters"),
       status: formData.get("status"),
       accessType: formData.get("accessType"),
+      ageRating: formData.get("ageRating"),
     })
 
     if (!validated.success) {

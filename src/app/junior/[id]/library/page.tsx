@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react"
 import { useParams } from "next/navigation"
 import { BookOpen, Search, Bookmark, Clock, TrendingUp } from "lucide-react"
 import Link from "next/link"
-import { CategoryFilter, CATEGORIES, matchCategory } from "@/components/junior/CategoryFilter"
+import { CategoryFilter, CATEGORIES, matchCategory, isStorySafeForJuniors } from "@/components/junior/CategoryFilter"
 
 interface Story {
   id: string
@@ -13,6 +13,7 @@ interface Story {
   coverImage: string | null
   ageRating: string | null
   tags: string | null
+  juniorApproved: boolean | null
   author: { name: string | null }
 }
 
@@ -29,8 +30,6 @@ interface Bookmark {
   page: number
 }
 
-const SAFE_AGE_RATINGS = ["everyone", "children", "kids", "all", null]
-
 export default function JuniorLibraryPage() {
   const params = useParams()
   const [stories, setStories] = useState<Story[]>([])
@@ -45,17 +44,16 @@ export default function JuniorLibraryPage() {
   useEffect(() => {
     let cancelled = false
     Promise.all([
-      fetch("/api/stories").then((r) => r.json()),
+      fetch(`/api/junior/stories?juniorId=${id}`).then((r) => r.json()),
       fetch(`/api/junior/reading/progress?juniorId=${id}`).then((r) => r.json()),
       fetch(`/api/junior/reading/bookmarks?juniorId=${id}`).then((r) => r.json()),
     ])
       .then(([storiesData, progressData, bookmarksData]) => {
         if (cancelled) return
-        const list: Story[] = storiesData.stories || storiesData || []
-        setStories(list.filter((s: Story) =>
-          SAFE_AGE_RATINGS.includes(s.ageRating) ||
-          (s.tags && !s.tags.toLowerCase().includes("mature") && !s.tags.toLowerCase().includes("adult")),
-        ))
+        const list: Story[] = (storiesData.stories || storiesData || []).filter(isStorySafeForJuniors)
+        const juniorApproved = list.filter((s) => s.juniorApproved)
+        const others = list.filter((s) => !s.juniorApproved)
+        setStories([...juniorApproved, ...others])
         setProgress(Array.isArray(progressData) ? progressData : [])
         setBookmarks(Array.isArray(bookmarksData) ? bookmarksData : [])
       })
@@ -91,7 +89,7 @@ export default function JuniorLibraryPage() {
     <div className="mx-auto max-w-4xl p-4 md:p-8">
       <div className="mb-6 flex items-center gap-3">
         <BookOpen size={24} className="text-purple-500" />
-        <h1 className="text-xl font-bold text-zinc-800 dark:text-zinc-100">Story Library</h1>
+        <h1 className="text-xl font-bold text-zinc-800 dark:text-zinc-100">Junior Library</h1>
       </div>
 
       <div className="relative mb-4">

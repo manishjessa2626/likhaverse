@@ -458,7 +458,8 @@ export const ModelName = {
   JuniorDraft: 'JuniorDraft',
   JuniorSubmission: 'JuniorSubmission',
   JuniorAchievement: 'JuniorAchievement',
-  FamilyBook: 'FamilyBook'
+  FamilyBook: 'FamilyBook',
+  ClassicBook: 'ClassicBook'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -474,7 +475,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile" | "juniorReadingProgress" | "juniorBookmark" | "juniorDraft" | "juniorSubmission" | "juniorAchievement" | "familyBook"
+    modelProps: "user" | "payment" | "userAccount" | "story" | "season" | "chapter" | "chapterUnlock" | "walletTransaction" | "dailyReward" | "adUnlock" | "character" | "aIGeneration" | "aIGenerationLog" | "studioApplication" | "conversation" | "conversationParticipant" | "message" | "comment" | "follow" | "reaction" | "report" | "save" | "notification" | "verificationCode" | "storyView" | "worldBuildingEntry" | "environmentStudio" | "storyAnalysis" | "storyboardScene" | "storyLike" | "filmProject" | "filmCrewMember" | "club" | "clubMember" | "challenge" | "challengeParticipant" | "liveSession" | "liveSessionAttendee" | "event" | "eventAttendee" | "fanArt" | "characterVote" | "rateLimit" | "storyReminder" | "readingProgress" | "post" | "postLike" | "postComment" | "myDayStory" | "postSave" | "reel" | "reelLike" | "reelComment" | "idempotencyKey" | "parentPin" | "juniorProfile" | "juniorReadingProgress" | "juniorBookmark" | "juniorDraft" | "juniorSubmission" | "juniorAchievement" | "familyBook" | "classicBook"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5066,6 +5067,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ClassicBook: {
+      payload: Prisma.$ClassicBookPayload<ExtArgs>
+      fields: Prisma.ClassicBookFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ClassicBookFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ClassicBookFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>
+        }
+        findFirst: {
+          args: Prisma.ClassicBookFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ClassicBookFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>
+        }
+        findMany: {
+          args: Prisma.ClassicBookFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>[]
+        }
+        create: {
+          args: Prisma.ClassicBookCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>
+        }
+        createMany: {
+          args: Prisma.ClassicBookCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ClassicBookCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>[]
+        }
+        delete: {
+          args: Prisma.ClassicBookDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>
+        }
+        update: {
+          args: Prisma.ClassicBookUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>
+        }
+        deleteMany: {
+          args: Prisma.ClassicBookDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ClassicBookUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ClassicBookUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>[]
+        }
+        upsert: {
+          args: Prisma.ClassicBookUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ClassicBookPayload>
+        }
+        aggregate: {
+          args: Prisma.ClassicBookAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateClassicBook>
+        }
+        groupBy: {
+          args: Prisma.ClassicBookGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClassicBookGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ClassicBookCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ClassicBookCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -5109,11 +5184,14 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  username: 'username',
   password: 'password',
   phone: 'phone',
   provider: 'provider',
   providerId: 'providerId',
+  firebaseUid: 'firebaseUid',
   isVerified: 'isVerified',
+  verifiedAt: 'verifiedAt',
   role: 'role',
   bio: 'bio',
   avatar: 'avatar',
@@ -5174,6 +5252,8 @@ export const StoryScalarFieldEnum = {
   viewCount: 'viewCount',
   completedAt: 'completedAt',
   ageRating: 'ageRating',
+  juniorApproved: 'juniorApproved',
+  featuredInJunior: 'featuredInJunior',
   studioBadge: 'studioBadge',
   completedBadge: 'completedBadge',
   original: 'original',
@@ -5915,6 +5995,7 @@ export type JuniorBookmarkScalarFieldEnum = (typeof JuniorBookmarkScalarFieldEnu
 export const JuniorDraftScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  genre: 'genre',
   content: 'content',
   chapters: 'chapters',
   coverImage: 'coverImage',
@@ -5932,12 +6013,15 @@ export type JuniorDraftScalarFieldEnum = (typeof JuniorDraftScalarFieldEnum)[key
 export const JuniorSubmissionScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  genre: 'genre',
   content: 'content',
   chapters: 'chapters',
   coverImage: 'coverImage',
   illustrations: 'illustrations',
   status: 'status',
+  moderationFlags: 'moderationFlags',
   parentFeedback: 'parentFeedback',
+  notifiedAt: 'notifiedAt',
   submittedAt: 'submittedAt',
   reviewedAt: 'reviewedAt',
   juniorId: 'juniorId',
@@ -5973,6 +6057,24 @@ export const FamilyBookScalarFieldEnum = {
 } as const
 
 export type FamilyBookScalarFieldEnum = (typeof FamilyBookScalarFieldEnum)[keyof typeof FamilyBookScalarFieldEnum]
+
+
+export const ClassicBookScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  author: 'author',
+  description: 'description',
+  coverImage: 'coverImage',
+  category: 'category',
+  source: 'source',
+  sourceUrl: 'sourceUrl',
+  contentUrl: 'contentUrl',
+  language: 'language',
+  addedById: 'addedById',
+  addedAt: 'addedAt'
+} as const
+
+export type ClassicBookScalarFieldEnum = (typeof ClassicBookScalarFieldEnum)[keyof typeof ClassicBookScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -6311,6 +6413,7 @@ export type GlobalOmitConfig = {
   juniorSubmission?: Prisma.JuniorSubmissionOmit
   juniorAchievement?: Prisma.JuniorAchievementOmit
   familyBook?: Prisma.FamilyBookOmit
+  classicBook?: Prisma.ClassicBookOmit
 }
 
 /* Types for Logging */

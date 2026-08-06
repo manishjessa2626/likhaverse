@@ -5,10 +5,12 @@ import { useParams } from "next/navigation"
 import { PenLine, Save, Trash2, Image, BookUp, Clock, FileText } from "lucide-react"
 import { ChapterEditor, type Chapter } from "@/components/junior/ChapterEditor"
 import { ImaginationPrompts } from "@/components/junior/ImaginationPrompts"
+import { SAFE_GENRE_LABELS, SAFE_GENRE_EMOJIS, type SafeGenre } from "@/lib/junior-safety"
 
 interface SavedDraft {
   id: string
   title: string
+  genre: string | null
   wordCount: number
   fontSize: number
   updatedAt: string
@@ -28,6 +30,7 @@ export default function JuniorWritePage() {
   const params = useParams()
   const id = params.id as string
   const [title, setTitle] = useState("")
+  const [genre, setGenre] = useState<string>("")
   const [text, setText] = useState("")
   const [chapters, setChapters] = useState<Chapter[]>([])
   const [useChapters, setUseChapters] = useState(false)
@@ -42,6 +45,7 @@ export default function JuniorWritePage() {
   const [submitting, setSubmitting] = useState(false)
   const [imagination, setImagination] = useState({ role: "", location: "", scenario: "" })
   const [submitted, setSubmitted] = useState(false)
+  const [submissionFlagged, setSubmissionFlagged] = useState(false)
   const [submitError, setSubmitError] = useState("")
   const autosaveRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const [encouragement] = useState(() => WORDS_OF_ENCOURAGEMENT[Math.floor(Math.random() * WORDS_OF_ENCOURAGEMENT.length)])
@@ -74,6 +78,7 @@ export default function JuniorWritePage() {
           juniorId: id,
           id: draftId,
           title: title || "Untitled",
+          genre: genre || undefined,
           content,
           chapters: chaptersData,
           coverImage,
@@ -104,6 +109,7 @@ export default function JuniorWritePage() {
       const data = await res.json()
       setDraftId(data.id)
       setTitle(data.title)
+      setGenre(data.genre || "")
       setFontSize(data.fontSize || 24)
       setCoverImage(data.coverImage || null)
       if (data.chapters && Array.isArray(data.chapters)) {
@@ -156,8 +162,10 @@ export default function JuniorWritePage() {
 
   const handlePublish = async () => {
     if (!title.trim()) return
+    if (!genre) { setSubmitError("Please select a genre for your story"); return }
     setSubmitting(true)
     setSubmitError("")
+    setSubmissionFlagged(false)
     try {
       const res = await fetch("/api/junior/writing/submissions", {
         method: "POST",
@@ -166,12 +174,18 @@ export default function JuniorWritePage() {
           juniorId: id,
           draftId,
           title: title.trim(),
+          genre,
           content: useChapters ? undefined : text,
           chapters: useChapters ? chapters : undefined,
           coverImage,
         }),
       })
-      if (res.ok) { setSubmitted(true); return }
+      if (res.ok) {
+        const data = await res.json()
+        setSubmissionFlagged(data.status === "FLAGGED")
+        setSubmitted(true)
+        return
+      }
       const err = await res.json()
       setSubmitError(err.error || "Failed to submit")
     } catch { setSubmitError("Something went wrong") } finally {
@@ -182,22 +196,34 @@ export default function JuniorWritePage() {
   const newDraft = () => {
     setDraftId(null)
     setTitle("")
+    setGenre("")
     setText("")
     setChapters([])
     setUseChapters(false)
     setCoverImage(null)
     setIllustrations([])
     setSubmitted(false)
+    setSubmissionFlagged(false)
     setImagination({ role: "", location: "", scenario: "" })
   }
 
   if (submitted) {
     return (
       <div className="mx-auto max-w-3xl p-4 md:p-8">
-        <div className="rounded-2xl border border-purple-200/60 bg-white/80 p-10 text-center backdrop-blur-sm dark:border-zinc-700/60 dark:bg-zinc-800/80">
-          <p className="text-6xl mb-4">🎉</p>
-          <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-2">Submitted for Review!</h2>
-          <p className="text-sm text-zinc-500 mb-6">Your parent will review it soon. Keep writing!</p>
+        <div className={`rounded-2xl border p-10 text-center backdrop-blur-sm ${
+          submissionFlagged
+            ? "border-amber-200/60 bg-amber-50/80 dark:border-amber-900/60 dark:bg-amber-900/20"
+            : "border-purple-200/60 bg-white/80 dark:border-zinc-700/60 dark:bg-zinc-800/80"
+        }`}>
+          <p className="text-6xl mb-4">{submissionFlagged ? "👀" : "🎉"}</p>
+          <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100 mb-2">
+            {submissionFlagged ? "Submitted — Needs Review" : "Submitted for Review!"}
+          </h2>
+          <p className="text-sm text-zinc-500 mb-6">
+            {submissionFlagged
+              ? "Some parts need a parent's review before this can be shared. That's okay!"
+              : "Your parent will review it soon. Keep writing!"}
+          </p>
           <div className="flex justify-center gap-3">
             <button onClick={newDraft}
               className="rounded-xl bg-purple-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-purple-500">
@@ -277,6 +303,30 @@ export default function JuniorWritePage() {
         style={{ fontSize: `${Math.min(fontSize + 8, 48)}px` }}
         className="w-full rounded-xl border border-purple-200/60 bg-white/70 px-4 py-3 font-bold text-zinc-800 placeholder:text-zinc-300 focus:border-purple-400 focus:outline-none dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-100 mb-4"
       />
+
+      <div className="mb-4">
+        <label className="mb-2 block text-xs font-medium text-zinc-500 dark:text-zinc-400">Choose your story genre</label>
+        <div className="flex flex-wrap gap-2">
+          {(Object.entries(SAFE_GENRE_LABELS) as [string, string][]).map(([key, label]) => {
+            const emoji = SAFE_GENRE_EMOJIS[key as SafeGenre] || "📖"
+            const isSelected = genre === key
+            return (
+              <button
+                key={key}
+                onClick={() => setGenre(isSelected ? "" : key)}
+                className={`flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-medium transition-all ${
+                  isSelected
+                    ? "border-pink-400 bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-300"
+                    : "border-purple-200/60 bg-white/70 text-zinc-600 hover:border-purple-300 dark:border-zinc-700/60 dark:bg-zinc-800/70 dark:text-zinc-400"
+                }`}
+              >
+                <span>{emoji}</span>
+                <span>{label}</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
 
       <div className="mb-4 flex items-center gap-2">
         <button

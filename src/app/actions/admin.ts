@@ -138,6 +138,72 @@ export async function toggleStoryFlag(storyId: string, field: string, value: boo
   revalidatePath("/admin/stories")
 }
 
+const VALID_AGE_RATINGS = ["EARLY_READERS", "JUNIOR_6", "JUNIOR_9", "TEEN_13", "TEEN_16", "ADULT_18"]
+
+export async function updateStoryAgeRating(storyId: string, ageRating: string) {
+  await requireAdmin()
+  if (!VALID_AGE_RATINGS.includes(ageRating)) {
+    throw new Error(`Invalid age rating: ${ageRating}`)
+  }
+  await prisma.story.update({ where: { id: storyId }, data: { ageRating } })
+  revalidatePath("/admin/stories")
+}
+
+// ─── CLASSIC LIBRARY ───
+
+const CLASSIC_CATEGORIES = ["BEDTIME", "FAIRY_TALE", "ANIMAL", "CLASSIC_ADVENTURE", "EDUCATIONAL"]
+
+export async function getClassicBooks(page = 1) {
+  await requireAdmin()
+  const take = 20
+  const [books, total] = await Promise.all([
+    prisma.classicBook.findMany({
+      orderBy: { addedAt: "desc" }, take, skip: (page - 1) * take,
+      include: { addedBy: { select: { id: true, name: true } } },
+    }),
+    prisma.classicBook.count(),
+  ])
+  return { books, total, pages: Math.ceil(total / take) }
+}
+
+export async function addClassicBook(data: {
+  title: string
+  author: string
+  description?: string
+  coverImage?: string
+  category: string
+  source: string
+  sourceUrl?: string
+  contentUrl?: string
+  language?: string
+}) {
+  const user = await requireAdmin()
+  if (!CLASSIC_CATEGORIES.includes(data.category)) {
+    throw new Error(`Invalid category: ${data.category}`)
+  }
+  await prisma.classicBook.create({
+    data: {
+      title: data.title,
+      author: data.author,
+      description: data.description,
+      coverImage: data.coverImage,
+      category: data.category,
+      source: data.source,
+      sourceUrl: data.sourceUrl,
+      contentUrl: data.contentUrl,
+      language: data.language || "en",
+      addedById: user.id,
+    },
+  })
+  revalidatePath("/admin/classic-library")
+}
+
+export async function removeClassicBook(bookId: string) {
+  await requireAdmin()
+  await prisma.classicBook.delete({ where: { id: bookId } })
+  revalidatePath("/admin/classic-library")
+}
+
 // ─── PAYMENTS ───
 
 export async function getPayments(page = 1) {

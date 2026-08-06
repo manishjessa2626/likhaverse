@@ -1210,7 +1210,11 @@ ALTER TABLE "ReelComment" ADD CONSTRAINT "ReelComment_reelId_fkey" FOREIGN KEY (
 ALTER TABLE "ReelComment" ADD CONSTRAINT "ReelComment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AlterTable: Add ageRating to Story
-ALTER TABLE "Story" ADD COLUMN IF NOT EXISTS "ageRating" TEXT NOT NULL DEFAULT 'ALL';
+ALTER TABLE "Story" ADD COLUMN IF NOT EXISTS "ageRating" TEXT NOT NULL DEFAULT 'EARLY_READERS';
+
+-- AlterTable: Add juniorApproved and featuredInJunior to Story
+ALTER TABLE "Story" ADD COLUMN IF NOT EXISTS "juniorApproved" BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE "Story" ADD COLUMN IF NOT EXISTS "featuredInJunior" BOOLEAN NOT NULL DEFAULT false;
 
 -- AlterTable: Add firebaseUid, username, verifiedAt to User
 ALTER TABLE "User" ADD COLUMN IF NOT EXISTS "firebaseUid" TEXT;
@@ -1277,6 +1281,7 @@ CREATE TABLE IF NOT EXISTS "JuniorBookmark" (
 CREATE TABLE IF NOT EXISTS "JuniorDraft" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "genre" TEXT,
     "content" TEXT,
     "chapters" JSONB,
     "coverImage" TEXT,
@@ -1293,12 +1298,15 @@ CREATE TABLE IF NOT EXISTS "JuniorDraft" (
 CREATE TABLE IF NOT EXISTS "JuniorSubmission" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "genre" TEXT,
     "content" TEXT,
     "chapters" JSONB,
     "coverImage" TEXT,
     "illustrations" JSONB,
-    "status" TEXT NOT NULL DEFAULT 'PENDING',
+    "status" TEXT NOT NULL DEFAULT 'DRAFT',
+    "moderationFlags" JSONB,
     "parentFeedback" TEXT,
+    "notifiedAt" TIMESTAMP(3),
     "submittedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "reviewedAt" TIMESTAMP(3),
     "juniorId" TEXT NOT NULL,
@@ -1394,4 +1402,33 @@ ALTER TABLE "JuniorAchievement" ADD CONSTRAINT "JuniorAchievement_juniorId_fkey"
 
 -- AddForeignKey
 ALTER TABLE "FamilyBook" ADD CONSTRAINT "FamilyBook_juniorId_fkey" FOREIGN KEY ("juniorId") REFERENCES "JuniorProfile"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- CreateTable: ClassicBook
+CREATE TABLE IF NOT EXISTS "ClassicBook" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "description" TEXT,
+    "coverImage" TEXT,
+    "category" TEXT NOT NULL,
+    "source" TEXT NOT NULL,
+    "sourceUrl" TEXT,
+    "contentUrl" TEXT,
+    "language" TEXT NOT NULL DEFAULT 'en',
+    "addedById" TEXT NOT NULL,
+    "addedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "ClassicBook_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "ClassicBook_category_idx" ON "ClassicBook"("category");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "ClassicBook_title_idx" ON "ClassicBook"("title");
+
+-- CreateIndex
+CREATE INDEX IF NOT EXISTS "ClassicBook_language_idx" ON "ClassicBook"("language");
+
+-- AddForeignKey
+ALTER TABLE "ClassicBook" ADD CONSTRAINT "ClassicBook_addedById_fkey" FOREIGN KEY ("addedById") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 

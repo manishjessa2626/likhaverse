@@ -32,7 +32,7 @@ export default function JuniorStoryReaderPage() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`/api/stories/${storyId}`).then((r) => r.json()),
+      fetch(`/api/junior/stories/${storyId}`).then((r) => r.json()),
       fetch(`/api/junior/reading/progress?juniorId=${id}&storyId=${storyId}`).then((r) => r.json()),
       fetch(`/api/junior/reading/bookmarks?juniorId=${id}`).then((r) => r.json()),
     ])

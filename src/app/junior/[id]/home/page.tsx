@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import Link from "next/link"
-import { Sparkles, BookOpen, PenLine, Trophy, Sunrise, Star, Clock, TrendingUp } from "lucide-react"
+import { Sparkles, BookOpen, BookMarked, PenLine, Trophy, Sunrise, Star, Clock, TrendingUp } from "lucide-react"
 
 interface Profile {
   id: string
@@ -45,7 +45,7 @@ export default function JuniorHomePage() {
     Promise.all([
       fetch(`/api/family/junior/${id}`).then((r) => { if (!r.ok) throw new Error("Failed to load profile"); return r.json() }),
       fetch(`/api/junior/reading/progress?juniorId=${id}`).then((r) => r.json()),
-      fetch("/api/stories").then((r) => r.json()),
+      fetch(`/api/junior/stories?juniorId=${id}`).then((r) => r.json()),
     ])
       .then(([profileData, progressData, storiesData]) => {
         if (cancelled) return
@@ -130,6 +130,13 @@ export default function JuniorHomePage() {
           <h3 className="font-bold text-zinc-800 dark:text-zinc-100">Read Stories</h3>
           <p className="text-xs text-zinc-500 mt-1">Discover magical adventures</p>
           {profile.booksRead > 0 && <p className="mt-2 text-[10px] text-purple-500">{profile.booksRead} read</p>}
+        </Link>
+
+        <Link href={`/junior/${id}/classic-library`}
+          className="group rounded-2xl border border-purple-200/60 bg-white/80 p-6 backdrop-blur-sm transition-all hover:border-emerald-400 hover:shadow-lg dark:border-zinc-700/60 dark:bg-zinc-800/80">
+          <BookMarked size={28} className="mb-3 text-emerald-500" />
+          <h3 className="font-bold text-zinc-800 dark:text-zinc-100">Classic Library</h3>
+          <p className="text-xs text-zinc-500 mt-1">Timeless tales for all ages</p>
         </Link>
 
         <Link href={`/junior/${id}/write`}

@@ -351,3 +351,8 @@ export type JuniorAchievement = Prisma.JuniorAchievementModel
  * 
  */
 export type FamilyBook = Prisma.FamilyBookModel
+/**
+ * Model ClassicBook
+ * 
+ */
+export type ClassicBook = Prisma.ClassicBookModel

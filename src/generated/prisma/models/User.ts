@@ -44,11 +44,14 @@ export type UserMinAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
+  username: string | null
   password: string | null
   phone: string | null
   provider: string | null
   providerId: string | null
+  firebaseUid: string | null
   isVerified: boolean | null
+  verifiedAt: Date | null
   role: string | null
   bio: string | null
   avatar: string | null
@@ -73,11 +76,14 @@ export type UserMaxAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
+  username: string | null
   password: string | null
   phone: string | null
   provider: string | null
   providerId: string | null
+  firebaseUid: string | null
   isVerified: boolean | null
+  verifiedAt: Date | null
   role: string | null
   bio: string | null
   avatar: string | null
@@ -102,11 +108,14 @@ export type UserCountAggregateOutputType = {
   id: number
   name: number
   email: number
+  username: number
   password: number
   phone: number
   provider: number
   providerId: number
+  firebaseUid: number
   isVerified: number
+  verifiedAt: number
   role: number
   bio: number
   avatar: number
@@ -147,11 +156,14 @@ export type UserMinAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  username?: true
   password?: true
   phone?: true
   provider?: true
   providerId?: true
+  firebaseUid?: true
   isVerified?: true
+  verifiedAt?: true
   role?: true
   bio?: true
   avatar?: true
@@ -176,11 +188,14 @@ export type UserMaxAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  username?: true
   password?: true
   phone?: true
   provider?: true
   providerId?: true
+  firebaseUid?: true
   isVerified?: true
+  verifiedAt?: true
   role?: true
   bio?: true
   avatar?: true
@@ -205,11 +220,14 @@ export type UserCountAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  username?: true
   password?: true
   phone?: true
   provider?: true
   providerId?: true
+  firebaseUid?: true
   isVerified?: true
+  verifiedAt?: true
   role?: true
   bio?: true
   avatar?: true
@@ -321,11 +339,14 @@ export type UserGroupByOutputType = {
   id: string
   name: string
   email: string | null
+  username: string | null
   password: string | null
   phone: string | null
   provider: string
   providerId: string | null
+  firebaseUid: string | null
   isVerified: boolean
+  verifiedAt: Date | null
   role: string
   bio: string | null
   avatar: string | null
@@ -373,11 +394,14 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringNullableFilter<"User"> | string | null
+  username?: Prisma.StringNullableFilter<"User"> | string | null
   password?: Prisma.StringNullableFilter<"User"> | string | null
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   provider?: Prisma.StringFilter<"User"> | string
   providerId?: Prisma.StringNullableFilter<"User"> | string | null
+  firebaseUid?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
+  verifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.StringFilter<"User"> | string
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
@@ -447,17 +471,21 @@ export type UserWhereInput = {
   characterVotes?: Prisma.CharacterVoteListRelationFilter
   parentPin?: Prisma.XOR<Prisma.ParentPinNullableScalarRelationFilter, Prisma.ParentPinWhereInput> | null
   juniorProfiles?: Prisma.JuniorProfileListRelationFilter
+  classicBooks?: Prisma.ClassicBookListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  username?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   provider?: Prisma.SortOrder
   providerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  firebaseUid?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -527,12 +555,15 @@ export type UserOrderByWithRelationInput = {
   characterVotes?: Prisma.CharacterVoteOrderByRelationAggregateInput
   parentPin?: Prisma.ParentPinOrderByWithRelationInput
   juniorProfiles?: Prisma.JuniorProfileOrderByRelationAggregateInput
+  classicBooks?: Prisma.ClassicBookOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  username?: string
   phone?: string
+  firebaseUid?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -541,6 +572,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   provider?: Prisma.StringFilter<"User"> | string
   providerId?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
+  verifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.StringFilter<"User"> | string
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   avatar?: Prisma.StringNullableFilter<"User"> | string | null
@@ -610,17 +642,21 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   characterVotes?: Prisma.CharacterVoteListRelationFilter
   parentPin?: Prisma.XOR<Prisma.ParentPinNullableScalarRelationFilter, Prisma.ParentPinWhereInput> | null
   juniorProfiles?: Prisma.JuniorProfileListRelationFilter
-}, "id" | "email" | "phone">
+  classicBooks?: Prisma.ClassicBookListRelationFilter
+}, "id" | "email" | "username" | "phone" | "firebaseUid">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
+  username?: Prisma.SortOrderInput | Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   provider?: Prisma.SortOrder
   providerId?: Prisma.SortOrderInput | Prisma.SortOrder
+  firebaseUid?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   avatar?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -653,11 +689,14 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  username?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   provider?: Prisma.StringWithAggregatesFilter<"User"> | string
   providerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  firebaseUid?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  verifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   role?: Prisma.StringWithAggregatesFilter<"User"> | string
   bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   avatar?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -682,11 +721,14 @@ export type UserCreateInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -756,17 +798,21 @@ export type UserCreateInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -836,17 +882,21 @@ export type UserUncheckedCreateInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -916,17 +966,21 @@ export type UserUpdateInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -996,17 +1050,21 @@ export type UserUncheckedUpdateInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -1031,11 +1089,14 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1060,11 +1121,14 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1089,11 +1153,14 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   providerId?: Prisma.SortOrder
+  firebaseUid?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
@@ -1125,11 +1192,14 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   providerId?: Prisma.SortOrder
+  firebaseUid?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
@@ -1154,11 +1224,14 @@ export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  username?: Prisma.SortOrder
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   provider?: Prisma.SortOrder
   providerId?: Prisma.SortOrder
+  firebaseUid?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
+  verifiedAt?: Prisma.SortOrder
   role?: Prisma.SortOrder
   bio?: Prisma.SortOrder
   avatar?: Prisma.SortOrder
@@ -1944,15 +2017,32 @@ export type UserUpdateOneRequiredWithoutJuniorProfilesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutJuniorProfilesInput, Prisma.UserUpdateWithoutJuniorProfilesInput>, Prisma.UserUncheckedUpdateWithoutJuniorProfilesInput>
 }
 
+export type UserCreateNestedOneWithoutClassicBooksInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClassicBooksInput, Prisma.UserUncheckedCreateWithoutClassicBooksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClassicBooksInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutClassicBooksNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClassicBooksInput, Prisma.UserUncheckedCreateWithoutClassicBooksInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClassicBooksInput
+  upsert?: Prisma.UserUpsertWithoutClassicBooksInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutClassicBooksInput, Prisma.UserUpdateWithoutClassicBooksInput>, Prisma.UserUncheckedUpdateWithoutClassicBooksInput>
+}
+
 export type UserCreateWithoutPaymentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -2021,17 +2111,21 @@ export type UserCreateWithoutPaymentsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutPaymentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -2100,6 +2194,7 @@ export type UserUncheckedCreateWithoutPaymentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -2122,11 +2217,14 @@ export type UserUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2195,17 +2293,21 @@ export type UserUpdateWithoutPaymentsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPaymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2274,17 +2376,21 @@ export type UserUncheckedUpdateWithoutPaymentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -2353,17 +2459,21 @@ export type UserCreateWithoutAccountsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -2432,6 +2542,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -2454,11 +2565,14 @@ export type UserUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2527,17 +2641,21 @@ export type UserUpdateWithoutAccountsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2606,17 +2724,21 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStoriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -2685,17 +2807,21 @@ export type UserCreateWithoutStoriesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStoriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -2764,6 +2890,7 @@ export type UserUncheckedCreateWithoutStoriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStoriesInput = {
@@ -2786,11 +2913,14 @@ export type UserUpdateWithoutStoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2859,17 +2989,21 @@ export type UserUpdateWithoutStoriesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2938,17 +3072,21 @@ export type UserUncheckedUpdateWithoutStoriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutChapterUnlocksInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -3017,17 +3155,21 @@ export type UserCreateWithoutChapterUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutChapterUnlocksInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -3096,6 +3238,7 @@ export type UserUncheckedCreateWithoutChapterUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutChapterUnlocksInput = {
@@ -3118,11 +3261,14 @@ export type UserUpdateWithoutChapterUnlocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3191,17 +3337,21 @@ export type UserUpdateWithoutChapterUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChapterUnlocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3270,17 +3420,21 @@ export type UserUncheckedUpdateWithoutChapterUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutWalletTransactionsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -3349,17 +3503,21 @@ export type UserCreateWithoutWalletTransactionsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutWalletTransactionsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -3428,6 +3586,7 @@ export type UserUncheckedCreateWithoutWalletTransactionsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutWalletTransactionsInput = {
@@ -3450,11 +3609,14 @@ export type UserUpdateWithoutWalletTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3523,17 +3685,21 @@ export type UserUpdateWithoutWalletTransactionsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWalletTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3602,17 +3768,21 @@ export type UserUncheckedUpdateWithoutWalletTransactionsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutDailyRewardsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -3681,17 +3851,21 @@ export type UserCreateWithoutDailyRewardsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutDailyRewardsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -3760,6 +3934,7 @@ export type UserUncheckedCreateWithoutDailyRewardsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutDailyRewardsInput = {
@@ -3782,11 +3957,14 @@ export type UserUpdateWithoutDailyRewardsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3855,17 +4033,21 @@ export type UserUpdateWithoutDailyRewardsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDailyRewardsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3934,17 +4116,21 @@ export type UserUncheckedUpdateWithoutDailyRewardsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAdUnlocksInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -4013,17 +4199,21 @@ export type UserCreateWithoutAdUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutAdUnlocksInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -4092,6 +4282,7 @@ export type UserUncheckedCreateWithoutAdUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAdUnlocksInput = {
@@ -4114,11 +4305,14 @@ export type UserUpdateWithoutAdUnlocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4187,17 +4381,21 @@ export type UserUpdateWithoutAdUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAdUnlocksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4266,17 +4464,21 @@ export type UserUncheckedUpdateWithoutAdUnlocksInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutCharactersInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -4345,17 +4547,21 @@ export type UserCreateWithoutCharactersInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutCharactersInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -4424,6 +4630,7 @@ export type UserUncheckedCreateWithoutCharactersInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCharactersInput = {
@@ -4446,11 +4653,14 @@ export type UserUpdateWithoutCharactersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4519,17 +4729,21 @@ export type UserUpdateWithoutCharactersInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharactersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4598,17 +4812,21 @@ export type UserUncheckedUpdateWithoutCharactersInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutAiGenerationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -4677,17 +4895,21 @@ export type UserCreateWithoutAiGenerationsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutAiGenerationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -4756,6 +4978,7 @@ export type UserUncheckedCreateWithoutAiGenerationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutAiGenerationsInput = {
@@ -4778,11 +5001,14 @@ export type UserUpdateWithoutAiGenerationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4851,17 +5077,21 @@ export type UserUpdateWithoutAiGenerationsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAiGenerationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -4930,17 +5160,21 @@ export type UserUncheckedUpdateWithoutAiGenerationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStudioApplicationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5009,17 +5243,21 @@ export type UserCreateWithoutStudioApplicationsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStudioApplicationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5088,6 +5326,7 @@ export type UserUncheckedCreateWithoutStudioApplicationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStudioApplicationsInput = {
@@ -5110,11 +5349,14 @@ export type UserUpdateWithoutStudioApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5183,17 +5425,21 @@ export type UserUpdateWithoutStudioApplicationsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStudioApplicationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5262,17 +5508,21 @@ export type UserUncheckedUpdateWithoutStudioApplicationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutConversationLinksInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5341,17 +5591,21 @@ export type UserCreateWithoutConversationLinksInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutConversationLinksInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5420,6 +5674,7 @@ export type UserUncheckedCreateWithoutConversationLinksInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutConversationLinksInput = {
@@ -5442,11 +5697,14 @@ export type UserUpdateWithoutConversationLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5515,17 +5773,21 @@ export type UserUpdateWithoutConversationLinksInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationLinksInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5594,17 +5856,21 @@ export type UserUncheckedUpdateWithoutConversationLinksInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5673,17 +5939,21 @@ export type UserCreateWithoutSentMessagesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5752,6 +6022,7 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -5763,11 +6034,14 @@ export type UserCreateWithoutReceivedMessagesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5836,17 +6110,21 @@ export type UserCreateWithoutReceivedMessagesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReceivedMessagesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -5915,6 +6193,7 @@ export type UserUncheckedCreateWithoutReceivedMessagesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReceivedMessagesInput = {
@@ -5937,11 +6216,14 @@ export type UserUpdateWithoutSentMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6010,17 +6292,21 @@ export type UserUpdateWithoutSentMessagesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6089,6 +6375,7 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutReceivedMessagesInput = {
@@ -6106,11 +6393,14 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6179,17 +6469,21 @@ export type UserUpdateWithoutReceivedMessagesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6258,17 +6552,21 @@ export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutCommentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -6337,17 +6635,21 @@ export type UserCreateWithoutCommentsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -6416,6 +6718,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -6438,11 +6741,14 @@ export type UserUpdateWithoutCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6511,17 +6817,21 @@ export type UserUpdateWithoutCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6590,17 +6900,21 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutFollowingInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -6669,17 +6983,21 @@ export type UserCreateWithoutFollowingInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutFollowingInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -6748,6 +7066,7 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutFollowingInput = {
@@ -6759,11 +7078,14 @@ export type UserCreateWithoutFollowersInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -6832,17 +7154,21 @@ export type UserCreateWithoutFollowersInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutFollowersInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -6911,6 +7237,7 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutFollowersInput = {
@@ -6933,11 +7260,14 @@ export type UserUpdateWithoutFollowingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7006,17 +7336,21 @@ export type UserUpdateWithoutFollowingInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7085,6 +7419,7 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutFollowersInput = {
@@ -7102,11 +7437,14 @@ export type UserUpdateWithoutFollowersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7175,17 +7513,21 @@ export type UserUpdateWithoutFollowersInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7254,17 +7596,21 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutReactionsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -7333,17 +7679,21 @@ export type UserCreateWithoutReactionsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReactionsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -7412,6 +7762,7 @@ export type UserUncheckedCreateWithoutReactionsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReactionsInput = {
@@ -7434,11 +7785,14 @@ export type UserUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7507,17 +7861,21 @@ export type UserUpdateWithoutReactionsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7586,17 +7944,21 @@ export type UserUncheckedUpdateWithoutReactionsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutReportsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -7665,17 +8027,21 @@ export type UserCreateWithoutReportsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReportsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -7744,6 +8110,7 @@ export type UserUncheckedCreateWithoutReportsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReportsInput = {
@@ -7766,11 +8133,14 @@ export type UserUpdateWithoutReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7839,17 +8209,21 @@ export type UserUpdateWithoutReportsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7918,17 +8292,21 @@ export type UserUncheckedUpdateWithoutReportsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutSavesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -7997,17 +8375,21 @@ export type UserCreateWithoutSavesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutSavesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -8076,6 +8458,7 @@ export type UserUncheckedCreateWithoutSavesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutSavesInput = {
@@ -8098,11 +8481,14 @@ export type UserUpdateWithoutSavesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8171,17 +8557,21 @@ export type UserUpdateWithoutSavesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8250,17 +8640,21 @@ export type UserUncheckedUpdateWithoutSavesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -8329,17 +8723,21 @@ export type UserCreateWithoutNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -8408,6 +8806,7 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -8419,11 +8818,14 @@ export type UserCreateWithoutActedNotificationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -8492,17 +8894,21 @@ export type UserCreateWithoutActedNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutActedNotificationsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -8571,6 +8977,7 @@ export type UserUncheckedCreateWithoutActedNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutActedNotificationsInput = {
@@ -8593,11 +9000,14 @@ export type UserUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8666,17 +9076,21 @@ export type UserUpdateWithoutNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8745,6 +9159,7 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUpsertWithoutActedNotificationsInput = {
@@ -8762,11 +9177,14 @@ export type UserUpdateWithoutActedNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8835,17 +9253,21 @@ export type UserUpdateWithoutActedNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutActedNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8914,17 +9336,21 @@ export type UserUncheckedUpdateWithoutActedNotificationsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutVerificationCodesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -8993,17 +9419,21 @@ export type UserCreateWithoutVerificationCodesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutVerificationCodesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -9072,6 +9502,7 @@ export type UserUncheckedCreateWithoutVerificationCodesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutVerificationCodesInput = {
@@ -9094,11 +9525,14 @@ export type UserUpdateWithoutVerificationCodesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9167,17 +9601,21 @@ export type UserUpdateWithoutVerificationCodesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9246,17 +9684,21 @@ export type UserUncheckedUpdateWithoutVerificationCodesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStoryViewsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -9325,17 +9767,21 @@ export type UserCreateWithoutStoryViewsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStoryViewsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -9404,6 +9850,7 @@ export type UserUncheckedCreateWithoutStoryViewsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStoryViewsInput = {
@@ -9426,11 +9873,14 @@ export type UserUpdateWithoutStoryViewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9499,17 +9949,21 @@ export type UserUpdateWithoutStoryViewsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryViewsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9578,17 +10032,21 @@ export type UserUncheckedUpdateWithoutStoryViewsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutWorldBuildingEntriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -9657,17 +10115,21 @@ export type UserCreateWithoutWorldBuildingEntriesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutWorldBuildingEntriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -9736,6 +10198,7 @@ export type UserUncheckedCreateWithoutWorldBuildingEntriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutWorldBuildingEntriesInput = {
@@ -9758,11 +10221,14 @@ export type UserUpdateWithoutWorldBuildingEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9831,17 +10297,21 @@ export type UserUpdateWithoutWorldBuildingEntriesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutWorldBuildingEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9910,17 +10380,21 @@ export type UserUncheckedUpdateWithoutWorldBuildingEntriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutEnvironmentStudiosInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -9989,17 +10463,21 @@ export type UserCreateWithoutEnvironmentStudiosInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutEnvironmentStudiosInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -10068,6 +10546,7 @@ export type UserUncheckedCreateWithoutEnvironmentStudiosInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutEnvironmentStudiosInput = {
@@ -10090,11 +10569,14 @@ export type UserUpdateWithoutEnvironmentStudiosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10163,17 +10645,21 @@ export type UserUpdateWithoutEnvironmentStudiosInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEnvironmentStudiosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10242,17 +10728,21 @@ export type UserUncheckedUpdateWithoutEnvironmentStudiosInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStoryAnalysesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -10321,17 +10811,21 @@ export type UserCreateWithoutStoryAnalysesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStoryAnalysesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -10400,6 +10894,7 @@ export type UserUncheckedCreateWithoutStoryAnalysesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStoryAnalysesInput = {
@@ -10422,11 +10917,14 @@ export type UserUpdateWithoutStoryAnalysesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10495,17 +10993,21 @@ export type UserUpdateWithoutStoryAnalysesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryAnalysesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10574,17 +11076,21 @@ export type UserUncheckedUpdateWithoutStoryAnalysesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStoryboardScenesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -10653,17 +11159,21 @@ export type UserCreateWithoutStoryboardScenesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStoryboardScenesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -10732,6 +11242,7 @@ export type UserUncheckedCreateWithoutStoryboardScenesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStoryboardScenesInput = {
@@ -10754,11 +11265,14 @@ export type UserUpdateWithoutStoryboardScenesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10827,17 +11341,21 @@ export type UserUpdateWithoutStoryboardScenesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryboardScenesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10906,17 +11424,21 @@ export type UserUncheckedUpdateWithoutStoryboardScenesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStoryLikesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -10985,17 +11507,21 @@ export type UserCreateWithoutStoryLikesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStoryLikesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -11064,6 +11590,7 @@ export type UserUncheckedCreateWithoutStoryLikesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStoryLikesInput = {
@@ -11086,11 +11613,14 @@ export type UserUpdateWithoutStoryLikesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11159,17 +11689,21 @@ export type UserUpdateWithoutStoryLikesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryLikesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11238,17 +11772,21 @@ export type UserUncheckedUpdateWithoutStoryLikesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutFilmProjectsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -11317,17 +11855,21 @@ export type UserCreateWithoutFilmProjectsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutFilmProjectsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -11396,6 +11938,7 @@ export type UserUncheckedCreateWithoutFilmProjectsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutFilmProjectsInput = {
@@ -11418,11 +11961,14 @@ export type UserUpdateWithoutFilmProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11491,17 +12037,21 @@ export type UserUpdateWithoutFilmProjectsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFilmProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11570,17 +12120,21 @@ export type UserUncheckedUpdateWithoutFilmProjectsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutOwnedClubsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -11649,17 +12203,21 @@ export type UserCreateWithoutOwnedClubsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedClubsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -11728,6 +12286,7 @@ export type UserUncheckedCreateWithoutOwnedClubsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedClubsInput = {
@@ -11750,11 +12309,14 @@ export type UserUpdateWithoutOwnedClubsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11823,17 +12385,21 @@ export type UserUpdateWithoutOwnedClubsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedClubsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11902,17 +12468,21 @@ export type UserUncheckedUpdateWithoutOwnedClubsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutClubMembershipsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -11981,17 +12551,21 @@ export type UserCreateWithoutClubMembershipsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutClubMembershipsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -12060,6 +12634,7 @@ export type UserUncheckedCreateWithoutClubMembershipsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutClubMembershipsInput = {
@@ -12082,11 +12657,14 @@ export type UserUpdateWithoutClubMembershipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12155,17 +12733,21 @@ export type UserUpdateWithoutClubMembershipsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClubMembershipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12234,17 +12816,21 @@ export type UserUncheckedUpdateWithoutClubMembershipsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutOwnedChallengesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -12313,17 +12899,21 @@ export type UserCreateWithoutOwnedChallengesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedChallengesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -12392,6 +12982,7 @@ export type UserUncheckedCreateWithoutOwnedChallengesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedChallengesInput = {
@@ -12414,11 +13005,14 @@ export type UserUpdateWithoutOwnedChallengesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12487,17 +13081,21 @@ export type UserUpdateWithoutOwnedChallengesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedChallengesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12566,17 +13164,21 @@ export type UserUncheckedUpdateWithoutOwnedChallengesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutChallengeEntriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -12645,17 +13247,21 @@ export type UserCreateWithoutChallengeEntriesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutChallengeEntriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -12724,6 +13330,7 @@ export type UserUncheckedCreateWithoutChallengeEntriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutChallengeEntriesInput = {
@@ -12746,11 +13353,14 @@ export type UserUpdateWithoutChallengeEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12819,17 +13429,21 @@ export type UserUpdateWithoutChallengeEntriesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChallengeEntriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12898,17 +13512,21 @@ export type UserUncheckedUpdateWithoutChallengeEntriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutHostedSessionsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -12977,17 +13595,21 @@ export type UserCreateWithoutHostedSessionsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutHostedSessionsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -13056,6 +13678,7 @@ export type UserUncheckedCreateWithoutHostedSessionsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutHostedSessionsInput = {
@@ -13078,11 +13701,14 @@ export type UserUpdateWithoutHostedSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13151,17 +13777,21 @@ export type UserUpdateWithoutHostedSessionsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHostedSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13230,17 +13860,21 @@ export type UserUncheckedUpdateWithoutHostedSessionsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutSessionAttendanceInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -13309,17 +13943,21 @@ export type UserCreateWithoutSessionAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionAttendanceInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -13388,6 +14026,7 @@ export type UserUncheckedCreateWithoutSessionAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionAttendanceInput = {
@@ -13410,11 +14049,14 @@ export type UserUpdateWithoutSessionAttendanceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13483,17 +14125,21 @@ export type UserUpdateWithoutSessionAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionAttendanceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13562,17 +14208,21 @@ export type UserUncheckedUpdateWithoutSessionAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutHostedEventsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -13641,17 +14291,21 @@ export type UserCreateWithoutHostedEventsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutHostedEventsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -13720,6 +14374,7 @@ export type UserUncheckedCreateWithoutHostedEventsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutHostedEventsInput = {
@@ -13742,11 +14397,14 @@ export type UserUpdateWithoutHostedEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13815,17 +14473,21 @@ export type UserUpdateWithoutHostedEventsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHostedEventsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13894,17 +14556,21 @@ export type UserUncheckedUpdateWithoutHostedEventsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutEventAttendanceInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -13973,17 +14639,21 @@ export type UserCreateWithoutEventAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutEventAttendanceInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -14052,6 +14722,7 @@ export type UserUncheckedCreateWithoutEventAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutEventAttendanceInput = {
@@ -14074,11 +14745,14 @@ export type UserUpdateWithoutEventAttendanceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14147,17 +14821,21 @@ export type UserUpdateWithoutEventAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutEventAttendanceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14226,17 +14904,21 @@ export type UserUncheckedUpdateWithoutEventAttendanceInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutFanArtsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -14305,17 +14987,21 @@ export type UserCreateWithoutFanArtsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutFanArtsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -14384,6 +15070,7 @@ export type UserUncheckedCreateWithoutFanArtsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutFanArtsInput = {
@@ -14406,11 +15093,14 @@ export type UserUpdateWithoutFanArtsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14479,17 +15169,21 @@ export type UserUpdateWithoutFanArtsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFanArtsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14558,17 +15252,21 @@ export type UserUncheckedUpdateWithoutFanArtsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutCharacterVotesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -14637,17 +15335,21 @@ export type UserCreateWithoutCharacterVotesInput = {
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutCharacterVotesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -14716,6 +15418,7 @@ export type UserUncheckedCreateWithoutCharacterVotesInput = {
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutCharacterVotesInput = {
@@ -14738,11 +15441,14 @@ export type UserUpdateWithoutCharacterVotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14811,17 +15517,21 @@ export type UserUpdateWithoutCharacterVotesInput = {
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCharacterVotesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14890,17 +15600,21 @@ export type UserUncheckedUpdateWithoutCharacterVotesInput = {
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutStoryRemindersInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -14969,17 +15683,21 @@ export type UserCreateWithoutStoryRemindersInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutStoryRemindersInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -15048,6 +15766,7 @@ export type UserUncheckedCreateWithoutStoryRemindersInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutStoryRemindersInput = {
@@ -15070,11 +15789,14 @@ export type UserUpdateWithoutStoryRemindersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15143,17 +15865,21 @@ export type UserUpdateWithoutStoryRemindersInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStoryRemindersInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15222,17 +15948,21 @@ export type UserUncheckedUpdateWithoutStoryRemindersInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutReadingProgressInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -15301,17 +16031,21 @@ export type UserCreateWithoutReadingProgressInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReadingProgressInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -15380,6 +16114,7 @@ export type UserUncheckedCreateWithoutReadingProgressInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReadingProgressInput = {
@@ -15402,11 +16137,14 @@ export type UserUpdateWithoutReadingProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15475,17 +16213,21 @@ export type UserUpdateWithoutReadingProgressInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReadingProgressInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15554,17 +16296,21 @@ export type UserUncheckedUpdateWithoutReadingProgressInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutPostsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -15633,17 +16379,21 @@ export type UserCreateWithoutPostsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -15712,6 +16462,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -15734,11 +16485,14 @@ export type UserUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15807,17 +16561,21 @@ export type UserUpdateWithoutPostsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15886,17 +16644,21 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutPostLikesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -15965,17 +16727,21 @@ export type UserCreateWithoutPostLikesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutPostLikesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -16044,6 +16810,7 @@ export type UserUncheckedCreateWithoutPostLikesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutPostLikesInput = {
@@ -16066,11 +16833,14 @@ export type UserUpdateWithoutPostLikesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16139,17 +16909,21 @@ export type UserUpdateWithoutPostLikesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostLikesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16218,17 +16992,21 @@ export type UserUncheckedUpdateWithoutPostLikesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutPostCommentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -16297,17 +17075,21 @@ export type UserCreateWithoutPostCommentsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutPostCommentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -16376,6 +17158,7 @@ export type UserUncheckedCreateWithoutPostCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutPostCommentsInput = {
@@ -16398,11 +17181,14 @@ export type UserUpdateWithoutPostCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16471,17 +17257,21 @@ export type UserUpdateWithoutPostCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16550,17 +17340,21 @@ export type UserUncheckedUpdateWithoutPostCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutMyDayStoriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -16629,17 +17423,21 @@ export type UserCreateWithoutMyDayStoriesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutMyDayStoriesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -16708,6 +17506,7 @@ export type UserUncheckedCreateWithoutMyDayStoriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutMyDayStoriesInput = {
@@ -16730,11 +17529,14 @@ export type UserUpdateWithoutMyDayStoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16803,17 +17605,21 @@ export type UserUpdateWithoutMyDayStoriesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMyDayStoriesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16882,17 +17688,21 @@ export type UserUncheckedUpdateWithoutMyDayStoriesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutPostSavesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -16961,17 +17771,21 @@ export type UserCreateWithoutPostSavesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutPostSavesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -17040,6 +17854,7 @@ export type UserUncheckedCreateWithoutPostSavesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutPostSavesInput = {
@@ -17062,11 +17877,14 @@ export type UserUpdateWithoutPostSavesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17135,17 +17953,21 @@ export type UserUpdateWithoutPostSavesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostSavesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17214,17 +18036,21 @@ export type UserUncheckedUpdateWithoutPostSavesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutReelsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -17293,17 +18119,21 @@ export type UserCreateWithoutReelsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReelsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -17372,6 +18202,7 @@ export type UserUncheckedCreateWithoutReelsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReelsInput = {
@@ -17394,11 +18225,14 @@ export type UserUpdateWithoutReelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17467,17 +18301,21 @@ export type UserUpdateWithoutReelsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17546,17 +18384,21 @@ export type UserUncheckedUpdateWithoutReelsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutReelLikesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -17625,17 +18467,21 @@ export type UserCreateWithoutReelLikesInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReelLikesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -17704,6 +18550,7 @@ export type UserUncheckedCreateWithoutReelLikesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReelLikesInput = {
@@ -17726,11 +18573,14 @@ export type UserUpdateWithoutReelLikesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17799,17 +18649,21 @@ export type UserUpdateWithoutReelLikesInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReelLikesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17878,17 +18732,21 @@ export type UserUncheckedUpdateWithoutReelLikesInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutReelCommentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -17957,17 +18815,21 @@ export type UserCreateWithoutReelCommentsInput = {
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutReelCommentsInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -18036,6 +18898,7 @@ export type UserUncheckedCreateWithoutReelCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutReelCommentsInput = {
@@ -18058,11 +18921,14 @@ export type UserUpdateWithoutReelCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18131,17 +18997,21 @@ export type UserUpdateWithoutReelCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReelCommentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18210,17 +19080,21 @@ export type UserUncheckedUpdateWithoutReelCommentsInput = {
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutParentPinInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -18289,17 +19163,21 @@ export type UserCreateWithoutParentPinInput = {
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutParentPinInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -18368,6 +19246,7 @@ export type UserUncheckedCreateWithoutParentPinInput = {
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutParentPinInput = {
@@ -18390,11 +19269,14 @@ export type UserUpdateWithoutParentPinInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18463,17 +19345,21 @@ export type UserUpdateWithoutParentPinInput = {
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParentPinInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18542,17 +19428,21 @@ export type UserUncheckedUpdateWithoutParentPinInput = {
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserCreateWithoutJuniorProfilesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -18621,17 +19511,21 @@ export type UserCreateWithoutJuniorProfilesInput = {
   fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookCreateNestedManyWithoutAddedByInput
 }
 
 export type UserUncheckedCreateWithoutJuniorProfilesInput = {
   id?: string
   name: string
   email?: string | null
+  username?: string | null
   password?: string | null
   phone?: string | null
   provider?: string
   providerId?: string | null
+  firebaseUid?: string | null
   isVerified?: boolean
+  verifiedAt?: Date | string | null
   role?: string
   bio?: string | null
   avatar?: string | null
@@ -18700,6 +19594,7 @@ export type UserUncheckedCreateWithoutJuniorProfilesInput = {
   fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
   characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
   parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  classicBooks?: Prisma.ClassicBookUncheckedCreateNestedManyWithoutAddedByInput
 }
 
 export type UserCreateOrConnectWithoutJuniorProfilesInput = {
@@ -18722,11 +19617,14 @@ export type UserUpdateWithoutJuniorProfilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18795,17 +19693,21 @@ export type UserUpdateWithoutJuniorProfilesInput = {
   fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUpdateManyWithoutAddedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutJuniorProfilesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   provider?: Prisma.StringFieldUpdateOperationsInput | string
   providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.StringFieldUpdateOperationsInput | string
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18874,6 +19776,355 @@ export type UserUncheckedUpdateWithoutJuniorProfilesInput = {
   fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
   characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
   parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  classicBooks?: Prisma.ClassicBookUncheckedUpdateManyWithoutAddedByNestedInput
+}
+
+export type UserCreateWithoutClassicBooksInput = {
+  id?: string
+  name: string
+  email?: string | null
+  username?: string | null
+  password?: string | null
+  phone?: string | null
+  provider?: string
+  providerId?: string | null
+  firebaseUid?: string | null
+  isVerified?: boolean
+  verifiedAt?: Date | string | null
+  role?: string
+  bio?: string | null
+  avatar?: string | null
+  emailVerified?: boolean
+  premium?: boolean
+  premiumSince?: Date | string | null
+  aiGenerationCount?: number
+  aiGenerationResetAt?: Date | string | null
+  walletBalance?: number
+  subscriptionStatus?: string
+  subscriptionExpiry?: Date | string | null
+  isVIP?: boolean
+  rewardStreak?: number
+  dailyEpisodesRead?: number
+  lastReadReset?: Date | string | null
+  lastEpisodeUnlockTime?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutReporterInput
+  saves?: Prisma.SaveCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  actedNotifications?: Prisma.NotificationCreateNestedManyWithoutActorInput
+  verificationCodes?: Prisma.VerificationCodeCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterCreateNestedManyWithoutAuthorInput
+  aiGenerations?: Prisma.AIGenerationCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
+  studioApplications?: Prisma.StudioApplicationCreateNestedManyWithoutAuthorInput
+  storyAnalyses?: Prisma.StoryAnalysisCreateNestedManyWithoutAuthorInput
+  storyboardScenes?: Prisma.StoryboardSceneCreateNestedManyWithoutAuthorInput
+  worldBuildingEntries?: Prisma.WorldBuildingEntryCreateNestedManyWithoutAuthorInput
+  environmentStudios?: Prisma.EnvironmentStudioCreateNestedManyWithoutAuthorInput
+  readingProgress?: Prisma.ReadingProgressCreateNestedManyWithoutUserInput
+  storyLikes?: Prisma.StoryLikeCreateNestedManyWithoutUserInput
+  accounts?: Prisma.UserAccountCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewCreateNestedManyWithoutUserInput
+  storyReminders?: Prisma.StoryReminderCreateNestedManyWithoutUserInput
+  chapterUnlocks?: Prisma.ChapterUnlockCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionCreateNestedManyWithoutUserInput
+  dailyRewards?: Prisma.DailyRewardCreateNestedManyWithoutUserInput
+  adUnlocks?: Prisma.AdUnlockCreateNestedManyWithoutUserInput
+  conversationLinks?: Prisma.ConversationParticipantCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostCreateNestedManyWithoutUserInput
+  postLikes?: Prisma.PostLikeCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentCreateNestedManyWithoutUserInput
+  myDayStories?: Prisma.MyDayStoryCreateNestedManyWithoutUserInput
+  postSaves?: Prisma.PostSaveCreateNestedManyWithoutUserInput
+  reels?: Prisma.ReelCreateNestedManyWithoutUserInput
+  reelLikes?: Prisma.ReelLikeCreateNestedManyWithoutUserInput
+  reelComments?: Prisma.ReelCommentCreateNestedManyWithoutUserInput
+  filmProjects?: Prisma.FilmProjectCreateNestedManyWithoutUserInput
+  ownedClubs?: Prisma.ClubCreateNestedManyWithoutOwnerInput
+  clubMemberships?: Prisma.ClubMemberCreateNestedManyWithoutUserInput
+  ownedChallenges?: Prisma.ChallengeCreateNestedManyWithoutOwnerInput
+  challengeEntries?: Prisma.ChallengeParticipantCreateNestedManyWithoutUserInput
+  hostedSessions?: Prisma.LiveSessionCreateNestedManyWithoutHostInput
+  sessionAttendance?: Prisma.LiveSessionAttendeeCreateNestedManyWithoutUserInput
+  hostedEvents?: Prisma.EventCreateNestedManyWithoutHostInput
+  eventAttendance?: Prisma.EventAttendeeCreateNestedManyWithoutUserInput
+  fanArts?: Prisma.FanArtCreateNestedManyWithoutUserInput
+  characterVotes?: Prisma.CharacterVoteCreateNestedManyWithoutUserInput
+  parentPin?: Prisma.ParentPinCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileCreateNestedManyWithoutParentUserInput
+}
+
+export type UserUncheckedCreateWithoutClassicBooksInput = {
+  id?: string
+  name: string
+  email?: string | null
+  username?: string | null
+  password?: string | null
+  phone?: string | null
+  provider?: string
+  providerId?: string | null
+  firebaseUid?: string | null
+  isVerified?: boolean
+  verifiedAt?: Date | string | null
+  role?: string
+  bio?: string | null
+  avatar?: string | null
+  emailVerified?: boolean
+  premium?: boolean
+  premiumSince?: Date | string | null
+  aiGenerationCount?: number
+  aiGenerationResetAt?: Date | string | null
+  walletBalance?: number
+  subscriptionStatus?: string
+  subscriptionExpiry?: Date | string | null
+  isVIP?: boolean
+  rewardStreak?: number
+  dailyEpisodesRead?: number
+  lastReadReset?: Date | string | null
+  lastEpisodeUnlockTime?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutUserInput
+  stories?: Prisma.StoryUncheckedCreateNestedManyWithoutAuthorInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutReporterInput
+  saves?: Prisma.SaveUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  actedNotifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutActorInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedCreateNestedManyWithoutUserInput
+  characters?: Prisma.CharacterUncheckedCreateNestedManyWithoutAuthorInput
+  aiGenerations?: Prisma.AIGenerationUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
+  studioApplications?: Prisma.StudioApplicationUncheckedCreateNestedManyWithoutAuthorInput
+  storyAnalyses?: Prisma.StoryAnalysisUncheckedCreateNestedManyWithoutAuthorInput
+  storyboardScenes?: Prisma.StoryboardSceneUncheckedCreateNestedManyWithoutAuthorInput
+  worldBuildingEntries?: Prisma.WorldBuildingEntryUncheckedCreateNestedManyWithoutAuthorInput
+  environmentStudios?: Prisma.EnvironmentStudioUncheckedCreateNestedManyWithoutAuthorInput
+  readingProgress?: Prisma.ReadingProgressUncheckedCreateNestedManyWithoutUserInput
+  storyLikes?: Prisma.StoryLikeUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.UserAccountUncheckedCreateNestedManyWithoutUserInput
+  storyViews?: Prisma.StoryViewUncheckedCreateNestedManyWithoutUserInput
+  storyReminders?: Prisma.StoryReminderUncheckedCreateNestedManyWithoutUserInput
+  chapterUnlocks?: Prisma.ChapterUnlockUncheckedCreateNestedManyWithoutUserInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+  dailyRewards?: Prisma.DailyRewardUncheckedCreateNestedManyWithoutUserInput
+  adUnlocks?: Prisma.AdUnlockUncheckedCreateNestedManyWithoutUserInput
+  conversationLinks?: Prisma.ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+  posts?: Prisma.PostUncheckedCreateNestedManyWithoutUserInput
+  postLikes?: Prisma.PostLikeUncheckedCreateNestedManyWithoutUserInput
+  postComments?: Prisma.PostCommentUncheckedCreateNestedManyWithoutUserInput
+  myDayStories?: Prisma.MyDayStoryUncheckedCreateNestedManyWithoutUserInput
+  postSaves?: Prisma.PostSaveUncheckedCreateNestedManyWithoutUserInput
+  reels?: Prisma.ReelUncheckedCreateNestedManyWithoutUserInput
+  reelLikes?: Prisma.ReelLikeUncheckedCreateNestedManyWithoutUserInput
+  reelComments?: Prisma.ReelCommentUncheckedCreateNestedManyWithoutUserInput
+  filmProjects?: Prisma.FilmProjectUncheckedCreateNestedManyWithoutUserInput
+  ownedClubs?: Prisma.ClubUncheckedCreateNestedManyWithoutOwnerInput
+  clubMemberships?: Prisma.ClubMemberUncheckedCreateNestedManyWithoutUserInput
+  ownedChallenges?: Prisma.ChallengeUncheckedCreateNestedManyWithoutOwnerInput
+  challengeEntries?: Prisma.ChallengeParticipantUncheckedCreateNestedManyWithoutUserInput
+  hostedSessions?: Prisma.LiveSessionUncheckedCreateNestedManyWithoutHostInput
+  sessionAttendance?: Prisma.LiveSessionAttendeeUncheckedCreateNestedManyWithoutUserInput
+  hostedEvents?: Prisma.EventUncheckedCreateNestedManyWithoutHostInput
+  eventAttendance?: Prisma.EventAttendeeUncheckedCreateNestedManyWithoutUserInput
+  fanArts?: Prisma.FanArtUncheckedCreateNestedManyWithoutUserInput
+  characterVotes?: Prisma.CharacterVoteUncheckedCreateNestedManyWithoutUserInput
+  parentPin?: Prisma.ParentPinUncheckedCreateNestedOneWithoutParentUserInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedCreateNestedManyWithoutParentUserInput
+}
+
+export type UserCreateOrConnectWithoutClassicBooksInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutClassicBooksInput, Prisma.UserUncheckedCreateWithoutClassicBooksInput>
+}
+
+export type UserUpsertWithoutClassicBooksInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutClassicBooksInput, Prisma.UserUncheckedUpdateWithoutClassicBooksInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutClassicBooksInput, Prisma.UserUncheckedCreateWithoutClassicBooksInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutClassicBooksInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutClassicBooksInput, Prisma.UserUncheckedUpdateWithoutClassicBooksInput>
+}
+
+export type UserUpdateWithoutClassicBooksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  premium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  premiumSince?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  aiGenerationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  aiGenerationResetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  walletBalance?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isVIP?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rewardStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyEpisodesRead?: Prisma.IntFieldUpdateOperationsInput | number
+  lastReadReset?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEpisodeUnlockTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutReporterNestedInput
+  saves?: Prisma.SaveUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  actedNotifications?: Prisma.NotificationUpdateManyWithoutActorNestedInput
+  verificationCodes?: Prisma.VerificationCodeUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUpdateManyWithoutAuthorNestedInput
+  aiGenerations?: Prisma.AIGenerationUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
+  studioApplications?: Prisma.StudioApplicationUpdateManyWithoutAuthorNestedInput
+  storyAnalyses?: Prisma.StoryAnalysisUpdateManyWithoutAuthorNestedInput
+  storyboardScenes?: Prisma.StoryboardSceneUpdateManyWithoutAuthorNestedInput
+  worldBuildingEntries?: Prisma.WorldBuildingEntryUpdateManyWithoutAuthorNestedInput
+  environmentStudios?: Prisma.EnvironmentStudioUpdateManyWithoutAuthorNestedInput
+  readingProgress?: Prisma.ReadingProgressUpdateManyWithoutUserNestedInput
+  storyLikes?: Prisma.StoryLikeUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.UserAccountUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUpdateManyWithoutUserNestedInput
+  storyReminders?: Prisma.StoryReminderUpdateManyWithoutUserNestedInput
+  chapterUnlocks?: Prisma.ChapterUnlockUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUpdateManyWithoutUserNestedInput
+  dailyRewards?: Prisma.DailyRewardUpdateManyWithoutUserNestedInput
+  adUnlocks?: Prisma.AdUnlockUpdateManyWithoutUserNestedInput
+  conversationLinks?: Prisma.ConversationParticipantUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUpdateManyWithoutUserNestedInput
+  postLikes?: Prisma.PostLikeUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUpdateManyWithoutUserNestedInput
+  myDayStories?: Prisma.MyDayStoryUpdateManyWithoutUserNestedInput
+  postSaves?: Prisma.PostSaveUpdateManyWithoutUserNestedInput
+  reels?: Prisma.ReelUpdateManyWithoutUserNestedInput
+  reelLikes?: Prisma.ReelLikeUpdateManyWithoutUserNestedInput
+  reelComments?: Prisma.ReelCommentUpdateManyWithoutUserNestedInput
+  filmProjects?: Prisma.FilmProjectUpdateManyWithoutUserNestedInput
+  ownedClubs?: Prisma.ClubUpdateManyWithoutOwnerNestedInput
+  clubMemberships?: Prisma.ClubMemberUpdateManyWithoutUserNestedInput
+  ownedChallenges?: Prisma.ChallengeUpdateManyWithoutOwnerNestedInput
+  challengeEntries?: Prisma.ChallengeParticipantUpdateManyWithoutUserNestedInput
+  hostedSessions?: Prisma.LiveSessionUpdateManyWithoutHostNestedInput
+  sessionAttendance?: Prisma.LiveSessionAttendeeUpdateManyWithoutUserNestedInput
+  hostedEvents?: Prisma.EventUpdateManyWithoutHostNestedInput
+  eventAttendance?: Prisma.EventAttendeeUpdateManyWithoutUserNestedInput
+  fanArts?: Prisma.FanArtUpdateManyWithoutUserNestedInput
+  characterVotes?: Prisma.CharacterVoteUpdateManyWithoutUserNestedInput
+  parentPin?: Prisma.ParentPinUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUpdateManyWithoutParentUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutClassicBooksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  firebaseUid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  verifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  premium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  premiumSince?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  aiGenerationCount?: Prisma.IntFieldUpdateOperationsInput | number
+  aiGenerationResetAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  walletBalance?: Prisma.IntFieldUpdateOperationsInput | number
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  subscriptionExpiry?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  isVIP?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rewardStreak?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyEpisodesRead?: Prisma.IntFieldUpdateOperationsInput | number
+  lastReadReset?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastEpisodeUnlockTime?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutUserNestedInput
+  stories?: Prisma.StoryUncheckedUpdateManyWithoutAuthorNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutReporterNestedInput
+  saves?: Prisma.SaveUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  actedNotifications?: Prisma.NotificationUncheckedUpdateManyWithoutActorNestedInput
+  verificationCodes?: Prisma.VerificationCodeUncheckedUpdateManyWithoutUserNestedInput
+  characters?: Prisma.CharacterUncheckedUpdateManyWithoutAuthorNestedInput
+  aiGenerations?: Prisma.AIGenerationUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
+  studioApplications?: Prisma.StudioApplicationUncheckedUpdateManyWithoutAuthorNestedInput
+  storyAnalyses?: Prisma.StoryAnalysisUncheckedUpdateManyWithoutAuthorNestedInput
+  storyboardScenes?: Prisma.StoryboardSceneUncheckedUpdateManyWithoutAuthorNestedInput
+  worldBuildingEntries?: Prisma.WorldBuildingEntryUncheckedUpdateManyWithoutAuthorNestedInput
+  environmentStudios?: Prisma.EnvironmentStudioUncheckedUpdateManyWithoutAuthorNestedInput
+  readingProgress?: Prisma.ReadingProgressUncheckedUpdateManyWithoutUserNestedInput
+  storyLikes?: Prisma.StoryLikeUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.UserAccountUncheckedUpdateManyWithoutUserNestedInput
+  storyViews?: Prisma.StoryViewUncheckedUpdateManyWithoutUserNestedInput
+  storyReminders?: Prisma.StoryReminderUncheckedUpdateManyWithoutUserNestedInput
+  chapterUnlocks?: Prisma.ChapterUnlockUncheckedUpdateManyWithoutUserNestedInput
+  walletTransactions?: Prisma.WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+  dailyRewards?: Prisma.DailyRewardUncheckedUpdateManyWithoutUserNestedInput
+  adUnlocks?: Prisma.AdUnlockUncheckedUpdateManyWithoutUserNestedInput
+  conversationLinks?: Prisma.ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+  posts?: Prisma.PostUncheckedUpdateManyWithoutUserNestedInput
+  postLikes?: Prisma.PostLikeUncheckedUpdateManyWithoutUserNestedInput
+  postComments?: Prisma.PostCommentUncheckedUpdateManyWithoutUserNestedInput
+  myDayStories?: Prisma.MyDayStoryUncheckedUpdateManyWithoutUserNestedInput
+  postSaves?: Prisma.PostSaveUncheckedUpdateManyWithoutUserNestedInput
+  reels?: Prisma.ReelUncheckedUpdateManyWithoutUserNestedInput
+  reelLikes?: Prisma.ReelLikeUncheckedUpdateManyWithoutUserNestedInput
+  reelComments?: Prisma.ReelCommentUncheckedUpdateManyWithoutUserNestedInput
+  filmProjects?: Prisma.FilmProjectUncheckedUpdateManyWithoutUserNestedInput
+  ownedClubs?: Prisma.ClubUncheckedUpdateManyWithoutOwnerNestedInput
+  clubMemberships?: Prisma.ClubMemberUncheckedUpdateManyWithoutUserNestedInput
+  ownedChallenges?: Prisma.ChallengeUncheckedUpdateManyWithoutOwnerNestedInput
+  challengeEntries?: Prisma.ChallengeParticipantUncheckedUpdateManyWithoutUserNestedInput
+  hostedSessions?: Prisma.LiveSessionUncheckedUpdateManyWithoutHostNestedInput
+  sessionAttendance?: Prisma.LiveSessionAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  hostedEvents?: Prisma.EventUncheckedUpdateManyWithoutHostNestedInput
+  eventAttendance?: Prisma.EventAttendeeUncheckedUpdateManyWithoutUserNestedInput
+  fanArts?: Prisma.FanArtUncheckedUpdateManyWithoutUserNestedInput
+  characterVotes?: Prisma.CharacterVoteUncheckedUpdateManyWithoutUserNestedInput
+  parentPin?: Prisma.ParentPinUncheckedUpdateOneWithoutParentUserNestedInput
+  juniorProfiles?: Prisma.JuniorProfileUncheckedUpdateManyWithoutParentUserNestedInput
 }
 
 
@@ -18932,6 +20183,7 @@ export type UserCountOutputType = {
   fanArts: number
   characterVotes: number
   juniorProfiles: number
+  classicBooks: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -18985,6 +20237,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   fanArts?: boolean | UserCountOutputTypeCountFanArtsArgs
   characterVotes?: boolean | UserCountOutputTypeCountCharacterVotesArgs
   juniorProfiles?: boolean | UserCountOutputTypeCountJuniorProfilesArgs
+  classicBooks?: boolean | UserCountOutputTypeCountClassicBooksArgs
 }
 
 /**
@@ -19347,16 +20600,26 @@ export type UserCountOutputTypeCountJuniorProfilesArgs<ExtArgs extends runtime.T
   where?: Prisma.JuniorProfileWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountClassicBooksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClassicBookWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   email?: boolean
+  username?: boolean
   password?: boolean
   phone?: boolean
   provider?: boolean
   providerId?: boolean
+  firebaseUid?: boolean
   isVerified?: boolean
+  verifiedAt?: boolean
   role?: boolean
   bio?: boolean
   avatar?: boolean
@@ -19426,6 +20689,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   characterVotes?: boolean | Prisma.User$characterVotesArgs<ExtArgs>
   parentPin?: boolean | Prisma.User$parentPinArgs<ExtArgs>
   juniorProfiles?: boolean | Prisma.User$juniorProfilesArgs<ExtArgs>
+  classicBooks?: boolean | Prisma.User$classicBooksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -19433,11 +20697,14 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   name?: boolean
   email?: boolean
+  username?: boolean
   password?: boolean
   phone?: boolean
   provider?: boolean
   providerId?: boolean
+  firebaseUid?: boolean
   isVerified?: boolean
+  verifiedAt?: boolean
   role?: boolean
   bio?: boolean
   avatar?: boolean
@@ -19462,11 +20729,14 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   name?: boolean
   email?: boolean
+  username?: boolean
   password?: boolean
   phone?: boolean
   provider?: boolean
   providerId?: boolean
+  firebaseUid?: boolean
   isVerified?: boolean
+  verifiedAt?: boolean
   role?: boolean
   bio?: boolean
   avatar?: boolean
@@ -19491,11 +20761,14 @@ export type UserSelectScalar = {
   id?: boolean
   name?: boolean
   email?: boolean
+  username?: boolean
   password?: boolean
   phone?: boolean
   provider?: boolean
   providerId?: boolean
+  firebaseUid?: boolean
   isVerified?: boolean
+  verifiedAt?: boolean
   role?: boolean
   bio?: boolean
   avatar?: boolean
@@ -19516,7 +20789,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "provider" | "providerId" | "isVerified" | "role" | "bio" | "avatar" | "emailVerified" | "premium" | "premiumSince" | "aiGenerationCount" | "aiGenerationResetAt" | "walletBalance" | "subscriptionStatus" | "subscriptionExpiry" | "isVIP" | "rewardStreak" | "dailyEpisodesRead" | "lastReadReset" | "lastEpisodeUnlockTime" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "username" | "password" | "phone" | "provider" | "providerId" | "firebaseUid" | "isVerified" | "verifiedAt" | "role" | "bio" | "avatar" | "emailVerified" | "premium" | "premiumSince" | "aiGenerationCount" | "aiGenerationResetAt" | "walletBalance" | "subscriptionStatus" | "subscriptionExpiry" | "isVIP" | "rewardStreak" | "dailyEpisodesRead" | "lastReadReset" | "lastEpisodeUnlockTime" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   payments?: boolean | Prisma.User$paymentsArgs<ExtArgs>
   stories?: boolean | Prisma.User$storiesArgs<ExtArgs>
@@ -19569,6 +20842,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   characterVotes?: boolean | Prisma.User$characterVotesArgs<ExtArgs>
   parentPin?: boolean | Prisma.User$parentPinArgs<ExtArgs>
   juniorProfiles?: boolean | Prisma.User$juniorProfilesArgs<ExtArgs>
+  classicBooks?: boolean | Prisma.User$classicBooksArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -19628,16 +20902,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     characterVotes: Prisma.$CharacterVotePayload<ExtArgs>[]
     parentPin: Prisma.$ParentPinPayload<ExtArgs> | null
     juniorProfiles: Prisma.$JuniorProfilePayload<ExtArgs>[]
+    classicBooks: Prisma.$ClassicBookPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
     email: string | null
+    username: string | null
     password: string | null
     phone: string | null
     provider: string
     providerId: string | null
+    firebaseUid: string | null
     isVerified: boolean
+    verifiedAt: Date | null
     role: string
     bio: string | null
     avatar: string | null
@@ -20101,6 +21379,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   characterVotes<T extends Prisma.User$characterVotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$characterVotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CharacterVotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   parentPin<T extends Prisma.User$parentPinArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$parentPinArgs<ExtArgs>>): Prisma.Prisma__ParentPinClient<runtime.Types.Result.GetResult<Prisma.$ParentPinPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   juniorProfiles<T extends Prisma.User$juniorProfilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$juniorProfilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JuniorProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  classicBooks<T extends Prisma.User$classicBooksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$classicBooksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassicBookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20133,11 +21412,14 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly username: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly provider: Prisma.FieldRef<"User", 'String'>
   readonly providerId: Prisma.FieldRef<"User", 'String'>
+  readonly firebaseUid: Prisma.FieldRef<"User", 'String'>
   readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
+  readonly verifiedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly role: Prisma.FieldRef<"User", 'String'>
   readonly bio: Prisma.FieldRef<"User", 'String'>
   readonly avatar: Prisma.FieldRef<"User", 'String'>
@@ -21765,6 +23047,30 @@ export type User$juniorProfilesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.JuniorProfileScalarFieldEnum | Prisma.JuniorProfileScalarFieldEnum[]
+}
+
+/**
+ * User.classicBooks
+ */
+export type User$classicBooksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ClassicBook
+   */
+  select?: Prisma.ClassicBookSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ClassicBook
+   */
+  omit?: Prisma.ClassicBookOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClassicBookInclude<ExtArgs> | null
+  where?: Prisma.ClassicBookWhereInput
+  orderBy?: Prisma.ClassicBookOrderByWithRelationInput | Prisma.ClassicBookOrderByWithRelationInput[]
+  cursor?: Prisma.ClassicBookWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClassicBookScalarFieldEnum | Prisma.ClassicBookScalarFieldEnum[]
 }
 
 /**

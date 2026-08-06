@@ -39,6 +39,7 @@ export type JuniorDraftSumAggregateOutputType = {
 export type JuniorDraftMinAggregateOutputType = {
   id: string | null
   title: string | null
+  genre: string | null
   content: string | null
   coverImage: string | null
   fontSize: number | null
@@ -51,6 +52,7 @@ export type JuniorDraftMinAggregateOutputType = {
 export type JuniorDraftMaxAggregateOutputType = {
   id: string | null
   title: string | null
+  genre: string | null
   content: string | null
   coverImage: string | null
   fontSize: number | null
@@ -63,6 +65,7 @@ export type JuniorDraftMaxAggregateOutputType = {
 export type JuniorDraftCountAggregateOutputType = {
   id: number
   title: number
+  genre: number
   content: number
   chapters: number
   coverImage: number
@@ -89,6 +92,7 @@ export type JuniorDraftSumAggregateInputType = {
 export type JuniorDraftMinAggregateInputType = {
   id?: true
   title?: true
+  genre?: true
   content?: true
   coverImage?: true
   fontSize?: true
@@ -101,6 +105,7 @@ export type JuniorDraftMinAggregateInputType = {
 export type JuniorDraftMaxAggregateInputType = {
   id?: true
   title?: true
+  genre?: true
   content?: true
   coverImage?: true
   fontSize?: true
@@ -113,6 +118,7 @@ export type JuniorDraftMaxAggregateInputType = {
 export type JuniorDraftCountAggregateInputType = {
   id?: true
   title?: true
+  genre?: true
   content?: true
   chapters?: true
   coverImage?: true
@@ -214,6 +220,7 @@ export type JuniorDraftGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type JuniorDraftGroupByOutputType = {
   id: string
   title: string
+  genre: string | null
   content: string | null
   chapters: runtime.JsonValue | null
   coverImage: string | null
@@ -251,6 +258,7 @@ export type JuniorDraftWhereInput = {
   NOT?: Prisma.JuniorDraftWhereInput | Prisma.JuniorDraftWhereInput[]
   id?: Prisma.StringFilter<"JuniorDraft"> | string
   title?: Prisma.StringFilter<"JuniorDraft"> | string
+  genre?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
   content?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
   chapters?: Prisma.JsonNullableFilter<"JuniorDraft">
   coverImage?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
@@ -266,6 +274,7 @@ export type JuniorDraftWhereInput = {
 export type JuniorDraftOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   chapters?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -284,6 +293,7 @@ export type JuniorDraftWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.JuniorDraftWhereInput[]
   NOT?: Prisma.JuniorDraftWhereInput | Prisma.JuniorDraftWhereInput[]
   title?: Prisma.StringFilter<"JuniorDraft"> | string
+  genre?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
   content?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
   chapters?: Prisma.JsonNullableFilter<"JuniorDraft">
   coverImage?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
@@ -299,6 +309,7 @@ export type JuniorDraftWhereUniqueInput = Prisma.AtLeast<{
 export type JuniorDraftOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
   chapters?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -321,6 +332,7 @@ export type JuniorDraftScalarWhereWithAggregatesInput = {
   NOT?: Prisma.JuniorDraftScalarWhereWithAggregatesInput | Prisma.JuniorDraftScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"JuniorDraft"> | string
   title?: Prisma.StringWithAggregatesFilter<"JuniorDraft"> | string
+  genre?: Prisma.StringNullableWithAggregatesFilter<"JuniorDraft"> | string | null
   content?: Prisma.StringNullableWithAggregatesFilter<"JuniorDraft"> | string | null
   chapters?: Prisma.JsonNullableWithAggregatesFilter<"JuniorDraft">
   coverImage?: Prisma.StringNullableWithAggregatesFilter<"JuniorDraft"> | string | null
@@ -335,6 +347,7 @@ export type JuniorDraftScalarWhereWithAggregatesInput = {
 export type JuniorDraftCreateInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
@@ -349,6 +362,7 @@ export type JuniorDraftCreateInput = {
 export type JuniorDraftUncheckedCreateInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
@@ -363,6 +377,7 @@ export type JuniorDraftUncheckedCreateInput = {
 export type JuniorDraftUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -377,6 +392,7 @@ export type JuniorDraftUpdateInput = {
 export type JuniorDraftUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -391,6 +407,7 @@ export type JuniorDraftUncheckedUpdateInput = {
 export type JuniorDraftCreateManyInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
@@ -405,6 +422,7 @@ export type JuniorDraftCreateManyInput = {
 export type JuniorDraftUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -418,6 +436,7 @@ export type JuniorDraftUpdateManyMutationInput = {
 export type JuniorDraftUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -442,6 +461,7 @@ export type JuniorDraftOrderByRelationAggregateInput = {
 export type JuniorDraftCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
   content?: Prisma.SortOrder
   chapters?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
@@ -461,6 +481,7 @@ export type JuniorDraftAvgOrderByAggregateInput = {
 export type JuniorDraftMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   fontSize?: Prisma.SortOrder
@@ -473,6 +494,7 @@ export type JuniorDraftMaxOrderByAggregateInput = {
 export type JuniorDraftMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
+  genre?: Prisma.SortOrder
   content?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
   fontSize?: Prisma.SortOrder
@@ -532,6 +554,7 @@ export type JuniorDraftUncheckedUpdateManyWithoutJuniorNestedInput = {
 export type JuniorDraftCreateWithoutJuniorInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
@@ -545,6 +568,7 @@ export type JuniorDraftCreateWithoutJuniorInput = {
 export type JuniorDraftUncheckedCreateWithoutJuniorInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
@@ -587,6 +611,7 @@ export type JuniorDraftScalarWhereInput = {
   NOT?: Prisma.JuniorDraftScalarWhereInput | Prisma.JuniorDraftScalarWhereInput[]
   id?: Prisma.StringFilter<"JuniorDraft"> | string
   title?: Prisma.StringFilter<"JuniorDraft"> | string
+  genre?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
   content?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
   chapters?: Prisma.JsonNullableFilter<"JuniorDraft">
   coverImage?: Prisma.StringNullableFilter<"JuniorDraft"> | string | null
@@ -601,6 +626,7 @@ export type JuniorDraftScalarWhereInput = {
 export type JuniorDraftCreateManyJuniorInput = {
   id?: string
   title: string
+  genre?: string | null
   content?: string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: string | null
@@ -614,6 +640,7 @@ export type JuniorDraftCreateManyJuniorInput = {
 export type JuniorDraftUpdateWithoutJuniorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -627,6 +654,7 @@ export type JuniorDraftUpdateWithoutJuniorInput = {
 export type JuniorDraftUncheckedUpdateWithoutJuniorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -640,6 +668,7 @@ export type JuniorDraftUncheckedUpdateWithoutJuniorInput = {
 export type JuniorDraftUncheckedUpdateManyWithoutJuniorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
+  genre?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   chapters?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -655,6 +684,7 @@ export type JuniorDraftUncheckedUpdateManyWithoutJuniorInput = {
 export type JuniorDraftSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
@@ -670,6 +700,7 @@ export type JuniorDraftSelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type JuniorDraftSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
@@ -685,6 +716,7 @@ export type JuniorDraftSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type JuniorDraftSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
@@ -700,6 +732,7 @@ export type JuniorDraftSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type JuniorDraftSelectScalar = {
   id?: boolean
   title?: boolean
+  genre?: boolean
   content?: boolean
   chapters?: boolean
   coverImage?: boolean
@@ -711,7 +744,7 @@ export type JuniorDraftSelectScalar = {
   juniorId?: boolean
 }
 
-export type JuniorDraftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "chapters" | "coverImage" | "illustrations" | "fontSize" | "wordCount" | "updatedAt" | "createdAt" | "juniorId", ExtArgs["result"]["juniorDraft"]>
+export type JuniorDraftOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "genre" | "content" | "chapters" | "coverImage" | "illustrations" | "fontSize" | "wordCount" | "updatedAt" | "createdAt" | "juniorId", ExtArgs["result"]["juniorDraft"]>
 export type JuniorDraftInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   junior?: boolean | Prisma.JuniorProfileDefaultArgs<ExtArgs>
 }
@@ -730,6 +763,7 @@ export type $JuniorDraftPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
+    genre: string | null
     content: string | null
     chapters: runtime.JsonValue | null
     coverImage: string | null
@@ -1165,6 +1199,7 @@ export interface Prisma__JuniorDraftClient<T, Null = never, ExtArgs extends runt
 export interface JuniorDraftFieldRefs {
   readonly id: Prisma.FieldRef<"JuniorDraft", 'String'>
   readonly title: Prisma.FieldRef<"JuniorDraft", 'String'>
+  readonly genre: Prisma.FieldRef<"JuniorDraft", 'String'>
   readonly content: Prisma.FieldRef<"JuniorDraft", 'String'>
   readonly chapters: Prisma.FieldRef<"JuniorDraft", 'Json'>
   readonly coverImage: Prisma.FieldRef<"JuniorDraft", 'String'>

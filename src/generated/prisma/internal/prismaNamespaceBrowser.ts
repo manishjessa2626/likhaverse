@@ -112,7 +112,8 @@ export const ModelName = {
   JuniorDraft: 'JuniorDraft',
   JuniorSubmission: 'JuniorSubmission',
   JuniorAchievement: 'JuniorAchievement',
-  FamilyBook: 'FamilyBook'
+  FamilyBook: 'FamilyBook',
+  ClassicBook: 'ClassicBook'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -135,11 +136,14 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  username: 'username',
   password: 'password',
   phone: 'phone',
   provider: 'provider',
   providerId: 'providerId',
+  firebaseUid: 'firebaseUid',
   isVerified: 'isVerified',
+  verifiedAt: 'verifiedAt',
   role: 'role',
   bio: 'bio',
   avatar: 'avatar',
@@ -200,6 +204,8 @@ export const StoryScalarFieldEnum = {
   viewCount: 'viewCount',
   completedAt: 'completedAt',
   ageRating: 'ageRating',
+  juniorApproved: 'juniorApproved',
+  featuredInJunior: 'featuredInJunior',
   studioBadge: 'studioBadge',
   completedBadge: 'completedBadge',
   original: 'original',
@@ -941,6 +947,7 @@ export type JuniorBookmarkScalarFieldEnum = (typeof JuniorBookmarkScalarFieldEnu
 export const JuniorDraftScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  genre: 'genre',
   content: 'content',
   chapters: 'chapters',
   coverImage: 'coverImage',
@@ -958,12 +965,15 @@ export type JuniorDraftScalarFieldEnum = (typeof JuniorDraftScalarFieldEnum)[key
 export const JuniorSubmissionScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  genre: 'genre',
   content: 'content',
   chapters: 'chapters',
   coverImage: 'coverImage',
   illustrations: 'illustrations',
   status: 'status',
+  moderationFlags: 'moderationFlags',
   parentFeedback: 'parentFeedback',
+  notifiedAt: 'notifiedAt',
   submittedAt: 'submittedAt',
   reviewedAt: 'reviewedAt',
   juniorId: 'juniorId',
@@ -999,6 +1009,24 @@ export const FamilyBookScalarFieldEnum = {
 } as const
 
 export type FamilyBookScalarFieldEnum = (typeof FamilyBookScalarFieldEnum)[keyof typeof FamilyBookScalarFieldEnum]
+
+
+export const ClassicBookScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  author: 'author',
+  description: 'description',
+  coverImage: 'coverImage',
+  category: 'category',
+  source: 'source',
+  sourceUrl: 'sourceUrl',
+  contentUrl: 'contentUrl',
+  language: 'language',
+  addedById: 'addedById',
+  addedAt: 'addedAt'
+} as const
+
+export type ClassicBookScalarFieldEnum = (typeof ClassicBookScalarFieldEnum)[keyof typeof ClassicBookScalarFieldEnum]
 
 
 export const SortOrder = {

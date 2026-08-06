@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import {
-  LayoutDashboard, Users, Flag, BookOpen, CreditCard, Repeat, BarChart3, Cpu, Shield, Megaphone, HeadphonesIcon, UserCog, ScrollText, ChevronLeft, ChevronRight,
+  LayoutDashboard, Users, Flag, BookOpen, Library, CreditCard, Repeat, BarChart3, Cpu, Shield, Megaphone, HeadphonesIcon, UserCog, ScrollText, ChevronLeft, ChevronRight,
 } from "lucide-react"
 import { useState } from "react"
 import { Logo } from "@/components/brand/Logo"
@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { href: "/admin/users", label: "Users", icon: <Users size={16} /> },
   { href: "/admin/reports", label: "Reports", icon: <Flag size={16} /> },
   { href: "/admin/stories", label: "Stories", icon: <BookOpen size={16} /> },
+  { href: "/admin/classic-library", label: "Classic Library", icon: <Library size={16} /> },
   { href: "/admin/payments", label: "Payments", icon: <CreditCard size={16} /> },
   { href: "/admin/subscriptions", label: "Subscriptions", icon: <Repeat size={16} /> },
   { href: "/admin/analytics", label: "Analytics", icon: <BarChart3 size={16} /> },

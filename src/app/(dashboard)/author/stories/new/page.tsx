@@ -146,6 +146,28 @@ export default function NewStoryPage() {
           </p>
         </div>
 
+        <div>
+          <label htmlFor="ageRating" className="block text-sm font-medium mb-1">
+            Age Rating
+          </label>
+          <select
+            id="ageRating"
+            name="ageRating"
+            defaultValue="EARLY_READERS"
+            className="block w-full max-w-xs rounded-lg border px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="EARLY_READERS">Early Readers (3-5)</option>
+            <option value="JUNIOR_6">Junior 6+</option>
+            <option value="JUNIOR_9">Junior 9+</option>
+            <option value="TEEN_13">Teen 13+</option>
+            <option value="TEEN_16">Teen 16+</option>
+            <option value="ADULT_18">Adult 18+</option>
+          </select>
+          <p className="mt-1 text-xs text-zinc-400">
+            Set the minimum age for readers
+          </p>
+        </div>
+
         <div className="flex items-center gap-3">
           <Button type="submit" disabled={pending || uploading}>
             {uploading ? "Uploading..." : pending ? "Creating..." : "Create Story"}

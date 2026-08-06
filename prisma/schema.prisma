@@ -92,6 +92,7 @@ model User {
   characterVotes    CharacterVote[]
   parentPin         ParentPin?
   juniorProfiles    JuniorProfile[]
+  classicBooks      ClassicBook[]
 }
 
 model Payment {
@@ -143,7 +144,9 @@ model Story {
   wordCount        Int      @default(0)
   viewCount        Int      @default(0)
   completedAt      DateTime?
-  ageRating        String   @default("ALL") // ALL | 7+ | 12+ | 16+ | 18+
+  ageRating        String   @default("EARLY_READERS") // EARLY_READERS | JUNIOR_6 | JUNIOR_9 | TEEN_13 | TEEN_16 | ADULT_18
+  juniorApproved   Boolean  @default(false)
+  featuredInJunior Boolean  @default(false)
   studioBadge      Boolean  @default(false)
   completedBadge   Boolean  @default(false)
   original         Boolean  @default(false)
@@ -1042,6 +1045,7 @@ model JuniorBookmark {
 model JuniorDraft {
   id            String   @id @default(uuid())
   title         String
+  genre         String?  // SAFE_GENRES only
   content       String?
   chapters      Json?    // array of { title, content }
   coverImage    String?
@@ -1059,16 +1063,19 @@ model JuniorDraft {
 }
 
 model JuniorSubmission {
-  id             String    @id @default(uuid())
-  title          String
-  content        String?
-  chapters       Json?     // array of { title, content }
-  coverImage     String?
-  illustrations  Json?     // array of { url, caption }
-  status         String    @default("PENDING") // PENDING | APPROVED | REJECTED
-  parentFeedback String?
-  submittedAt    DateTime  @default(now())
-  reviewedAt     DateTime?
+  id               String    @id @default(uuid())
+  title            String
+  genre            String?  // SAFE_GENRES only
+  content          String?
+  chapters         Json?     // array of { title, content }
+  coverImage       String?
+  illustrations    Json?     // array of { url, caption }
+  status           String    @default("DRAFT") // DRAFT | FLAGGED | APPROVED | PRIVATE | REJECTED | ARCHIVED
+  moderationFlags  Json?     // array of { type, detail } for content moderation hits
+  parentFeedback   String?
+  notifiedAt       DateTime? // when parent was notified about flagged content
+  submittedAt      DateTime  @default(now())
+  reviewedAt       DateTime?
 
   juniorId String
   junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
@@ -1113,4 +1120,25 @@ model FamilyBook {
   junior   JuniorProfile @relation(fields: [juniorId], references: [id], onDelete: Cascade)
 
   @@index([juniorId, createdAt])
+}
+
+model ClassicBook {
+  id          String   @id @default(uuid())
+  title       String
+  author      String
+  description String?
+  coverImage  String?
+  category    String   // BEDTIME | FAIRY_TALE | ANIMAL | CLASSIC_ADVENTURE | EDUCATIONAL
+  source      String   // "PROJECT_GUTENBERG" | "PROJECT_GUTENBERG_AU" | "MANUAL"
+  sourceUrl   String?
+  contentUrl  String?  // URL to read online (e.g. Project Gutenberg page)
+  language    String   @default("en")
+  addedById   String   // admin user ID
+  addedAt     DateTime @default(now())
+
+  addedBy User @relation(fields: [addedById], references: [id])
+
+  @@index([category])
+  @@index([title])
+  @@index([language])
 }

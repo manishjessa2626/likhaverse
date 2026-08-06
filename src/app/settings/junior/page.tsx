@@ -5,8 +5,9 @@ import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { BackButton } from "@/components/ui/BackButton"
 import { Button } from "@/components/ui/Button"
-import { ChevronDown, ChevronRight, Check, X, BookOpen, Trophy, HeartHandshake, LogIn } from "lucide-react"
+import { ChevronDown, ChevronRight, Check, X, BookOpen, Trophy, HeartHandshake, LogIn, Trash2, Lock } from "lucide-react"
 import { PinGate } from "@/components/junior/PinGate"
+import { SAFE_GENRE_LABELS } from "@/lib/junior-safety"
 
 interface JuniorProfile {
   id: string
@@ -25,9 +26,11 @@ interface JuniorProfile {
 interface Submission {
   id: string
   title: string
+  genre: string | null
   content: string | null
   coverImage: string | null
   status: string
+  moderationFlags: { type: string; detail: string }[] | null
   parentFeedback: string | null
   submittedAt: string
   reviewedAt: string | null
@@ -236,7 +239,7 @@ function PinVerifyDialog({ title, message, onSuccess, onCancel }: {
 function SubmissionsSection({ juniorId }: { juniorId: string }) {
   const [submissions, setSubmissions] = useState<Submission[]>([])
   const [loading, setLoading] = useState(true)
-  const [feedback, setFeedback] = useState("")
+  const [feedback, setFeedback] = useState<Record<string, string>>({})
 
   const fetchSubmissions = useCallback(async () => {
     try {
@@ -249,63 +252,117 @@ function SubmissionsSection({ juniorId }: { juniorId: string }) {
   useEffect(() => { fetchSubmissions() }, [fetchSubmissions])
 
   const handleReview = async (id: string, status: string) => {
+    const fb = feedback[id] || undefined
     await fetch(`/api/junior/writing/submissions/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status, parentFeedback: feedback || undefined }),
+      body: JSON.stringify({ status, parentFeedback: fb }),
     })
-    setFeedback("")
+    setFeedback((prev) => ({ ...prev, [id]: "" }))
     fetchSubmissions()
   }
 
-  const pending = submissions.filter((s) => s.status === "PENDING")
+  const handleDelete = async (id: string, title: string) => {
+    if (!window.confirm(`Delete "${title}"? This cannot be undone.`)) return
+    await fetch(`/api/junior/writing/submissions/${id}`, { method: "DELETE" })
+    fetchSubmissions()
+  }
+
+  const pending = submissions.filter((s) => s.status === "DRAFT" || s.status === "PENDING" || s.status === "FLAGGED")
 
   if (loading) return <p className="text-xs text-zinc-400 py-2">Loading...</p>
   if (submissions.length === 0) return null
+
+  const MODERATION_LABELS: Record<string, string> = {
+    graphic_violence: "Graphic violence",
+    gore: "Gore",
+    sexual_content: "Sexual content",
+    explicit_language: "Explicit language",
+    drug_references: "Drug references",
+    gambling: "Gambling",
+    self_harm: "Self-harm themes",
+    adult_themes: "Adult themes",
+  }
 
   return (
     <div className="mt-3 border-t border-zinc-100 pt-3 dark:border-zinc-800">
       <p className="text-[11px] font-semibold text-zinc-500 mb-2 flex items-center gap-1">
         <BookOpen size={12} />
-        Submissions ({pending.length} pending / {submissions.length} total)
+        Submissions ({pending.length} need review / {submissions.length} total)
       </p>
       <div className="space-y-2">
-        {submissions.slice(0, 10).map((s) => (
-          <div key={s.id} className="rounded-lg border border-zinc-100 bg-zinc-50/50 p-3 dark:border-zinc-800 dark:bg-zinc-800/30">
-            <div className="flex items-start gap-3">
-              {s.coverImage && <img src={s.coverImage} alt={s.title} className="h-10 w-8 rounded object-cover shrink-0" />}
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-zinc-800 dark:text-zinc-100 truncate">{s.title}</p>
-                <p className="text-[10px] text-zinc-500">
-                  {new Date(s.submittedAt).toLocaleDateString()} · {s.content ? `${s.content.split(/\s+/).filter(Boolean).length} words` : ""}
-                </p>
+        {submissions.slice(0, 10).map((s) => {
+          const flags: { type: string; detail: string }[] = s.moderationFlags || []
+          return (
+            <div key={s.id} className={`rounded-lg border p-3 ${
+              s.status === "FLAGGED"
+                ? "border-amber-200 bg-amber-50/50 dark:border-amber-900/50 dark:bg-amber-900/10"
+                : "border-zinc-100 bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-800/30"
+            }`}>
+              <div className="flex items-start gap-3">
+                {s.coverImage && <img src={s.coverImage} alt={s.title} className="h-10 w-8 rounded object-cover shrink-0" />}
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-zinc-800 dark:text-zinc-100 truncate">{s.title}</p>
+                  <p className="text-[10px] text-zinc-500">
+                    {new Date(s.submittedAt).toLocaleDateString()}
+                    {s.genre ? ` · ${SAFE_GENRE_LABELS[s.genre as keyof typeof SAFE_GENRE_LABELS] || s.genre}` : ""}
+                    {s.content ? ` · ${s.content.split(/\s+/).filter(Boolean).length} words` : ""}
+                  </p>
+                </div>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
+                  s.status === "APPROVED" ? "bg-green-100 text-green-700" :
+                  s.status === "REJECTED" ? "bg-red-100 text-red-700" :
+                  s.status === "FLAGGED" ? "bg-amber-100 text-amber-700" :
+                  s.status === "PRIVATE" ? "bg-zinc-200 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300" :
+                  "bg-yellow-100 text-yellow-700"
+                }`}>{s.status}</span>
               </div>
-              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded ${
-                s.status === "APPROVED" ? "bg-green-100 text-green-700" :
-                s.status === "REJECTED" ? "bg-red-100 text-red-700" :
-                "bg-yellow-100 text-yellow-700"
-              }`}>{s.status}</span>
+
+              {flags.length > 0 && (
+                <div className="mt-2 rounded-lg border border-amber-200 bg-amber-50/80 p-2 dark:border-amber-900/50 dark:bg-amber-900/20">
+                  <p className="text-[10px] font-medium text-amber-700 dark:text-amber-400 mb-1">
+                    ⚠ Content flags detected
+                  </p>
+                  {flags.map((f, i) => (
+                    <p key={i} className="text-[10px] text-amber-600 dark:text-amber-300">
+                      • {MODERATION_LABELS[f.type] || f.type}: {f.detail}
+                    </p>
+                  ))}
+                  <p className="text-[10px] text-zinc-500 mt-1">
+                    Review the story. You can approve it if it's appropriate.
+                  </p>
+                </div>
+              )}
+
+              {(s.status === "DRAFT" || s.status === "PENDING" || s.status === "FLAGGED") && (
+                <div className="mt-2 flex items-center gap-2">
+                  <input value={feedback[s.id] || ""} onChange={(e) => setFeedback((prev) => ({ ...prev, [s.id]: e.target.value }))}
+                    placeholder="Feedback (optional)"
+                    className="flex-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[10px] outline-none focus:border-purple-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100" />
+                  <button onClick={() => handleReview(s.id, "APPROVED")}
+                    className="flex items-center gap-0.5 rounded-lg bg-green-500 px-2.5 py-1.5 text-[10px] font-medium text-white hover:bg-green-600">
+                    <Check size={10} />Approve
+                  </button>
+                  <button onClick={() => handleReview(s.id, "PRIVATE")}
+                    className="flex items-center gap-0.5 rounded-lg bg-zinc-600 px-2.5 py-1.5 text-[10px] font-medium text-white hover:bg-zinc-500">
+                    <Lock size={10} />Keep Private
+                  </button>
+                  <button onClick={() => handleReview(s.id, "REJECTED")}
+                    className="flex items-center gap-0.5 rounded-lg bg-red-500 px-2.5 py-1.5 text-[10px] font-medium text-white hover:bg-red-600">
+                    <X size={10} />Reject
+                  </button>
+                  <button onClick={() => handleDelete(s.id, s.title)} aria-label="Delete submission"
+                    className="flex items-center gap-0.5 rounded-lg border border-zinc-200 px-2.5 py-1.5 text-[10px] font-medium text-zinc-400 hover:bg-red-50 hover:text-red-500 dark:border-zinc-700 dark:hover:bg-red-900/20">
+                    <Trash2 size={10} />
+                  </button>
+                </div>
+              )}
+              {s.parentFeedback && (
+                <p className="mt-1.5 text-[10px] text-zinc-500 italic">Feedback: {s.parentFeedback}</p>
+              )}
             </div>
-            {s.status === "PENDING" && (
-              <div className="mt-2 flex items-center gap-2">
-                <input value={feedback} onChange={(e) => setFeedback(e.target.value)}
-                  placeholder="Feedback (optional)"
-                  className="flex-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[10px] outline-none focus:border-purple-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100" />
-                <button onClick={() => handleReview(s.id, "APPROVED")}
-                  className="flex items-center gap-0.5 rounded-lg bg-green-500 px-2.5 py-1.5 text-[10px] font-medium text-white hover:bg-green-600">
-                  <Check size={10} />Approve
-                </button>
-                <button onClick={() => handleReview(s.id, "REJECTED")}
-                  className="flex items-center gap-0.5 rounded-lg bg-red-500 px-2.5 py-1.5 text-[10px] font-medium text-white hover:bg-red-600">
-                  <X size={10} />Reject
-                </button>
-              </div>
-            )}
-            {s.parentFeedback && (
-              <p className="mt-1.5 text-[10px] text-zinc-500 italic">Feedback: {s.parentFeedback}</p>
-            )}
-          </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )

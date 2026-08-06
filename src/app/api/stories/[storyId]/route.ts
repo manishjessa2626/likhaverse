@@ -78,7 +78,7 @@ export async function PATCH(
     }
 
     const body = await request.json()
-    const allowed = ["title", "description", "cover", "tags", "status", "accessType", "freePreviewChapters"]
+    const allowed = ["title", "description", "cover", "tags", "status", "accessType", "freePreviewChapters", "ageRating"]
     const updateData: Record<string, unknown> = {}
     for (const key of allowed) {
       if (body[key] !== undefined) updateData[key] = body[key]
