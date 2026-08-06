@@ -19,6 +19,13 @@ export default function VerifyOtpPage() {
   const email = typeof window !== "undefined" ? sessionStorage.getItem("otp_email") : null
   const phone = typeof window !== "undefined" ? sessionStorage.getItem("otp_phone") : null
   const verificationId = typeof window !== "undefined" ? sessionStorage.getItem("otp_verificationId") : null
+  const [devCode, setDevCode] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "production") {
+      setDevCode(sessionStorage.getItem("otp_devCode"))
+    }
+  }, [])
 
   useEffect(() => {
     if (!mode) router.replace("/welcome")
@@ -105,6 +112,35 @@ export default function VerifyOtpPage() {
     }
   }
 
+  async function handleResend() {
+    if (mode === "email" && email) {
+      setPending(true)
+      try {
+        const res = await fetch("/api/auth/email-otp/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        })
+        const data = await res.json()
+        if (data.error) { setError(data.error); return }
+        if (process.env.NODE_ENV !== "production" && data.devCode) {
+          sessionStorage.setItem("otp_devCode", data.devCode)
+          setDevCode(data.devCode)
+        }
+        setCooldown(30)
+        setError("")
+        setCode(["", "", "", "", "", ""])
+        inputRefs.current[0]?.focus()
+      } catch { setError("Failed to resend. Try again.") }
+      finally { setPending(false) }
+    } else {
+      setCooldown(30)
+      setError("")
+      setCode(["", "", "", "", "", ""])
+      inputRefs.current[0]?.focus()
+    }
+  }
+
   if (!mode) return null
 
   return (
@@ -115,6 +151,12 @@ export default function VerifyOtpPage() {
         Enter the code sent to<br />
         <span className="font-semibold text-white">{email || phone}</span>
       </p>
+
+      {process.env.NODE_ENV !== "production" && devCode && (
+        <p className="mb-4 rounded-lg bg-blue-900/40 px-3 py-2 text-center text-sm text-blue-100 border border-blue-700/50">
+          Dev code: <span className="font-mono font-bold tracking-widest">{devCode}</span>
+        </p>
+      )}
 
       {error && (
         <p className="mb-4 rounded-lg bg-red-900/60 px-3 py-2 text-sm text-red-200 text-center border border-red-700/50">{error}</p>
@@ -148,15 +190,11 @@ export default function VerifyOtpPage() {
         <p className="mt-4 text-center text-xs text-white/50">Resend in {cooldown}s</p>
       ) : (
         <button
-          onClick={() => {
-            setCooldown(30)
-            setError("")
-            setCode(["", "", "", "", "", ""])
-            inputRefs.current[0]?.focus()
-          }}
-          className="mt-4 w-full text-sm text-amber-300 hover:text-amber-200"
+          onClick={handleResend}
+          disabled={pending}
+          className="mt-4 w-full text-sm text-amber-300 hover:text-amber-200 disabled:opacity-50"
         >
-          Resend Code
+          {pending ? "Sending..." : "Resend Code"}
         </button>
       )}
     </div>

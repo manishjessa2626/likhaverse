@@ -88,6 +88,9 @@ export default function WelcomePage() {
       })
       const data = await res.json()
       if (data.error) { setError(data.error); return }
+      if (process.env.NODE_ENV !== "production" && data.devCode) {
+        sessionStorage.setItem("otp_devCode", data.devCode)
+      }
       sessionStorage.setItem("otp_email", email.trim())
       sessionStorage.setItem("otp_mode", "email")
       router.push("/verify-otp")

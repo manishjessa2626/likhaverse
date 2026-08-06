@@ -31,7 +31,9 @@ export async function POST(req: Request) {
       },
     })
 
-    if (process.env.SMTP_HOST) {
+    const from = process.env.SMTP_FROM
+
+    if (process.env.SMTP_HOST && from) {
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT) || 587,
@@ -43,18 +45,18 @@ export async function POST(req: Request) {
       })
 
       await transporter.sendMail({
-        from: `"LikhaVerse" <${process.env.SMTP_USER}>`,
+        from: `"LikhaVerse" <${from}>`,
         to: sanitized,
         subject: "Your LikhaVerse verification code",
         text: `Your verification code is: ${code}\n\nThis code expires in 10 minutes.`,
         html: `<p>Your verification code is:</p><h2>${code}</h2><p>This code expires in 10 minutes.</p>`,
       })
     } else {
-      console.log(`[EMAIL OTP] Code for ${sanitized}: ${code}`)
+      console.warn(`[EMAIL OTP] SMTP not configured (SMTP_HOST=${!!process.env.SMTP_HOST}, SMTP_FROM=${!!from}). Code for ${sanitized}: ${code}`)
     }
 
     const response: Record<string, unknown> = { sent: true, message: "Code sent to your email" }
-    if (!process.env.SMTP_HOST) {
+    if (!process.env.SMTP_HOST || !from) {
       response.devCode = code
     }
 
